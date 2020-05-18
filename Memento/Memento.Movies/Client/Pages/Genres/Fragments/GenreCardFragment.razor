@@ -1,0 +1,26 @@
+﻿@inherits MementoComponent<GenreCardFragment>
+
+<div class="card mb-md-2">
+	<div class="card-header">
+		<h3 class="mb-md-0">
+			@this.Genre.Name
+		</h3>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="d-flex flex-column h-100">
+					<!-- data -->
+					<dl>
+						<dt>@this.Localizer.GetString(SharedResources.GENRE_NAME)</dt>
+						<dd>@this.Genre.Name</dd>
+					</dl>
+					<!-- button -->
+					<Button class="btn btn-block btn-primary mt-auto mb-1" IsSubmit="false" OnClicked="this.OnViewClick">
+						<span class="fas fa-sign-in"></span> @this.Localizer.GetString(SharedResources.BUTTON_VIEW)
+					</Button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

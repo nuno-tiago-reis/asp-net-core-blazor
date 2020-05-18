@@ -1,0 +1,46 @@
+﻿@inherits InputBase<File>
+
+<div class="row">
+	<div class="col-md-6">
+		<label for="@this.ForName">
+			@if (this.ImageLabelContent != null)
+			{
+				@this.ImageLabelContent
+			}
+			else
+			{
+				@this.ForDisplayName
+			}
+		</label>
+	</div>
+	<div class="col-md-6">
+		<label for="@this.ForName">
+			@if (this.PreviewLabelContent != null)
+			{
+				@this.PreviewLabelContent
+			}
+			else
+			{
+				@this.Localizer.GetString(SharedResources.FORM_MARKDOWN_PREVIEW)
+			}
+		</label>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<input type="file" accept="@this.Accepts" @ref="this.Input" @onchange="this.OnInputChangeAsync" @attributes="this.AdditionalAttributes" />
+	</div>
+	<div class="col-md-6">
+		<div class="border border-secondary">
+			@if (string.IsNullOrWhiteSpace(this.CurrentValue?.FileBase64) && !string.IsNullOrWhiteSpace(this.ImageUrl))
+			{
+				<img class="img-fluid" src="@this.ImageUrl" />
+			}
+			@if (!string.IsNullOrWhiteSpace(this.CurrentValue?.FileBase64))
+			{
+				<img class="img-fluid" src="data:image/jpeg;base64, @this.CurrentValue?.FileBase64" />
+			}
+		</div>
+	</div>
+</div>

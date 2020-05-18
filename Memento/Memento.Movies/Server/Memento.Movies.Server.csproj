@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RazorLangVersion>3.0</RazorLangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Extend Watch -->
+		<Watch Include="..\**\*.razor" />
+		<Watch Include="..\**\*.scss" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<!-- Faster Debug Builds-->
+		<BlazorWebAssemblyEnableLinking Condition="'$(Configuration)'!='Release'">false</BlazorWebAssemblyEnableLinking>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- AutoMapper -->
+		<PackageReference Include="AutoMapper" Version="9.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
+		<!-- Microsoft.AspNetCore -->
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.4" />
+		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+		<!-- Microsoft.EntityFrameworkCore -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4" />
+		<!-- Microsoft.Extensions -->
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.4" />
+		<!-- System -->
+		<PackageReference Include="System.Net.Http.Json" Version="3.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Client\Memento.Movies.Client.csproj" />
+		<ProjectReference Include="..\Shared\Memento.Movies.Shared.csproj" />
+		<ProjectReference Include="..\..\Memento.Shared\Memento\Memento.Shared\Memento.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

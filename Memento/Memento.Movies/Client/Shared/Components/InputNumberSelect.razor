@@ -1,0 +1,7 @@
+﻿@inherits InputBase<int>
+
+<select value="@this.CurrentValue"
+		@onchange="@this.OnInputChange"
+		@attributes="this.AdditionalAttributes">
+	@this.ChildContent
+</select>

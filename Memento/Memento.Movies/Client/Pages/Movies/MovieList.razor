@@ -1,0 +1,99 @@
+﻿@inherits MementoComponent<MovieList>
+
+@if (this.Movies != null)
+{
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
+	<PageListFilter T="MovieFilter"
+					Filter="this.Filter"
+					OnSearch="this.OnFilterSearchAsync"
+					OnReset="this.OnFilterResetAsync">
+		<FilterContent>
+			<div class="row mb-1">
+				<div class="col-md-6">
+					<!-- name -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.Name)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Filter.Name">
+					</InputText>
+				</div>
+				<div class="col-md-6">
+					<!-- summary -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.Summary)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Filter.Summary">
+					</InputText>
+				</div>
+			</div>
+			<div class="row mb-1">
+				<div class="col-md-6">
+					<!-- released after -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.ReleasedAfter)">
+					</Label>
+					<InputDate class="form-control"
+							   @bind-Value="this.Filter.ReleasedAfter">
+					</InputDate>
+				</div>
+				<div class="col-md-6">
+					<!-- released before -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.ReleasedBefore)">
+					</Label>
+					<InputDate class="form-control"
+							   @bind-Value="this.Filter.ReleasedBefore">
+					</InputDate>
+				</div>
+			</div>
+			<div class="row mb-1">
+				<div class="col-md-6">
+					<!-- in theaters -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.InTheaters)">
+					</Label>
+					<InputNullableSelect class="form-control"
+										 @bind-Value="this.Filter.InTheaters">
+						<option selected></option>
+						@foreach (MovieFilterInTheaters inTheaters in Enum.GetValues(typeof(MovieFilterInTheaters)))
+							{
+							<option value="@inTheaters">@inTheaters.GetLocalizedName()</option>
+							}
+					</InputNullableSelect>
+				</div>
+			</div>
+		</FilterContent>
+	</PageListFilter>
+}
+
+<PageList Page="this.Movies">
+	<ItemTemplate>
+		<div class="col-md-4">
+			<MovieCardFragment Movie="@context">
+			</MovieCardFragment>
+		</div>
+	</ItemTemplate>
+</PageList>
+
+@if (this.Movies != null)
+{
+	<PageListControls PageNumber="this.Filter.PageNumber"
+					  PageNumberChanged="@((value) => this.OnPageNumberChangeAsync(value))"
+					  PageSize="this.Filter.PageSize"
+					  PageSizeChanged="@((value) => this.OnPageSizeChangeAsync(value))"
+					  TotalPages="this.Movies.TotalPages"
+					  TotalItems="this.Movies.TotalItems"
+					  TOrderBy="MovieFilterOrderBy"
+					  OrderBy="this.Filter.OrderBy"
+					  OrderByChanged="@((value) => this.OnOrderByChangeAsync(value))"
+					  TOrderDirection="MovieFilterOrderDirection"
+					  OrderDirection="this.Filter.OrderDirection"
+					  OrderDirectionChanged="@((value) => this.OnOrderDirectionChangeAsync(value))">
+	</PageListControls>
+}

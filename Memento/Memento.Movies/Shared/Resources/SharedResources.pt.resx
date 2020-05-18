@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<xsd:schema id="root" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="BREADCRUMB_CREATE_HEADER" xml:space="preserve">
+		<value>Criar {0}</value>
+	</data>
+	<data name="BREADCRUMB_CREATE_LINK_LABEL" xml:space="preserve">
+		<value>Criar</value>
+	</data>
+	<data name="BREADCRUMB_DETAIL_HEADER" xml:space="preserve">
+		<value>{0}</value>
+	</data>
+	<data name="BREADCRUMB_DETAIL_LINK_LABEL" xml:space="preserve">
+		<value>Detalhe</value>
+	</data>
+	<data name="BREADCRUMB_LIST_HEADER" xml:space="preserve">
+		<value>{0}</value>
+	</data>
+	<data name="BREADCRUMB_LIST_LINK_LABEL" xml:space="preserve">
+		<value>{0}</value>
+	</data>
+	<data name="BREADCRUMB_UPDATE_HEADER" xml:space="preserve">
+		<value>Atualizar {0}.</value>
+	</data>
+	<data name="BREADCRUMB_UPDATE_LINK_LABEL" xml:space="preserve">
+		<value>Atualizar</value>
+	</data>
+	<data name="BUTTON_CANCEL" xml:space="preserve">
+		<value>Cancelar</value>
+	</data>
+	<data name="BUTTON_CONFIRM" xml:space="preserve">
+		<value>Confirmar</value>
+	</data>
+	<data name="BUTTON_CREATE" xml:space="preserve">
+		<value>Criar</value>
+	</data>
+	<data name="BUTTON_DELETE" xml:space="preserve">
+		<value>Apagar</value>
+	</data>
+	<data name="BUTTON_DISCARD_CHANGES" xml:space="preserve">
+		<value>Descartar</value>
+	</data>
+	<data name="BUTTON_SAVE_CHANGES" xml:space="preserve">
+		<value>Guardar</value>
+	</data>
+	<data name="BUTTON_UPDATE" xml:space="preserve">
+		<value>Atualizar</value>
+	</data>
+	<data name="BUTTON_VIEW" xml:space="preserve">
+		<value>Ver</value>
+	</data>
+	<data name="CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
+		<value>A criação foi concluída com successo.</value>
+	</data>
+	<data name="CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
+		<value>A remoção foi concluída com successo.</value>
+	</data>
+	<data name="CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
+		<value>A listagem foi obtida com successo.</value>
+	</data>
+	<data name="CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
+		<value>O detalhe foi obtido successo.</value>
+	</data>
+	<data name="CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
+		<value>A atualização foi concluída com successo.</value>
+	</data>
+	<data name="ERROR_DUPLICATE_FIELD" xml:space="preserve">
+		<value>O campo '{0}' já existe.</value>
+	</data>
+	<data name="ERROR_INVALID_FIELD" xml:space="preserve">
+		<value>O campo '{0}' é inválido.</value>
+	</data>
+	<data name="ERROR_LOADING" xml:space="preserve">
+		<value>Ocorreu um erro durante o carregamento da página. Por favor tente novamente mais tarde.</value>
+	</data>
+	<data name="ERROR_NOT_FOUND" xml:space="preserve">
+		<value>O {0} não existe.</value>
+	</data>
+	<data name="ERROR_UNEXPECTED" xml:space="preserve">
+		<value>Ocorreu um erro inesperado. Por favor tente novamente mais tarde.</value>
+	</data>
+	<data name="FILTER_HEADING" xml:space="preserve">
+		<value>Filtrar</value>
+	</data>
+	<data name="FILTER_RESET_BUTTON" xml:space="preserve">
+		<value>Limpar</value>
+	</data>
+	<data name="FILTER_SEARCH_BUTTON" xml:space="preserve">
+		<value>Procurar</value>
+	</data>
+	<data name="FORM_IMAGE_PREVIEW" xml:space="preserve">
+		<value>Pré-Visualização</value>
+	</data>
+	<data name="FORM_INVALID_FIELDS" xml:space="preserve">
+		<value>O formulário contém campos inválidos.</value>
+	</data>
+	<data name="FORM_MARKDOWN_PREVIEW" xml:space="preserve">
+		<value>Pré-Visualização</value>
+	</data>
+	<data name="FORM_TYPEAHEAD_LOADING" xml:space="preserve">
+		<value>Carregando...</value>
+	</data>
+	<data name="FORM_TYPEAHEAD_NOT_FOUND" xml:space="preserve">
+		<value>Não foram encontrados registos</value>
+	</data>
+	<data name="GENERIC_IN_THEATERS" xml:space="preserve">
+		<value>Em Exibição</value>
+	</data>
+	<data name="GENERIC_LOADING" xml:space="preserve">
+		<value>Carregando</value>
+	</data>
+	<data name="GENERIC_NO_RECORDS_FOUND" xml:space="preserve">
+		<value>Não foram encontrados registos</value>
+	</data>
+	<data name="GENERIC_UPCOMING_RELEASES" xml:space="preserve">
+		<value>Brevemente</value>
+	</data>
+	<data name="GENRE" xml:space="preserve">
+		<value>Género</value>
+	</data>
+	<data name="GENRE_CREATEDAT" xml:space="preserve">
+		<value>Criado Em</value>
+	</data>
+	<data name="GENRE_CREATEDBY" xml:space="preserve">
+		<value>Criado Por</value>
+	</data>
+	<data name="GENRE_ID" xml:space="preserve">
+		<value>Identificador</value>
+	</data>
+	<data name="GENRE_MOVIES" xml:space="preserve">
+		<value>Filmes</value>
+	</data>
+	<data name="GENRE_NAME" xml:space="preserve">
+		<value>Nome</value>
+	</data>
+	<data name="GENRE_ORDER_ASCENDING" xml:space="preserve">
+		<value>Ascendente</value>
+	</data>
+	<data name="GENRE_ORDER_DESCENDING" xml:space="preserve">
+		<value>Descendente</value>
+	</data>
+	<data name="GENRE_PLURAL" xml:space="preserve">
+		<value>Géneros</value>
+	</data>
+	<data name="GENRE_UPDATEDAT" xml:space="preserve">
+		<value>Atualizado Em</value>
+	</data>
+	<data name="GENRE_UPDATEDBY" xml:space="preserve">
+		<value>Atualizado Por</value>
+	</data>
+	<data name="HOME" xml:space="preserve">
+		<value>Home</value>
+	</data>
+	<data name="MODAL_DELETE_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer apagar este {0}?</value>
+	</data>
+	<data name="MODAL_DELETE_TITLE" xml:space="preserve">
+		<value>Apagar {0}</value>
+	</data>
+	<data name="MODAL_DISCARD_CHANGES_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer descartar as suas alterações?</value>
+	</data>
+	<data name="MODAL_DISCARD_CHANGES_TITLE" xml:space="preserve">
+		<value>Descartar Alterações</value>
+	</data>
+	<data name="MODAL_SAVE_CHANGES_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer guardar as suas alterações?</value>
+	</data>
+	<data name="MODAL_SAVE_CHANGES_TITLE" xml:space="preserve">
+		<value>Guardar Alterações</value>
+	</data>
+	<data name="MOVIE" xml:space="preserve">
+		<value>Filme</value>
+	</data>
+	<data name="MOVIE_ACTORS" xml:space="preserve">
+		<value>Atores</value>
+	</data>
+	<data name="MOVIE_CREATEDAT" xml:space="preserve">
+		<value>Criado Em</value>
+	</data>
+	<data name="MOVIE_CREATEDBY" xml:space="preserve">
+		<value>Criado Por</value>
+	</data>
+	<data name="MOVIE_DIRECTORS" xml:space="preserve">
+		<value>Diretores</value>
+	</data>
+	<data name="MOVIE_GENRES" xml:space="preserve">
+		<value>Géneros</value>
+	</data>
+	<data name="MOVIE_ID" xml:space="preserve">
+		<value>Identificador</value>
+	</data>
+	<data name="MOVIE_INTHEATERS" xml:space="preserve">
+		<value>Em Exibição</value>
+	</data>
+	<data name="MOVIE_INTHEATERS_CHECKED" xml:space="preserve">
+		<value>Em Exibição</value>
+	</data>
+	<data name="MOVIE_INTHEATERS_UNCHECKED" xml:space="preserve">
+		<value>Fora de Exibição</value>
+	</data>
+	<data name="MOVIE_NAME" xml:space="preserve">
+		<value>Nome</value>
+	</data>
+	<data name="MOVIE_ORDER_ASCENDING" xml:space="preserve">
+		<value>Ascendente</value>
+	</data>
+	<data name="MOVIE_ORDER_DESCENDING" xml:space="preserve">
+		<value>Descendente</value>
+	</data>
+	<data name="MOVIE_PERSONS" xml:space="preserve">
+		<value>Pessoas</value>
+	</data>
+	<data name="MOVIE_PICTURE" xml:space="preserve">
+		<value>Foto</value>
+	</data>
+	<data name="MOVIE_PICTUREURL" xml:space="preserve">
+		<value>Foto (URL)</value>
+	</data>
+	<data name="MOVIE_PLURAL" xml:space="preserve">
+		<value>Filmes</value>
+	</data>
+	<data name="MOVIE_RELEASEDAFTER" xml:space="preserve">
+		<value>Lançado Após</value>
+	</data>
+	<data name="MOVIE_RELEASEDATE" xml:space="preserve">
+		<value>Data de Lançamento</value>
+	</data>
+	<data name="MOVIE_RELEASEDBEFORE" xml:space="preserve">
+		<value>Lançado Até</value>
+	</data>
+	<data name="MOVIE_SUMMARY" xml:space="preserve">
+		<value>Resumo</value>
+	</data>
+	<data name="MOVIE_TRAILERURL" xml:space="preserve">
+		<value>Trailer (URL)</value>
+	</data>
+	<data name="MOVIE_UPDATEDAT" xml:space="preserve">
+		<value>Atualizado Em</value>
+	</data>
+	<data name="MOVIE_UPDATEDBY" xml:space="preserve">
+		<value>Atualizado Por</value>
+	</data>
+	<data name="MOVIE_WRITERS" xml:space="preserve">
+		<value>Escritores</value>
+	</data>
+	<data name="MOVIEGENRE_CREATEDAT" xml:space="preserve">
+		<value>Criado Em</value>
+	</data>
+	<data name="MOVIEGENRE_CREATEDBY" xml:space="preserve">
+		<value>Criado Por</value>
+	</data>
+	<data name="MOVIEGENRE_GENRE" xml:space="preserve">
+		<value>Género</value>
+	</data>
+	<data name="MOVIEGENRE_GENREID" xml:space="preserve">
+		<value>Identificador do Género</value>
+	</data>
+	<data name="MOVIEGENRE_ID" xml:space="preserve">
+		<value>Identificador</value>
+	</data>
+	<data name="MOVIEGENRE_MOVIE" xml:space="preserve">
+		<value>Filme</value>
+	</data>
+	<data name="MOVIEGENRE_MOVIEID" xml:space="preserve">
+		<value>Identificador do Filme</value>
+	</data>
+	<data name="MOVIEGENRE_UPDATEDAT" xml:space="preserve">
+		<value>Atualizado Em</value>
+	</data>
+	<data name="MOVIEGENRE_UPDATEDBY" xml:space="preserve">
+		<value>Atualizado Por</value>
+	</data>
+	<data name="MOVIEPERSON_CREATEDAT" xml:space="preserve">
+		<value>Criado Em</value>
+	</data>
+	<data name="MOVIEPERSON_CREATEDBY" xml:space="preserve">
+		<value>Criado Por</value>
+	</data>
+	<data name="MOVIEPERSON_ID" xml:space="preserve">
+		<value>Identificador</value>
+	</data>
+	<data name="MOVIEPERSON_MOVIE" xml:space="preserve">
+		<value>Filme</value>
+	</data>
+	<data name="MOVIEPERSON_MOVIEID" xml:space="preserve">
+		<value>Identificador do Filme</value>
+	</data>
+	<data name="MOVIEPERSON_PERSON" xml:space="preserve">
+		<value>Pessoa</value>
+	</data>
+	<data name="MOVIEPERSON_PERSONID" xml:space="preserve">
+		<value>Identificador da Pessoa</value>
+	</data>
+	<data name="MOVIEPERSON_ROLE" xml:space="preserve">
+		<value>Papel</value>
+	</data>
+	<data name="MOVIEPERSON_UPDATEDAT" xml:space="preserve">
+		<value>Atualizado Em</value>
+	</data>
+	<data name="MOVIEPERSON_UPDATEDBY" xml:space="preserve">
+		<value>Atualizado Por</value>
+	</data>
+	<data name="MOVIEPERSONROLE_ACTOR" xml:space="preserve">
+		<value>Ator</value>
+	</data>
+	<data name="MOVIEPERSONROLE_DIRECTOR" xml:space="preserve">
+		<value>Diretor</value>
+	</data>
+	<data name="MOVIEPERSONROLE_WRITER" xml:space="preserve">
+		<value>Escritor</value>
+	</data>
+	<data name="PERSON" xml:space="preserve">
+		<value>Pessoa</value>
+	</data>
+	<data name="PERSON_BIOGRAPHY" xml:space="preserve">
+		<value>Biografia</value>
+	</data>
+	<data name="PERSON_BIRTHDATE" xml:space="preserve">
+		<value>Data de Nascimento</value>
+	</data>
+	<data name="PERSON_BORNAFTER" xml:space="preserve">
+		<value>Nascido Depois</value>
+	</data>
+	<data name="PERSON_BORNBEFORE" xml:space="preserve">
+		<value>Nascido Antes</value>
+	</data>
+	<data name="PERSON_CREATEDAT" xml:space="preserve">
+		<value>Criado Em</value>
+	</data>
+	<data name="PERSON_CREATEDBY" xml:space="preserve">
+		<value>Criado Por</value>
+	</data>
+	<data name="PERSON_ID" xml:space="preserve">
+		<value>Identificador</value>
+	</data>
+	<data name="PERSON_MOVIES" xml:space="preserve">
+		<value>Filmes</value>
+	</data>
+	<data name="PERSON_NAME" xml:space="preserve">
+		<value>Nome</value>
+	</data>
+	<data name="PERSON_ORDER_ASCENDING" xml:space="preserve">
+		<value>Ascendente</value>
+	</data>
+	<data name="PERSON_ORDER_DESCENDING" xml:space="preserve">
+		<value>Descendente</value>
+	</data>
+	<data name="PERSON_PICTURE" xml:space="preserve">
+		<value>Foto</value>
+	</data>
+	<data name="PERSON_PICTUREURL" xml:space="preserve">
+		<value>Foto (URL)</value>
+	</data>
+	<data name="PERSON_PLURAL" xml:space="preserve">
+		<value>Pessoas</value>
+	</data>
+	<data name="PERSON_UPDATEDAT" xml:space="preserve">
+		<value>Atualizado Em</value>
+	</data>
+	<data name="PERSON_UPDATEDBY" xml:space="preserve">
+		<value>Atualizado Por</value>
+	</data>
+</root>

@@ -1,0 +1,38 @@
+﻿@inherits MementoComponent<PageListFilter<T>>
+@typeparam T
+
+<Card MarginBottom="Spacing.S2">
+	<HeaderTemplate>
+		<Anchor Clicked="this.OnFilterToggleAsync">
+			<CardHeader>
+				<Heading Level="5" Margin="Spacing.S0">
+					<span class="fas @(this.IsCollapsed ? "fa-chevron-down" : "fa-chevron-up")"></span>
+					@this.Localizer.GetString(SharedResources.FILTER_HEADING)
+				</Heading>
+			</CardHeader>
+		</Anchor>
+	</HeaderTemplate>
+	<BodyTemplate>
+		<Collapse @ref="this.Collapse">
+			<CardBody>
+				<EditForm Model="this.Filter" OnSubmit="this.OnSubmitAsync">
+					@this.FilterContent
+					<div class="row pt-2">
+						<div class="offset-md-8 col-md-2">
+							<Button Color="NamedColor.Primary" IsBlockLevel="true" IsSubmit="true"  OnClicked="this.OnSubmitAsync">
+								<span class="far fa-search"></span>
+								@this.Localizer.GetString(SharedResources.FILTER_SEARCH_BUTTON)
+							</Button>
+						</div>
+						<div class="col-md-2">
+							<Button Color="NamedColor.Danger" IsBlockLevel="true" IsSubmit="false" OnClicked="this.OnResetAsync">
+								<span class="far fa-search"></span>
+								@this.Localizer.GetString(SharedResources.FILTER_RESET_BUTTON)
+							</Button>
+						</div>
+					</div>
+				</EditForm>
+			</CardBody>
+		</Collapse>
+	</BodyTemplate>
+</Card>

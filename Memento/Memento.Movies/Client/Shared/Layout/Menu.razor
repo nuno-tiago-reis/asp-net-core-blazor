@@ -1,0 +1,46 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+	<a class="navbar-brand" href="">Memento.Movies</a>
+	<button class="navbar-toggler" @onclick="ToggleNavMenu">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+	<ul class="nav flex-column">
+		<li class="nav-item px-3">
+			<NavLink class="nav-link" href="@Routes.HomeRoutes.ROOT" Match="NavLinkMatch.All">
+				<span class="fa fa-home"></span> Home
+			</NavLink>
+		</li>
+		<li class="nav-item px-3">
+			<NavLink class="nav-link" href="@Routes.GenreRoutes.ROOT" Match="NavLinkMatch.Prefix">
+				<span class="fas fa-presentation"></span> @this.Localizer.GetString(SharedResources.GENRE_PLURAL)
+			</NavLink>
+		</li>
+		<li class="nav-item px-3">
+			<NavLink class="nav-link" href="@Routes.MovieRoutes.ROOT" Match="NavLinkMatch.Prefix">
+				<span class="fas fa-film"></span> @this.Localizer.GetString(SharedResources.MOVIE_PLURAL)
+			</NavLink>
+		</li>
+		<li class="nav-item px-3">
+			<NavLink class="nav-link" href="@Routes.PersonRoutes.ROOT" Match="NavLinkMatch.Prefix">
+				<span class="fas fa-user-friends"></span> @this.Localizer.GetString(SharedResources.PERSON_PLURAL)
+			</NavLink>
+		</li>
+	</ul>
+</div>
+
+@code
+{
+	private bool CollapseNavMenu = true;
+
+	private string NavMenuCssClass
+	{
+		get { return CollapseNavMenu ? "collapse" : null; }
+	}
+
+	private void ToggleNavMenu()
+	{
+		CollapseNavMenu = !CollapseNavMenu;
+	}
+}

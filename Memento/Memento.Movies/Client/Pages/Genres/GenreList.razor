@@ -1,0 +1,55 @@
+﻿@inherits MementoComponent<GenreList>
+
+
+@if (this.Genres != null)
+{
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
+	<PageListFilter T="GenreFilter"
+					Filter="this.Filter"
+					OnSearch="this.OnFilterSearchAsync"
+					OnReset="this.OnFilterResetAsync">
+		<FilterContent>
+			<div class="row mb-1">
+				<div class="col-md-6">
+					<!-- name -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.Name)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Filter.Name">
+					</InputText>
+				</div>
+			</div>
+		</FilterContent>
+	</PageListFilter>
+}
+
+<PageList Page="this.Genres">
+	<ItemTemplate>
+		<div class="col-md-4">
+			<GenreCardFragment Genre="@context">
+			</GenreCardFragment>
+		</div>
+	</ItemTemplate>
+</PageList>
+
+@if (this.Genres != null)
+{
+	<PageListControls PageNumber="this.Filter.PageNumber"
+					  PageNumberChanged="@((value) => this.OnPageNumberChangeAsync(value))"
+					  PageSize="this.Filter.PageSize"
+					  PageSizeChanged="@((value) => this.OnPageSizeChangeAsync(value))"
+					  TotalPages="this.Genres.TotalPages"
+					  TotalItems="this.Genres.TotalItems"
+					  TOrderBy="GenreFilterOrderBy"
+					  OrderBy="this.Filter.OrderBy"
+					  OrderByChanged="@((value) => this.OnOrderByChangeAsync(value))"
+					  TOrderDirection="GenreFilterOrderDirection"
+					  OrderDirection="this.Filter.OrderDirection"
+					  OrderDirectionChanged="@((value) => this.OnOrderDirectionChangeAsync(value))">
+	</PageListControls>
+}

@@ -1,0 +1,11 @@
+﻿@inherits InputBase<T>
+@typeparam T
+
+<select value="@this.CurrentValue"
+		@onchange="@this.OnInputChange"
+		@attributes="@this.AdditionalAttributes">
+	<!-- default option -->
+	<option disabled selected></option>
+	<!-- remaining options -->
+	@this.ChildContent
+</select>

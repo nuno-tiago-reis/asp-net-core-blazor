@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memento.Movies.Server", "Memento.Movies\Server\Memento.Movies.Server.csproj", "{B019F209-9B9E-47C3-8657-934C9C5B6CDE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memento.Movies.Client", "Memento.Movies\Client\Memento.Movies.Client.csproj", "{C32DDE71-7FCC-43A6-9A83-64A55B12ADB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memento.Movies.Shared", "Memento.Movies\Shared\Memento.Movies.Shared.csproj", "{C6BE302D-C987-4EF9-9B56-6C8467E1FA56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{F383F068-6919-4ECE-A8F0-FC81CCC04D09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{51CD4590-65F9-4EE7-BF83-A39272939FD9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memento.Shared", "Memento.Shared\Memento\Memento.Shared\Memento.Shared.csproj", "{9AEF46DA-246F-417C-91A5-38153EEE21B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B019F209-9B9E-47C3-8657-934C9C5B6CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B019F209-9B9E-47C3-8657-934C9C5B6CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B019F209-9B9E-47C3-8657-934C9C5B6CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B019F209-9B9E-47C3-8657-934C9C5B6CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C32DDE71-7FCC-43A6-9A83-64A55B12ADB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C32DDE71-7FCC-43A6-9A83-64A55B12ADB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C32DDE71-7FCC-43A6-9A83-64A55B12ADB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C32DDE71-7FCC-43A6-9A83-64A55B12ADB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6BE302D-C987-4EF9-9B56-6C8467E1FA56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6BE302D-C987-4EF9-9B56-6C8467E1FA56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6BE302D-C987-4EF9-9B56-6C8467E1FA56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6BE302D-C987-4EF9-9B56-6C8467E1FA56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AEF46DA-246F-417C-91A5-38153EEE21B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AEF46DA-246F-417C-91A5-38153EEE21B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AEF46DA-246F-417C-91A5-38153EEE21B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AEF46DA-246F-417C-91A5-38153EEE21B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B019F209-9B9E-47C3-8657-934C9C5B6CDE} = {51CD4590-65F9-4EE7-BF83-A39272939FD9}
+		{C32DDE71-7FCC-43A6-9A83-64A55B12ADB4} = {51CD4590-65F9-4EE7-BF83-A39272939FD9}
+		{C6BE302D-C987-4EF9-9B56-6C8467E1FA56} = {51CD4590-65F9-4EE7-BF83-A39272939FD9}
+		{9AEF46DA-246F-417C-91A5-38153EEE21B4} = {F383F068-6919-4ECE-A8F0-FC81CCC04D09}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC5F338E-04CA-407D-BB07-8C2439430D2E}
+	EndGlobalSection
+EndGlobal

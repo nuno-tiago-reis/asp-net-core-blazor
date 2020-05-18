@@ -1,0 +1,191 @@
+﻿@inherits MementoComponent<MovieForm>
+
+@if (this.Movie == null)
+{
+	<h3>
+		<i class="fas fa-spinner fa-pulse"></i> @this.Localizer.GetString(SharedResources.GENERIC_LOADING)...
+	</h3>
+}
+else
+{
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
+	<EditForm @ref="this.EditForm"
+			  EditContext="this.EditContext"
+			  OnValidSubmit="this.OnValidSubmitAsync"
+			  OnInvalidSubmit="this.OnInvalidSubmit">
+
+		<!-- validation -->
+		<ValidationSummary />
+		<DataAnnotationsValidator />
+
+		<!-- inputs -->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- name -->
+				<div class="form-group">
+					<Label For="@(() => this.MovieChanges.Name)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.MovieChanges.Name">
+					</InputText>
+					<ValidationMessage For="@(() => this.MovieChanges.Name)">
+					</ValidationMessage>
+				</div>
+				<!-- summary -->
+				<div class="form-group">
+					<InputMarkdown class="form-control"
+								   @bind-Value="this.MovieChanges.Summary">
+						<MarkdownLabelContent>
+							@this.Localizer.GetString(SharedResources.MOVIE_SUMMARY)
+						</MarkdownLabelContent>
+						<PreviewLabelContent>
+							@this.Localizer.GetString(SharedResources.FORM_MARKDOWN_PREVIEW)
+						</PreviewLabelContent>
+					</InputMarkdown>
+					<ValidationMessage For="@(() => this.MovieChanges.Summary)">
+					</ValidationMessage>
+				</div>
+				<!-- genres -->
+				<div class="form-group">
+					<Label For="@(() => this.Movie.Genres)">
+					</Label>
+					<InputTypeahead @ref="this.GenreInputTypeahead"
+									T="GenreListContract"
+									SearchMethod="@((name) => this.GetGenresAsync(name))"
+									Value="this.GenreModelTypeahead"
+									ValueChanged="@((genre) => this.OnGenreSelected(genre))"
+									ValueExpression="@(() => this.GenreModelTypeahead)">
+						<SuggestionContent Context="genre">
+							<span>@genre.Name</span>
+						</SuggestionContent>
+					</InputTypeahead>
+				</div>
+				<ul>
+					@foreach (var genre in this.Genres)
+					{
+						<li>@genre.Name</li>
+					}
+				</ul>
+				<!-- persons -->
+				<div class="form-group">
+					<Label For="@(() => this.Movie.Persons)">
+					</Label>
+					<InputNullableSelect class="form-control mb-2"
+										 @bind-Value="this.PersonRole">
+						@foreach (MoviePersonRole role in Enum.GetValues(typeof(MoviePersonRole)))
+							{
+							<option value="@role">@role.GetLocalizedName()</option>
+							}
+					</InputNullableSelect>
+					@if (this.PersonRole != null)
+					{
+						<InputTypeahead @ref="this.PersonInputTypeahead"
+										T="PersonListContract"
+										SearchMethod="@((name) => this.GetPersonsAsync(name))"
+										Value="this.PersonModelTypeahead"
+										ValueChanged="@((person) => this.OnPersonSelected(person))"
+										ValueExpression="@(() => this.PersonModelTypeahead)">
+							<SuggestionContent Context="person">
+								<span>@person.Name</span>
+							</SuggestionContent>
+						</InputTypeahead>
+					}
+				</div>
+				<ul>
+					@foreach (var roles in this.PersonsByRole)
+					{
+						@foreach (var role in roles.Value)
+						{
+							<li>@role.Name (@roles.Key)</li>
+						}
+					}
+				</ul>
+				<!-- picture -->
+				<div class="form-group">
+					<InputImage @bind-Value="this.MovieChanges.Picture"
+								ImageUrl="@this.Movie.PictureUrl">
+						<ImageLabelContent>
+							@this.Localizer.GetString(SharedResources.MOVIE_PICTURE)
+						</ImageLabelContent>
+						<PreviewLabelContent>
+							@this.Localizer.GetString(SharedResources.FORM_IMAGE_PREVIEW)
+						</PreviewLabelContent>
+					</InputImage>
+					<ValidationMessage For="@(() => this.MovieChanges.Picture)">
+					</ValidationMessage>
+				</div>
+				<!-- trailer -->
+				<div class="form-group">
+					<Label For="@(() => this.MovieChanges.TrailerUrl)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.MovieChanges.TrailerUrl">
+					</InputText>
+					<ValidationMessage For="@(() => this.MovieChanges.TrailerUrl)">
+					</ValidationMessage>
+				</div>
+				<!-- in theaters -->
+				<div class="form-group">
+					<Label For="@(() => this.MovieChanges.InTheaters)">
+					</Label>
+					<InputCheckbox class="form-control"
+								   @bind-Value="this.MovieChanges.InTheaters">
+					</InputCheckbox>
+					<ValidationMessage For="@(() => this.MovieChanges.InTheaters)">
+					</ValidationMessage>
+				</div>
+				<!-- release date -->
+				<div class="form-group">
+					<Label For="@(() => this.MovieChanges.ReleaseDate)">
+					</Label>
+					<InputDate class="form-control"
+							   @bind-Value="this.MovieChanges.ReleaseDate">
+					</InputDate>
+					<ValidationMessage For="@(() => this.MovieChanges.ReleaseDate)">
+					</ValidationMessage>
+				</div>
+			</div>
+		</div>
+
+	</EditForm>
+}
+
+<!-- save changes modal -->
+<ConfirmationModal @ref="this.SaveChangesModal"
+				   HeaderBackgroundColor="NamedColor.Success"
+				   HeaderTextColor="NamedColor.White"
+				   ConfirmButtonColor="NamedColor.Success"
+				   ConfirmButtonCallback="this.OnSaveChangesConfirmedAsync"
+				   CancelButtonColor="NamedColor.Secondary"
+				   CancelButtonCallback="this.OnSaveChangesCancelledAsync">
+	<!-- header -->
+	<HeaderContent>
+		<span class="fas fa-save"></span> @this.Localizer.GetString(SharedResources.MODAL_SAVE_CHANGES_TITLE)
+	</HeaderContent>
+	<!-- body -->
+	<BodyContent>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_SAVE_CHANGES_BODY)</p>
+	</BodyContent>
+</ConfirmationModal>
+
+<!-- discard changes modal -->
+<ConfirmationModal @ref="this.DiscardChangesModal"
+				   HeaderBackgroundColor="NamedColor.Danger"
+				   HeaderTextColor="NamedColor.White"
+				   ConfirmButtonColor="NamedColor.Danger"
+				   ConfirmButtonCallback="this.OnDiscardChangesConfirmedAsync"
+				   CancelButtonColor="NamedColor.Secondary"
+				   CancelButtonCallback="this.OnDiscardChangesCancelledAsync">
+	<!-- header -->
+	<HeaderContent>
+		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DISCARD_CHANGES_TITLE)
+	</HeaderContent>
+	<!-- body -->
+	<BodyContent>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_DISCARD_CHANGES_BODY)</p>
+	</BodyContent>
+</ConfirmationModal>

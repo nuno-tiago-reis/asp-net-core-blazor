@@ -1,0 +1,83 @@
+﻿@inherits MementoComponent<PersonList>
+
+@if (this.Persons != null)
+{
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
+	<PageListFilter T="PersonFilter"
+					Filter="this.Filter"
+					OnSearch="this.OnFilterSearchAsync"
+					OnReset="this.OnFilterResetAsync">
+		<FilterContent>
+			<div class="row mb-1">
+				<div class="col-md-6">
+					<!-- name -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.Name)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Filter.Name">
+					</InputText>
+				</div>
+				<div class="col-md-6">
+					<!-- biography -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.Biography)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Filter.Biography">
+					</InputText>
+				</div>
+			</div>
+			<div class="row mb-1">
+				<div class="col-md-6">
+					<!-- born after -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.BornAfter)">
+					</Label>
+					<InputDate class="form-control"
+							   @bind-Value="this.Filter.BornAfter">
+					</InputDate>
+				</div>
+				<div class="col-md-6">
+					<!-- born before -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.BornBefore)">
+					</Label>
+					<InputDate class="form-control"
+							   @bind-Value="this.Filter.BornBefore">
+					</InputDate>
+				</div>
+			</div>
+		</FilterContent>
+	</PageListFilter>
+}
+
+<PageList Page="this.Persons">
+	<ItemTemplate>
+		<div class="col-md-4">
+			<PersonCardFragment Person="@context">
+			</PersonCardFragment>
+		</div>
+	</ItemTemplate>
+</PageList>
+
+@if (this.Persons != null)
+{
+	<PageListControls PageNumber="this.Filter.PageNumber"
+					  PageNumberChanged="@((value) => this.OnPageNumberChangeAsync(value))"
+					  PageSize="this.Filter.PageSize"
+					  PageSizeChanged="@((value) => this.OnPageSizeChangeAsync(value))"
+					  TotalPages="this.Persons.TotalPages"
+					  TotalItems="this.Persons.TotalItems"
+					  TOrderBy="PersonFilterOrderBy"
+					  OrderBy="this.Filter.OrderBy"
+					  OrderByChanged="@((value) => this.OnOrderByChangeAsync(value))"
+					  TOrderDirection="PersonFilterOrderDirection"
+					  OrderDirection="this.Filter.OrderDirection"
+					  OrderDirectionChanged="@((value) => this.OnOrderDirectionChangeAsync(value))">
+	</PageListControls>
+}

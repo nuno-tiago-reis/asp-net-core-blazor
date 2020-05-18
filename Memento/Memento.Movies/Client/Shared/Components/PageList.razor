@@ -1,0 +1,38 @@
+﻿@inherits MementoComponent<PageList<T>>
+@typeparam T
+
+@if (this.Page == null)
+{
+	if (this.LoadingTemplate == null)
+	{
+		<h3>
+			<i class="fas fa-spinner fa-pulse"></i> @this.Localizer.GetString(SharedResources.GENERIC_LOADING)...
+		</h3>
+	}
+	else
+	{
+		@this.LoadingTemplate
+	}
+}
+else if (this.Page.Count == 0)
+{
+	if (this.EmptyTemplate == null)
+	{
+		<h3>
+			<i class="fas fa-empty-set"></i> @this.Localizer.GetString(SharedResources.GENERIC_NO_RECORDS_FOUND)
+		</h3>
+	}
+	else
+	{
+		@this.EmptyTemplate
+	}
+}
+else
+{
+	<div class="row">
+		@foreach (var pageItem in this.Page)
+		{
+			@this.ItemTemplate(pageItem)
+		}
+	</div>
+}
