@@ -1,24 +1,47 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Memento.Movies</title>
-    <base href="/" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
+	<!-- meta -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<!-- base -->
+	<base href="/" />
+
+	<!-- title -->
+	<title>Memento.Movies</title>
+
+	<!-- icon -->
+	<link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+
+	<!-- development global styles -->
+	<environment exclude="Production">
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="lib/font-awesome/css/all.css" />
+		<link rel="stylesheet" href="css/styles.css" />
+	</environment>
+
+	<!-- production global styles -->
+	<environment include="Production">
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="lib/font-awesome/css/all.min.css" />
+		<link rel="stylesheet" href="css/styles.min.css" />
+	</environment>
+
+	<!-- scripts -->
+	<script src="_framework/blazor.webassembly.js"></script>
 </head>
-
 <body>
-    <app>Loading...</app>
+	<!-- entry -->
+	<app>Loading...</app>
 
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
-    <script src="_framework/blazor.webassembly.js"></script>
+	<!-- error -->
+	<div id="blazor-error-ui">
+		An unhandled error has occurred.
+		<a href="" class="reload">Reload</a>
+		<a class="dismiss">🗙</a>
+	</div>
 </body>
-
 </html>

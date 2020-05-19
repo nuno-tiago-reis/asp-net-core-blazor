@@ -19,8 +19,14 @@ namespace Memento.Movies.Client
 		/// <param name="services">The services.</param>
 		public static void ConfigureBuilder(WebAssemblyHostBuilder builder)
 		{
+			// Components
 			builder.RootComponents.Add<App>("app");
-			builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+			// Options
+			builder.Services.AddOptions();
+
+			// Services
+			builder.Services.AddTransient(provider => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 		}
 		#endregion
 	}
