@@ -20,6 +20,7 @@
 	<environment exclude="Production">
 		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="lib/font-awesome/css/all.css" />
+		<link rel="stylesheet" href="lib/toastr/css/toastr.css" />
 		<link rel="stylesheet" href="css/styles.css" />
 	</environment>
 
@@ -27,7 +28,26 @@
 	<environment include="Production">
 		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="lib/font-awesome/css/all.min.css" />
+		<link rel="stylesheet" href="lib/toastr/css/toastr.min.css" />
 		<link rel="stylesheet" href="css/styles.min.css" />
+	</environment>
+
+	<!-- development global scripts -->
+	<environment exclude="Production">
+		<script src="lib/bootstrap/js/bootstrap.css"></script>
+		<script src="lib/font-awesome/js/all.css"></script>
+		<script src="lib/jquery/js/jquery.js"></script>
+		<script src="lib/popper/js/popper.js"></script>
+		<script src="lib/toastr/js/toastr.js"></script>
+	</environment>
+	
+	<!-- production global scripts -->
+	<environment include="Production">
+		<script src="lib/bootstrap/js/bootstrap.min.css"></script>
+		<script src="lib/font-awesome/js/all.min.css"></script>
+		<script src="lib/jquery/js/jquery.min.js"></script>
+		<script src="lib/popper/js/popper.min.js"></script>
+		<script src="lib/toastr/js/toastr.min.js"></script>
 	</environment>
 
 	<!-- scripts -->

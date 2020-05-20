@@ -139,6 +139,3 @@ Thumbs.db
 
 tempkey.rsa
 appsettings.local.json
-
-**/wwwroot/lib
-**/wwwroot/is-cache
