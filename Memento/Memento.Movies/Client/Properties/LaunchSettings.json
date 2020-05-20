@@ -41,7 +41,7 @@
 			"applicationUrl": "https://localhost:44390",
 			"environmentVariables":
 			{
-				"ASPNETCORE_ENVIRONMENT": "Local"
+				"ASPNETCORE_ENVIRONMENT": "Development"
 			}
 		},
 		"Movies.Client.Watch (Release) [Kestrel]":
@@ -53,7 +53,7 @@
 			"applicationUrl": "https://localhost:44390",
 			"environmentVariables":
 			{
-				"ASPNETCORE_ENVIRONMENT": "Local"
+				"ASPNETCORE_ENVIRONMENT": "Development"
 			}
 		}
 	}

@@ -1,4 +1,8 @@
+using Memento.Movies.Shared.Database;
+using Memento.Movies.Shared.Database.Models.Movies;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
@@ -25,8 +29,18 @@ namespace Memento.Movies.Client
 			// Options
 			builder.Services.AddOptions();
 
-			// Services
+			// Http Clients
 			builder.Services.AddTransient(provider => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+			builder.Services.AddDbContext<MovieContext>(options =>
+			{
+				options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Memento.Movies;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+			});
+
+			// Repositories
+			builder.Services.AddTransient<IMovieRepository, MovieRepository>();
+
+			builder.Services.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
 		}
 		#endregion
 	}

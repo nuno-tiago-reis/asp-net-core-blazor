@@ -1,14 +1,18 @@
-using Memento.Shared.Configuration;
+using Memento.Movies.Shared.Configuration;
+using Memento.Movies.Shared.Database;
+using Memento.Movies.Shared.Database.Models.Movies;
 using Memento.Shared.Localization;
 using Memento.Shared.ModelBinding;
 using Memento.Shared.Routing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,7 +30,12 @@ namespace Memento.Movies.Server
 		/// <summary>
 		/// The configuration.
 		/// </summary>
-		public IConfiguration Configuration { get; }
+		private readonly IConfiguration Configuration;
+
+		/// <summary>
+		/// Gets the movie settings.
+		/// </summary>
+		private readonly MovieSettings MovieSettings;
 		#endregion
 
 		#region [Constructors]
@@ -38,7 +47,8 @@ namespace Memento.Movies.Server
 		/// <param name="environment">The environment.</param> 
 		public Startup(IConfiguration configuration)
 		{
-			Configuration = configuration;
+			this.Configuration = configuration;
+			this.MovieSettings = configuration.Get<MovieSettings>();
 		}
 		#endregion
 
@@ -51,6 +61,12 @@ namespace Memento.Movies.Server
 		/// <param name="services">The services.</param>
 		public void ConfigureServices(IServiceCollection services)
 		{
+			#region [Required: AspNet AppSettings]
+			// Configurations
+			services
+				.Configure<MovieSettings>(this.Configuration);
+			#endregion
+
 			#region [Required: AspNet Middleware]
 			// Middleware
 			services
@@ -59,8 +75,6 @@ namespace Memento.Movies.Server
 				.AddRazorPages();
 
 			// Configurations
-			services
-				.Configure<ApplicationSettings>(this.Configuration);
 			services
 				.Configure<ApiBehaviorOptions>(options =>
 				{
@@ -137,6 +151,28 @@ namespace Memento.Movies.Server
 					options.SupportedUICultures = localizationOptions.SupportedUICultures;
 				});
 			#endregion
+
+			#region [Required: AspNet EntityFramework]
+			services
+				.AddDbContext<MovieContext>(options =>
+				{
+					options.UseSqlServer(this.MovieSettings.ConnectionStrings.DefaultConnection, builder =>
+					{
+						builder.MigrationsAssembly(typeof(MovieContext).Assembly.FullName);
+					});
+				});
+
+			services
+				.AddTransient<MovieSeeder>();
+
+			services
+				.AddTransient<IMovieRepository, MovieRepository>();
+			#endregion
+
+			#region [Required: AspNet Miscellaneous]
+			services
+				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
+			#endregion
 		}
 
 		/// <summary>
@@ -184,6 +220,14 @@ namespace Memento.Movies.Server
 				options.SupportedCultures = localizationOptions.SupportedCultures;
 				options.SupportedUICultures = localizationOptions.SupportedUICultures;
 			});
+			#endregion
+
+			#region [Required: AspNet EntityFramework]
+			using (var scope = builder.ApplicationServices.CreateScope())
+			{
+				scope.ServiceProvider.GetService<MovieContext>().Database.Migrate();
+				scope.ServiceProvider.GetService<MovieSeeder>().Seed();
+			}
 			#endregion
 
 			#region [Required: AspNet Routing]
