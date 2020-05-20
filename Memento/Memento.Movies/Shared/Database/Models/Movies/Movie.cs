@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Memento.Shared.Models;
+using System;
 
-namespace Memento.Movies.Shared.Database.Movies
+namespace Memento.Movies.Shared.Database.Models.Movies
 {
 	/// <summary>
-	/// Implements the 'Movie' database entity.
+	/// Implements the 'Movie' model.
 	/// </summary>
-	public sealed class Movie
+	public sealed class Movie : Model
 	{
 		/// <summary>
 		/// The title.
