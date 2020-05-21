@@ -1,4 +1,6 @@
-﻿using Memento.Movies.Shared.Database.Models.Movies;
+﻿using Memento.Movies.Shared.Database.Models.Genres;
+using Memento.Movies.Shared.Database.Models.Movies;
+using Memento.Movies.Shared.Database.Models.Persons;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,9 +20,19 @@ namespace Memento.Movies.Shared.Database
 	{
 		#region [Constants]
 		/// <summary>
+		/// The filename with the seeding data for the 'Genre' models.
+		/// </summary>
+		private const string GENRE_FILE_NAME = "Database/Models/Seeding/Genres";
+
+		/// <summary>
 		/// The filename with the seeding data for the 'Movie' models.
 		/// </summary>
 		private const string MOVIES_FILE_NAME = "Database/Models/Seeding/Movies";
+
+		/// <summary>
+		/// The filename with the seeding data for the 'Person' models.
+		/// </summary>
+		private const string PERSONS_FILE_NAME = "Database/Models/Seeding/Persons";
 		#endregion
 
 		#region [Properties]
@@ -67,7 +79,69 @@ namespace Memento.Movies.Shared.Database
 		/// </summary>
 		public void Seed()
 		{
+			this.SeedGenres();
 			this.SeedMovies();
+			this.SeedPersons();
+		}
+
+		/// <summary>
+		/// Seeds the genres.
+		/// </summary>
+		private void SeedGenres()
+		{
+			// Build the genres
+			var genres = new List<Genre>();
+
+			try
+			{
+				// Read the genres from the global file
+				string globalFile = $"{GENRE_FILE_NAME}.json";
+				genres.AddRange(JsonSerializer.Deserialize<List<Genre>>(File.ReadAllText(globalFile)));
+			}
+			catch (DirectoryNotFoundException)
+			{
+				// Ignore if the file does not exist
+			}
+			catch (Exception exception)
+			{
+				this.Logger.LogError(exception.Message, exception);
+			}
+
+			try
+			{
+				// Read the genres from the environment specific file
+				string environmentFile = $"{GENRE_FILE_NAME}.{this.Environment.EnvironmentName}.json";
+				genres.AddRange(JsonSerializer.Deserialize<List<Genre>>(File.ReadAllText(environmentFile)));
+			}
+			catch (DirectoryNotFoundException)
+			{
+				// Ignore if the file does not exist
+			}
+			catch (Exception exception)
+			{
+				this.Logger.LogError(exception.Message, exception);
+			}
+
+			// Sort the genres
+			genres.Sort((first, second) => string.Compare(first.Name, second.Name, StringComparison.Ordinal));
+
+			// Update the context
+			foreach (var genre in genres)
+			{
+				// Check if it exists
+				var contextGenre = this.Context.Genres
+					.FirstOrDefault(g => g.Name == genre.Name);
+
+				// Add the genre
+				if (contextGenre == null)
+				{
+					this.Context.Genres.Add(genre);
+					continue;
+				}
+			}
+
+			// Save the context
+			this.Context.SaveChanges();
 		}
 
 		/// <summary>
@@ -109,19 +183,79 @@ namespace Memento.Movies.Shared.Database
 			}
 
 			// Sort the movies
-			movies.Sort((first, second) => string.Compare(first.Title, second.Title, StringComparison.Ordinal));
+			movies.Sort((first, second) => first.ReleaseDate.CompareTo(second.ReleaseDate));
 
 			// Update the context
 			foreach (var movie in movies)
 			{
 				// Check if it exists
 				var contextMovie = this.Context.Movies
-					.FirstOrDefault(m => m.Title == movie.Title);
+					.FirstOrDefault(m => m.Name == movie.Name && m.ReleaseDate == movie.ReleaseDate);
 
 				// Add the movie
 				if (contextMovie == null)
 				{
 					this.Context.Movies.Add(movie);
+					continue;
+				}
+			}
+
+			// Save the context
+			this.Context.SaveChanges();
+		}
+
+		/// <summary>
+		/// Seeds the persons.
+		/// </summary>
+		private void SeedPersons()
+		{
+			// Build the persons
+			var persons = new List<Person>();
+
+			try
+			{
+				// Read the persons from the global file
+				string globalFile = $"{PERSONS_FILE_NAME}.json";
+				persons.AddRange(JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(globalFile)));
+			}
+			catch (DirectoryNotFoundException)
+			{
+				// Ignore if the file does not exist
+			}
+			catch (Exception exception)
+			{
+				this.Logger.LogError(exception.Message, exception);
+			}
+
+			try
+			{
+				// Read the persons from the environment specific file
+				string environmentFile = $"{PERSONS_FILE_NAME}.{this.Environment.EnvironmentName}.json";
+				persons.AddRange(JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(environmentFile)));
+			}
+			catch (DirectoryNotFoundException)
+			{
+				// Ignore if the file does not exist
+			}
+			catch (Exception exception)
+			{
+				this.Logger.LogError(exception.Message, exception);
+			}
+
+			// Sort the persons
+			persons.Sort((first, second) => first.BirthDate.CompareTo(second.BirthDate));
+
+			// Update the context
+			foreach (var person in persons)
+			{
+				// Check if it exists
+				var contextPerson = this.Context.Persons
+					.FirstOrDefault(p => p.Name == person.Name && p.BirthDate == person.BirthDate);
+
+				// Add the person
+				if (contextPerson == null)
+				{
+					this.Context.Persons.Add(person);
 					continue;
 				}
 			}

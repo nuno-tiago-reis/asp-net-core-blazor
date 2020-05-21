@@ -1,23 +1,21 @@
 ﻿<div class="card mb-md-2">
 	<div class="card-header">
 		<h3 class="mb-md-0">
-			@this.Movie.Title
+			@this.Movie.Name
 		</h3>
 	</div>
 	<div class="card-body">
 		<div class="row">
 			<div class="col-md-6">
 				<a>
-					<img class="img-thumbnail h-md-350-px" src="@this.Movie.Poster" alt="@this.Movie.Title" />
+					<img class="img-thumbnail h-md-350-px" src="@this.Movie.PictureUrl" alt="@this.Movie.Name" />
 				</a>
 			</div>
 			<div class="col-md-6">
 				<div class="d-flex flex-column h-100">
 					<dl>
 						<dt>Title</dt>
-						<dd>@Movie.Title</dd>
-						<dt>Genre:</dt>
-						<dd>@Movie.Genre</dd>
+						<dd>@Movie.Name</dd>
 						<dt>Release Date:</dt>
 						<dd>@Movie.ReleaseDate.ToString("yyyy-MM-dd")</dd>
 					</dl>

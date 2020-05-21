@@ -12,7 +12,7 @@
 
 	<PropertyGroup>
 		<!-- Faster Debug Builds-->
-		<BlazorWebAssemblyEnableLinking  Condition="'$(Configuration)'!='Release'">false</BlazorWebAssemblyEnableLinking>
+		<BlazorWebAssemblyEnableLinking Condition="'$(Configuration)'!='Release'">false</BlazorWebAssemblyEnableLinking>
 	</PropertyGroup>
 
 	<ItemGroup>

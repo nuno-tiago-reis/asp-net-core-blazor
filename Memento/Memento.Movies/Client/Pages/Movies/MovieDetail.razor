@@ -3,14 +3,14 @@
 <div class="card">
 	<div class="card-header">
 		<h5>
-			@this.Movie.Title
+			@this.Movie.Name
 		</h5>
 	</div>
 	<div class="card-body">
 		<div class="row">
 			<div class="col-md-4">
 				<a>
-					<img src="@this.Movie.Poster" alt="@this.Movie.Title" />
+					<img src="@this.Movie.PictureUrl" alt="@this.Movie.Name" />
 				</a>
 				<button class="btn btn-success" type="button" @onclick="async () => { await this.ConfirmationModal.ShowAsync(); }">
 					<span class="fas fa-edit"></span> Update
@@ -22,9 +22,7 @@
 			<div class="col-md-8">
 				<dl>
 					<dd>Title</dd>
-					<dt>@Movie.Title</dt>
-					<dd>Genre:</dd>
-					<dt>@Movie.Genre</dt>
+					<dt>@Movie.Name</dt>
 					<dd>Release Date:</dd>
 					<dt>@Movie.ReleaseDate.ToString("yyyy-MM-dd")</dt>
 				</dl>

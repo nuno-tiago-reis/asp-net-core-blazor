@@ -16,8 +16,43 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Watch Remove="Shared\Movies\MovieCard.razor" />
-	  <Watch Remove="Shared\Movies\MovieDetail.razor" />
+	  <Content Remove="Pages\Genres\GenreCard.razor" />
+	  <Content Remove="Pages\Genres\GenreDetail.razor" />
+	  <Content Remove="Pages\Genres\GenreForm.razor" />
+	  <Content Remove="Pages\Genres\GenreList.razor" />
+	  <Content Remove="Pages\Movies\MovieForm.razor" />
+	  <Content Remove="Pages\Persons\PersonCard.razor" />
+	  <Content Remove="Pages\Persons\PersonDetail.razor" />
+	  <Content Remove="Pages\Persons\PersonForm.razor" />
+	  <Content Remove="Pages\Persons\PersonList.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Watch Remove="Shared\Errors\NotFound.razor" />
+	  <Watch Remove="Pages\Genres\GenreCard.razor" />
+	  <Watch Remove="Pages\Genres\GenreDetail.razor" />
+	  <Watch Remove="Pages\Genres\GenreForm.razor" />
+	  <Watch Remove="Pages\Genres\GenreList.razor" />
+	  <Watch Remove="Pages\Movies\MovieCard.razor" />
+	  <Watch Remove="Pages\Movies\MovieDetail.razor" />
+	  <Watch Remove="Pages\Movies\MovieForm.razor" />
+	  <Watch Remove="Pages\Persons\PersonCard.razor" />
+	  <Watch Remove="Pages\Persons\PersonDetail.razor" />
+	  <Watch Remove="Pages\Persons\PersonForm.razor" />
+	  <Watch Remove="Pages\Persons\PersonList.razor" />
+	  <Watch Remove="Shared\Layout\Menu.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Pages\Genres\GenreCard.razor" />
+	  <None Include="Pages\Genres\GenreDetail.razor" />
+	  <None Include="Pages\Genres\GenreForm.razor" />
+	  <None Include="Pages\Genres\GenreList.razor" />
+	  <None Include="Pages\Movies\MovieForm.razor" />
+	  <None Include="Pages\Persons\PersonCard.razor" />
+	  <None Include="Pages\Persons\PersonDetail.razor" />
+	  <None Include="Pages\Persons\PersonForm.razor" />
+	  <None Include="Pages\Persons\PersonList.razor" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -36,6 +71,10 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Shared\Memento.Movies.Shared.csproj" />
 		<ProjectReference Include="..\..\Memento.Shared\Memento\Memento.Shared\Memento.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Shared\Generic\" />
 	</ItemGroup>
 
 </Project>

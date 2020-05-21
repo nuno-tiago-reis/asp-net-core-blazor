@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace Memento.Movies.Shared.Database.Models.Movies
+namespace Memento.Movies.Shared.Database.Models.Persons
 {
 	/// <summary>
-	/// Implements the 'Movie' model.
+	/// Implements the 'Person' model.
 	/// </summary>
-	public sealed class Movie : Model
+	public sealed class Person : Model
 	{
 		#region [Properties]
 		/// <summary>
@@ -21,9 +21,9 @@ namespace Memento.Movies.Shared.Database.Models.Movies
 		public string NormalizedName { get; set; }
 
 		/// <summary>
-		/// The summary.
+		/// The biography.
 		/// </summary>
-		public string Summary { get; set; }
+		public string Biography { get; set; }
 
 		/// <summary>
 		/// The picture url.
@@ -31,38 +31,23 @@ namespace Memento.Movies.Shared.Database.Models.Movies
 		public string PictureUrl { get; set; }
 
 		/// <summary>
-		/// The trailer url.
+		/// The birth date.
 		/// </summary>
-		public string TrailerUrl { get; set; }
+		public DateTime BirthDate { get; set; }
 
 		/// <summary>
-		/// The release date.
+		/// The movies associated with the person.
 		/// </summary>
-		public DateTime ReleaseDate { get; set; }
-
-		/// <summary>
-		/// Whether the movie is in theaters.
-		/// </summary>
-		public bool InTheaters { get; set; }
-
-		/// <summary>
-		/// The genres associated with the movie.
-		/// </summary>
-		public List<MovieGenre> Genres { get; set; }
-
-		/// <summary>
-		/// The persons associated with the movie.
-		/// </summary>
-		public List<MoviePerson> Persons { get; set; }
+		public List<MoviePerson> Movies { get; set; }
 		#endregion
 
 		#region [Methods]
 		/// <inheritdoc />
 		public override bool Equals(object @object)
 		{
-			if (@object is Movie movie)
+			if (@object is Person person)
 			{
-				return this.Id == movie.Id;
+				return this.Id == person.Id;
 			}
 			return false;
 		}

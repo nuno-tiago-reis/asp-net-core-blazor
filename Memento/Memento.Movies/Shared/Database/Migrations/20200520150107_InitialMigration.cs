@@ -60,7 +60,10 @@ namespace Memento.Movies.Shared.Migrations
 		/// <inheritdoc />
 		protected override void Down(MigrationBuilder migrationBuilder)
 		{
-			migrationBuilder.DropTable(name: "Movies");
+			migrationBuilder.DropTable
+			(
+				name: "Movies"
+			);
 		}
 	}
 }

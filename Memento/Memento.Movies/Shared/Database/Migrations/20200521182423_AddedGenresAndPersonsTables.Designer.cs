@@ -3,14 +3,16 @@ using Memento.Movies.Shared.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
 namespace Memento.Movies.Shared.Migrations
 {
 	[DbContext(typeof(MovieContext))]
-	internal partial class MovieContextModelSnapshot : ModelSnapshot
+	[Migration("20200521182423_AddedGenresAndPersonsTables")]
+	internal partial class AddedGenresAndPersonsTables
 	{
-		protected override void BuildModel(ModelBuilder modelBuilder)
+		protected override void BuildTargetModel(ModelBuilder modelBuilder)
 		{
 			#pragma warning disable 612, 618
 			modelBuilder

@@ -1,4 +1,7 @@
-﻿using Memento.Movies.Shared.Database.Models.Movies;
+﻿using Memento.Movies.Shared.Database.Models;
+using Memento.Movies.Shared.Database.Models.Genres;
+using Memento.Movies.Shared.Database.Models.Movies;
+using Memento.Movies.Shared.Database.Models.Persons;
 using Memento.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,11 +18,33 @@ namespace Memento.Movies.Shared.Database
 	/// <seealso cref="DbContext"/>
 	public sealed class MovieContext : DbContext
 	{
-		#region [Properties]
+		#region [Properties] Models
 		/// <summary>
-		/// Gets or sets the movies.
+		/// Gets or sets the 'Genre' database set.
+		/// </summary>
+		public DbSet<Genre> Genres { get; set; }
+
+		/// <summary>
+		/// Gets or sets the 'Movie' database set.
 		/// </summary>
 		public DbSet<Movie> Movies { get; set; }
+
+		/// <summary>
+		/// Gets or sets the 'Person' database set.
+		/// </summary>
+		public DbSet<Person> Persons { get; set; }
+		#endregion
+
+		#region [Properties] Model Associations
+		/// <summary>
+		/// Gets or sets the 'MovieGenre' database set.
+		/// </summary>
+		public DbSet<MovieGenre> MovieGenres { get; set; }
+
+		/// <summary>
+		/// Gets or sets the 'MoviePerson' database set.
+		/// </summary>
+		public DbSet<MoviePerson> MoviePersons { get; set; }
 		#endregion
 
 		#region [Constructors]
@@ -40,8 +65,14 @@ namespace Memento.Movies.Shared.Database
 		{
 			base.OnModelCreating(builder);
 
-			// Configurations
+			// Configurations (Models)
+			builder.ApplyConfiguration(new GenreConfiguration());
 			builder.ApplyConfiguration(new MovieConfiguration());
+			builder.ApplyConfiguration(new PersonConfiguration());
+
+			// Configurations (Model Associations)
+			builder.ApplyConfiguration(new MovieGenreConfiguration());
+			builder.ApplyConfiguration(new MoviePersonConfiguration());
 		}
 		#endregion
 

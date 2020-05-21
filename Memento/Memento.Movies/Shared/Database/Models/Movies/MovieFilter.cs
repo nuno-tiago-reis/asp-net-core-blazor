@@ -1,4 +1,5 @@
 ﻿using Memento.Shared.Models;
+using System;
 
 namespace Memento.Movies.Shared.Database.Models.Movies
 {
@@ -7,19 +8,34 @@ namespace Memento.Movies.Shared.Database.Models.Movies
 	/// </summary
 	///
 	/// <seealso cref="MovieFilterOrderBy" />
-	/// <seealso cref="ModelFilterOrderDirection" />
-	public sealed class MovieFilter : ModelFilter<MovieFilterOrderBy, ModelFilterOrderDirection>
+	/// <seealso cref="FilterOrderDirection" />
+	public sealed class MovieFilter : ModelFilter<MovieFilterOrderBy, FilterOrderDirection>
 	{
 		#region [Properties]
 		/// <summary>
-		///  The 'Title' filter.
+		///  The 'Name' filter.
 		/// </summary>
-		public string Title { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
-		///  The 'Genre' filter.
+		///  The 'Summary' filter.
 		/// </summary>
-		public string Genre { get; set; }
+		public string Summary { get; set; }
+
+		/// <summary>
+		///  The 'InTheaters' filter.
+		/// </summary>
+		public bool? InTheaters { get; set; }
+
+		/// <summary>
+		///  The 'BirthDate' filter (released after).
+		/// </summary>
+		public DateTime? ReleasedAfter { get; set; }
+
+		/// <summary>
+		///  The 'BirthDate' filter (released before).
+		/// </summary>
+		public DateTime? ReleasedBefore { get; set; }
 		#endregion
 	}
 
@@ -33,20 +49,16 @@ namespace Memento.Movies.Shared.Database.Models.Movies
 		/// </summary>
 		Id = 0,
 		/// <summary>
-		/// By 'Title'.
+		/// By 'Name'.
 		/// </summary>
-		Title = 1,
-		/// <summary>
-		/// By 'Genre'.
-		/// </summary>
-		Genre = 2,
+		Name = 1,
 		/// <summary>
 		/// By 'CreatedAt'.
 		/// </summary>
-		CreatedAt = 3,
+		CreatedAt = 2,
 		/// <summary>
 		/// By 'UpdatedAt'.
 		/// </summary>
-		UpdatedAt = 4
+		UpdatedAt = 3
 	}
 }
