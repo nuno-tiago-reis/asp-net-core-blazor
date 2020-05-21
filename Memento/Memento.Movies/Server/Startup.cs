@@ -169,7 +169,7 @@ namespace Memento.Movies.Server
 				.AddTransient<IMovieRepository, MovieRepository>();
 			#endregion
 
-			#region [Required: AspNet Miscellaneous]
+			#region [Required: Services]
 			services
 				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
 			#endregion

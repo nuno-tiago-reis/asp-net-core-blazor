@@ -1,10 +1,24 @@
-﻿@using Microsoft.AspNetCore.Components.Forms
+﻿@* Blazorade *@
+@using Blazorade.Bootstrap.Components
+@using Blazorade.Bootstrap.Components.Builder
+@using Blazorade.Bootstrap.Components.Content
+@using Blazorade.Bootstrap.Components.Layout
+@using Blazorade.Bootstrap.Components.Model
+@using Blazorade.Bootstrap.Components.Utilities
+
+@* Microsoft.AspNetCore *@
+@using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.WebAssembly.Http
+
+@* Microsoft.JSInterop *@
 @using Microsoft.JSInterop
+
+@* Memento.Movies *@
 @using Memento.Movies.Client
 @using Memento.Movies.Client.Shared
+@using Memento.Movies.Client.Shared.Components
 @using Memento.Movies.Client.Shared.Generic
 @using Memento.Movies.Client.Shared.Layout
 @using Memento.Movies.Client.Shared.Movies
@@ -12,5 +26,16 @@
 @using Memento.Movies.Shared.Database
 @using Memento.Movies.Shared.Database.Models
 @using Memento.Movies.Shared.Database.Models.Movies
+
+@* Memento.Shared *@
+@using Memento.Shared.Configuration
+@using Memento.Shared.Exceptions;
+@using Memento.Shared.Extensions;
+@using Memento.Shared.Localization;
+@using Memento.Shared.ModelBinding;
+@using Memento.Shared.Models;
+@using Memento.Shared.Routing;
+
+@* System *@
 @using System.Net.Http
 @using System.Net.Http.Json

@@ -6,6 +6,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<!-- Blazorade -->
+		<PackageReference Include="Blazorade.Bootstrap.Components" Version="1.0.0-rc3" />
 		<!-- Microsoft.AspNetCore -->
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
 		<!-- Microsoft.EntityFrameworkCore -->

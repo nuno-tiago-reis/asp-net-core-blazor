@@ -1,10 +1,23 @@
 ﻿<h3>Movies</h3>
 
-<GenericList ElementList="this.Movies">
+@*<GenericList ElementList="this.Movies">
 	<ElementTemplate>
 		<p>Title: <strong>@context.Title</strong></p>
 		<p>Genre: <strong>@context.Genre</strong></p>
 		<p>Releaste Date: <strong>@context.ReleaseDate</strong></p>
-		<hr/>
+		<hr />
 	</ElementTemplate>
-</GenericList>
+</GenericList>*@
+
+<button type="button" class="btn btn-primary" @onclick="async () => { await this.ConfirmationModal.ShowAsync(); }">Show Modal</button>
+
+<ConfirmationModal @ref="this.ConfirmationModal"
+	ConfirmButtonCallback="this.OnConfirm"
+	CancelButtonCallback="this.OnCancel">
+	<HeaderContent>
+		<span class="fas fa-refresh"></span> Refresh List
+	</HeaderContent>
+	<BodyContent>
+		<p>Are you sure you want to refresh the list?</p>
+	</BodyContent>
+</ConfirmationModal>

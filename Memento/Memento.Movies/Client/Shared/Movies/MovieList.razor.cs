@@ -1,5 +1,7 @@
-﻿using Memento.Movies.Shared.Database.Models.Movies;
+﻿using Memento.Movies.Client.Shared.Components;
+using Memento.Movies.Shared.Database.Models.Movies;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,15 +27,39 @@ namespace Memento.Movies.Client.Shared.Movies
 		/// </summary>
 		[Inject]
 		public IMovieRepository Repository { get; set; }
+
+		/// <summary>
+		/// The confirmation modal.
+		/// </summary>
+		[Parameter]
+		public ConfirmationModal ConfirmationModal { get; set; }
 		#endregion
 
-		#region [Methods]
+		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
 		{
 			await Task.Delay(3000);
 
 			this.Movies = (await this.Repository.GetAllAsync()).ToList();
+		}
+		#endregion
+
+		#region [Methods] ConfirmationModal
+		/// <summary>
+		/// Callback that is invoked when the confirm button is clicked in the confirmation modal.
+		/// </summary>
+		private async Task OnConfirm()
+		{
+			System.Console.WriteLine("Confirm!");
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the cancel button is clicked in the confirmation modal.
+		/// </summary>
+		private async Task OnCancel()
+		{
+			System.Console.WriteLine("Cancel!");
 		}
 		#endregion
 	}

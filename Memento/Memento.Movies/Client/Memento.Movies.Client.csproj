@@ -6,6 +6,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<!-- Blazorade -->
+		<PackageReference Include="Blazorade.Bootstrap.Components" Version="1.0.0-rc3" />
 		<!-- BuildWebCompiler -->
 		<PackageReference Include="BuildWebCompiler" Version="1.12.405" />
 		<!-- Microsoft.AspNetCore -->

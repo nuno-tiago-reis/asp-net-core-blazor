@@ -1,0 +1,54 @@
+﻿<Modal @ref="this.Modal">
+	<!-- header -->
+	<HeaderTemplate>
+		<ModalHeader BackgroundColor="this.HeaderBackgroundColor" TextColor="this.HeaderTextColor">
+			<h5 class="mb-0">
+				@this.HeaderContent
+			</h5>
+			<Button class="close" TextColor="this.HeaderTextColor" OnClicked="this.OnCancelAsync">
+				<span class="fas fa-times"></span>
+			</Button>
+		</ModalHeader>
+	</HeaderTemplate>
+	<!-- body -->
+	<BodyTemplate>
+		<ModalBody>
+			<div class="row w-100">
+				<div class="col-md-12">
+					@this.BodyContent
+				</div>
+			</div>
+		</ModalBody>
+	</BodyTemplate>
+	<!-- footer -->
+	<FooterTemplate>
+		<ModalFooter>
+			<div class="row w-100">
+				<div class="col-md-6">
+					<Button Color="this.ConfirmButtonColor" IsBlockLevel="true" OnClicked="this.OnConfirmAsync">
+						@if (this.ConfirmButtonContent != null)
+						{
+							@this.ConfirmButtonContent
+						}
+						else
+						{
+							<span class="fas fa-check"></span> <text>Confirm</text>
+						}
+					</Button>
+				</div>
+				<div class="col-md-6">
+					<Button Color="this.CancelButtonColor" IsBlockLevel="true" OnClicked="this.OnCancelAsync">
+						@if (this.CancelButtonContent != null)
+						{
+							@this.CancelButtonContent
+						}
+						else
+						{
+							<span class="fas fa-times"></span> <text>Cancel</text>
+						}
+					</Button>
+				</div>
+			</div>
+		</ModalFooter>
+	</FooterTemplate>
+</Modal>

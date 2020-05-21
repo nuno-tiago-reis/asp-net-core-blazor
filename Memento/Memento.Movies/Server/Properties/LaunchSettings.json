@@ -36,7 +36,7 @@
 		{
 			"commandName": "Executable",
 			"executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-			"commandLineArgs": "watch --project ..\\..\\..\\Memento.Movies.csproj run",
+			"commandLineArgs": "watch --project ..\\..\\..\\Memento.Movies.Server.csproj run",
 			"launchBrowser": false,
 			"applicationUrl": "https://localhost:44391",
 			"environmentVariables":
@@ -48,7 +48,7 @@
 		{
 			"commandName": "Executable",
 			"executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-			"commandLineArgs": "watch --project ..\\..\\..\\Memento.Movies.csproj run",
+			"commandLineArgs": "watch --project ..\\..\\..\\Memento.Movies.Server.csproj run",
 			"launchBrowser": false,
 			"applicationUrl": "https://localhost:44391",
 			"environmentVariables":

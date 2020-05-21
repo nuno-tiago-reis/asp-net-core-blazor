@@ -10,7 +10,7 @@
 			"wwwroot/lib/bootstrap/css/bootstrap.css"
 		],
 		"outputFileName": "wwwroot/lib/bootstrap/css/bootstrap.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -23,7 +23,7 @@
 			"wwwroot/lib/bootstrap/css/bootstrap-grid.css"
 		],
 		"outputFileName": "wwwroot/lib/bootstrap/css/bootstrap-grid.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -36,7 +36,33 @@
 			"wwwroot/lib/bootstrap/css/bootstrap-reboot.css"
 		],
 		"outputFileName": "wwwroot/lib/bootstrap/css/bootstrap-reboot.min.css",
-		"sourceMap": false
+		"sourceMap": true
+	},
+	{
+		"minify":
+		{
+			"enabled": true,
+			"renameLocals": true
+		},
+		"inputFiles":
+		[
+			"wwwroot/lib/bootstrap/js/bootstrap.js"
+		],
+		"outputFileName": "wwwroot/lib/bootstrap/js/bootstrap.min.js",
+		"sourceMap": true
+	},
+	{
+		"minify":
+		{
+			"enabled": true,
+			"renameLocals": true
+		},
+		"inputFiles":
+		[
+			"wwwroot/lib/bootstrap/js/bootstrap.bundle.js"
+		],
+		"outputFileName": "wwwroot/lib/bootstrap/js/bootstrap.bundle.min.js",
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -49,7 +75,7 @@
 			"wwwroot/lib/font-awesome/css/all.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/all.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -62,7 +88,7 @@
 			"wwwroot/lib/font-awesome/css/brands.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/brands.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -75,7 +101,7 @@
 			"wwwroot/lib/font-awesome/css/duotone.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/duotone.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -88,7 +114,7 @@
 			"wwwroot/lib/font-awesome/css/fontawesome.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/fontawesome.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -101,7 +127,7 @@
 			"wwwroot/lib/font-awesome/css/light.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/light.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -114,7 +140,7 @@
 			"wwwroot/lib/font-awesome/css/regular.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/regular.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -127,7 +153,7 @@
 			"wwwroot/lib/font-awesome/css/solid.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/solid.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -140,7 +166,7 @@
 			"wwwroot/lib/font-awesome/css/svg-with-js.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/svg-with-js.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -153,7 +179,7 @@
 			"wwwroot/lib/font-awesome/css/v4-shims.css"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/css/v4-shims.min.css",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -166,7 +192,7 @@
 			"wwwroot/lib/font-awesome/js/all.js"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/js/all.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -179,7 +205,7 @@
 			"wwwroot/lib/font-awesome/js/brands.js"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/js/brands.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -192,7 +218,7 @@
 			"wwwroot/lib/font-awesome/js/duotone.js"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/js/duotone.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -205,7 +231,7 @@
 			"wwwroot/lib/font-awesome/js/fontawesome.js"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/js/fontawesome.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -218,7 +244,7 @@
 			"wwwroot/lib/font-awesome/js/light.js"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/js/light.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -231,7 +257,7 @@
 			"wwwroot/lib/font-awesome/js/regular.js"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/js/regular.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -244,7 +270,7 @@
 			"wwwroot/lib/font-awesome/js/solid.js"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/js/solid.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -257,7 +283,7 @@
 			"wwwroot/lib/font-awesome/js/v4-shims.js"
 		],
 		"outputFileName": "wwwroot/lib/font-awesome/js/v4-shims.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -270,7 +296,7 @@
 			"wwwroot/lib/jquery/js/jquery.js"
 		],
 		"outputFileName": "wwwroot/lib/jquery/js/jquery.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	},
 	{
 		"minify":
@@ -283,32 +309,6 @@
 			"wwwroot/lib/popper/js/popper.js"
 		],
 		"outputFileName": "wwwroot/lib/popper/js/popper.min.js",
-		"sourceMap": false
-	},
-	{
-		"minify":
-		{
-			"enabled": true,
-			"renameLocals": true
-		},
-		"inputFiles":
-		[
-			"wwwroot/lib/toastr/css/toastr.css"
-		],
-		"outputFileName": "wwwroot/lib/toastr/css/toastr.min.css",
-		"sourceMap": false
-	},
-	{
-		"minify":
-		{
-			"enabled": true,
-			"renameLocals": true
-		},
-		"inputFiles":
-		[
-			"wwwroot/lib/toastr/js/toastr.js"
-		],
-		"outputFileName": "wwwroot/lib/toastr/js/toastr.min.js",
-		"sourceMap": false
+		"sourceMap": true
 	}
 ]
