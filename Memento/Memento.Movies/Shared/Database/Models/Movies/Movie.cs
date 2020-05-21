@@ -19,6 +19,11 @@ namespace Memento.Movies.Shared.Database.Models.Movies
 		public string Genre { get; set; }
 
 		/// <summary>
+		/// The poster url.
+		/// </summary>
+		public string Poster { get; set; }
+
+		/// <summary>
 		/// The release date.
 		/// </summary>
 		public DateTime ReleaseDate { get; set; }

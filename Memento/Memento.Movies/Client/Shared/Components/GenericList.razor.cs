@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Memento.Movies.Client.Shared.Generic
+namespace Memento.Movies.Client.Shared.Components
 {
 	/// <summary>
 	/// Implements the 'GenericList' component.

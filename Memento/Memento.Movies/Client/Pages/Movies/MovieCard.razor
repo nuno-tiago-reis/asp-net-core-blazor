@@ -1,0 +1,31 @@
+﻿<div class="card mb-md-2">
+	<div class="card-header">
+		<h3 class="mb-md-0">
+			@this.Movie.Title
+		</h3>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-6">
+				<a>
+					<img class="img-thumbnail h-md-350-px" src="@this.Movie.Poster" alt="@this.Movie.Title" />
+				</a>
+			</div>
+			<div class="col-md-6">
+				<div class="d-flex flex-column h-100">
+					<dl>
+						<dt>Title</dt>
+						<dd>@Movie.Title</dd>
+						<dt>Genre:</dt>
+						<dd>@Movie.Genre</dd>
+						<dt>Release Date:</dt>
+						<dd>@Movie.ReleaseDate.ToString("yyyy-MM-dd")</dd>
+					</dl>
+					<button class="btn btn-block btn-success mt-auto mb-1" type="button">
+						<span class="fas fa-sign-in"></span> View
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

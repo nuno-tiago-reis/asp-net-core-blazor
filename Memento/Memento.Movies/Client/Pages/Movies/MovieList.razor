@@ -1,0 +1,14 @@
+﻿@page "/Movies"
+
+<h3>Movies</h3>
+
+<div class="row">
+	<GenericList ElementList="this.Movies">
+		<ElementTemplate>
+			<div class="col-md-4">
+				<MovieCard Movie="@context">
+				</MovieCard>
+			</div>
+		</ElementTemplate>
+	</GenericList>
+</div>

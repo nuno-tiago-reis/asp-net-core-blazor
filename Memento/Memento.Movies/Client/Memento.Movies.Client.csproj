@@ -1,9 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<RazorLangVersion>3.0</RazorLangVersion>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Extend Watch -->
+		<Watch Include="..\**\*.razor" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<!-- Faster Debug Builds-->
+		<BlazorWebAssemblyEnableLinking Condition="'$(Configuration)'!='Release'">false</BlazorWebAssemblyEnableLinking>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Watch Remove="Shared\Movies\MovieCard.razor" />
+	  <Watch Remove="Shared\Movies\MovieDetail.razor" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<!-- Blazorade -->

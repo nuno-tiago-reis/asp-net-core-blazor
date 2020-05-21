@@ -310,5 +310,18 @@
 		],
 		"outputFileName": "wwwroot/lib/popper/js/popper.min.js",
 		"sourceMap": true
+	},
+	{
+		"minify":
+		{
+			"enabled": true,
+			"renameLocals": true
+		},
+		"inputFiles":
+		[
+			"wwwroot/css/styles.css"
+		],
+		"outputFileName": "wwwroot/css/styles.min.css",
+		"sourceMap": true
 	}
 ]
