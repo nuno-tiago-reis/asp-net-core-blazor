@@ -3,7 +3,7 @@
 <h3>Movies</h3>
 
 <div class="row">
-	<GenericList ElementList="this.Movies">
+	<GenericList ElementList="this.Movies.ToList()">
 		<ElementTemplate>
 			<div class="col-md-4">
 				<MovieCard Movie="@context">

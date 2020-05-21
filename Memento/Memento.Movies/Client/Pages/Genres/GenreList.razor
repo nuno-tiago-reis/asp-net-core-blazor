@@ -1,3 +1,14 @@
 ﻿@page "/Genres"
 
 <h3>Genres</h3>
+
+<div class="row">
+	<GenericList ElementList="this.Genres.ToList()">
+		<ElementTemplate>
+			<div class="col-md-4">
+				<GenreCard Genre="@context">
+				</GenreCard>
+			</div>
+		</ElementTemplate>
+	</GenericList>
+</div>

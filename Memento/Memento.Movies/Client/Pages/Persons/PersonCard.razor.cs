@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Memento.Movies.Shared.Database.Models.Persons;
+using Microsoft.AspNetCore.Components;
 
 namespace Memento.Movies.Client.Pages.Persons
 {
@@ -9,6 +10,26 @@ namespace Memento.Movies.Client.Pages.Persons
 	/// <seealso cref="ComponentBase"/>
 	public sealed partial class PersonCard : ComponentBase
 	{
-		// Nothing do to here.
+		#region [Properties] Parameters
+		/// <summary>
+		/// The person identifier.
+		/// </summary>
+		[Parameter]
+		public long PersonId { get; set; }
+
+		/// <summary>
+		/// The person.
+		/// </summary>
+		[Parameter]
+		public Person Person { get; set; }
+		#endregion
+
+		#region [Properties] Services
+		/// <summary>
+		/// The person repository.
+		/// </summary>
+		[Inject]
+		public IPersonRepository Repository { get; set; }
+		#endregion
 	}
 }

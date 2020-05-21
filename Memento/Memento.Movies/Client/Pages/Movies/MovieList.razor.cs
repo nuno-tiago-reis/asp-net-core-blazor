@@ -1,6 +1,6 @@
 ﻿using Memento.Movies.Shared.Database.Models.Movies;
+using Memento.Shared.Models;
 using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,10 +15,16 @@ namespace Memento.Movies.Client.Pages.Movies
 	{
 		#region [Properties] Parameters
 		/// <summary>
+		/// The movie filter.
+		/// </summary>
+		[Parameter]
+		public MovieFilter MovieFilter { get; set; }
+
+		/// <summary>
 		/// The movies.
 		/// </summary>
 		[Parameter]
-		public List<Movie> Movies { get; set; }
+		public IModelPage<Movie> Movies { get; set; }
 		#endregion
 
 		#region [Properties] Services
@@ -35,7 +41,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		{
 			await Task.Delay(1000);
 
-			this.Movies = (await this.Repository.GetAllAsync()).ToList();
+			this.Movies = await this.Repository.GetAllAsync();
 		}
 		#endregion
 	}

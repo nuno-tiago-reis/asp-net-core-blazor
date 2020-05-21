@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Memento.Movies.Shared.Database.Models.Persons;
+using Microsoft.AspNetCore.Components;
 
 namespace Memento.Movies.Client.Pages.Persons
 {
@@ -19,16 +20,16 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <summary>
 		/// The person.
 		/// </summary>
-		//[Parameter]
-		//public Person Person { get; set; }
+		[Parameter]
+		public Person Person { get; set; }
 		#endregion
 
 		#region [Properties] Services
 		/// <summary>
 		/// The person repository.
 		/// </summary>
-		//[Inject]
-		//public IPersonRepository Repository { get; set; }
+		[Inject]
+		public IPersonRepository Repository { get; set; }
 		#endregion
 	}
 }

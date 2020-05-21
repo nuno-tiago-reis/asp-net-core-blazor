@@ -1,1 +1,29 @@
-﻿<h3>PersonCard</h3>
+﻿<div class="card mb-md-2">
+	<div class="card-header">
+		<h3 class="mb-md-0">
+			@this.Person.Name
+		</h3>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-6">
+				<a>
+					<img class="img-thumbnail h-md-350-px" src="@this.Person.PictureUrl" alt="@this.Person.Name" />
+				</a>
+			</div>
+			<div class="col-md-6">
+				<div class="d-flex flex-column h-100">
+					<dl>
+						<dt>Name</dt>
+						<dd>@this.Person.Name</dd>
+						<dt>Brith Date:</dt>
+						<dd>@this.Person.BirthDate.ToString("yyyy-MM-dd")</dd>
+					</dl>
+					<button class="btn btn-block btn-success mt-auto mb-1" type="button">
+						<span class="fas fa-sign-in"></span> View
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Memento.Movies.Shared.Database.Models.Genres;
+using Microsoft.AspNetCore.Components;
 
 namespace Memento.Movies.Client.Pages.Genres
 {
@@ -19,16 +20,16 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <summary>
 		/// The genre.
 		/// </summary>
-		//[Parameter]
-		//public Genre Genre { get; set; }
+		[Parameter]
+		public Genre Genre { get; set; }
 		#endregion
 
 		#region [Properties] Services
 		/// <summary>
 		/// The genre repository.
 		/// </summary>
-		//[Inject]
-		//public IGenreRepository Repository { get; set; }
+		[Inject]
+		public IGenreRepository Repository { get; set; }
 		#endregion
 	}
 }
