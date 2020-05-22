@@ -1,48 +1,4 @@
 ﻿@page "/Movies/Create"
 @page "/Movies/{MovieId:long}/Update"
 
-<div class="card">
-	<div class="card-header">
-		<h5>
-			@this.Movie.Title
-		</h5>
-	</div>
-	<div class="card-body">
-		<div class="row">
-			<div class="col-md-4">
-				<a>
-					<img src="@this.Movie.Poster" alt="@this.Movie.Title" />
-				</a>
-				<button class="btn btn-success" type="button" @onclick="async () => { await this.ConfirmationModal.ShowAsync(); }">
-					<span class="fas fa-edit"></span> Update
-				</button>
-				<button class="btn btn-danger" type="button" @onclick="async () => { await this.ConfirmationModal.ShowAsync(); }">
-					<span class="fas fa-trash"></span> Delete
-				</button>
-			</div>
-			<div class="col-md-8">
-				<dl>
-					<dd>Title</dd>
-					<dt>@Movie.Title</dt>
-					<dd>Genre:</dd>
-					<dt>@Movie.Genre</dt>
-					<dd>Release Date:</dd>
-					<dt>@Movie.ReleaseDate.ToString("yyyy-MM-dd")</dt>
-				</dl>
-			</div>
-		</div>
-	</div>
-</div>
-
-<ConfirmationModal @ref="this.ConfirmationModal"
-				   ConfirmButtonCallback="this.OnConfirm"
-				   CancelButtonCallback="this.OnCancel">
-	<!-- header -->
-	<HeaderContent>
-		<span class="fas fa-refresh"></span> Refresh List
-	</HeaderContent>
-	<!-- body -->
-	<BodyContent>
-		<p>Are you sure you want to refresh the list?</p>
-	</BodyContent>
-</ConfirmationModal>
+<h3>MovieForm</h3>

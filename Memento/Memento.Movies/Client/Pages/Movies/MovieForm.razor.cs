@@ -1,6 +1,6 @@
-﻿using Memento.Movies.Client.Shared.Components;
-using Memento.Movies.Shared.Database.Models.Movies;
+﻿using Memento.Movies.Shared.Database.Models.Movies;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Movies
@@ -34,28 +34,35 @@ namespace Memento.Movies.Client.Pages.Movies
 		public IMovieRepository Repository { get; set; }
 		#endregion
 
-		#region [Properties] References
+		#region [Constructors]
 		/// <summary>
-		/// The confirmation modal.
+		/// Initializes a new instance of the <see cref="MovieForm"/> class.
 		/// </summary>
-		public ConfirmationModal ConfirmationModal { get; set; }
+		public MovieForm()
+		{
+			this.Movie = new Movie();
+		}
 		#endregion
 
-		#region [Methods] ConfirmationModal
+		#region [Methods] Form
 		/// <summary>
-		/// Callback that is invoked when the confirm button is clicked in the confirmation modal.
+		/// Callback that is invoked when the form is submited with no errors
 		/// </summary>
-		private async Task OnConfirm()
+		/// 
+		/// <param name="context">The context.</param>.</param>
+		public async Task OnValidSubmitAsync(EditContext context)
 		{
-			System.Console.WriteLine("Confirm!");
+			await Task.Delay(1000);
 		}
 
 		/// <summary>
-		/// Callback that is invoked when the cancel button is clicked in the confirmation modal.
+		/// Callback that is invoked when the form is submited with errors.
 		/// </summary>
-		private async Task OnCancel()
+		/// 
+		/// <param name="context">The context.</param>.</param>
+		public async Task OnInvalidSubmitAsync(EditContext context)
 		{
-			System.Console.WriteLine("Cancel!");
+			await Task.Delay(1000);
 		}
 		#endregion
 	}
