@@ -4,9 +4,14 @@ using Memento.Movies.Shared.Models;
 using Memento.Movies.Shared.Models.Genres;
 using Memento.Movies.Shared.Models.Movies;
 using Memento.Movies.Shared.Models.Persons;
+using Memento.Shared.Configuration;
 using Memento.Shared.Localization;
 using Memento.Shared.ModelBinding;
 using Memento.Shared.Routing;
+using Memento.Shared.Services.Http;
+using Memento.Shared.Services.ReCaptcha;
+using Memento.Shared.Services.Storage;
+using Memento.Shared.Services.Templates;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +19,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -77,6 +83,8 @@ namespace Memento.Movies.Server
 				.AddControllersWithViews();
 			services
 				.AddRazorPages();
+			services
+				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
 
 			// Configurations
 			services
@@ -178,9 +186,42 @@ namespace Memento.Movies.Server
 				.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 			#endregion
 
-			#region [Required: Services]
+			#region [Required: HttpClients]
 			services
-				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
+				.AddHttpClient(this.MovieSettings.ReCaptcha.HttpClientName)
+				.ConfigureHttpClient(configuration =>
+				{
+					configuration.BaseAddress = new Uri(this.MovieSettings.ReCaptcha.Host);
+				});
+			#endregion
+
+			#region [Required: Services]
+			// Services
+			services
+				.AddSingleton<IRecaptchaService, GoogleRecaptchaService>()
+				.AddSingleton<IStorageService, FileSystemStorageService>()
+				.AddSingleton<ITemplateService, RazorTemplateService>();
+
+			// Configurations
+			services
+				.Configure<GoogleReCaptchaSettings>(options =>
+				{
+					options.HttpClientName = this.MovieSettings.ReCaptcha.HttpClientName;
+					options.Host = this.MovieSettings.ReCaptcha.Host;
+					options.SiteKey = this.MovieSettings.ReCaptcha.SiteKey;
+					options.SiteSecret = this.MovieSettings.ReCaptcha.SiteSecret;
+				});
+			services
+				.Configure<FileSystemStorageSettings>(options =>
+				{
+					options.Folder = this.MovieSettings.Storage.Folder;
+				});
+			services
+				.Configure<RazorViewEngineOptions>(options =>
+				{
+					// Add the razor template service's folder
+					options.ViewLocationFormats.Add("/Services/Razor/Templates/{0}" + RazorViewEngine.ViewExtension);
+				});
 			#endregion
 		}
 

@@ -9,6 +9,21 @@ namespace Memento.Movies.Shared.Configuration
 	{
 		#region [Properties]
 		/// <summary>
+		/// Gets or sets the 'FileSystemDataProtection' settings.
+		/// </summary>
+		public FileSystemDataProtectionSettings DataProtection { get; set; }
+
+		/// <summary>
+		/// Gets or sets the 'ReCaptcha' settings.
+		/// </summary>
+		public GoogleReCaptchaSettings ReCaptcha { get; set; }
+
+		/// <summary>
+		/// Gets or sets the 'FileSystemStorage' settings.
+		/// </summary>
+		public FileSystemStorageSettings Storage { get; set; }
+
+		/// <summary>
 		/// The connection strings.
 		/// </summary>
 		public ConnectionStrings ConnectionStrings { get; set; }

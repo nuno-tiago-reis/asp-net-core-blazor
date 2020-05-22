@@ -4,6 +4,7 @@ using Memento.Movies.Shared.Models.Genres;
 using Memento.Movies.Shared.Models.Movies;
 using Memento.Movies.Shared.Models.Persons;
 using Memento.Shared.Localization;
+using Memento.Shared.Services.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -55,20 +56,6 @@ namespace Memento.Movies.Client
 				});
 			#endregion
 
-			#region [Required: Blazor EntityFramework]
-			builder.Services
-				.AddDbContext<MovieContext>(options =>
-			{
-				options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Memento.Movies;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-			})
-				.AddTransient<MovieSeeder>();
-
-			builder.Services
-				.AddTransient<IGenreRepository, GenreRepository>()
-				.AddTransient<IMovieRepository, MovieRepository>()
-				.AddTransient<IPersonRepository, PersonRepository>();
-			#endregion
-
 			#region [Required: AutoMapper]
 			builder.Services
 				.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -81,7 +68,7 @@ namespace Memento.Movies.Client
 
 			#region [Required: Services]
 			builder.Services
-				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
+				.AddSingleton<IHttpService, HttpService>();
 			#endregion
 		}
 		#endregion
