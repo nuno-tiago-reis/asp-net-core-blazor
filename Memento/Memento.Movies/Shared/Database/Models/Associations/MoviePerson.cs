@@ -33,14 +33,14 @@ namespace Memento.Movies.Shared.Database.Models
 		/// <summary>
 		/// The persons role.
 		/// </summary>
-		public PersonRole PersonRole { get; set; }
+		public MoviePersonRole PersonRole { get; set; }
 		#endregion
 	}
 
 	/// <summary>
 	/// Defines the roles a person can have in a movie.
 	/// </summary>
-	public enum PersonRole
+	public enum MoviePersonRole
 	{
 		/// <summary>
 		/// The person is an actor.
