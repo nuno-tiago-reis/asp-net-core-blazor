@@ -1,5 +1,6 @@
 ﻿using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Components;
+using System;
 
 namespace Memento.Movies.Client.Shared.Components
 {
@@ -52,7 +53,13 @@ namespace Memento.Movies.Client.Shared.Components
 		/// <inheritdoc />
 		protected override void OnParametersSet()
 		{
-			// Nothing to do here.
+			if (this.PageItemTemplate == null)
+			{
+				throw new InvalidOperationException
+				(
+					$"{this.GetType()} requires a value for the {nameof(this.PageItemTemplate)} parameter."
+				);
+			}
 		}
 
 		/// <inheritdoc />

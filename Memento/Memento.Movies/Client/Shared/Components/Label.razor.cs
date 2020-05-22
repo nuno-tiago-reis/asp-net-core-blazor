@@ -75,7 +75,7 @@ namespace Memento.Movies.Client.Shared.Components
 			{
 				throw new InvalidOperationException
 				(
-					$"{this.GetType()} requires a value for the " + $"{nameof(this.For)} parameter."
+					$"{this.GetType()} requires a value for the {nameof(this.For)} parameter."
 				);
 			}
 

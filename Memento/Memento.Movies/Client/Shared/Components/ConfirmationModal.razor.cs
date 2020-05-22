@@ -1,5 +1,6 @@
 ﻿using Blazorade.Bootstrap.Components;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Shared.Components
@@ -103,7 +104,21 @@ namespace Memento.Movies.Client.Shared.Components
 		/// <inheritdoc />
 		protected override void OnParametersSet()
 		{
-			// Nothing to do here.
+			if (this.ConfirmButtonCallback.HasDelegate == false)
+			{
+				throw new InvalidOperationException
+				(
+					$"{this.GetType()} requires a value for the {nameof(this.ConfirmButtonCallback)} parameter."
+				);
+			}
+
+			if (this.CancelButtonCallback.HasDelegate == false)
+			{
+				throw new InvalidOperationException
+				(
+					$"{this.GetType()} requires a value for the {nameof(this.CancelButtonCallback)} parameter."
+				);
+			}
 		}
 
 		/// <inheritdoc />
