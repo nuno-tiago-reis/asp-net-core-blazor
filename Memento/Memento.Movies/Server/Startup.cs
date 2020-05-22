@@ -186,41 +186,42 @@ namespace Memento.Movies.Server
 				.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 			#endregion
 
-			#region [Required: HttpClients]
-			services
-				.AddHttpClient(this.MovieSettings.ReCaptcha.HttpClientName)
-				.ConfigureHttpClient(configuration =>
-				{
-					configuration.BaseAddress = new Uri(this.MovieSettings.ReCaptcha.Host);
-				});
-			#endregion
-
 			#region [Required: Services]
 			// Services
 			services
-				.AddSingleton<IRecaptchaService, GoogleRecaptchaService>()
-				.AddSingleton<IStorageService, FileSystemStorageService>()
-				.AddSingleton<ITemplateService, RazorTemplateService>();
-
+				.AddHttpClient<IRecaptchaService>()
+				.ConfigureHttpClient(configuration =>
+				{
+					configuration.BaseAddress = new Uri(this.MovieSettings.ReCaptcha?.Host);
+				});
 			// Configurations
 			services
 				.Configure<GoogleReCaptchaSettings>(options =>
 				{
-					options.HttpClientName = this.MovieSettings.ReCaptcha.HttpClientName;
-					options.Host = this.MovieSettings.ReCaptcha.Host;
-					options.SiteKey = this.MovieSettings.ReCaptcha.SiteKey;
-					options.SiteSecret = this.MovieSettings.ReCaptcha.SiteSecret;
+					options.Host = this.MovieSettings.ReCaptcha?.Host;
+					options.SiteKey = this.MovieSettings.ReCaptcha?.SiteKey;
+					options.SiteSecret = this.MovieSettings.ReCaptcha?.SiteSecret;
 				});
+
+			// Services
+			services
+				.AddScoped<IStorageService, FileSystemStorageService>();
+			// Configurations
 			services
 				.Configure<FileSystemStorageSettings>(options =>
 				{
-					options.Folder = this.MovieSettings.Storage.Folder;
+					options.Folder = this.MovieSettings.Storage?.Folder;
 				});
+
+			// Services
+			services
+				.AddScoped<ITemplateService, RazorTemplateService>();
+			// Configurations
 			services
 				.Configure<RazorViewEngineOptions>(options =>
 				{
-					// Add the razor template service's folder
-					options.ViewLocationFormats.Add("/Services/Razor/Templates/{0}" + RazorViewEngine.ViewExtension);
+					// Add the shared templates folder
+					options.ViewLocationFormats.Add("/Shared/Templates/{0}" + RazorViewEngine.ViewExtension);
 				});
 			#endregion
 		}

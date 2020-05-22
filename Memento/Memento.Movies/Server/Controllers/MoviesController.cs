@@ -104,7 +104,7 @@ namespace Memento.Movies.Server.Controller
 		/// 
 		/// <param name="id">The identifer.</param>
 		/// <param name="contract">The contract.</param>
-		[HttpPut("{movieId:long]")]
+		[HttpPut("{movieId:long}")]
 		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] string contract)
 		{
 			// Map the movie
@@ -125,7 +125,7 @@ namespace Memento.Movies.Server.Controller
 		/// </summary>
 		/// 
 		/// <param name="id">The identifer.</param>
-		[HttpDelete("{movieId:long]")]
+		[HttpDelete("{movieId:long}")]
 		public async Task<ActionResult<MementoResponse>> DeleteAsync([FromRoute] long id)
 		{
 			// Delete the movie
