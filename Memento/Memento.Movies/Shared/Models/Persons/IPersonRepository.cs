@@ -1,6 +1,6 @@
 ﻿using Memento.Shared.Models;
 
-namespace Memento.Movies.Shared.Database.Models.Persons
+namespace Memento.Movies.Shared.Models.Persons
 {
 	/// <summary>
 	/// Defines an interface for a 'Person' repository.

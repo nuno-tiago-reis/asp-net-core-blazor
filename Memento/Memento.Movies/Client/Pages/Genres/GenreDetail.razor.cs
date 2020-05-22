@@ -1,6 +1,6 @@
 ﻿using Memento.Movies.Client.Shared.Routes;
 using Memento.Movies.Shared.Contracts.Genres;
-using Memento.Movies.Shared.Database.Models.Genres;
+using Memento.Movies.Shared.Models.Genres;
 using Microsoft.AspNetCore.Components;
 
 namespace Memento.Movies.Client.Pages.Genres

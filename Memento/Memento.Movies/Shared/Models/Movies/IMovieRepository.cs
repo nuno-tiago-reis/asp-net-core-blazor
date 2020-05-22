@@ -1,6 +1,6 @@
 ﻿using Memento.Shared.Models;
 
-namespace Memento.Movies.Shared.Database.Models.Movies
+namespace Memento.Movies.Shared.Models.Movies
 {
 	/// <summary>
 	/// Defines an interface for a 'Movie' repository.

@@ -1,5 +1,5 @@
 ﻿using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Database.Models.Movies;
+using Memento.Movies.Shared.Models.Movies;
 using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;

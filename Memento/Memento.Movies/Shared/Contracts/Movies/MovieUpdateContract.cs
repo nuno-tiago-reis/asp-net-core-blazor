@@ -1,4 +1,4 @@
-﻿using Memento.Movies.Shared.Database.Models;
+﻿using Memento.Movies.Shared.Models;
 using System;
 using System.Collections.Generic;
 
@@ -10,11 +10,6 @@ namespace Memento.Movies.Shared.Contracts.Movies
 	public sealed class MovieUpdateContract
 	{
 		#region [Properties]
-		/// <summary>
-		/// The Movie's identifier.
-		/// </summary>
-		public long Id { get; set; }
-
 		/// <summary>
 		/// The Movie's name.
 		/// </summary>

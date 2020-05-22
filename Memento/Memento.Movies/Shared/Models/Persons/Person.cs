@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Memento.Movies.Shared.Database.Models.Persons
+namespace Memento.Movies.Shared.Models.Persons
 {
 	/// <summary>
 	/// Implements the 'Person' model.

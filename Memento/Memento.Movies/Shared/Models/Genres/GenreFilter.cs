@@ -1,6 +1,6 @@
 ﻿using Memento.Shared.Models;
 
-namespace Memento.Movies.Shared.Database.Models.Genres
+namespace Memento.Movies.Shared.Models.Genres
 {
 	/// <summary>
 	/// Defines the fields over which 'Genres' can be filtered.

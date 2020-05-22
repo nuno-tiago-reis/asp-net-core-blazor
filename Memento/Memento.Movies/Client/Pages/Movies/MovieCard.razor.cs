@@ -1,4 +1,4 @@
-﻿using Memento.Movies.Shared.Database.Models.Movies;
+﻿using Memento.Movies.Shared.Models.Movies;
 using Microsoft.AspNetCore.Components;
 
 namespace Memento.Movies.Client.Pages.Movies

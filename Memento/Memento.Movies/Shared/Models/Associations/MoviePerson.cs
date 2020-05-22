@@ -1,8 +1,8 @@
-﻿using Memento.Movies.Shared.Database.Models.Movies;
-using Memento.Movies.Shared.Database.Models.Persons;
+﻿using Memento.Movies.Shared.Models.Movies;
+using Memento.Movies.Shared.Models.Persons;
 using Memento.Shared.Models;
 
-namespace Memento.Movies.Shared.Database.Models
+namespace Memento.Movies.Shared.Models
 {
 	/// <summary>
 	/// Implements the 'MoviePerson' model.

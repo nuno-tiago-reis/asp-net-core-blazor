@@ -1,7 +1,7 @@
 ﻿using Memento.Shared.Models;
 using System.Collections.Generic;
 
-namespace Memento.Movies.Shared.Database.Models.Genres
+namespace Memento.Movies.Shared.Models.Genres
 {
 	/// <summary>
 	/// Implements the 'Genre' model.

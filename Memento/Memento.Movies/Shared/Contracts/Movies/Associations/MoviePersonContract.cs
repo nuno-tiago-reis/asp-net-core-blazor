@@ -1,4 +1,4 @@
-﻿using Memento.Movies.Shared.Database.Models;
+﻿using Memento.Movies.Shared.Models;
 using System;
 
 namespace Memento.Movies.Shared.Contracts.Movies

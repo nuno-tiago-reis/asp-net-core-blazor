@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Memento.Movies.Shared.Database.Models.Genres
+namespace Memento.Movies.Shared.Models.Genres
 {
 	/// <summary>
 	/// Implements the 'Genre' configurations.

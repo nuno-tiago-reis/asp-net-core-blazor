@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Memento.Movies.Shared.Database.Models.Persons
+namespace Memento.Movies.Shared.Models.Persons
 {
 	/// <summary>
 	/// Implements the 'Person' configurations.

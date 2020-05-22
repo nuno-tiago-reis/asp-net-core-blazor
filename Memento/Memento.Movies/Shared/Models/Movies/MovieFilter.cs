@@ -1,7 +1,7 @@
 ﻿using Memento.Shared.Models;
 using System;
 
-namespace Memento.Movies.Shared.Database.Models.Movies
+namespace Memento.Movies.Shared.Models.Movies
 {
 	/// <summary>
 	/// Defines the fields over which 'Movies' can be filtered.

@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Memento.Movies.Shared.Database.Models.Movies
+namespace Memento.Movies.Shared.Models.Movies
 {
 	/// <summary>
 	/// Implements the interface for a 'Movie' repository.

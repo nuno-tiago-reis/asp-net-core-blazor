@@ -1,5 +1,5 @@
 ﻿using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Database.Models.Persons;
+using Memento.Movies.Shared.Models.Persons;
 using Microsoft.AspNetCore.Components;
 
 namespace Memento.Movies.Client.Pages.Persons

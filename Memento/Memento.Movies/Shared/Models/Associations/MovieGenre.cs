@@ -1,8 +1,8 @@
-﻿using Memento.Movies.Shared.Database.Models.Genres;
-using Memento.Movies.Shared.Database.Models.Movies;
+﻿using Memento.Movies.Shared.Models.Genres;
+using Memento.Movies.Shared.Models.Movies;
 using Memento.Shared.Models;
 
-namespace Memento.Movies.Shared.Database.Models
+namespace Memento.Movies.Shared.Models
 {
 	/// <summary>
 	/// Implements the 'MovieGenre' model.

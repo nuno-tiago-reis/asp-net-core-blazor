@@ -1,8 +1,8 @@
 using AutoMapper;
-using Memento.Movies.Shared.Database;
-using Memento.Movies.Shared.Database.Models.Genres;
-using Memento.Movies.Shared.Database.Models.Movies;
-using Memento.Movies.Shared.Database.Models.Persons;
+using Memento.Movies.Shared.Models;
+using Memento.Movies.Shared.Models.Genres;
+using Memento.Movies.Shared.Models.Movies;
+using Memento.Movies.Shared.Models.Persons;
 using Memento.Shared.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

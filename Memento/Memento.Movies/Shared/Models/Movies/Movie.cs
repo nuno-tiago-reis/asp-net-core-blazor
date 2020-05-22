@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Memento.Movies.Shared.Database.Models.Movies
+namespace Memento.Movies.Shared.Models.Movies
 {
 	/// <summary>
 	/// Implements the 'Movie' model.

@@ -1,6 +1,6 @@
-﻿using Memento.Movies.Shared.Database.Models.Genres;
-using Memento.Movies.Shared.Database.Models.Movies;
-using Memento.Movies.Shared.Database.Models.Persons;
+﻿using Memento.Movies.Shared.Models.Genres;
+using Memento.Movies.Shared.Models.Movies;
+using Memento.Movies.Shared.Models.Persons;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 
-namespace Memento.Movies.Shared.Database
+namespace Memento.Movies.Shared.Models
 {
 	/// <summary>
 	/// Implements the movie database seeder.
