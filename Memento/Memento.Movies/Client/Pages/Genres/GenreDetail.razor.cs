@@ -1,4 +1,6 @@
-﻿using Memento.Movies.Shared.Database.Models.Genres;
+﻿using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Contracts.Genres;
+using Memento.Movies.Shared.Database.Models.Genres;
 using Microsoft.AspNetCore.Components;
 
 namespace Memento.Movies.Client.Pages.Genres
@@ -8,6 +10,7 @@ namespace Memento.Movies.Client.Pages.Genres
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
+	[Route(Routes.GenreRoutes.Detail)]
 	public sealed partial class GenreDetail : ComponentBase
 	{
 		#region [Properties] Parameters
@@ -21,7 +24,7 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// The genre.
 		/// </summary>
 		[Parameter]
-		public Genre Genre { get; set; }
+		public GenreDetailContract Genre { get; set; }
 		#endregion
 
 		#region [Properties] Services

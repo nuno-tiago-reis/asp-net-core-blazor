@@ -1,8 +1,38 @@
-﻿@page "/Genres/Create"
-@page "/Genres/{GenreId:long}/Update"
+﻿<h3>GenreForm</h3>
 
-<h3>GenreForm</h3>
+<EditForm @ref="this.Form"
+		  Model="this.Genre"
+		  OnValidSubmit="async (context) => { await this.OnValidSubmitAsync(context); }"
+		  OnInvalidSubmit="async (context) => { await this.OnInvalidSubmitAsync(context); }">
 
-<EditForm Model="this.GenreId">
+	<ValidationSummary />
+	<DataAnnotationsValidator />
 
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<Label
+					For="@(() => this.Genre.Name)">
+				</Label>
+				<InputText
+					class="form-control"
+					@bind-Value="this.Genre.Name">
+				</InputText>
+				<ValidationMessage
+					For="@(() => this.Genre.Name)">
+				</ValidationMessage>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-success" type="submit">
+				<span class="fas fa-save"></span> Save Changes
+			</button>
+			<Button Color="NamedColor.Secondary" OnClicked="async () => { await this.OnCancelAsync(this.Form.EditContext); }">
+				<span class="fas fa-trash"></span> Discard Changes
+			</Button>
+		</div>
+	</div>
 </EditForm>
