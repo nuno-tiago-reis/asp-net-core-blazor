@@ -1,4 +1,5 @@
 ﻿using Memento.Shared.Models;
+using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
@@ -66,7 +67,7 @@ namespace Memento.Movies.Shared.Database.Models.Persons
 		}
 
 		/// <inheritdoc />
-		public async override Task<IModelPage<Person>> GetAllAsync(PersonFilter personFilter = null)
+		public async override Task<IPage<Person>> GetAllAsync(PersonFilter personFilter = null)
 		{
 			return await base.GetAllAsync(personFilter);
 		}

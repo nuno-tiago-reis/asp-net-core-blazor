@@ -1,4 +1,5 @@
 ﻿using Memento.Shared.Models;
+using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
@@ -66,7 +67,7 @@ namespace Memento.Movies.Shared.Database.Models.Movies
 		}
 
 		/// <inheritdoc />
-		public async override Task<IModelPage<Movie>> GetAllAsync(MovieFilter movieFilter = null)
+		public async override Task<IPage<Movie>> GetAllAsync(MovieFilter movieFilter = null)
 		{
 			await Task.Delay(2500);
 
@@ -211,7 +212,7 @@ namespace Memento.Movies.Shared.Database.Models.Movies
 					ReleaseDate = DateTime.Parse("July 2, 2019")
 				}
 			};
-			var moviePage = ModelPage<Movie>.CreateUnmodified(movies, movies.Count, 1, 100, null, null);
+			var moviePage = Page<Movie>.CreateUnmodified(movies, movies.Count, 1, 100, null, null);
 
 			return moviePage;
 

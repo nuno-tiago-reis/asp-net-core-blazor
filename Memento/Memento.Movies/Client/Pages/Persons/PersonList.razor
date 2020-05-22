@@ -1,14 +1,18 @@
-﻿@page "/Persons"
-
-<h3>Persons</h3>
-
-<div class="row">
-	<GenericList ElementList="this.Persons.ToList()">
-		<ElementTemplate>
+﻿<div class="row">
+	<PaginatedList Page="this.Persons">
+		<PageItemTemplate>
 			<div class="col-md-4">
 				<PersonCard Person="@context">
 				</PersonCard>
 			</div>
-		</ElementTemplate>
-	</GenericList>
+		</PageItemTemplate>
+	</PaginatedList>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<a class="btn btn-success" href="@Routes.PersonRoutes.Create">
+			<span class="fas fa-plus"></span> Create
+		</a>
+	</div>
 </div>

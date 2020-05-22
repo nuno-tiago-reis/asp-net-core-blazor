@@ -1,0 +1,71 @@
+﻿using Memento.Shared.Pagination;
+using Microsoft.AspNetCore.Components;
+
+namespace Memento.Movies.Client.Shared.Components
+{
+	/// <summary>
+	/// Implements the 'PaginatedTable' component.
+	/// </summary>
+	/// 
+	/// <seealso cref="ComponentBase"/>
+	public sealed partial class PaginatedTable<T> : ComponentBase
+	{
+		#region [Properties]
+		/// <summary>
+		/// The page.
+		/// </summary>
+		[Parameter]
+		public IPage<T> Page { get; set; }
+
+		/// <summary>
+		/// The template to be used for the page items.
+		/// </summary>
+		[Parameter]
+		public RenderFragment<T> PageHeaderTemplate { get; set; }
+
+		/// <summary>
+		/// The template to be used for the page items.
+		/// </summary>
+		[Parameter]
+		public RenderFragment<T> PageItemTemplate { get; set; }
+
+		/// <summary>
+		/// The template to be used when the page is empty.
+		/// </summary>
+		[Parameter]
+		public RenderFragment<T> PageEmptyTemplate { get; set; }
+
+		/// <summary>
+		/// The template to be used when the page is loading.
+		/// </summary>
+		[Parameter]
+		public RenderFragment<T> PageLoadingTemplate { get; set; }
+		#endregion
+
+		#region [Methods]
+		/// <inheritdoc />
+		protected override void OnInitialized()
+		{
+			// Nothing to do here.
+		}
+
+		/// <inheritdoc />
+		protected override void OnParametersSet()
+		{
+			// Nothing to do here.
+		}
+
+		/// <inheritdoc />
+		protected override void OnAfterRender(bool firstRender)
+		{
+			// Nothing to do here.
+		}
+
+		/// <inheritdoc />
+		protected override bool ShouldRender()
+		{
+			return true;
+		}
+		#endregion
+	}
+}

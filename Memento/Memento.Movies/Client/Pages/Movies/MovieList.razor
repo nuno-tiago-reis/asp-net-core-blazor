@@ -1,14 +1,18 @@
-﻿@page "/Movies"
-
-<h3>Movies</h3>
-
-<div class="row">
-	<GenericList ElementList="this.Movies.ToList()">
-		<ElementTemplate>
+﻿<div class="row">
+	<PaginatedList Page="this.Movies">
+		<PageItemTemplate>
 			<div class="col-md-4">
 				<MovieCard Movie="@context">
 				</MovieCard>
 			</div>
-		</ElementTemplate>
-	</GenericList>
+		</PageItemTemplate>
+	</PaginatedList>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<a class="btn btn-success" href="@Routes.MovieRoutes.Create">
+			<span class="fas fa-plus"></span> Create
+		</a>
+	</div>
 </div>

@@ -1,6 +1,8 @@
-﻿using Memento.Movies.Shared.Database.Models.Persons;
-using Memento.Shared.Models;
+﻿using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Database.Models.Persons;
+using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Persons
 {
@@ -9,6 +11,7 @@ namespace Memento.Movies.Client.Pages.Persons
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
+	[Route(Routes.PersonRoutes.Root)]
 	public sealed partial class PersonList : ComponentBase
 	{
 		#region [Properties] Parameters
@@ -19,10 +22,10 @@ namespace Memento.Movies.Client.Pages.Persons
 		public PersonFilter PersonFilter { get; set; }
 
 		/// <summary>
-		/// The personsS.
+		/// The persons.
 		/// </summary>
 		[Parameter]
-		public IModelPage<Person> Persons { get; set; }
+		public IPage<Person> Persons { get; set; }
 		#endregion
 
 		#region [Properties] Services
@@ -31,6 +34,16 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		[Inject]
 		public IPersonRepository Repository { get; set; }
+		#endregion
+
+		#region [Methods] Component
+		/// <inheritdoc />
+		protected async override Task OnInitializedAsync()
+		{
+			await Task.Delay(1000);
+
+			this.Persons = await this.Repository.GetAllAsync();
+		}
 		#endregion
 	}
 }

@@ -1,7 +1,7 @@
-﻿using Memento.Movies.Shared.Database.Models.Movies;
-using Memento.Shared.Models;
+﻿using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Database.Models.Movies;
+using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Components;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Movies
@@ -11,6 +11,7 @@ namespace Memento.Movies.Client.Pages.Movies
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
+	[Route(Routes.MovieRoutes.Root)]
 	public sealed partial class MovieList : ComponentBase
 	{
 		#region [Properties] Parameters
@@ -24,7 +25,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// The movies.
 		/// </summary>
 		[Parameter]
-		public IModelPage<Movie> Movies { get; set; }
+		public IPage<Movie> Movies { get; set; }
 		#endregion
 
 		#region [Properties] Services
