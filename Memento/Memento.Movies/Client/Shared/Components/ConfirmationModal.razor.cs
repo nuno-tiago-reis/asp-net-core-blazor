@@ -1,8 +1,5 @@
 ﻿using Blazorade.Bootstrap.Components;
-using Memento.Shared.Extensions;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using System;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Shared.Components
