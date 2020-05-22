@@ -1,6 +1,9 @@
+using AutoMapper;
 using Memento.Movies.Shared.Configuration;
 using Memento.Movies.Shared.Database;
+using Memento.Movies.Shared.Database.Models.Genres;
 using Memento.Movies.Shared.Database.Models.Movies;
+using Memento.Movies.Shared.Database.Models.Persons;
 using Memento.Shared.Localization;
 using Memento.Shared.ModelBinding;
 using Memento.Shared.Routing;
@@ -16,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -160,13 +164,18 @@ namespace Memento.Movies.Server
 					{
 						builder.MigrationsAssembly(typeof(MovieContext).Assembly.FullName);
 					});
-				});
-
-			services
+				})
 				.AddTransient<MovieSeeder>();
 
 			services
-				.AddTransient<IMovieRepository, MovieRepository>();
+				.AddTransient<IGenreRepository, GenreRepository>()
+				.AddTransient<IMovieRepository, MovieRepository>()
+				.AddTransient<IPersonRepository, PersonRepository>();
+			#endregion
+
+			#region [Required: AutoMapper]
+			services
+				.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 			#endregion
 
 			#region [Required: Services]

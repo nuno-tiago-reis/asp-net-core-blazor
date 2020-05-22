@@ -16,46 +16,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="Pages\Genres\GenreCard.razor" />
-	  <Content Remove="Pages\Genres\GenreDetail.razor" />
-	  <Content Remove="Pages\Genres\GenreForm.razor" />
-	  <Content Remove="Pages\Genres\GenreList.razor" />
-	  <Content Remove="Pages\Movies\MovieForm.razor" />
-	  <Content Remove="Pages\Persons\PersonCard.razor" />
-	  <Content Remove="Pages\Persons\PersonDetail.razor" />
-	  <Content Remove="Pages\Persons\PersonForm.razor" />
-	  <Content Remove="Pages\Persons\PersonList.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Watch Remove="Shared\Errors\NotFound.razor" />
-	  <Watch Remove="Pages\Genres\GenreCard.razor" />
-	  <Watch Remove="Pages\Genres\GenreDetail.razor" />
-	  <Watch Remove="Pages\Genres\GenreForm.razor" />
-	  <Watch Remove="Pages\Genres\GenreList.razor" />
-	  <Watch Remove="Pages\Movies\MovieCard.razor" />
-	  <Watch Remove="Pages\Movies\MovieDetail.razor" />
-	  <Watch Remove="Pages\Movies\MovieForm.razor" />
-	  <Watch Remove="Pages\Persons\PersonCard.razor" />
-	  <Watch Remove="Pages\Persons\PersonDetail.razor" />
-	  <Watch Remove="Pages\Persons\PersonForm.razor" />
-	  <Watch Remove="Pages\Persons\PersonList.razor" />
-	  <Watch Remove="Shared\Layout\Menu.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="Pages\Genres\GenreCard.razor" />
-	  <None Include="Pages\Genres\GenreDetail.razor" />
-	  <None Include="Pages\Genres\GenreForm.razor" />
-	  <None Include="Pages\Genres\GenreList.razor" />
-	  <None Include="Pages\Movies\MovieForm.razor" />
-	  <None Include="Pages\Persons\PersonCard.razor" />
-	  <None Include="Pages\Persons\PersonDetail.razor" />
-	  <None Include="Pages\Persons\PersonForm.razor" />
-	  <None Include="Pages\Persons\PersonList.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<!-- AutoMapper -->
+		<PackageReference Include="AutoMapper" Version="9.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
 		<!-- Blazorade -->
 		<PackageReference Include="Blazorade.Bootstrap.Components" Version="1.0.0-rc3" />
 		<!-- BuildWebCompiler -->
@@ -64,6 +27,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0" PrivateAssets="all" />
+		<!-- Microsoft.Extensions -->
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.0" />
 		<!-- System -->
 		<PackageReference Include="System.Net.Http.Json" Version="3.2.0" />
 	</ItemGroup>
@@ -71,10 +36,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Shared\Memento.Movies.Shared.csproj" />
 		<ProjectReference Include="..\..\Memento.Shared\Memento\Memento.Shared\Memento.Shared.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Shared\Generic\" />
 	</ItemGroup>
 
 </Project>
