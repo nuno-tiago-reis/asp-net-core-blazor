@@ -1,5 +1,8 @@
-﻿using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Genres;
+﻿using Memento.Movies.Client.Services.Genres;
+using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Contracts.Genres;
+using Memento.Shared.Components;
+using Memento.Shared.Exceptions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Threading.Tasks;
@@ -13,7 +16,7 @@ namespace Memento.Movies.Client.Pages.Genres
 	/// <seealso cref="ComponentBase"/>
 	[Route(Routes.GenreRoutes.Create)]
 	[Route(Routes.GenreRoutes.Update)]
-	public sealed partial class GenreForm : ComponentBase
+	public sealed partial class GenreForm : BaseComponent<GenreForm>
 	{
 		#region [Properties] Parameters
 		/// <summary>
@@ -26,31 +29,48 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// The genre.
 		/// </summary>
 		[Parameter]
-		public Genre Genre { get; set; }
-		#endregion
-
-		#region [Properties] References
-		/// <summary>
-		/// The genre form.
-		/// </summary>
-		public EditForm Form { get; set; }
+		public GenreFormContract Genre { get; set; }
 		#endregion
 
 		#region [Properties] Services
 		/// <summary>
-		/// The genre repository.
+		/// The genre service.
 		/// </summary>
 		[Inject]
-		public IGenreRepository Repository { get; set; }
+		public IGenreService GenreService { get; set; }
 		#endregion
 
-		#region [Constructors]
-		/// <summary>
-		/// Initializes a new instance of the <see cref="GenreForm"/> class.
-		/// </summary>
-		public GenreForm()
+		#region [Methods] Component
+		/// <inheritdoc />
+		protected async override Task OnInitializedAsync()
 		{
-			this.Genre = new Genre();
+			if (this.GenreId.HasValue == false)
+			{
+				// Create the contract
+				this.Genre = new GenreFormContract();
+			}
+			else
+			{
+				try
+				{
+					// Get the genre
+					var genre = await this.GenreService.GetAsync(this.GenreId.Value);
+
+					// Create the contract
+					this.Genre = this.Mapper.Map<GenreFormContract>(genre);
+				}
+				catch (MementoException exception)
+				{
+					if (exception.Type == MementoExceptionType.NotFound)
+					{
+						// Navigate to the list
+						this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+
+						// Show the user a notification
+						this.Toaster.Error($"The {nameof(this.Genre)} does not exist.");
+					}
+				}
+			}
 		}
 		#endregion
 
@@ -60,11 +80,30 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// </summary>
 		/// 
 		/// <param name="context">The context.</param>.</param>
-		public async Task OnValidSubmitAsync(EditContext context)
+		public async Task OnValidSubmitAsync(EditContext _)
 		{
-			await Task.Delay(1000);
+			if (this.GenreId.HasValue == false)
+			{
+				// Create the genre
+				var genre = await this.GenreService.CreateAsync(this.Genre);
 
-			System.Console.WriteLine("OnValidSubmitAsync");
+				// Navigate to the detail
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, genre.Id));
+
+				// Show the user a notification
+				this.Toaster.Success($"The {nameof(this.Genre)} has been created successfully.");
+			}
+			else
+			{
+				// Update the genre
+				await this.GenreService.UpdateAsync(this.GenreId.Value, this.Genre);
+
+				// Navigate to the detail
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.GenreId.Value));
+
+				// Show the user a notification
+				this.Toaster.Success($"The {nameof(this.Genre)} has been updated successfully.");
+			}
 		}
 
 		/// <summary>
@@ -72,39 +111,18 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// </summary>
 		/// 
 		/// <param name="context">The context.</param>.</param>
-		public async Task OnInvalidSubmitAsync(EditContext context)
+		public void OnInvalidSubmit(EditContext _)
 		{
-			await Task.Delay(1000);
-
-			System.Console.WriteLine("OnInvalidSubmitAsync");
+			this.Toaster.Error("The form has invalid fields.");
 		}
 
 		/// <summary>
 		/// Callback that is invoked when the form is cancelled.
 		/// </summary>
-		/// 
-		/// <param name="context">The context.</param>.</param>
-		public async Task OnCancelAsync(EditContext context)
+		public void OnCancel()
 		{
-			await Task.Delay(1000);
-
-			System.Console.WriteLine("OnCancelAsync");
-		}
-
-		/// <summary>
-		/// Returns whether this form is in create mode.
-		/// </summary>
-		public bool IsCreate()
-		{
-			return this.Genre == null || this.Genre.Id == 0;
-		}
-
-		/// <summary>
-		/// Returns whether this form is in update mode.
-		/// </summary>
-		public bool IsUpdate()
-		{
-			return this.Genre != null && this.Genre.Id != 0;
+			// Navigate to the detail
+			this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.GenreId.Value));
 		}
 		#endregion
 	}

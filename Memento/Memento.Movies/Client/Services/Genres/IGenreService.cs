@@ -1,5 +1,6 @@
 ﻿using Memento.Movies.Shared.Contracts.Genres;
 using Memento.Movies.Shared.Models.Genres;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace Memento.Movies.Client.Services.Genres
 		/// </summary>
 		/// 
 		/// <param name="genre">The genre.</param>
-		Task<GenreDetailContract> CreateAsync(GenreCreateContract genre);
+		Task<GenreDetailContract> CreateAsync(GenreFormContract genre);
 
 		/// <summary>
 		/// Invokes the API to update the given 'Genre'.
@@ -25,14 +26,14 @@ namespace Memento.Movies.Client.Services.Genres
 		/// 
 		/// <param name="genreId">The genre identifier.</param>
 		/// <param name="genre">The genre.</param>
-		Task UpdateAsync(long genreId, GenreUpdateContract genre);
+		Task UpdateAsync(long genreId, GenreFormContract genre);
 
 		/// <summary>
 		/// Invokes the API to delete the 'Genre' with the given identifier.
 		/// </summary>
 		/// 
 		/// <param name="genreId">The genre identifier.</param>
-		Task DeleteGenre(long genreId);
+		Task DeleteAsync(long genreId);
 
 		/// <summary>
 		/// Invokes the API to get the 'Genre' with the given identifier.

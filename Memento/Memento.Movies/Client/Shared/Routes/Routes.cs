@@ -41,9 +41,19 @@ namespace Memento.Movies.Client.Shared.Routes
 			public const string Detail = "/Genres/{" + nameof(GenreDetail.GenreId) + ":long}";
 
 			/// <summary>
+			/// The genres detail route (indexed).
+			/// </summary>
+			public const string DetailIndexed = "/Genres/{0}";
+
+			/// <summary>
 			/// The genres update route.
 			/// </summary>
 			public const string Update = "/Genres/{" + nameof(GenreForm.GenreId) + ":long}/Update";
+
+			/// <summary>
+			/// The genres update route (indexed).
+			/// </summary>
+			public const string UpdateIndexed = "/Genres/{0}/Update";
 		}
 
 		/// <summary>
@@ -67,9 +77,19 @@ namespace Memento.Movies.Client.Shared.Routes
 			public const string Detail = "/Movies/{" + nameof(MovieDetail.MovieId) + ":long}";
 
 			/// <summary>
+			/// The movies detail route (indexed).
+			/// </summary>
+			public const string DetailIndexed = "/Movies/{0}";
+
+			/// <summary>
 			/// The movies update route.
 			/// </summary>
 			public const string Update = "/Movies/{" + nameof(MovieForm.MovieId) + ":long}/Update";
+
+			/// <summary>
+			/// The movies update route (indexed).
+			/// </summary>
+			public const string UpdateIndexed = "/Movies/{0}/Update";
 		}
 
 		/// <summary>
@@ -93,9 +113,19 @@ namespace Memento.Movies.Client.Shared.Routes
 			public const string Detail = "/Persons/{" + nameof(PersonDetail.PersonId) + ":long}";
 
 			/// <summary>
+			/// The persons detail route (indexed).
+			/// </summary>
+			public const string DetailIndexed = "/Persons/{0}";
+
+			/// <summary>
 			/// The persons update route.
 			/// </summary>
 			public const string Update = "/Persons/{" + nameof(PersonForm.PersonId) + ":long}/Update";
+
+			/// <summary>
+			/// The persons update route (indexed).
+			/// </summary>
+			public const string UpdateIndexed = "/Persons/{0}/Update";
 		}
 	}
 }

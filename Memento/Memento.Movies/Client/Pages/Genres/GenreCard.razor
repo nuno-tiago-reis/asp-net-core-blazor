@@ -1,4 +1,6 @@
-﻿<div class="card mb-md-2">
+﻿@inherits BaseComponent<GenreCard>
+
+<div class="card mb-md-2">
 	<div class="card-header">
 		<h3 class="mb-md-0">
 			@this.Genre.Name
@@ -12,7 +14,7 @@
 						<dt>Title</dt>
 						<dd>@this.Genre.Name</dd>
 					</dl>
-					<button class="btn btn-block btn-success mt-auto mb-1" type="button">
+					<button class="btn btn-block btn-primary mt-auto mb-1" type="button" @onclick="this.OnView">
 						<span class="fas fa-sign-in"></span> View
 					</button>
 				</div>

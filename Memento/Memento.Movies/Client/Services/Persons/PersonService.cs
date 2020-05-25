@@ -1,6 +1,7 @@
 ﻿using Memento.Movies.Shared.Contracts.Persons;
 using Memento.Movies.Shared.Models.Persons;
 using Memento.Shared.Extensions;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using Memento.Shared.Services.Http;
 using System;
@@ -43,10 +44,10 @@ namespace Memento.Movies.Client.Services.Persons
 
 		#region [Methods]
 		/// <inheritdoc />
-		public async Task<PersonDetailContract> CreateAsync(PersonCreateContract person)
+		public async Task<PersonDetailContract> CreateAsync(PersonFormContract person)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Post<PersonCreateContract, PersonDetailContract>($"{API_URL}", person);
+			var response = await this.HttpService.Post<PersonFormContract, PersonDetailContract>($"{API_URL}", person);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -58,10 +59,10 @@ namespace Memento.Movies.Client.Services.Persons
 		}
 
 		/// <inheritdoc />
-		public async Task UpdateAsync(long personId, PersonUpdateContract person)
+		public async Task UpdateAsync(long personId, PersonFormContract person)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Put($"{API_URL}/{personId}", person);
+			var response = await this.HttpService.Put($"{API_URL}{personId}", person);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -73,10 +74,10 @@ namespace Memento.Movies.Client.Services.Persons
 		}
 
 		/// <inheritdoc />
-		public async Task DeletePerson(long personId)
+		public async Task DeleteAsync(long personId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Delete($"{API_URL}/{personId}");
+			var response = await this.HttpService.Delete($"{API_URL}{personId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -91,7 +92,7 @@ namespace Memento.Movies.Client.Services.Persons
 		public async Task<PersonDetailContract> GetAsync(long personId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Get<PersonDetailContract>($"{API_URL}/{personId}");
+			var response = await this.HttpService.Get<PersonDetailContract>($"{API_URL}{personId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));

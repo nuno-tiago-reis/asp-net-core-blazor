@@ -1,5 +1,6 @@
 ﻿using Memento.Movies.Shared.Contracts.Persons;
 using Memento.Movies.Shared.Models.Persons;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace Memento.Movies.Client.Services.Persons
 		/// </summary>
 		/// 
 		/// <param name="person">The person.</param>
-		Task<PersonDetailContract> CreateAsync(PersonCreateContract person);
+		Task<PersonDetailContract> CreateAsync(PersonFormContract person);
 
 		/// <summary>
 		/// Invokes the API to update the given 'Person'.
@@ -25,14 +26,14 @@ namespace Memento.Movies.Client.Services.Persons
 		/// 
 		/// <param name="personId">The person identifier.</param>
 		/// <param name="person">The person.</param>
-		Task UpdateAsync(long personId, PersonUpdateContract person);
+		Task UpdateAsync(long personId, PersonFormContract person);
 
 		/// <summary>
 		/// Invokes the API to delete the 'Person' with the given identifier.
 		/// </summary>
 		/// 
 		/// <param name="personId">The person identifier.</param>
-		Task DeletePerson(long personId);
+		Task DeleteAsync(long personId);
 
 		/// <summary>
 		/// Invokes the API to get the 'Person' with the given identifier.

@@ -1,4 +1,5 @@
 ﻿using Memento.Movies.Shared.Models.Persons;
+using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 
 namespace Memento.Movies.Client.Pages.Persons
@@ -8,7 +9,7 @@ namespace Memento.Movies.Client.Pages.Persons
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
-	public sealed partial class PersonCard : ComponentBase
+	public sealed partial class PersonCard : BaseComponent<PersonCard>
 	{
 		#region [Properties] Parameters
 		/// <summary>

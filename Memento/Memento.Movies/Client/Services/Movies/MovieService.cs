@@ -1,6 +1,7 @@
 ﻿using Memento.Movies.Shared.Contracts.Movies;
 using Memento.Movies.Shared.Models.Movies;
 using Memento.Shared.Extensions;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using Memento.Shared.Services.Http;
 using System;
@@ -43,10 +44,10 @@ namespace Memento.Movies.Client.Services.Movies
 
 		#region [Methods]
 		/// <inheritdoc />
-		public async Task<MovieDetailContract> CreateAsync(MovieCreateContract movie)
+		public async Task<MovieDetailContract> CreateAsync(MovieFormContract movie)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Post<MovieCreateContract, MovieDetailContract>($"{API_URL}", movie);
+			var response = await this.HttpService.Post<MovieFormContract, MovieDetailContract>($"{API_URL}", movie);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -58,10 +59,10 @@ namespace Memento.Movies.Client.Services.Movies
 		}
 
 		/// <inheritdoc />
-		public async Task UpdateAsync(long movieId, MovieUpdateContract movie)
+		public async Task UpdateAsync(long movieId, MovieFormContract movie)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Put($"{API_URL}/{movieId}", movie);
+			var response = await this.HttpService.Put($"{API_URL}{movieId}", movie);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -73,10 +74,10 @@ namespace Memento.Movies.Client.Services.Movies
 		}
 
 		/// <inheritdoc />
-		public async Task DeleteMovie(long movieId)
+		public async Task DeleteAsync(long movieId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Delete($"{API_URL}/{movieId}");
+			var response = await this.HttpService.Delete($"{API_URL}{movieId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -91,7 +92,7 @@ namespace Memento.Movies.Client.Services.Movies
 		public async Task<MovieDetailContract> GetAsync(long movieId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Get<MovieDetailContract>($"{API_URL}/{movieId}");
+			var response = await this.HttpService.Get<MovieDetailContract>($"{API_URL}{movieId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));

@@ -1,6 +1,6 @@
 ﻿using Memento.Movies.Shared.Contracts.Genres;
 using Memento.Movies.Shared.Models.Genres;
-using Memento.Shared.Extensions;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using Memento.Shared.Services.Http;
 using System;
@@ -43,10 +43,10 @@ namespace Memento.Movies.Client.Services.Genres
 
 		#region [Methods]
 		/// <inheritdoc />
-		public async Task<GenreDetailContract> CreateAsync(GenreCreateContract genre)
+		public async Task<GenreDetailContract> CreateAsync(GenreFormContract genre)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Post<GenreCreateContract, GenreDetailContract>($"{API_URL}", genre);
+			var response = await this.HttpService.Post<GenreFormContract, GenreDetailContract>($"{API_URL}", genre);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -58,10 +58,10 @@ namespace Memento.Movies.Client.Services.Genres
 		}
 
 		/// <inheritdoc />
-		public async Task UpdateAsync(long genreId, GenreUpdateContract genre)
+		public async Task UpdateAsync(long genreId, GenreFormContract genre)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Put($"{API_URL}/{genreId}", genre);
+			var response = await this.HttpService.Put($"{API_URL}{genreId}", genre);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -73,10 +73,10 @@ namespace Memento.Movies.Client.Services.Genres
 		}
 
 		/// <inheritdoc />
-		public async Task DeleteGenre(long genreId)
+		public async Task DeleteAsync(long genreId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Delete($"{API_URL}/{genreId}");
+			var response = await this.HttpService.Delete($"{API_URL}{genreId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -91,7 +91,7 @@ namespace Memento.Movies.Client.Services.Genres
 		public async Task<GenreDetailContract> GetAsync(long genreId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Get<GenreDetailContract>($"{API_URL}/{genreId}");
+			var response = await this.HttpService.Get<GenreDetailContract>($"{API_URL}{genreId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));

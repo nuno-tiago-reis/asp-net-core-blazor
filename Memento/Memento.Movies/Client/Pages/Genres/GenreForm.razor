@@ -1,38 +1,43 @@
-﻿<h3>GenreForm</h3>
+﻿@inherits BaseComponent<GenreForm>
 
-<EditForm @ref="this.Form"
-		  Model="this.Genre"
-		  OnValidSubmit="async (context) => { await this.OnValidSubmitAsync(context); }"
-		  OnInvalidSubmit="async (context) => { await this.OnInvalidSubmitAsync(context); }">
+@if (this.Genre == null)
+{
+	<h3>
+		<i class="fas fa-spinner fa-pulse"></i> Loading...
+	</h3>
+}
+else
+{
+	<EditForm Model="this.Genre"
+			  OnValidSubmit="this.OnValidSubmitAsync"
+			  OnInvalidSubmit="this.OnInvalidSubmit">
 
-	<ValidationSummary />
-	<DataAnnotationsValidator />
+		<ValidationSummary />
+		<DataAnnotationsValidator />
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="form-group">
-				<Label
-					For="@(() => this.Genre.Name)">
-				</Label>
-				<InputText
-					class="form-control"
-					@bind-Value="this.Genre.Name">
-				</InputText>
-				<ValidationMessage
-					For="@(() => this.Genre.Name)">
-				</ValidationMessage>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<Label For="@(() => this.Genre.Name)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Genre.Name">
+					</InputText>
+					<ValidationMessage For="@(() => this.Genre.Name)">
+					</ValidationMessage>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-12">
-			<button class="btn btn-success" type="submit">
-				<span class="fas fa-save"></span> Save Changes
-			</button>
-			<Button Color="NamedColor.Secondary" OnClicked="async () => { await this.OnCancelAsync(this.Form.EditContext); }">
-				<span class="fas fa-trash"></span> Discard Changes
-			</Button>
+		<div class="row">
+			<div class="col-md-12">
+				<button class="btn btn-success" type="submit">
+					<span class="fas fa-save"></span> Save Changes
+				</button>
+				<Button Color="NamedColor.Secondary" OnClicked="this.OnCancel">
+					<span class="fas fa-trash"></span> Discard Changes
+				</Button>
+			</div>
 		</div>
-	</div>
-</EditForm>
+	</EditForm>
+}	

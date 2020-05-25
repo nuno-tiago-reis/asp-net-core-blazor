@@ -1,5 +1,6 @@
 ﻿using Memento.Movies.Client.Shared.Routes;
 using Memento.Movies.Shared.Models.Movies;
+using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Memento.Movies.Client.Pages.Movies
 	/// <seealso cref="ComponentBase"/>
 	[Route(Routes.MovieRoutes.Create)]
 	[Route(Routes.MovieRoutes.Update)]
-	public sealed partial class MovieForm : ComponentBase
+	public sealed partial class MovieForm : BaseComponent<MovieForm>
 	{
 		#region [Properties] Parameters
 		/// <summary>

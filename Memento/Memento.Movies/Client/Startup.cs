@@ -1,14 +1,13 @@
 using AutoMapper;
-using Memento.Movies.Shared.Models;
-using Memento.Movies.Shared.Models.Genres;
-using Memento.Movies.Shared.Models.Movies;
-using Memento.Movies.Shared.Models.Persons;
+using Memento.Movies.Client.Services.Genres;
+using Memento.Movies.Client.Services.Movies;
+using Memento.Movies.Client.Services.Persons;
+using Memento.Movies.Shared.Configuration;
+using Memento.Shared.Configuration;
 using Memento.Shared.Localization;
 using Memento.Shared.Services.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
@@ -58,17 +57,28 @@ namespace Memento.Movies.Client
 
 			#region [Required: AutoMapper]
 			builder.Services
-				.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+				.AddAutoMapper(typeof(MovieMapperSettings).Assembly);
 			#endregion
 
 			#region [Required: HttpClients]
 			builder.Services
-				.AddTransient(provider => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+				.AddTransient(provider => new HttpClient
+				{
+					BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) 
+				});
 			#endregion
 
 			#region [Required: Services]
 			builder.Services
-				.AddSingleton<IHttpService, HttpService>();
+				.AddSingleton<IHttpService, HttpService>()
+				.AddSingleton<IGenreService, GenreService>()
+				.AddSingleton<IMovieService, MovieService>()
+				.AddSingleton<IPersonService, PersonService>();
+			#endregion
+
+			#region [Required: Toastr]
+			builder.Services
+				.AddToaster(new ToasterSettings());
 			#endregion
 		}
 		#endregion

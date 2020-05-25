@@ -1,5 +1,6 @@
 ﻿using Memento.Movies.Client.Shared.Routes;
 using Memento.Movies.Shared.Models.Persons;
+using Memento.Shared.Components;
 using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Memento.Movies.Client.Pages.Persons
 	/// 
 	/// <seealso cref="ComponentBase"/>
 	[Route(Routes.PersonRoutes.Root)]
-	public sealed partial class PersonList : ComponentBase
+	public sealed partial class PersonList : BaseComponent<PersonList>
 	{
 		#region [Properties] Parameters
 		/// <summary>

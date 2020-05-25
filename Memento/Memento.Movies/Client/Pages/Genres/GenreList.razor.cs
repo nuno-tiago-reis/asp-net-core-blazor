@@ -1,5 +1,8 @@
-﻿using Memento.Movies.Client.Shared.Routes;
+﻿using Memento.Movies.Client.Services.Genres;
+using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Contracts.Genres;
 using Memento.Movies.Shared.Models.Genres;
+using Memento.Shared.Components;
 using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
@@ -12,7 +15,7 @@ namespace Memento.Movies.Client.Pages.Genres
 	/// 
 	/// <seealso cref="ComponentBase"/>
 	[Route(Routes.GenreRoutes.Root)]
-	public sealed partial class GenreList : ComponentBase
+	public sealed partial class GenreList : BaseComponent<GenreList>
 	{
 		#region [Properties] Parameters
 		/// <summary>
@@ -25,24 +28,22 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// The genres.
 		/// </summary>
 		[Parameter]
-		public IPage<Genre> Genres { get; set; }
+		public IPage<GenreListContract> Genres { get; set; }
 		#endregion
 
 		#region [Properties] Services
 		/// <summary>
-		/// The genre repository.
+		/// The genre service.
 		/// </summary>
 		[Inject]
-		public IGenreRepository Repository { get; set; }
+		public IGenreService GenreService { get; set; }
 		#endregion
 
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
 		{
-			await Task.Delay(1000);
-
-			this.Genres = await this.Repository.GetAllAsync();
+			this.Genres = await this.GenreService.GetAllAsync();
 		}
 		#endregion
 	}

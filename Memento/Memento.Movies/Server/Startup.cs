@@ -183,7 +183,7 @@ namespace Memento.Movies.Server
 
 			#region [Required: AutoMapper]
 			services
-				.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+				.AddAutoMapper(typeof(MovieMapperSettings).Assembly);
 			#endregion
 
 			#region [Required: Services]
@@ -227,12 +227,7 @@ namespace Memento.Movies.Server
 
 			#region [Required: Toastr]
 			services
-				.AddToaster(config =>
-				{
-					config.PositionClass = Sotsera.Blazor.Toaster.Core.Models.Defaults.Classes.Position.BottomRight;
-					config.PreventDuplicates = false;
-					config.NewestOnTop = false;
-				});
+				.AddToaster(new ToasterSettings());
 			#endregion
 		}
 

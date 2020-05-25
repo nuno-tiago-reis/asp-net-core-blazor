@@ -1,5 +1,9 @@
-﻿using Memento.Movies.Shared.Models.Genres;
+﻿using Memento.Movies.Client.Services.Genres;
+using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Contracts.Genres;
+using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Genres
 {
@@ -8,7 +12,7 @@ namespace Memento.Movies.Client.Pages.Genres
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
-	public sealed partial class GenreCard : ComponentBase
+	public sealed partial class GenreCard : BaseComponent<GenreCard>
 	{
 		#region [Properties] Parameters
 		/// <summary>
@@ -21,15 +25,26 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// The genre.
 		/// </summary>
 		[Parameter]
-		public Genre Genre { get; set; }
+		public GenreListContract Genre { get; set; }
 		#endregion
 
 		#region [Properties] Services
 		/// <summary>
-		/// The genre repository.
+		/// The genre service.
 		/// </summary>
 		[Inject]
-		public IGenreRepository Repository { get; set; }
+		public IGenreService GenreService { get; set; }
+		#endregion
+
+		#region [Methods]
+		/// <summary>
+		/// Callback that is invoked when the user clicks the view button.
+		/// </summary>
+		public void OnView()
+		{
+			// Navigate to the detail
+			this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.Genre.Id));
+		}
 		#endregion
 	}
 }
