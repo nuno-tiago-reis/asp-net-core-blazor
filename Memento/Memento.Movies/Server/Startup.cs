@@ -224,6 +224,16 @@ namespace Memento.Movies.Server
 					options.ViewLocationFormats.Add("/Shared/Templates/{0}" + RazorViewEngine.ViewExtension);
 				});
 			#endregion
+
+			#region [Required: Toastr]
+			services
+				.AddToaster(config =>
+				{
+					config.PositionClass = Sotsera.Blazor.Toaster.Core.Models.Defaults.Classes.Position.BottomRight;
+					config.PreventDuplicates = false;
+					config.NewestOnTop = false;
+				});
+			#endregion
 		}
 
 		/// <summary>
