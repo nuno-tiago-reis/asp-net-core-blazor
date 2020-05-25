@@ -91,7 +91,7 @@ namespace Memento.Movies.Server.Controllers
 			var createdPerson = await this.Repository.CreateAsync(person);
 
 			// Build the response
-			var response = new MementoResponse<PersonDetailContract>(true, CREATE_SUCCESFULL, this.Mapper.Map<PersonDetailContract>(contract));
+			var response = new MementoResponse<PersonDetailContract>(true, CREATE_SUCCESFULL, this.Mapper.Map<PersonDetailContract>(createdPerson));
 
 			// Build the response header
 			this.HttpContext.Response.AddMementoHeader();
