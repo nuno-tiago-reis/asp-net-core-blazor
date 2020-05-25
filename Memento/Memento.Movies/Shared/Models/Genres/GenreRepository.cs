@@ -1,8 +1,12 @@
-﻿using Memento.Shared.Models;
+﻿using Memento.Shared.Exceptions;
+using Memento.Shared.Extensions;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -84,45 +88,110 @@ namespace Memento.Movies.Shared.Models.Genres
 
 		#region [Methods] Utility
 		/// <inheritdoc />
-		protected override void NormalizeModel(Genre genre)
+		protected override void NormalizeModel(Genre sourceGenre)
 		{
-			// Nothing to do here.
+			sourceGenre.NormalizedName = this.LookupNormalizer.NormalizeName(sourceGenre.Name ?? string.Empty);
 		}
 
 		/// <inheritdoc />
-		protected override void ValidateModel(Genre genre)
+		protected override void ValidateModel(Genre sourceGenre)
 		{
-			// Nothing to do here.
+			var errorMessages = new List<string>();
+
+			// Required fields
+			if (string.IsNullOrWhiteSpace(sourceGenre.Name))
+			{
+				errorMessages.Add(sourceGenre.InvalidFieldMessage(genre => genre.Name));
+			}
+
+			// Duplicate fields
+			if (this.Models.Any(genre => genre.NormalizedName.Equals(sourceGenre.NormalizedName)))
+			{
+				errorMessages.Add(sourceGenre.ExistingFieldMessage(genre => genre.Name));
+			}
+
+			if (errorMessages.Count > 0)
+			{
+				throw new MementoException(errorMessages, MementoExceptionType.BadRequest);
+			}
 		}
 
 		/// <inheritdoc />
 		protected override void UpdateModel(Genre sourceGenre, Genre targetGenre)
 		{
-			// Nothing to do here.
+			targetGenre.Name = sourceGenre.Name;
+			targetGenre.NormalizedName = sourceGenre.NormalizedName;
 		}
 
 		/// <inheritdoc />
 		protected override IQueryable<Genre> GetCountQueryable()
 		{
-			return null;
+			return this.Models;
 		}
 
 		/// <inheritdoc />
 		protected override IQueryable<Genre> GetSimpleQueryable()
 		{
-			return null;
+			return this.Models;
 		}
 
 		/// <inheritdoc />
 		protected override IQueryable<Genre> GetDetailedQueryable()
 		{
-			return null;
+			return this.Models;
 		}
 
 		/// <inheritdoc />
 		protected override void FilterQueryable(IQueryable<Genre> genreQueryable, GenreFilter genreFilter)
 		{
-			// Nothing to do here.
+			// Apply the filter
+			if (string.IsNullOrWhiteSpace(genreFilter.Name) == false)
+			{
+				var name = this.LookupNormalizer.NormalizeName(genreFilter.Name);
+
+				genreQueryable = genreQueryable.Where(genre => EF.Functions.Like(genre.Name, $"%{name}%"));
+			}
+
+			// Apply the order
+			switch (genreFilter.OrderBy)
+			{
+				case GenreFilterOrderBy.Id:
+				{
+					genreQueryable = genreFilter.OrderDirection == FilterOrderDirection.Ascending
+						? genreQueryable.OrderBy(genre => genre.Id)
+						: genreQueryable.OrderByDescending(genre => genre.Id);
+					break;
+				}
+
+				case GenreFilterOrderBy.Name:
+				{
+					genreQueryable = genreFilter.OrderDirection == FilterOrderDirection.Ascending
+						? genreQueryable.OrderBy(genre => genre.Name)
+						: genreQueryable.OrderByDescending(genre => genre.Name);
+					break;
+				}
+
+				case GenreFilterOrderBy.CreatedAt:
+				{
+					genreQueryable = genreFilter.OrderDirection == FilterOrderDirection.Ascending
+						? genreQueryable.OrderBy(genre => genre.CreatedAt)
+						: genreQueryable.OrderByDescending(genre => genre.CreatedAt);
+					break;
+				}
+
+				case GenreFilterOrderBy.UpdatedAt:
+				{
+					genreQueryable = genreFilter.OrderDirection == FilterOrderDirection.Ascending
+						? genreQueryable.OrderBy(genre => genre.UpdatedAt)
+						: genreQueryable.OrderByDescending(genre => genre.UpdatedAt);
+					break;
+				}
+
+				default:
+				{
+					throw new ArgumentOutOfRangeException(nameof(genreFilter.OrderBy));
+				}
+			}
 		}
 		#endregion
 	}

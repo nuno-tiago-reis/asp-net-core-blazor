@@ -10,6 +10,24 @@ namespace Memento.Movies.Shared.Models.Persons
 	/// <seealso cref="Person" />
 	public sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
 	{
+		#region [Constants]
+		/// <summary>
+		/// The maximum length for the name column.
+		/// </summary>
+		public const int NAME_MAXIMUM_LENGTH = 250;
+
+		/// <summary>
+		/// The maximum length for the biography column.
+		/// </summary>
+		public const int BIOGRAPHY_MAXIMUM_LENGTH = 500;
+
+		/// <summary>
+		/// The maximum length for the picture url column.
+		/// </summary>
+		public const int PICTURE_URL_MAXIMUM_LENGTH = 250;
+		#endregion
+
+		#region [Methods]
 		/// <inheritdoc />
 		public void Configure(EntityTypeBuilder<Person> builder)
 		{
@@ -25,10 +43,10 @@ namespace Memento.Movies.Shared.Models.Persons
 			builder.HasIndex(person => new { person.NormalizedName, person.BirthDate }).IsUnique();
 
 			// Properties (Person)
-			builder.Property(person => person.Name).IsRequired().HasMaxLength(250);
-			builder.Property(person => person.NormalizedName).IsRequired().HasMaxLength(250);
-			builder.Property(person => person.Biography).IsRequired().HasMaxLength(500);
-			builder.Property(person => person.PictureUrl).IsRequired().HasMaxLength(250);
+			builder.Property(person => person.Name).IsRequired().HasMaxLength(NAME_MAXIMUM_LENGTH);
+			builder.Property(person => person.NormalizedName).IsRequired().HasMaxLength(NAME_MAXIMUM_LENGTH);
+			builder.Property(person => person.Biography).IsRequired().HasMaxLength(BIOGRAPHY_MAXIMUM_LENGTH);
+			builder.Property(person => person.PictureUrl).IsRequired().HasMaxLength(PICTURE_URL_MAXIMUM_LENGTH);
 			builder.Property(person => person.BirthDate).IsRequired();
 
 			// Properties (Model)
@@ -37,5 +55,6 @@ namespace Memento.Movies.Shared.Models.Persons
 			builder.Property(person => person.UpdatedBy);
 			builder.Property(person => person.UpdatedAt);
 		}
+		#endregion
 	}
 }

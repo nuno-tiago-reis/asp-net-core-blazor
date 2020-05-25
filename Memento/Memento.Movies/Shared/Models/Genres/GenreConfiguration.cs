@@ -10,6 +10,14 @@ namespace Memento.Movies.Shared.Models.Genres
 	/// <seealso cref="Genre" />
 	public sealed class GenreConfiguration : IEntityTypeConfiguration<Genre>
 	{
+		#region [Constants]
+		/// <summary>
+		/// The maximum length for the name column.
+		/// </summary>
+		public const int NAME_MAXIMUM_LENGTH = 50;
+		#endregion
+
+		#region [Methods]
 		/// <inheritdoc />
 		public void Configure(EntityTypeBuilder<Genre> builder)
 		{
@@ -21,8 +29,8 @@ namespace Memento.Movies.Shared.Models.Genres
 			builder.HasIndex(genre => genre.NormalizedName).IsUnique();
 
 			// Properties (Genre)
-			builder.Property(genre => genre.Name).IsRequired().HasMaxLength(50);
-			builder.Property(genre => genre.NormalizedName).IsRequired().HasMaxLength(50);
+			builder.Property(genre => genre.Name).IsRequired().HasMaxLength(NAME_MAXIMUM_LENGTH);
+			builder.Property(genre => genre.NormalizedName).IsRequired().HasMaxLength(NAME_MAXIMUM_LENGTH);
 
 			// Properties (Model)
 			builder.Property(genre => genre.CreatedBy).IsRequired();
@@ -30,5 +38,6 @@ namespace Memento.Movies.Shared.Models.Genres
 			builder.Property(genre => genre.UpdatedBy);
 			builder.Property(genre => genre.UpdatedAt);
 		}
+		#endregion
 	}
 }

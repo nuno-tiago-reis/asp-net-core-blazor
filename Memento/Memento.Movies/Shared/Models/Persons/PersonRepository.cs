@@ -1,8 +1,12 @@
-﻿using Memento.Shared.Models;
+﻿using Memento.Shared.Exceptions;
+using Memento.Shared.Extensions;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -84,45 +88,150 @@ namespace Memento.Movies.Shared.Models.Persons
 
 		#region [Methods] Utility
 		/// <inheritdoc />
-		protected override void NormalizeModel(Person person)
+		protected override void NormalizeModel(Person sourcePerson)
 		{
-			// Nothing to do here.
+			sourcePerson.NormalizedName = this.LookupNormalizer.NormalizeName(sourcePerson.Name ?? string.Empty);
 		}
 
 		/// <inheritdoc />
-		protected override void ValidateModel(Person person)
+		protected override void ValidateModel(Person sourcePerson)
 		{
-			// Nothing to do here.
+			var errorMessages = new List<string>();
+
+			// Required fields
+			if (string.IsNullOrWhiteSpace(sourcePerson.Name))
+			{
+				errorMessages.Add(sourcePerson.InvalidFieldMessage(person => person.Name));
+			}
+			if (string.IsNullOrWhiteSpace(sourcePerson.Biography))
+			{
+				errorMessages.Add(sourcePerson.InvalidFieldMessage(person => person.Biography));
+			}
+			if (string.IsNullOrWhiteSpace(sourcePerson.PictureUrl))
+			{
+				errorMessages.Add(sourcePerson.InvalidFieldMessage(person => person.PictureUrl));
+			}
+			if (sourcePerson.BirthDate == default)
+			{
+				errorMessages.Add(sourcePerson.InvalidFieldMessage(person => person.BirthDate));
+			}
+
+			// Duplicate fields
+			if (this.Models.Any(person => person.NormalizedName.Equals(sourcePerson.NormalizedName) && person.BirthDate == sourcePerson.BirthDate))
+			{
+				errorMessages.Add(sourcePerson.ExistingFieldMessage(person => person.Name));
+				errorMessages.Add(sourcePerson.ExistingFieldMessage(person => person.BirthDate));
+			}
+
+			if (errorMessages.Count > 0)
+			{
+				throw new MementoException(errorMessages, MementoExceptionType.BadRequest);
+			}
 		}
 
 		/// <inheritdoc />
 		protected override void UpdateModel(Person sourcePerson, Person targetPerson)
 		{
-			// Nothing to do here.
+			targetPerson.Name = sourcePerson.Name;
+			targetPerson.NormalizedName = sourcePerson.NormalizedName;
+			targetPerson.Biography = sourcePerson.Biography;
+			targetPerson.PictureUrl = sourcePerson.PictureUrl;
+			targetPerson.BirthDate = sourcePerson.BirthDate;
+			targetPerson.Movies = sourcePerson.Movies;
 		}
 
 		/// <inheritdoc />
 		protected override IQueryable<Person> GetCountQueryable()
 		{
-			return null;
+			return this.Models;
 		}
 
 		/// <inheritdoc />
 		protected override IQueryable<Person> GetSimpleQueryable()
 		{
-			return null;
+			return this.Models
+				.Include(person => person.Movies);
 		}
 
 		/// <inheritdoc />
 		protected override IQueryable<Person> GetDetailedQueryable()
 		{
-			return null;
+			return this.Models
+				.Include(person => person.Movies);
 		}
 
 		/// <inheritdoc />
 		protected override void FilterQueryable(IQueryable<Person> personQueryable, PersonFilter personFilter)
 		{
-			// Nothing to do here.
+			// Apply the filter
+			if (string.IsNullOrWhiteSpace(personFilter.Name) == false)
+			{
+				var name = this.LookupNormalizer.NormalizeName(personFilter.Name);
+
+				personQueryable = personQueryable.Where(person => EF.Functions.Like(person.Name, $"%{name}%"));
+			}
+
+			if (string.IsNullOrWhiteSpace(personFilter.Biography) == false)
+			{
+				var biography = personFilter.Biography;
+
+				personQueryable = personQueryable.Where(person => EF.Functions.Like(person.Biography, $"%{biography}%"));
+			}
+
+			if (personFilter.BornAfter != null)
+			{
+				var birthDate = personFilter.BornAfter.Value;
+
+				personQueryable = personQueryable.Where(person => person.BirthDate >= birthDate);
+			}
+
+			if (personFilter.BornBefore != null)
+			{
+				var birthDate = personFilter.BornBefore.Value;
+
+				personQueryable = personQueryable.Where(person => person.BirthDate <= birthDate);
+			}
+
+			// Apply the order
+			switch (personFilter.OrderBy)
+			{
+				case PersonFilterOrderBy.Id:
+				{
+					personQueryable = personFilter.OrderDirection == FilterOrderDirection.Ascending
+						? personQueryable.OrderBy(person => person.Id)
+						: personQueryable.OrderByDescending(person => person.Id);
+					break;
+				}
+
+				case PersonFilterOrderBy.Name:
+				{
+					personQueryable = personFilter.OrderDirection == FilterOrderDirection.Ascending
+						? personQueryable.OrderBy(person => person.Name)
+						: personQueryable.OrderByDescending(person => person.Name);
+					break;
+				}
+
+				case PersonFilterOrderBy.CreatedAt:
+				{
+					personQueryable = personFilter.OrderDirection == FilterOrderDirection.Ascending
+						? personQueryable.OrderBy(person => person.CreatedAt)
+						: personQueryable.OrderByDescending(person => person.CreatedAt);
+					break;
+				}
+
+				case PersonFilterOrderBy.UpdatedAt:
+				{
+					personQueryable = personFilter.OrderDirection == FilterOrderDirection.Ascending
+						? personQueryable.OrderBy(person => person.UpdatedAt)
+						: personQueryable.OrderByDescending(person => person.UpdatedAt);
+					break;
+				}
+
+				default:
+				{
+					throw new ArgumentOutOfRangeException(nameof(personFilter.OrderBy));
+				}
+			}
 		}
 		#endregion
 	}
