@@ -3,13 +3,11 @@ using Memento.Movies.Server.Shared.Routes;
 using Memento.Movies.Shared.Contracts.Persons;
 using Memento.Movies.Shared.Models.Persons;
 using Memento.Shared.Controllers;
-using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Server.Controllers
@@ -95,6 +93,9 @@ namespace Memento.Movies.Server.Controllers
 			// Build the response
 			var response = new MementoResponse<PersonDetailContract>(true, CREATE_SUCCESFULL, this.Mapper.Map<PersonDetailContract>(contract));
 
+			// Build the response header
+			this.HttpContext.Response.AddMementoHeader();
+
 			return this.Created(new Uri($"{this.Request.GetDisplayUrl()}/{createdPerson.Id}"), response);
 		}
 
@@ -117,6 +118,9 @@ namespace Memento.Movies.Server.Controllers
 			// Build the response
 			var response = new MementoResponse(true, UPDATE_SUCCESFULL);
 
+			// Build the response header
+			this.HttpContext.Response.AddMementoHeader();
+
 			return this.Ok(response);
 		}
 
@@ -133,6 +137,9 @@ namespace Memento.Movies.Server.Controllers
 
 			// Build the response
 			var response = new MementoResponse(true, DELETE_SUCCESFULL);
+
+			// Build the response header
+			this.HttpContext.Response.AddMementoHeader();
 
 			return this.Ok(response);
 		}
@@ -152,6 +159,9 @@ namespace Memento.Movies.Server.Controllers
 			// Build the response
 			var response = new MementoResponse<PersonDetailContract>(true, GET_SUCCESSFULL, personContract);
 
+			// Build the response header
+			this.HttpContext.Response.AddMementoHeader();
+
 			return this.Ok(response);
 		}
 
@@ -169,6 +179,9 @@ namespace Memento.Movies.Server.Controllers
 
 			// Build the response
 			var response = new MementoResponse<Page<PersonListContract>>(true, GET_ALL_SUCCESSFULL, personContracts);
+
+			// Build the response header
+			this.HttpContext.Response.AddMementoHeader();
 
 			return this.Ok(response);
 		}
