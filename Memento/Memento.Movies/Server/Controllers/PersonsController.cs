@@ -2,8 +2,8 @@
 using Memento.Movies.Server.Shared.Routes;
 using Memento.Movies.Shared.Contracts.Persons;
 using Memento.Movies.Shared.Models.Persons;
-using Memento.Shared.Controlers;
 using Memento.Shared.Controllers;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Memento.Movies.Server.Controller
+namespace Memento.Movies.Server.Controllers
 {
 	/// <summary>
 	/// Implements the API controller for the person model.
@@ -84,7 +84,7 @@ namespace Memento.Movies.Server.Controller
 		/// 
 		/// <param name="contract">The contract.</param>
 		[HttpPost]
-		public async Task<ActionResult<MementoResponse<PersonDetailContract>>> CreateAsync([FromBody] PersonCreateContract contract)
+		public async Task<ActionResult<MementoResponse<PersonDetailContract>>> CreateAsync([FromBody] PersonFormContract contract)
 		{
 			// Map the person
 			var person = this.Mapper.Map<Person>(contract);
@@ -104,8 +104,8 @@ namespace Memento.Movies.Server.Controller
 		/// 
 		/// <param name="id">The identifer.</param>
 		/// <param name="contract">The contract.</param>
-		[HttpPut("{personId:long}")]
-		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] string contract)
+		[HttpPut("{id:long}")]
+		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] PersonFormContract contract)
 		{
 			// Map the person
 			var person = this.Mapper.Map<Person>(contract);
@@ -125,7 +125,7 @@ namespace Memento.Movies.Server.Controller
 		/// </summary>
 		/// 
 		/// <param name="id">The identifer.</param>
-		[HttpDelete("{personId:long}")]
+		[HttpDelete("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> DeleteAsync([FromRoute] long id)
 		{
 			// Delete the person
@@ -142,7 +142,7 @@ namespace Memento.Movies.Server.Controller
 		/// </summary>
 		/// 
 		/// <param name="id">The identifer.</param>
-		[HttpGet("{personId:long}")]
+		[HttpGet("{id:long}")]
 		public async Task<ActionResult<MementoResponse<PersonDetailContract>>> GetAsync([FromRoute] long id)
 		{
 			// Get the persons
@@ -165,21 +165,10 @@ namespace Memento.Movies.Server.Controller
 		{
 			// Get the persons
 			var persons = await this.Repository.GetAllAsync(filter);
-			var personContracts = this.Mapper.Map<IEnumerable<PersonListContract>>(persons);
-
-			// Build the person page
-			var personPage = Page<PersonListContract>.CreateUnmodified
-			(
-				personContracts,
-				persons.TotalCount,
-				persons.PageNumber,
-				persons.PageSize,
-				persons.OrderBy,
-				persons.OrderDirection
-			);
+			var personContracts = this.Mapper.Map<Page<PersonListContract>>(persons);
 
 			// Build the response
-			var response = new MementoResponse<Page<PersonListContract>>(true, GET_ALL_SUCCESSFULL, personPage);
+			var response = new MementoResponse<Page<PersonListContract>>(true, GET_ALL_SUCCESSFULL, personContracts);
 
 			return this.Ok(response);
 		}

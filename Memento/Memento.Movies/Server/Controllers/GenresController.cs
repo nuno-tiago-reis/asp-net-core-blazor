@@ -2,8 +2,8 @@
 using Memento.Movies.Server.Shared.Routes;
 using Memento.Movies.Shared.Contracts.Genres;
 using Memento.Movies.Shared.Models.Genres;
-using Memento.Shared.Controlers;
 using Memento.Shared.Controllers;
+using Memento.Shared.Models;
 using Memento.Shared.Pagination;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Memento.Movies.Server.Controller
+namespace Memento.Movies.Server.Controllers
 {
 	/// <summary>
 	/// Implements the API controller for the genre model.
@@ -84,7 +84,7 @@ namespace Memento.Movies.Server.Controller
 		/// 
 		/// <param name="contract">The contract.</param>
 		[HttpPost]
-		public async Task<ActionResult<MementoResponse<GenreDetailContract>>> CreateAsync([FromBody] GenreCreateContract contract)
+		public async Task<ActionResult<MementoResponse<GenreDetailContract>>> CreateAsync([FromBody] GenreFormContract contract)
 		{
 			// Map the genre
 			var genre = this.Mapper.Map<Genre>(contract);
@@ -104,8 +104,8 @@ namespace Memento.Movies.Server.Controller
 		/// 
 		/// <param name="id">The identifer.</param>
 		/// <param name="contract">The contract.</param>
-		[HttpPut("{genreId:long}")]
-		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] string contract)
+		[HttpPut("{id:long}")]
+		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] GenreFormContract contract)
 		{
 			// Map the genre
 			var genre = this.Mapper.Map<Genre>(contract);
@@ -125,7 +125,7 @@ namespace Memento.Movies.Server.Controller
 		/// </summary>
 		/// 
 		/// <param name="id">The identifer.</param>
-		[HttpDelete("{genreId:long}")]
+		[HttpDelete("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> DeleteAsync([FromRoute] long id)
 		{
 			// Delete the genre
@@ -142,7 +142,7 @@ namespace Memento.Movies.Server.Controller
 		/// </summary>
 		/// 
 		/// <param name="id">The identifer.</param>
-		[HttpGet("{genreId:long}")]
+		[HttpGet("{id:long}")]
 		public async Task<ActionResult<MementoResponse<GenreDetailContract>>> GetAsync([FromRoute] long id)
 		{
 			// Get the genres
@@ -165,21 +165,10 @@ namespace Memento.Movies.Server.Controller
 		{
 			// Get the genres
 			var genres = await this.Repository.GetAllAsync(filter);
-			var genreContracts =  this.Mapper.Map<IEnumerable<GenreListContract>>(genres);
-
-			// Build the genre page
-			var genrePage = Page<GenreListContract>.CreateUnmodified
-			(
-				genreContracts,
-				genres.TotalCount,
-				genres.PageNumber,
-				genres.PageSize,
-				genres.OrderBy,
-				genres.OrderDirection
-			);
+			var genreContracts =  this.Mapper.Map<Page<GenreListContract>>(genres);
 
 			// Build the response
-			var response = new MementoResponse<Page<GenreListContract>>(true, GET_ALL_SUCCESSFULL, genrePage);
+			var response = new MementoResponse<Page<GenreListContract>>(true, GET_ALL_SUCCESSFULL, genreContracts);
 
 			return this.Ok(response);
 		}
