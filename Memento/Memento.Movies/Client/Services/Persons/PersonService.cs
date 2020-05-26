@@ -1,8 +1,7 @@
-﻿using Memento.Movies.Shared.Contracts.Persons;
-using Memento.Movies.Shared.Models.Persons;
+﻿using Memento.Movies.Shared.Models.Contracts.Persons;
+using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Shared.Extensions;
-using Memento.Shared.Models;
-using Memento.Shared.Pagination;
+using Memento.Shared.Models.Pagination;
 using Memento.Shared.Services.Http;
 using System;
 using System.Collections.Generic;

@@ -2,11 +2,11 @@ using AutoMapper;
 using Memento.Movies.Client.Services.Genres;
 using Memento.Movies.Client.Services.Movies;
 using Memento.Movies.Client.Services.Persons;
+using Memento.Movies.Shared;
 using Memento.Movies.Shared.Configuration;
-using Memento.Shared.Configuration;
-using Memento.Shared.Localization;
 using Memento.Shared.Services.Http;
-using Microsoft.AspNetCore.Builder;
+using Memento.Shared.Services.Localization;
+using Memento.Shared.Services.Toaster;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -29,35 +29,22 @@ namespace Memento.Movies.Client
 		public static void ConfigureBuilder(WebAssemblyHostBuilder builder)
 		{
 			#region [Required: Blazor Components]
-			// Components
 			builder.RootComponents
 				.Add<App>("app");
 
-			// Configurations
 			builder.Services
 				.AddOptions();
-			#endregion
-
-			#region [Required: Blazor Localization]
-			// Middleware
 			builder.Services
-				.AddLocalization();
-
-			// Configurations
-			builder.Services
-				.Configure<RequestLocalizationOptions>(options =>
+				.AddSharedLocalization<SharedResources>(options =>
 				{
-					var localizationOptions = LocalizationSettings.GetLocalizationOptions();
-
-					options.DefaultRequestCulture = localizationOptions.DefaultRequestCulture;
-					options.SupportedCultures = localizationOptions.SupportedCultures;
-					options.SupportedUICultures = localizationOptions.SupportedUICultures;
+					options.DefaultCulture = "en";
+					options.SupportedCultures = new[] { "en", "pt" };
 				});
 			#endregion
 
 			#region [Required: AutoMapper]
 			builder.Services
-				.AddAutoMapper(typeof(MovieMapperSettings).Assembly);
+				.AddAutoMapper(typeof(MovieMapperProfile).Assembly);
 			#endregion
 
 			#region [Required: HttpClients]
@@ -78,7 +65,7 @@ namespace Memento.Movies.Client
 
 			#region [Required: Toastr]
 			builder.Services
-				.AddToaster(new ToasterSettings());
+				.AddToasterService();
 			#endregion
 		}
 		#endregion

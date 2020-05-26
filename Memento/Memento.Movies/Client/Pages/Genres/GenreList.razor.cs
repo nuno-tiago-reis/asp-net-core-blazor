@@ -1,9 +1,9 @@
 ﻿using Memento.Movies.Client.Services.Genres;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Contracts.Genres;
-using Memento.Movies.Shared.Models.Genres;
+using Memento.Movies.Shared.Models.Contracts.Genres;
+using Memento.Movies.Shared.Models.Repositories.Genres;
 using Memento.Shared.Components;
-using Memento.Shared.Pagination;
+using Memento.Shared.Models.Pagination;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 
@@ -15,7 +15,7 @@ namespace Memento.Movies.Client.Pages.Genres
 	/// 
 	/// <seealso cref="ComponentBase"/>
 	[Route(Routes.GenreRoutes.Root)]
-	public sealed partial class GenreList : BaseComponent<GenreList>
+	public sealed partial class GenreList : MementoComponent<GenreList>
 	{
 		#region [Properties] Parameters
 		/// <summary>

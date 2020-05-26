@@ -1,5 +1,5 @@
 ﻿using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Persons;
+using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 
@@ -11,7 +11,7 @@ namespace Memento.Movies.Client.Pages.Persons
 	/// 
 	/// <seealso cref="ComponentBase"/>
 	[Route(Routes.PersonRoutes.Detail)]
-	public sealed partial class PersonDetail : BaseComponent<PersonDetail>
+	public sealed partial class PersonDetail : MementoComponent<PersonDetail>
 	{
 		#region [Properties] Parameters
 		/// <summary>

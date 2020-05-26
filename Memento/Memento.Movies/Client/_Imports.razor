@@ -12,9 +12,6 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.WebAssembly.Http
 
-@* Microsoft.JSInterop *@
-@using Microsoft.JSInterop
-
 @* Memento.Movies *@
 @using Memento.Movies.Client
 @using Memento.Movies.Client.Pages
@@ -30,30 +27,24 @@
 @using Memento.Movies.Client.Shared.Errors
 @using Memento.Movies.Client.Shared.Layout
 @using Memento.Movies.Client.Shared.Routes
-@using Memento.Movies.Shared
-@using Memento.Movies.Shared.Contracts
-@using Memento.Movies.Shared.Contracts.Genres
-@using Memento.Movies.Shared.Contracts.Movies
-@using Memento.Movies.Shared.Contracts.Persons
-@using Memento.Movies.Shared.Models
-@using Memento.Movies.Shared.Models.Genres
-@using Memento.Movies.Shared.Models.Movies
-@using Memento.Movies.Shared.Models.Persons
+@using Memento.Movies.Shared.Models.Contracts
+@using Memento.Movies.Shared.Models.Contracts.Genres
+@using Memento.Movies.Shared.Models.Contracts.Movies
+@using Memento.Movies.Shared.Models.Contracts.Persons
+@using Memento.Movies.Shared.Models.Repositories
+@using Memento.Movies.Shared.Models.Repositories.Genres
+@using Memento.Movies.Shared.Models.Repositories.Movies
+@using Memento.Movies.Shared.Models.Repositories.Persons
 
 @* Memento.Shared *@
 @using Memento.Shared.Components
-@using Memento.Shared.Configuration
-@using Memento.Shared.Controllers;
-@using Memento.Shared.Extensions;
-@using Memento.Shared.Localization;
-@using Memento.Shared.ModelBinding;
-@using Memento.Shared.Models;
-@using Memento.Shared.Pagination;
-@using Memento.Shared.Routing;
+@using Memento.Shared.Exceptions
+@using Memento.Shared.Extensions
+@using Memento.Shared.Models.Pagination
+@using Memento.Shared.Models.Responses
 
 @* System *@
 @using System.Net.Http
-@using System.Net.Http.Json
 
 @* Toaster *@
 @using Sotsera.Blazor.Toaster

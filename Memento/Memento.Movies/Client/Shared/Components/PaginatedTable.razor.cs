@@ -1,4 +1,4 @@
-﻿using Memento.Shared.Pagination;
+﻿using Memento.Shared.Models.Pagination;
 using Microsoft.AspNetCore.Components;
 using System;
 

@@ -1,7 +1,6 @@
-﻿using Memento.Movies.Shared.Contracts.Genres;
-using Memento.Movies.Shared.Models.Genres;
-using Memento.Shared.Models;
-using Memento.Shared.Pagination;
+﻿using Memento.Movies.Shared.Models.Contracts.Genres;
+using Memento.Movies.Shared.Models.Repositories.Genres;
+using Memento.Shared.Models.Pagination;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Services.Genres
