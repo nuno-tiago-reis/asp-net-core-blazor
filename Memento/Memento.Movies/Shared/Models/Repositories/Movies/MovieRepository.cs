@@ -121,7 +121,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 			}
 
 			// Duplicate fields
-			if (this.Models.Any(movie => movie.NormalizedName.Equals(sourceMovie.NormalizedName) && movie.ReleaseDate == sourceMovie.ReleaseDate))
+			if (this.Models.Any(movie => movie.Id != sourceMovie.Id && movie.NormalizedName.Equals(sourceMovie.NormalizedName) && movie.ReleaseDate == sourceMovie.ReleaseDate))
 			{
 				errorMessages.Add(this.GetModelHasDuplicateFieldMessage(movie => movie.Name));
 				errorMessages.Add(this.GetModelHasDuplicateFieldMessage(movie => movie.ReleaseDate));

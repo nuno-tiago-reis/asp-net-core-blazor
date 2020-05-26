@@ -105,7 +105,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 			}
 
 			// Duplicate fields
-			if (this.Models.Any(genre => genre.NormalizedName.Equals(sourceGenre.NormalizedName)))
+			if (this.Models.Any(genre => genre.Id != sourceGenre.Id && genre.NormalizedName.Equals(sourceGenre.NormalizedName)))
 			{
 				errorMessages.Add(this.GetModelHasDuplicateFieldMessage(genre => genre.Name));
 			}
