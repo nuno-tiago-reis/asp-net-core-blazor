@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Memento.Movies.Server.Shared.Routes;
-using Memento.Movies.Shared.Contracts.Genres;
-using Memento.Movies.Shared.Models.Genres;
+using Memento.Movies.Shared.Models.Contracts.Genres;
+using Memento.Movies.Shared.Models.Repositories.Genres;
 using Memento.Shared.Controllers;
-using Memento.Shared.Pagination;
+using Memento.Shared.Models.Pagination;
+using Memento.Shared.Models.Responses;
+using Memento.Shared.Services.Localization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,38 +18,11 @@ namespace Memento.Movies.Server.Controllers
 	/// Implements the API controller for the genre model.
 	/// </summary>
 	///
-	/// <seealso cref="BaseApiController" />
+	/// <seealso cref="MementoApiController" />
 	[ApiController]
 	[Route(Routes.GenreRoutes.Root)]
-	public sealed class GenresController : BaseApiController
+	public sealed class GenresController : MementoApiController
 	{
-		#region [Constants]
-		/// <summary>
-		/// The message when the 'CreateAsync' method is invoked successfully.
-		/// </summary>
-		private const string CREATE_SUCCESFULL = "The Genre was created successfully.";
-
-		/// <summary>
-		/// The message when the 'UpdateAsync' method is invoked successfully.
-		/// </summary>
-		private const string UPDATE_SUCCESFULL = "The Genre was updated successfully.";
-
-		/// <summary>
-		/// The message when the 'DeleteAsync' method is invoked successfully.
-		/// </summary>
-		private const string DELETE_SUCCESFULL = "The Genre was deleted successfully.";
-
-		/// <summary>
-		/// The message when the 'GetAsync' method is invoked successfully.
-		/// </summary>
-		private const string GET_SUCCESSFULL = "The Genre was queried successfully.";
-
-		/// <summary>
-		/// The message when the 'GetAllAsync' method is invoked successfully.
-		/// </summary>
-		private const string GET_ALL_SUCCESSFULL = "The Genres were queried successfully.";
-		#endregion
-
 		#region [Properties]
 		/// <summary>
 		/// The 'Genre' repository.
@@ -63,13 +38,15 @@ namespace Memento.Movies.Server.Controllers
 		/// <param name="repository">The repository.</param>
 		/// <param name="logger">The logger.</param>
 		/// <param name="mapper">The mapper.</param>
+		/// <param name="localizer">The string localizer.</param>
 		public GenresController
 		(
 			IGenreRepository repository,
 			ILogger<GenresController> logger,
-			IMapper mapper
+			IMapper mapper,
+			ILocalizerService localizer
 		)
-		: base(logger, mapper)
+		: base(logger, mapper, localizer)
 		{
 			this.Repository = repository;
 		}
@@ -91,12 +68,7 @@ namespace Memento.Movies.Server.Controllers
 			var createdGenre = await this.Repository.CreateAsync(genre);
 
 			// Build the response
-			var response = new MementoResponse<GenreDetailContract>(true, CREATE_SUCCESFULL, this.Mapper.Map<GenreDetailContract>(createdGenre));
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Created(new Uri($"{this.Request.GetDisplayUrl()}/{createdGenre.Id}"), response);
+			return this.BuildCreateResponse<Genre, GenreDetailContract>(createdGenre);
 		}
 
 		/// <summary>
@@ -116,12 +88,7 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.UpdateAsync(genre);
 
 			// Build the response
-			var response = new MementoResponse(true, UPDATE_SUCCESFULL);
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Ok(response);
+			return this.BuildUpdateResponse<Genre>();
 		}
 
 		/// <summary>
@@ -136,12 +103,7 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.DeleteAsync(id);
 
 			// Build the response
-			var response = new MementoResponse(true, DELETE_SUCCESFULL);
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Ok(response);
+			return this.BuildDeleteResponse<Genre>();
 		}
 
 		/// <summary>
@@ -154,15 +116,9 @@ namespace Memento.Movies.Server.Controllers
 		{
 			// Get the genres
 			var genre = await this.Repository.GetAsync(id);
-			var genreContract = this.Mapper.Map<GenreDetailContract>(genre);
 
 			// Build the response
-			var response = new MementoResponse<GenreDetailContract>(true, GET_SUCCESSFULL, genreContract);
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Ok(response);
+			return this.BuildGetResponse<Genre, GenreDetailContract>(genre);
 		}
 
 		/// <summary>
@@ -175,15 +131,9 @@ namespace Memento.Movies.Server.Controllers
 		{
 			// Get the genres
 			var genres = await this.Repository.GetAllAsync(filter);
-			var genreContracts =  this.Mapper.Map<Page<GenreListContract>>(genres);
 
 			// Build the response
-			var response = new MementoResponse<Page<GenreListContract>>(true, GET_ALL_SUCCESSFULL, genreContracts);
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Ok(response);
+			return this.BuildGetAllResponse<Genre, GenreListContract>(genres);
 		}
 		#endregion
 	}

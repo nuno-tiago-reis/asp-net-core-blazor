@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Memento.Movies.Server.Shared.Routes;
-using Memento.Movies.Shared.Contracts.Persons;
-using Memento.Movies.Shared.Models.Persons;
+using Memento.Movies.Shared.Models.Contracts.Persons;
+using Memento.Movies.Shared.Models.Repositories.Genres;
+using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Shared.Controllers;
-using Memento.Shared.Pagination;
+using Memento.Shared.Models.Pagination;
+using Memento.Shared.Models.Responses;
+using Memento.Shared.Services.Localization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,38 +19,11 @@ namespace Memento.Movies.Server.Controllers
 	/// Implements the API controller for the person model.
 	/// </summary>
 	///
-	/// <seealso cref="BaseApiController" />
+	/// <seealso cref="MementoApiController" />
 	[ApiController]
 	[Route(Routes.PersonRoutes.Root)]
-	public sealed class PersonsController : BaseApiController
+	public sealed class PersonsController : MementoApiController
 	{
-		#region [Constants]
-		/// <summary>
-		/// The message when the 'CreateAsync' method is invoked successfully.
-		/// </summary>
-		private const string CREATE_SUCCESFULL = "The Person was created successfully.";
-
-		/// <summary>
-		/// The message when the 'UpdateAsync' method is invoked successfully.
-		/// </summary>
-		private const string UPDATE_SUCCESFULL = "The Person was updated successfully.";
-
-		/// <summary>
-		/// The message when the 'DeleteAsync' method is invoked successfully.
-		/// </summary>
-		private const string DELETE_SUCCESFULL = "The Person was deleted successfully.";
-
-		/// <summary>
-		/// The message when the 'GetAsync' method is invoked successfully.
-		/// </summary>
-		private const string GET_SUCCESSFULL = "The Person was queried successfully.";
-
-		/// <summary>
-		/// The message when the 'GetAllAsync' method is invoked successfully.
-		/// </summary>
-		private const string GET_ALL_SUCCESSFULL = "The Persons were queried successfully.";
-		#endregion
-
 		#region [Properties]
 		/// <summary>
 		/// The 'Person' repository.
@@ -63,13 +39,15 @@ namespace Memento.Movies.Server.Controllers
 		/// <param name="repository">The repository.</param>
 		/// <param name="logger">The logger.</param>
 		/// <param name="mapper">The mapper.</param>
+		/// <param name="stringLocalizer">The string localizer.</param>
 		public PersonsController
 		(
 			IPersonRepository repository,
 			ILogger<PersonsController> logger,
-			IMapper mapper
+			IMapper mapper,
+			ILocalizerService localizer
 		)
-		: base(logger, mapper)
+		: base(logger, mapper, localizer)
 		{
 			this.Repository = repository;
 		}
@@ -91,12 +69,7 @@ namespace Memento.Movies.Server.Controllers
 			var createdPerson = await this.Repository.CreateAsync(person);
 
 			// Build the response
-			var response = new MementoResponse<PersonDetailContract>(true, CREATE_SUCCESFULL, this.Mapper.Map<PersonDetailContract>(createdPerson));
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Created(new Uri($"{this.Request.GetDisplayUrl()}/{createdPerson.Id}"), response);
+			return this.BuildCreateResponse<Person, PersonDetailContract>(createdPerson);
 		}
 
 		/// <summary>
@@ -116,12 +89,7 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.UpdateAsync(person);
 
 			// Build the response
-			var response = new MementoResponse(true, UPDATE_SUCCESFULL);
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Ok(response);
+			return this.BuildUpdateResponse<Person>();
 		}
 
 		/// <summary>
@@ -136,12 +104,7 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.DeleteAsync(id);
 
 			// Build the response
-			var response = new MementoResponse(true, DELETE_SUCCESFULL);
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Ok(response);
+			return this.BuildDeleteResponse<Person>();
 		}
 
 		/// <summary>
@@ -154,15 +117,9 @@ namespace Memento.Movies.Server.Controllers
 		{
 			// Get the persons
 			var person = await this.Repository.GetAsync(id);
-			var personContract = this.Mapper.Map<PersonDetailContract>(person);
 
 			// Build the response
-			var response = new MementoResponse<PersonDetailContract>(true, GET_SUCCESSFULL, personContract);
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Ok(response);
+			return this.BuildGetResponse<Person, PersonDetailContract>(person);
 		}
 
 		/// <summary>
@@ -175,15 +132,9 @@ namespace Memento.Movies.Server.Controllers
 		{
 			// Get the persons
 			var persons = await this.Repository.GetAllAsync(filter);
-			var personContracts = this.Mapper.Map<Page<PersonListContract>>(persons);
 
 			// Build the response
-			var response = new MementoResponse<Page<PersonListContract>>(true, GET_ALL_SUCCESSFULL, personContracts);
-
-			// Build the response header
-			this.HttpContext.Response.AddMementoHeader();
-
-			return this.Ok(response);
+			return this.BuildGetAllResponse<Person, PersonListContract>(persons);
 		}
 		#endregion
 	}

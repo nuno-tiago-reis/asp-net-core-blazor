@@ -1,17 +1,16 @@
 using AutoMapper;
+using Memento.Movies.Shared;
 using Memento.Movies.Shared.Configuration;
 using Memento.Movies.Shared.Models;
-using Memento.Movies.Shared.Models.Genres;
-using Memento.Movies.Shared.Models.Movies;
-using Memento.Movies.Shared.Models.Persons;
-using Memento.Shared.Configuration;
-using Memento.Shared.Localization;
-using Memento.Shared.ModelBinding;
+using Memento.Movies.Shared.Models.Repositories.Genres;
+using Memento.Movies.Shared.Models.Repositories.Movies;
+using Memento.Movies.Shared.Models.Repositories.Persons;
+using Memento.Shared.Middleware.DataProtection;
+using Memento.Shared.Models.Bindings;
 using Memento.Shared.Routing;
-using Memento.Shared.Services.Http;
-using Memento.Shared.Services.ReCaptcha;
+using Memento.Shared.Services.Localization;
 using Memento.Shared.Services.Storage;
-using Memento.Shared.Services.Templates;
+using Memento.Shared.Services.Toaster;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,13 +18,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -80,9 +77,12 @@ namespace Memento.Movies.Server
 			#region [Required: AspNet Middleware]
 			// Middleware
 			services
-				.AddControllersWithViews();
+				.AddControllersWithViews()
+				.AddSharedLocalization<SharedResources>(this.MovieSettings.Localization);
+
 			services
 				.AddRazorPages();
+
 			services
 				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
 
@@ -147,23 +147,6 @@ namespace Memento.Movies.Server
 				});
 			#endregion
 
-			#region [Required: AspNet Localization]
-			// Middleware
-			services
-				.AddLocalization();
-
-			// Configurations
-			services
-				.Configure<RequestLocalizationOptions>(options =>
-				{
-					var localizationOptions = LocalizationSettings.GetLocalizationOptions();
-
-					options.DefaultRequestCulture = localizationOptions.DefaultRequestCulture;
-					options.SupportedCultures = localizationOptions.SupportedCultures;
-					options.SupportedUICultures = localizationOptions.SupportedUICultures;
-				});
-			#endregion
-
 			#region [Required: AspNet EntityFramework]
 			services
 				.AddDbContext<MovieContext>(options =>
@@ -183,51 +166,16 @@ namespace Memento.Movies.Server
 
 			#region [Required: AutoMapper]
 			services
-				.AddAutoMapper(typeof(MovieMapperSettings).Assembly);
+				.AddAutoMapper(typeof(MovieMapperProfile).Assembly);
 			#endregion
 
 			#region [Required: Services]
-			// Services
 			services
-				.AddHttpClient<IRecaptchaService>()
-				.ConfigureHttpClient(configuration =>
-				{
-					configuration.BaseAddress = new Uri(this.MovieSettings.ReCaptcha?.Host);
-				});
-			// Configurations
+				.AddFileSystemDataProtection(this.MovieSettings.DataProtection);
 			services
-				.Configure<GoogleReCaptchaSettings>(options =>
-				{
-					options.Host = this.MovieSettings.ReCaptcha?.Host;
-					options.SiteKey = this.MovieSettings.ReCaptcha?.SiteKey;
-					options.SiteSecret = this.MovieSettings.ReCaptcha?.SiteSecret;
-				});
-
-			// Services
+				.AddFileSystemStorageService(this.MovieSettings.Storage);
 			services
-				.AddScoped<IStorageService, FileSystemStorageService>();
-			// Configurations
-			services
-				.Configure<FileSystemStorageSettings>(options =>
-				{
-					options.Folder = this.MovieSettings.Storage?.Folder;
-				});
-
-			// Services
-			services
-				.AddScoped<ITemplateService, RazorTemplateService>();
-			// Configurations
-			services
-				.Configure<RazorViewEngineOptions>(options =>
-				{
-					// Add the shared templates folder
-					options.ViewLocationFormats.Add("/Shared/Templates/{0}" + RazorViewEngine.ViewExtension);
-				});
-			#endregion
-
-			#region [Required: Toastr]
-			services
-				.AddToaster(new ToasterSettings());
+				.AddToasterService();
 			#endregion
 		}
 
@@ -261,6 +209,7 @@ namespace Memento.Movies.Server
 			});
 			builder.UseHttpsRedirection();
 			builder.UseBlazorFrameworkFiles();
+			builder.UseRequestLocalization();
 			builder.UseCookiePolicy();
 			builder.UseStaticFiles();
 			builder.UseRouting();
@@ -268,14 +217,7 @@ namespace Memento.Movies.Server
 			#endregion
 
 			#region [Required: AspNet Localization]
-			builder.UseRequestLocalization(options =>
-			{
-				var localizationOptions = LocalizationSettings.GetLocalizationOptions();
-
-				options.DefaultRequestCulture = localizationOptions.DefaultRequestCulture;
-				options.SupportedCultures = localizationOptions.SupportedCultures;
-				options.SupportedUICultures = localizationOptions.SupportedUICultures;
-			});
+			builder.UseSharedLocalization(this.MovieSettings.Localization);
 			#endregion
 
 			#region [Required: AspNet EntityFramework]
