@@ -1,6 +1,6 @@
 ﻿using Memento.Movies.Shared.Models.Movies;
 using Memento.Movies.Shared.Models.Persons;
-using Memento.Shared.Models;
+using Memento.Shared.Models.Repository;
 
 namespace Memento.Movies.Shared.Models
 {

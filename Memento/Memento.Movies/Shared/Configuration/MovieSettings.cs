@@ -1,30 +1,32 @@
-﻿using Memento.Shared.Configuration;
+﻿using Memento.Shared.Middleware.DataProtection;
+using Memento.Shared.Services.Localization;
+using Memento.Shared.Services.Storage;
 
 namespace Memento.Movies.Shared.Configuration
 {
 	/// <summary>
 	/// Implements the 'Movie' settings.
 	/// </summary>
-	public sealed class MovieSettings : ApplicationSettings
+	public sealed class MovieSettings
 	{
 		#region [Properties]
 		/// <summary>
-		/// Gets or sets the 'FileSystemDataProtection' settings.
+		/// Gets or sets the data protection options.
 		/// </summary>
-		public FileSystemDataProtectionSettings DataProtection { get; set; }
+		public FileSystemDataProtectionOptions DataProtection { get; set; }
 
 		/// <summary>
-		/// Gets or sets the 'ReCaptcha' settings.
+		/// Gets or sets the localization options.
 		/// </summary>
-		public GoogleReCaptchaSettings ReCaptcha { get; set; }
+		public SharedLocalizerOptions Localization { get; set; }
 
 		/// <summary>
-		/// Gets or sets the 'FileSystemStorage' settings.
+		/// Gets or sets the storage options.
 		/// </summary>
-		public FileSystemStorageSettings Storage { get; set; }
+		public FileSystemStorageOptions Storage { get; set; }
 
 		/// <summary>
-		/// The connection strings.
+		/// Gets or sets the connection strings.
 		/// </summary>
 		public ConnectionStrings ConnectionStrings { get; set; }
 		#endregion

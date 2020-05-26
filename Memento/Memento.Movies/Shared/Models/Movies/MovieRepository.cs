@@ -1,7 +1,7 @@
 ﻿using Memento.Shared.Exceptions;
-using Memento.Shared.Extensions;
-using Memento.Shared.Models;
-using Memento.Shared.Pagination;
+using Memento.Shared.Models.Pagination;
+using Memento.Shared.Models.Repository;
+using Memento.Shared.Services.Localization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -29,17 +29,17 @@ namespace Memento.Movies.Shared.Models.Movies
 		/// </summary>
 		/// 
 		/// <param name="context">The context</param>
+		/// <param name="localizer">The localizer.</param>
 		/// <param name="lookupNormalizer">The lookup normalizer.</param>
-		/// <param name="serviceProvider">The services provider.</param>
 		/// <param name="logger">The logger.</param>
 		public MovieRepository
 		(
 			MovieContext context,
+			ILocalizerService localizer,
 			ILookupNormalizer lookupNormalizer,
-			IServiceProvider serviceProvider,
 			ILogger<MovieRepository> logger
 		)
-		: base(context, lookupNormalizer, serviceProvider, logger)
+		: base(context, localizer, lookupNormalizer, logger)
 		{
 			// Nothing to do here.
 		}
@@ -86,7 +86,7 @@ namespace Memento.Movies.Shared.Models.Movies
 		#region [Methods] IMovieRepository
 		#endregion
 
-		#region [Methods] Utility
+		#region [Methods] Model
 		/// <inheritdoc />
 		protected override void NormalizeModel(Movie sourceMovie)
 		{
@@ -101,30 +101,30 @@ namespace Memento.Movies.Shared.Models.Movies
 			// Required fields
 			if (string.IsNullOrWhiteSpace(sourceMovie.Name))
 			{
-				errorMessages.Add(sourceMovie.InvalidFieldMessage(movie => movie.Name));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(movie => movie.Name));
 			}
 			if (string.IsNullOrWhiteSpace(sourceMovie.Summary))
 			{
-				errorMessages.Add(sourceMovie.InvalidFieldMessage(movie => movie.Summary));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(movie => movie.Summary));
 			}
 			if (string.IsNullOrWhiteSpace(sourceMovie.PictureUrl))
 			{
-				errorMessages.Add(sourceMovie.InvalidFieldMessage(movie => movie.PictureUrl));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(movie => movie.PictureUrl));
 			}
 			if (string.IsNullOrWhiteSpace(sourceMovie.TrailerUrl))
 			{
-				errorMessages.Add(sourceMovie.InvalidFieldMessage(movie => movie.TrailerUrl));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(movie => movie.TrailerUrl));
 			}
 			if (sourceMovie.ReleaseDate == default)
 			{
-				errorMessages.Add(sourceMovie.InvalidFieldMessage(movie => movie.ReleaseDate));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(movie => movie.ReleaseDate));
 			}
 
 			// Duplicate fields
 			if (this.Models.Any(movie => movie.NormalizedName.Equals(sourceMovie.NormalizedName) && movie.ReleaseDate == sourceMovie.ReleaseDate))
 			{
-				errorMessages.Add(sourceMovie.ExistingFieldMessage(movie => movie.Name));
-				errorMessages.Add(sourceMovie.ExistingFieldMessage(movie => movie.ReleaseDate));
+				errorMessages.Add(this.GetModelHasDuplicateFieldMessage(movie => movie.Name));
+				errorMessages.Add(this.GetModelHasDuplicateFieldMessage(movie => movie.ReleaseDate));
 			}
 
 			if (errorMessages.Count > 0)
@@ -146,7 +146,9 @@ namespace Memento.Movies.Shared.Models.Movies
 			targetMovie.Genres = sourceMovie.Genres;
 			targetMovie.Persons = sourceMovie.Persons;
 		}
+		#endregion
 
+		#region [Methods] Queryable
 		/// <inheritdoc />
 		protected override IQueryable<Movie> GetCountQueryable()
 		{

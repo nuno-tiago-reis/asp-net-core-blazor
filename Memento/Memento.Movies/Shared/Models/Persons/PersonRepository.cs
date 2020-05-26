@@ -1,7 +1,7 @@
 ﻿using Memento.Shared.Exceptions;
-using Memento.Shared.Extensions;
-using Memento.Shared.Models;
-using Memento.Shared.Pagination;
+using Memento.Shared.Models.Pagination;
+using Memento.Shared.Models.Repository;
+using Memento.Shared.Services.Localization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -29,17 +29,17 @@ namespace Memento.Movies.Shared.Models.Persons
 		/// </summary>
 		/// 
 		/// <param name="context">The context</param>
+		/// <param name="localizer">The localizer.</param>
 		/// <param name="lookupNormalizer">The lookup normalizer.</param>
-		/// <param name="serviceProvider">The services provider.</param>
 		/// <param name="logger">The logger.</param>
 		public PersonRepository
 		(
 			MovieContext context,
+			ILocalizerService localizer,
 			ILookupNormalizer lookupNormalizer,
-			IServiceProvider serviceProvider,
 			ILogger<PersonRepository> logger
 		)
-		: base(context, lookupNormalizer, serviceProvider, logger)
+		: base(context, localizer, lookupNormalizer, logger)
 		{
 			// Nothing to do here.
 		}
@@ -86,7 +86,7 @@ namespace Memento.Movies.Shared.Models.Persons
 		#region [Methods] IPersonRepository
 		#endregion
 
-		#region [Methods] Utility
+		#region [Methods] Model
 		/// <inheritdoc />
 		protected override void NormalizeModel(Person sourcePerson)
 		{
@@ -101,26 +101,26 @@ namespace Memento.Movies.Shared.Models.Persons
 			// Required fields
 			if (string.IsNullOrWhiteSpace(sourcePerson.Name))
 			{
-				errorMessages.Add(sourcePerson.InvalidFieldMessage(person => person.Name));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(person => person.Name));
 			}
 			if (string.IsNullOrWhiteSpace(sourcePerson.Biography))
 			{
-				errorMessages.Add(sourcePerson.InvalidFieldMessage(person => person.Biography));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(person => person.Biography));
 			}
 			if (string.IsNullOrWhiteSpace(sourcePerson.PictureUrl))
 			{
-				errorMessages.Add(sourcePerson.InvalidFieldMessage(person => person.PictureUrl));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(person => person.PictureUrl));
 			}
 			if (sourcePerson.BirthDate == default)
 			{
-				errorMessages.Add(sourcePerson.InvalidFieldMessage(person => person.BirthDate));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(person => person.BirthDate));
 			}
 
 			// Duplicate fields
 			if (this.Models.Any(person => person.NormalizedName.Equals(sourcePerson.NormalizedName) && person.BirthDate == sourcePerson.BirthDate))
 			{
-				errorMessages.Add(sourcePerson.ExistingFieldMessage(person => person.Name));
-				errorMessages.Add(sourcePerson.ExistingFieldMessage(person => person.BirthDate));
+				errorMessages.Add(this.GetModelHasDuplicateFieldMessage(person => person.Name));
+				errorMessages.Add(this.GetModelHasDuplicateFieldMessage(person => person.BirthDate));
 			}
 
 			if (errorMessages.Count > 0)
@@ -139,7 +139,9 @@ namespace Memento.Movies.Shared.Models.Persons
 			targetPerson.BirthDate = sourcePerson.BirthDate;
 			targetPerson.Movies = sourcePerson.Movies;
 		}
+		#endregion
 
+		#region [Methods] Queryable
 		/// <inheritdoc />
 		protected override IQueryable<Person> GetCountQueryable()
 		{

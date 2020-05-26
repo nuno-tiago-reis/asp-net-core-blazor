@@ -1,7 +1,7 @@
 ﻿using Memento.Shared.Exceptions;
-using Memento.Shared.Extensions;
-using Memento.Shared.Models;
-using Memento.Shared.Pagination;
+using Memento.Shared.Models.Pagination;
+using Memento.Shared.Models.Repository;
+using Memento.Shared.Services.Localization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -29,17 +29,17 @@ namespace Memento.Movies.Shared.Models.Genres
 		/// </summary>
 		/// 
 		/// <param name="context">The context</param>
+		/// <param name="localizer">The localizer.</param>
 		/// <param name="lookupNormalizer">The lookup normalizer.</param>
-		/// <param name="serviceProvider">The services provider.</param>
 		/// <param name="logger">The logger.</param>
 		public GenreRepository
 		(
 			MovieContext context,
+			ILocalizerService localizer,
 			ILookupNormalizer lookupNormalizer,
-			IServiceProvider serviceProvider,
 			ILogger<GenreRepository> logger
 		)
-		: base(context, lookupNormalizer, serviceProvider, logger)
+		: base(context, localizer, lookupNormalizer, logger)
 		{
 			// Nothing to do here.
 		}
@@ -86,7 +86,7 @@ namespace Memento.Movies.Shared.Models.Genres
 		#region [Methods] IGenreRepository
 		#endregion
 
-		#region [Methods] Utility
+		#region [Methods] Model
 		/// <inheritdoc />
 		protected override void NormalizeModel(Genre sourceGenre)
 		{
@@ -101,13 +101,13 @@ namespace Memento.Movies.Shared.Models.Genres
 			// Required fields
 			if (string.IsNullOrWhiteSpace(sourceGenre.Name))
 			{
-				errorMessages.Add(sourceGenre.InvalidFieldMessage(genre => genre.Name));
+				errorMessages.Add(this.GetModelHasInvalidFieldMessage(genre => genre.Name));
 			}
 
 			// Duplicate fields
 			if (this.Models.Any(genre => genre.NormalizedName.Equals(sourceGenre.NormalizedName)))
 			{
-				errorMessages.Add(sourceGenre.ExistingFieldMessage(genre => genre.Name));
+				errorMessages.Add(this.GetModelHasDuplicateFieldMessage(genre => genre.Name));
 			}
 
 			if (errorMessages.Count > 0)
@@ -122,7 +122,9 @@ namespace Memento.Movies.Shared.Models.Genres
 			targetGenre.Name = sourceGenre.Name;
 			targetGenre.NormalizedName = sourceGenre.NormalizedName;
 		}
+		#endregion
 
+		#region [Methods] Queryable
 		/// <inheritdoc />
 		protected override IQueryable<Genre> GetCountQueryable()
 		{

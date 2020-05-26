@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GENRE" xml:space="preserve">
+		<value>Género</value>
+	</data>
+  <data name="GENRE_CREATEDAT" xml:space="preserve">
+		<value>Criado Em</value>
+	</data>
+  <data name="GENRE_CREATEDBY" xml:space="preserve">
+		<value>Criado Por</value>
+	</data>
+  <data name="GENRE_DOES_NOT_EXIST" xml:space="preserve">
+		<value>O género não existe.</value>
+	</data>
+  <data name="GENRE_ID" xml:space="preserve">
+		<value>Identificador</value>
+	</data>
+  <data name="GENRE_NAME" xml:space="preserve">
+		<value>Nome</value>
+	</data>
+  <data name="GENRE_UPDATEDAT" xml:space="preserve">
+		<value>Atualizado Em</value>
+	</data>
+  <data name="GENRE_UPDATEDBY" xml:space="preserve">
+		<value>Atualizado Por</value>
+	</data>
+  <data name="MODEL_HAS_DUPLICATE_FIELD" xml:space="preserve">
+		<value>O campo '{0}' já existe.</value>
+	</data>
+  <data name="MODEL_HAS_INVALID_FIELD" xml:space="preserve">
+		<value>O campo '{0}' é inválido.</value>
+	</data>
+  <data name="MOVIE" xml:space="preserve">
+		<value>Filme</value>
+	</data>
+  <data name="MOVIE_CREATEDAT" xml:space="preserve">
+		<value>Criado Em</value>
+	</data>
+  <data name="MOVIE_CREATEDBY" xml:space="preserve">
+		<value>Criado Por</value>
+	</data>
+  <data name="MOVIE_DOES_NOT_EXIST" xml:space="preserve">
+		<value>O filme não existe.</value>
+	</data>
+  <data name="MOVIE_ID" xml:space="preserve">
+		<value>Identificador</value>
+	</data>
+  <data name="MOVIE_INTHEATERS" xml:space="preserve">
+		<value>Em Exibição</value>
+	</data>
+  <data name="MOVIE_NAME" xml:space="preserve">
+		<value>Nome</value>
+	</data>
+  <data name="MOVIE_PICTUREURL" xml:space="preserve">
+		<value>Imagem (URL)</value>
+	</data>
+  <data name="MOVIE_RELEASEDATE" xml:space="preserve">
+		<value>Data de Lançamento</value>
+	</data>
+  <data name="MOVIE_SUMMARY" xml:space="preserve">
+		<value>Resumo</value>
+	</data>
+  <data name="MOVIE_TRAILERURL" xml:space="preserve">
+		<value>Trailer (URL)</value>
+	</data>
+  <data name="MOVIE_UPDATEDAT" xml:space="preserve">
+		<value>Atualizado Em</value>
+	</data>
+  <data name="MOVIE_UPDATEDBY" xml:space="preserve">
+		<value>Atualizado Por</value>
+	</data>
+  <data name="PERSON" xml:space="preserve">
+		<value>Pessoa</value>
+	</data>
+  <data name="PERSON_BIOGRAPHY" xml:space="preserve">
+		<value>Biografia</value>
+	</data>
+  <data name="PERSON_BIRTHDATE" xml:space="preserve">
+    <value>Data de Nascimento</value>
+  </data>
+  <data name="PERSON_CREATEDAT" xml:space="preserve">
+		<value>Criado Em</value>
+	</data>
+  <data name="PERSON_CREATEDBY" xml:space="preserve">
+		<value>Criado Por</value>
+	</data>
+  <data name="PERSON_DOES_NOT_EXIST" xml:space="preserve">
+		<value>A pessoa não existe.</value>
+	</data>
+  <data name="PERSON_ID" xml:space="preserve">
+		<value>Identificador</value>
+	</data>
+  <data name="PERSON_NAME" xml:space="preserve">
+		<value>Nome</value>
+	</data>
+  <data name="PERSON_PICTUREURL" xml:space="preserve">
+		<value>Imagem (URL)</value>
+	</data>
+  <data name="PERSON_UPDATEDAT" xml:space="preserve">
+		<value>Atualizado Em</value>
+	</data>
+  <data name="PERSON_UPDATEDBY" xml:space="preserve">
+		<value>Atualizado Por</value>
+	</data>
+</root>

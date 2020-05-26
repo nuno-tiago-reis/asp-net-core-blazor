@@ -1,29 +1,22 @@
 ﻿using AutoMapper;
 using Memento.Movies.Shared.Contracts.Genres;
-using Memento.Movies.Shared.Contracts.Movies;
-using Memento.Movies.Shared.Contracts.Persons;
-using Memento.Movies.Shared.Models;
 using Memento.Movies.Shared.Models.Genres;
-using Memento.Movies.Shared.Models.Movies;
-using Memento.Movies.Shared.Models.Persons;
-using Memento.Shared.Pagination;
-using System;
-using System.Linq;
+using Memento.Shared.Configuration;
 
 namespace Memento.Movies.Shared.Configuration
 {
 	/// <summary>
-	/// Implements the 'MovieMapper' settings.
+	/// Implements the 'MovieMapper' profile.
 	/// </summary>
 	/// 
 	/// <seealso cref="Profile" />
-	public sealed class MovieMapperSettings : AutoMapperSettings
+	public sealed class MovieMapperProfile : MementoMapperProfile
 	{
 		#region [Constructor]
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MovieMapperSettings"/> class.
+		/// Initializes a new instance of the <see cref="MovieMapperProfile"/> class.
 		/// </summary>
-		public MovieMapperSettings() : base()
+		public MovieMapperProfile() : base()
 		{
 			// Nothing to do here.
 		}

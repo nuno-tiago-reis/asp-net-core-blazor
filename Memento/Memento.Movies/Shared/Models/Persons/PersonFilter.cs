@@ -1,4 +1,4 @@
-﻿using Memento.Shared.Models;
+﻿using Memento.Shared.Models.Repository;
 using System;
 
 namespace Memento.Movies.Shared.Models.Persons
