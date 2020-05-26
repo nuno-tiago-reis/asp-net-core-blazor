@@ -69,24 +69,18 @@ namespace Memento.Movies.Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			#region [Required: AspNet AppSettings]
-			// Configurations
 			services
 				.Configure<MovieSettings>(this.Configuration);
 			#endregion
 
 			#region [Required: AspNet Middleware]
-			// Middleware
 			services
-				.AddControllersWithViews()
+				.AddControllers()
 				.AddSharedLocalization<SharedResources>(this.MovieSettings.Localization);
-
-			services
-				.AddRazorPages();
 
 			services
 				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
 
-			// Configurations
 			services
 				.Configure<ApiBehaviorOptions>(options =>
 				{
@@ -171,10 +165,6 @@ namespace Memento.Movies.Server
 
 			#region [Required: Services]
 			services
-				.AddFileSystemDataProtection(this.MovieSettings.DataProtection);
-			services
-				.AddFileSystemStorageService(this.MovieSettings.Storage);
-			services
 				.AddToasterService();
 			#endregion
 		}
@@ -209,7 +199,6 @@ namespace Memento.Movies.Server
 			});
 			builder.UseHttpsRedirection();
 			builder.UseBlazorFrameworkFiles();
-			builder.UseRequestLocalization();
 			builder.UseCookiePolicy();
 			builder.UseStaticFiles();
 			builder.UseRouting();
@@ -231,7 +220,6 @@ namespace Memento.Movies.Server
 			#region [Required: AspNet Routing]
 			builder.UseEndpoints(endpoints =>
 			{
-				endpoints.MapRazorPages();
 				endpoints.MapControllers();
 				endpoints.MapFallbackToFile("index.html");
 			});
