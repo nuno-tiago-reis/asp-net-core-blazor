@@ -6,12 +6,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Remove="Resources\MovieLocalizationResources.en.resx" />
+		<!-- Extend Watch -->
+		<Watch Include="..\**\*.razor" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Include="Resources\SharedResources.en.resx" />
-	</ItemGroup>
+	<PropertyGroup>
+		<!-- Faster Debug Builds-->
+		<BlazorWebAssemblyEnableLinking Condition="'$(Configuration)'!='Release'">false</BlazorWebAssemblyEnableLinking>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- AutoMapper -->

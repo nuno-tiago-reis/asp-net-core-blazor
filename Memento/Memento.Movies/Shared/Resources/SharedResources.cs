@@ -1,4 +1,4 @@
-﻿namespace Memento.Movies.Shared
+﻿namespace Memento.Movies.Shared.Resources
 {
 	/// <summary>
 	/// Implements a dummy class to be used in the localization service.
