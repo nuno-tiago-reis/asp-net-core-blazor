@@ -66,6 +66,94 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to Cancel.
+		/// </summary>
+		public static string BUTTON_CANCEL
+		{
+			get
+			{
+				return ResourceManager.GetString("BUTTON_CANCEL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Confirm.
+		/// </summary>
+		public static string BUTTON_CONFIRM
+		{
+			get
+			{
+				return ResourceManager.GetString("BUTTON_CONFIRM", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Create.
+		/// </summary>
+		public static string BUTTON_CREATE
+		{
+			get
+			{
+				return ResourceManager.GetString("BUTTON_CREATE", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Update.
+		/// </summary>
+		public static string BUTTON_DELETE
+		{
+			get
+			{
+				return ResourceManager.GetString("BUTTON_DELETE", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Discard.
+		/// </summary>
+		public static string BUTTON_DISCARD_CHANGES
+		{
+			get
+			{
+				return ResourceManager.GetString("BUTTON_DISCARD_CHANGES", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Save.
+		/// </summary>
+		public static string BUTTON_SAVE_CHANGES
+		{
+			get
+			{
+				return ResourceManager.GetString("BUTTON_SAVE_CHANGES", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Update.
+		/// </summary>
+		public static string BUTTON_UPDATE
+		{
+			get
+			{
+				return ResourceManager.GetString("BUTTON_UPDATE", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to View.
+		/// </summary>
+		public static string BUTTON_VIEW
+		{
+			get
+			{
+				return ResourceManager.GetString("BUTTON_VIEW", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to The form has invalid fields..
 		/// </summary>
 		public static string ERROR_FORM_INVALID_FIELDS
@@ -95,6 +183,28 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("ERROR_UNEXPECTED", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Loading.
+		/// </summary>
+		public static string GENERIC_LOADING
+		{
+			get
+			{
+				return ResourceManager.GetString("GENERIC_LOADING", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to No records were found.
+		/// </summary>
+		public static string GENERIC_NO_RECORDS_FOUND
+		{
+			get
+			{
+				return ResourceManager.GetString("GENERIC_NO_RECORDS_FOUND", resourceCulture);
 			}
 		}
 
@@ -260,6 +370,116 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("GENRE_UPDATEDBY", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Are you sure you want to delete this genre?.
+		/// </summary>
+		public static string MODAL_DELETE_GENRE_BODY
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_DELETE_GENRE_BODY", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Delete Genre.
+		/// </summary>
+		public static string MODAL_DELETE_GENRE_TITLE
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_DELETE_GENRE_TITLE", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Are you sure you want to delete this movie?.
+		/// </summary>
+		public static string MODAL_DELETE_MOVIE_BODY
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_DELETE_MOVIE_BODY", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Delete Movie.
+		/// </summary>
+		public static string MODAL_DELETE_MOVIE_TITLE
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_DELETE_MOVIE_TITLE", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Are you sure you want to delete this person?.
+		/// </summary>
+		public static string MODAL_DELETE_PERSON_BODY
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_DELETE_PERSON_BODY", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Delete Person.
+		/// </summary>
+		public static string MODAL_DELETE_PERSON_TITLE
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_DELETE_PERSON_TITLE", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Are you sure you want to discard your changes?.
+		/// </summary>
+		public static string MODAL_DISCARD_CHANGES_BODY
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_DISCARD_CHANGES_BODY", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Discard changes.
+		/// </summary>
+		public static string MODAL_DISCARD_CHANGES_TITLE
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_DISCARD_CHANGES_TITLE", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Are you sure you want to save your changes?.
+		/// </summary>
+		public static string MODAL_SAVE_CHANGES_BODY
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_SAVE_CHANGES_BODY", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Save changes.
+		/// </summary>
+		public static string MODAL_SAVE_CHANGES_TITLE
+		{
+			get
+			{
+				return ResourceManager.GetString("MODAL_SAVE_CHANGES_TITLE", resourceCulture);
 			}
 		}
 

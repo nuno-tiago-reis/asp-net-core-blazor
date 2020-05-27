@@ -58,6 +58,30 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="BUTTON_CANCEL" xml:space="preserve">
+		<value>Cancelar</value>
+	</data>
+	<data name="BUTTON_CONFIRM" xml:space="preserve">
+		<value>Confirmar</value>
+	</data>
+	<data name="BUTTON_CREATE" xml:space="preserve">
+		<value>Criar</value>
+	</data>
+	<data name="BUTTON_UPDATE" xml:space="preserve">
+		<value>Atualizar</value>
+	</data>
+	<data name="BUTTON_DELETE" xml:space="preserve">
+		<value>Apagar</value>
+	</data>
+	<data name="BUTTON_VIEW" xml:space="preserve">
+		<value>Ver</value>
+	</data>
+	<data name="BUTTON_SAVE_CHANGES" xml:space="preserve">
+		<value>Guardar</value>
+	</data>
+	<data name="BUTTON_DISCARD_CHANGES" xml:space="preserve">
+		<value>Descartar</value>
+	</data>
 	<data name="ERROR_FORM_INVALID_FIELDS" xml:space="preserve">
 		<value>O formulário contém campos inválidos.</value>
 	</data>
@@ -66,6 +90,12 @@
 	</data>
 	<data name="ERROR_UNEXPECTED" xml:space="preserve">
 		<value>Ocorreu um erro inesperado. Por favor tente novamente mais tarde.</value>
+	</data>
+	<data name="GENERIC_LOADING" xml:space="preserve">
+		<value>Carregando</value>
+	</data>
+	<data name="GENERIC_NO_RECORDS_FOUND" xml:space="preserve">
+		<value>Não foram encontrados registos</value>
 	</data>
 	<data name="GENRE" xml:space="preserve">
 		<value>Género</value>
@@ -111,6 +141,36 @@
 	</data>
 	<data name="GENRE_UPDATEDBY" xml:space="preserve">
 		<value>Atualizado Por</value>
+	</data>
+	<data name="MODAL_DELETE_GENRE_TITLE" xml:space="preserve">
+		<value>Apagar Género</value>
+	</data>
+	<data name="MODAL_DELETE_GENRE_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer apagar este género?</value>
+	</data>
+	<data name="MODAL_DELETE_MOVIE_TITLE" xml:space="preserve">
+		<value>Apagar Filme</value>
+	</data>
+	<data name="MODAL_DELETE_MOVIE_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer apagar este filme?</value>
+	</data>
+	<data name="MODAL_DELETE_PERSON_TITLE" xml:space="preserve">
+		<value>Apagar Pessoa</value>
+	</data>
+	<data name="MODAL_DELETE_PERSON_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer apagar esta pessoa?</value>
+	</data>
+	<data name="MODAL_DISCARD_CHANGES_TITLE" xml:space="preserve">
+		<value>Descartar Alterações</value>
+	</data>
+	<data name="MODAL_DISCARD_CHANGES_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer descartar as suas alterações?</value>
+	</data>
+	<data name="MODAL_SAVE_CHANGES_TITLE" xml:space="preserve">
+		<value>Guardar Alterações</value>
+	</data>
+	<data name="MODAL_SAVE_CHANGES_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer guardar as suas alterações?</value>
 	</data>
 	<data name="MODEL_HAS_DUPLICATE_FIELD" xml:space="preserve">
 		<value>O campo '{0}' já existe.</value>
