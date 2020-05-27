@@ -17,7 +17,7 @@ namespace Memento.Movies.Shared.Models.Contracts.Persons
 		/// </summary>
 		[Required]
 		[MaxLength(PersonConfiguration.NAME_MAXIMUM_LENGTH)]
-		[Display(Name = SharedResources.Person.Model.PERSON_NAME, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.PERSON_NAME), ResourceType = typeof(SharedResources))]
 		public string Name { get; set; }
 
 		/// <summary>
@@ -25,7 +25,7 @@ namespace Memento.Movies.Shared.Models.Contracts.Persons
 		/// </summary>
 		[Required]
 		[MaxLength(PersonConfiguration.BIOGRAPHY_MAXIMUM_LENGTH)]
-		[Display(Name = SharedResources.Person.Model.PERSON_BIOGRAPHY, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.PERSON_BIOGRAPHY), ResourceType = typeof(SharedResources))]
 		public string Biography { get; set; }
 
 		/// <summary>
@@ -33,20 +33,20 @@ namespace Memento.Movies.Shared.Models.Contracts.Persons
 		/// </summary>
 		[Required]
 		[MaxLength(PersonConfiguration.PICTURE_URL_MAXIMUM_LENGTH)]
-		[Display(Name = SharedResources.Person.Model.PERSON_PICTUREURL, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.PERSON_PICTUREURL), ResourceType = typeof(SharedResources))]
 		public string PictureUrl { get; set; }
 
 		/// <summary>
 		/// The Person's birth date.
 		/// </summary>
 		[Required]
-		[Display(Name = SharedResources.Person.Model.PERSON_BIRTHDATE, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.PERSON_BIRTHDATE), ResourceType = typeof(SharedResources))]
 		public DateTime? BirthDate { get; set; }
 
 		/// <summary>
 		/// The Movies associated with the Person.
 		/// </summary>
-		[Display(Name = SharedResources.Person.Model.PERSON_MOVIES, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.PERSON_MOVIES), ResourceType = typeof(SharedResources))]
 		public List<Tuple<long, MoviePersonRole>> Movies { get; set; }
 		#endregion
 	}

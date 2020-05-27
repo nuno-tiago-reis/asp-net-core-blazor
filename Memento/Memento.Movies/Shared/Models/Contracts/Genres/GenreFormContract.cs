@@ -15,7 +15,7 @@ namespace Memento.Movies.Shared.Models.Contracts.Genres
 		/// </summary>
 		[Required]
 		[MaxLength(GenreConfiguration.NAME_MAXIMUM_LENGTH)]
-		[Display(Name = SharedResources.Genre.Model.GENRE_NAME, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.GENRE_NAME), ResourceType = typeof(SharedResources))]
 		public string Name { get; set; }
 		#endregion
 	}

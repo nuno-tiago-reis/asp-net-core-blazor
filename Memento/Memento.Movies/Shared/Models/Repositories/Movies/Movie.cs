@@ -15,85 +15,85 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 		/// <summary>
 		/// Gets or sets the identifier.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_ID, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_ID), ResourceType = typeof(SharedResources))]
 		public override long Id { get; set; }
 
 		/// <summary>
 		/// The name.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_NAME, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_NAME), ResourceType = typeof(SharedResources))]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// The normalized name.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_NAME, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_NAME), ResourceType = typeof(SharedResources))]
 		public string NormalizedName { get; set; }
 
 		/// <summary>
 		/// The summary.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_SUMMARY, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_SUMMARY), ResourceType = typeof(SharedResources))]
 		public string Summary { get; set; }
 
 		/// <summary>
 		/// The picture url.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_PICTUREURL, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_PICTUREURL), ResourceType = typeof(SharedResources))]
 		public string PictureUrl { get; set; }
 
 		/// <summary>
 		/// The trailer url.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_TRAILERURL, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_TRAILERURL), ResourceType = typeof(SharedResources))]
 		public string TrailerUrl { get; set; }
 
 		/// <summary>
 		/// The release date.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_RELEASEDATE, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_RELEASEDATE), ResourceType = typeof(SharedResources))]
 		public DateTime ReleaseDate { get; set; }
 
 		/// <summary>
 		/// Whether the movie is in theaters.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_INTHEATERS, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_INTHEATERS), ResourceType = typeof(SharedResources))]
 		public bool InTheaters { get; set; }
 
 		/// <summary>
 		/// The genres associated with the movie.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_GENRES, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_GENRES), ResourceType = typeof(SharedResources))]
 		public List<MovieGenre> Genres { get; set; }
 
 		/// <summary>
 		/// The persons associated with the movie.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_PERSONS, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_PERSONS), ResourceType = typeof(SharedResources))]
 		public List<MoviePerson> Persons { get; set; }
 
 		/// <summary>
 		/// The created by user identifier.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_CREATEDBY, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_CREATEDBY), ResourceType = typeof(SharedResources))]
 		public override long CreatedBy { get; set; }
 
 		/// <summary>
 		/// The created at timestamp.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_CREATEDAT, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_CREATEDAT), ResourceType = typeof(SharedResources))]
 		public override DateTime CreatedAt { get; set; }
 
 		/// <summary>
 		/// The updated by user identifier.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_UPDATEDBY, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_UPDATEDBY), ResourceType = typeof(SharedResources))]
 		public override long? UpdatedBy { get; set; }
 
 		/// <summary>
 		/// The updated at timestamp.
 		/// </summary>
-		[Display(Name = SharedResources.Movie.Model.MOVIE_UPDATEDAT, ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIE_UPDATEDAT), ResourceType = typeof(SharedResources))]
 		public override DateTime? UpdatedAt { get; set; }
 		#endregion
 
