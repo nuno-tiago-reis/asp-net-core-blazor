@@ -1,208 +1,322 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="GENRE" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ERROR_FORM_INVALID_FIELDS" xml:space="preserve">
+		<value>The form has invalid fields.</value>
+	</data>
+  <data name="ERROR_LOADING" xml:space="preserve">
+		<value>An error occured while loading the page. Please try again later.</value>
+	</data>
+  <data name="ERROR_UNEXPECTED" xml:space="preserve">
+		<value>An error unexpected error occurred. Please try again later.</value>
+	</data>
+  <data name="GENRE" xml:space="preserve">
 		<value>Genre</value>
 	</data>
-	<data name="GENRE_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
+  <data name="GENRE_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
 		<value>The genre was created successfully.</value>
 	</data>
-	<data name="GENRE_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
+  <data name="GENRE_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
 		<value>The genre was deleted successfully.</value>
 	</data>
-	<data name="GENRE_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
+  <data name="GENRE_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
 		<value>The genres were obtained successfully.</value>
 	</data>
-	<data name="GENRE_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
+  <data name="GENRE_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
 		<value>The genre was obtained successfully.</value>
 	</data>
-	<data name="GENRE_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
+  <data name="GENRE_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
 		<value>The genre was updated successfully.</value>
 	</data>
-	<data name="GENRE_CREATEDAT" xml:space="preserve">
+  <data name="GENRE_CREATEDAT" xml:space="preserve">
 		<value>Created At</value>
 	</data>
-	<data name="GENRE_CREATEDBY" xml:space="preserve">
+  <data name="GENRE_CREATEDBY" xml:space="preserve">
 		<value>Created By</value>
 	</data>
-	<data name="GENRE_DOES_NOT_EXIST" xml:space="preserve">
+  <data name="GENRE_DOES_NOT_EXIST" xml:space="preserve">
 		<value>The gender does not exist.</value>
 	</data>
-	<data name="GENRE_ID" xml:space="preserve">
+  <data name="GENRE_ID" xml:space="preserve">
 		<value>Identifier</value>
 	</data>
-	<data name="GENRE_NAME" xml:space="preserve">
+  <data name="GENRE_MOVIES" xml:space="preserve">
+		<value>Movies</value>
+	</data>
+  <data name="GENRE_NAME" xml:space="preserve">
 		<value>Name</value>
 	</data>
-	<data name="GENRE_UPDATEDAT" xml:space="preserve">
+  <data name="GENRE_PLURAL" xml:space="preserve">
+		<value>Genres</value>
+	</data>
+  <data name="GENRE_UPDATEDAT" xml:space="preserve">
 		<value>Updated At</value>
 	</data>
-	<data name="GENRE_UPDATEDBY" xml:space="preserve">
+  <data name="GENRE_UPDATEDBY" xml:space="preserve">
 		<value>Updated By</value>
 	</data>
-	<data name="MODEL_HAS_DUPLICATE_FIELD" xml:space="preserve">
+  <data name="MODEL_HAS_DUPLICATE_FIELD" xml:space="preserve">
 		<value>The field '{0}' already exists.</value>
 	</data>
-	<data name="MODEL_HAS_INVALID_FIELD" xml:space="preserve">
+  <data name="MODEL_HAS_INVALID_FIELD" xml:space="preserve">
 		<value>The field '{0}' is invalid.</value>
 	</data>
-	<data name="MOVIE" xml:space="preserve">
+  <data name="MOVIE" xml:space="preserve">
 		<value>Movie</value>
 	</data>
-	<data name="MOVIE_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
+  <data name="MOVIE_ACTORS" xml:space="preserve">
+		<value>Actors</value>
+	</data>
+  <data name="MOVIE_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
 		<value>The movie was created successfully.</value>
 	</data>
-	<data name="MOVIE_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
+  <data name="MOVIE_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
 		<value>The movie was deleted successfully.</value>
 	</data>
-	<data name="MOVIE_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
+  <data name="MOVIE_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
 		<value>The movies were obtained successfully.</value>
 	</data>
-	<data name="MOVIE_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
+  <data name="MOVIE_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
 		<value>The movie was obtained successfully.</value>
 	</data>
-	<data name="MOVIE_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
+  <data name="MOVIE_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
 		<value>The movie was updated successfully.</value>
 	</data>
-	<data name="MOVIE_CREATEDAT" xml:space="preserve">
+  <data name="MOVIE_CREATEDAT" xml:space="preserve">
 		<value>Created At</value>
 	</data>
-	<data name="MOVIE_CREATEDBY" xml:space="preserve">
+  <data name="MOVIE_CREATEDBY" xml:space="preserve">
 		<value>Created By</value>
 	</data>
-	<data name="MOVIE_DOES_NOT_EXIST" xml:space="preserve">
+  <data name="MOVIE_DIRECTORS" xml:space="preserve">
+		<value>Directors</value>
+	</data>
+  <data name="MOVIE_DOES_NOT_EXIST" xml:space="preserve">
 		<value>The movie does not exist.</value>
 	</data>
-	<data name="MOVIE_ID" xml:space="preserve">
+  <data name="MOVIE_GENRES" xml:space="preserve">
+		<value>Genres</value>
+	</data>
+  <data name="MOVIE_ID" xml:space="preserve">
 		<value>Identifier</value>
 	</data>
-	<data name="MOVIE_INTHEATERS" xml:space="preserve">
+  <data name="MOVIE_INTHEATERS" xml:space="preserve">
 		<value>In Theaters</value>
 	</data>
-	<data name="MOVIE_NAME" xml:space="preserve">
+  <data name="MOVIE_NAME" xml:space="preserve">
 		<value>Name</value>
 	</data>
-	<data name="MOVIE_PICTUREURL" xml:space="preserve">
+  <data name="MOVIE_PERSONS" xml:space="preserve">
+		<value>Persons</value>
+	</data>
+  <data name="MOVIE_PICTUREURL" xml:space="preserve">
 		<value>Picture (URL)</value>
 	</data>
-	<data name="MOVIE_RELEASEDATE" xml:space="preserve">
+  <data name="MOVIE_PLURAL" xml:space="preserve">
+		<value>Movies</value>
+	</data>
+  <data name="MOVIE_RELEASEDAFTER" xml:space="preserve">
+		<value>Released After</value>
+	</data>
+  <data name="MOVIE_RELEASEDATE" xml:space="preserve">
 		<value>Release Date</value>
 	</data>
-	<data name="MOVIE_SUMMARY" xml:space="preserve">
+  <data name="MOVIE_RELEASEDBEFORE" xml:space="preserve">
+		<value>Released Before</value>
+	</data>
+  <data name="MOVIE_SUMMARY" xml:space="preserve">
 		<value>Summary</value>
 	</data>
-	<data name="MOVIE_TRAILERURL" xml:space="preserve">
+  <data name="MOVIE_TRAILERURL" xml:space="preserve">
 		<value>Trailer (URL)</value>
 	</data>
-	<data name="MOVIE_UPDATEDAT" xml:space="preserve">
+  <data name="MOVIE_UPDATEDAT" xml:space="preserve">
 		<value>Updated At</value>
 	</data>
-	<data name="MOVIE_UPDATEDBY" xml:space="preserve">
+  <data name="MOVIE_UPDATEDBY" xml:space="preserve">
 		<value>Updated By</value>
 	</data>
-	<data name="PERSON" xml:space="preserve">
-		<value>Person</value>
+  <data name="MOVIE_WRITERS" xml:space="preserve">
+		<value>Writers</value>
 	</data>
-	<data name="PERSON_BIOGRAPHY" xml:space="preserve">
-		<value>Biography</value>
-	</data>
-	<data name="PERSON_BIRTHDATE" xml:space="preserve">
-		<value>Birth Date</value>
-	</data>
-	<data name="PERSON_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
-		<value>The person was created successfully.</value>
-	</data>
-	<data name="PERSON_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
-		<value>The person was deleted successfully.</value>
-	</data>
-	<data name="PERSON_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
-		<value>The persons were obtained successfully.</value>
-	</data>
-	<data name="PERSON_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
-		<value>The person was obtained successfully.</value>
-	</data>
-	<data name="PERSON_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
-		<value>The person was updated successfully.</value>
-	</data>
-	<data name="PERSON_CREATEDAT" xml:space="preserve">
+  <data name="MOVIEGENRE_CREATEDAT" xml:space="preserve">
 		<value>Created At</value>
 	</data>
-	<data name="PERSON_CREATEDBY" xml:space="preserve">
+  <data name="MOVIEGENRE_CREATEDBY" xml:space="preserve">
 		<value>Created By</value>
 	</data>
-	<data name="PERSON_DOES_NOT_EXIST" xml:space="preserve">
-		<value>The person does not exist.</value>
+  <data name="MOVIEGENRE_GENRE" xml:space="preserve">
+		<value>Genre</value>
 	</data>
-	<data name="PERSON_ID" xml:space="preserve">
+  <data name="MOVIEGENRE_GENREID" xml:space="preserve">
+		<value>Genre Identifier</value>
+	</data>
+  <data name="MOVIEGENRE_ID" xml:space="preserve">
 		<value>Identifier</value>
 	</data>
-	<data name="PERSON_NAME" xml:space="preserve">
-		<value>Name</value>
+  <data name="MOVIEGENRE_MOVIE" xml:space="preserve">
+		<value>Movie</value>
 	</data>
-	<data name="PERSON_PICTUREURL" xml:space="preserve">
-		<value>Picture (URL)</value>
+  <data name="MOVIEGENRE_MOVIEID" xml:space="preserve">
+		<value>Movie Identifier</value>
 	</data>
-	<data name="PERSON_UPDATEDAT" xml:space="preserve">
+  <data name="MOVIEGENRE_UPDATEDAT" xml:space="preserve">
 		<value>Updated At</value>
 	</data>
-	<data name="PERSON_UPDATEDBY" xml:space="preserve">
+  <data name="MOVIEGENRE_UPDATEDBY" xml:space="preserve">
+		<value>Updated By</value>
+	</data>
+  <data name="MOVIEPERSON_CREATEDAT" xml:space="preserve">
+		<value>Created At</value>
+	</data>
+  <data name="MOVIEPERSON_CREATEDBY" xml:space="preserve">
+		<value>Created By</value>
+	</data>
+  <data name="MOVIEPERSON_ID" xml:space="preserve">
+		<value>Identifier</value>
+	</data>
+  <data name="MOVIEPERSON_MOVIE" xml:space="preserve">
+		<value>Movie</value>
+	</data>
+  <data name="MOVIEPERSON_MOVIEID" xml:space="preserve">
+		<value>Movie Identifier</value>
+	</data>
+  <data name="MOVIEPERSON_PERSON" xml:space="preserve">
+		<value>Person</value>
+	</data>
+  <data name="MOVIEPERSON_PERSONID" xml:space="preserve">
+		<value>Person Identifier</value>
+	</data>
+  <data name="MOVIEPERSON_PERSONROLE" xml:space="preserve">
+		<value>Person Role</value>
+	</data>
+  <data name="MOVIEPERSON_UPDATEDAT" xml:space="preserve">
+		<value>Updated At</value>
+	</data>
+  <data name="MOVIEPERSON_UPDATEDBY" xml:space="preserve">
+		<value>Updated By</value>
+	</data>
+  <data name="MOVIEPERSONROLE_ACTOR" xml:space="preserve">
+		<value>Actor</value>
+	</data>
+  <data name="MOVIEPERSONROLE_DIRECTOR" xml:space="preserve">
+		<value>Director</value>
+	</data>
+  <data name="MOVIEPERSONROLE_WRITER" xml:space="preserve">
+		<value>Writer</value>
+	</data>
+  <data name="PERSON" xml:space="preserve">
+		<value>Person</value>
+	</data>
+  <data name="PERSON_BIOGRAPHY" xml:space="preserve">
+		<value>Biography</value>
+	</data>
+  <data name="PERSON_BIRTHDATE" xml:space="preserve">
+		<value>Birth Date</value>
+	</data>
+  <data name="PERSON_BORNAFTER" xml:space="preserve">
+		<value>Born After</value>
+	</data>
+  <data name="PERSON_BORNBEFORE" xml:space="preserve">
+		<value>Born Before</value>
+	</data>
+  <data name="PERSON_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
+		<value>The person was created successfully.</value>
+	</data>
+  <data name="PERSON_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
+		<value>The person was deleted successfully.</value>
+	</data>
+  <data name="PERSON_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
+		<value>The persons were obtained successfully.</value>
+	</data>
+  <data name="PERSON_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
+		<value>The person was obtained successfully.</value>
+	</data>
+  <data name="PERSON_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
+		<value>The person was updated successfully.</value>
+	</data>
+  <data name="PERSON_CREATEDAT" xml:space="preserve">
+		<value>Created At</value>
+	</data>
+  <data name="PERSON_CREATEDBY" xml:space="preserve">
+		<value>Created By</value>
+	</data>
+  <data name="PERSON_DOES_NOT_EXIST" xml:space="preserve">
+		<value>The person does not exist.</value>
+	</data>
+  <data name="PERSON_ID" xml:space="preserve">
+		<value>Identifier</value>
+	</data>
+  <data name="PERSON_NAME" xml:space="preserve">
+		<value>Name</value>
+	</data>
+  <data name="PERSON_PICTUREURL" xml:space="preserve">
+		<value>Picture (URL)</value>
+	</data>
+  <data name="PERSON_PLURAL" xml:space="preserve">
+		<value>Persons</value>
+	</data>
+  <data name="PERSON_UPDATEDAT" xml:space="preserve">
+		<value>Updated At</value>
+	</data>
+  <data name="PERSON_UPDATEDBY" xml:space="preserve">
 		<value>Updated By</value>
 	</data>
 </root>
