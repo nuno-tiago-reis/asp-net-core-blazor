@@ -1,4 +1,6 @@
-﻿<Modal @ref="this.Modal">
+﻿@inherits MementoComponent<ConfirmationModal>
+
+<Modal @ref="this.Modal">
 	<!-- header -->
 	<HeaderTemplate>
 		<ModalHeader BackgroundColor="this.HeaderBackgroundColor" TextColor="this.HeaderTextColor">
@@ -30,9 +32,13 @@
 						{
 							@this.ConfirmButtonContent
 						}
+						else if (!string.IsNullOrWhiteSpace(this.ConfirmButtonIcon))
+						{
+							<span class="@this.ConfirmButtonIcon"></span> <text>@this.Localizer.GetString(SharedResources.BUTTON_CONFIRM)</text>
+						}
 						else
 						{
-							<span class="fas fa-check"></span> <text>Confirm</text>
+							<span class="fas fa-check"></span> <text>@this.Localizer.GetString(SharedResources.BUTTON_CONFIRM)</text>
 						}
 					</Button>
 				</div>
@@ -42,9 +48,13 @@
 						{
 							@this.CancelButtonContent
 						}
+						else if (!string.IsNullOrWhiteSpace(this.CancelButtonIcon))
+						{
+							<span class="@this.CancelButtonIcon"></span> <text>@this.Localizer.GetString(SharedResources.BUTTON_CANCEL)</text>
+						}
 						else
 						{
-							<span class="fas fa-times"></span> <text>Cancel</text>
+							<span class="fas fa-times"></span> <text>@this.Localizer.GetString(SharedResources.BUTTON_CANCEL)</text>
 						}
 					</Button>
 				</div>

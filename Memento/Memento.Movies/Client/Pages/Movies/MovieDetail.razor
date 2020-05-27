@@ -1,45 +1,77 @@
 ﻿@inherits MementoComponent<MovieDetail>
 
-<div class="card">
-	<div class="card-header">
-		<h5>
-			@this.Movie.Name
-		</h5>
-	</div>
-	<div class="card-body">
-		<div class="row">
-			<div class="col-md-4">
-				<a>
-					<img src="@this.Movie.PictureUrl" alt="@this.Movie.Name" />
-				</a>
-				<button class="btn btn-success" type="button" @onclick="async () => { await this.ConfirmationModal.ShowAsync(); }">
-					<span class="fas fa-edit"></span> Update
-				</button>
-				<button class="btn btn-danger" type="button" @onclick="async () => { await this.ConfirmationModal.ShowAsync(); }">
-					<span class="fas fa-trash"></span> Delete
-				</button>
+@if (this.Movie == null)
+{
+	<h3>
+		<i class="fas fa-spinner fa-pulse"></i> @this.Localizer.GetString(SharedResources.GENERIC_LOADING)...
+	</h3>
+}
+else
+{
+	<div class="card mb-md-2">
+		<!-- header -->
+		<div class="card-header">
+			<h3 class="mb-md-0">
+				@this.Movie.Name
+			</h3>
+		</div>
+		<!-- body -->
+		<div class="card-body">
+			<!-- data -->
+			<div class="row">
+				<div class="col-md-6">
+					<a>
+						<img class="img-thumbnail h-md-350-px" src="@this.Movie.PictureUrl" alt="@this.Movie.Name" />
+					</a>
+				</div>
+				<div class="col-md-6">
+					<div class="d-flex flex-column h-100">
+						<dl>
+							<dt>@this.Localizer.GetString(SharedResources.MOVIE_NAME)</dt>
+							<dd>@Movie.Name</dd>
+							<dt>@this.Localizer.GetString(SharedResources.MOVIE_SUMMARY)</dt>
+							<dd>@Movie.Summary</dd>
+							<dt>@this.Localizer.GetString(SharedResources.MOVIE_TRAILERURL)</dt>
+							<dd>@Movie.TrailerUrl</dd>
+							<dt>@this.Localizer.GetString(SharedResources.MOVIE_INTHEATERS)</dt>
+							<dd>@Movie.InTheaters</dd>
+							<dt>@this.Localizer.GetString(SharedResources.MOVIE_RELEASEDATE)</dt>
+							<dd>@Movie.ReleaseDate.ToShortDateString()</dd>
+						</dl>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-8">
-				<dl>
-					<dd>Title</dd>
-					<dt>@Movie.Name</dt>
-					<dd>Release Date:</dd>
-					<dt>@Movie.ReleaseDate.ToString("yyyy-MM-dd")</dt>
-				</dl>
+			<!-- buttons -->
+			<div class="row">
+				<div class="col-md-6">
+					<Button Color="NamedColor.Success" IsBlockLevel="true" IsSubmit="false" OnClicked="this.OnUpdate">
+						<span class="fas fa-sign-in"></span> @this.Localizer.GetString(SharedResources.BUTTON_UPDATE)
+					</Button>
+				</div>
+				<div class="col-md-6">
+					<Button Color="NamedColor.Danger" IsBlockLevel="true" IsSubmit="false" OnClicked="this.OnDeleteAsync">
+						<span class="fas fa-trash-alt"></span> @this.Localizer.GetString(SharedResources.BUTTON_DELETE)
+					</Button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+}
 
+<!-- modal -->
 <ConfirmationModal @ref="this.ConfirmationModal"
-				   ConfirmButtonCallback="this.OnConfirm"
-				   CancelButtonCallback="this.OnCancel">
+				   HeaderBackgroundColor="NamedColor.Danger"
+				   HeaderTextColor="NamedColor.White"
+				   ConfirmButtonColor="NamedColor.Danger"
+				   ConfirmButtonCallback="this.OnDeleteConfirmedAsync"
+				   CancelButtonColor="NamedColor.Secondary"
+				   CancelButtonCallback="this.OnDeleteCancelledAsync">
 	<!-- header -->
 	<HeaderContent>
-		<span class="fas fa-refresh"></span> Refresh List
+		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DELETE_MOVIE_TITLE)
 	</HeaderContent>
 	<!-- body -->
 	<BodyContent>
-		<p>Are you sure you want to refresh the list?</p>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_DELETE_MOVIE_BODY)</p>
 	</BodyContent>
 </ConfirmationModal>

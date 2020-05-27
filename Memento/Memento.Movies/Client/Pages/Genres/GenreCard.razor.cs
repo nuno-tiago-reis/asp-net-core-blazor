@@ -15,27 +15,13 @@ namespace Memento.Movies.Client.Pages.Genres
 	{
 		#region [Properties] Parameters
 		/// <summary>
-		/// The genre identifier.
-		/// </summary>
-		[Parameter]
-		public long GenreId { get; set; }
-
-		/// <summary>
 		/// The genre.
 		/// </summary>
 		[Parameter]
 		public GenreListContract Genre { get; set; }
 		#endregion
 
-		#region [Properties] Services
-		/// <summary>
-		/// The genre service.
-		/// </summary>
-		[Inject]
-		public IGenreService GenreService { get; set; }
-		#endregion
-
-		#region [Methods]
+		#region [Methods] Events
 		/// <summary>
 		/// Callback that is invoked when the user clicks the view button.
 		/// </summary>

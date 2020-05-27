@@ -1,3 +1,108 @@
 ﻿@inherits MementoComponent<PersonForm>
 
-<h3>PersonForm</h3>
+@if (this.Person == null)
+{
+	<h3>
+		<i class="fas fa-spinner fa-pulse"></i> @this.Localizer.GetString(SharedResources.GENERIC_LOADING)...
+	</h3>
+}
+else
+{
+	<EditForm Model="this.Person"
+			  OnValidSubmit="this.OnValidSubmitAsync"
+			  OnInvalidSubmit="this.OnInvalidSubmit">
+
+		<ValidationSummary />
+		<DataAnnotationsValidator />
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<Label For="@(() => this.Person.Name)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Person.Name">
+					</InputText>
+					<ValidationMessage For="@(() => this.Person.Name)">
+					</ValidationMessage>
+				</div>
+				<div class="form-group">
+					<Label For="@(() => this.Person.Biography)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Person.Biography">
+					</InputText>
+					<ValidationMessage For="@(() => this.Person.Biography)">
+					</ValidationMessage>
+				</div>
+				<div class="form-group">
+					<Label For="@(() => this.Person.PictureUrl)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Person.PictureUrl">
+					</InputText>
+					<ValidationMessage For="@(() => this.Person.PictureUrl)">
+					</ValidationMessage>
+				</div>
+				<div class="form-group">
+					<Label For="@(() => this.Person.BirthDate)">
+					</Label>
+					<InputDate class="form-control" TValue="DateTime"
+							   value="@(this.Person.BirthDate != null ? this.Person.BirthDate.Value : DateTime.Today)"
+							   @onchange="@((@event) => this.Person.BirthDate = (DateTime)@event.Value)">
+					</InputDate>
+					<ValidationMessage For="@(() => this.Person.BirthDate)">
+					</ValidationMessage>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<Button Color="NamedColor.Success" IsSubmit="true">
+					<span class="fas fa-save"></span> @this.Localizer.GetString(SharedResources.BUTTON_SAVE_CHANGES)...
+				</Button>
+				<Button Color="NamedColor.Secondary" IsSubmit="false" OnClicked="this.OnCancelAsync">
+					<span class="fas fa-trash"></span> @this.Localizer.GetString(SharedResources.BUTTON_DISCARD_CHANGES)...
+				</Button>
+			</div>
+		</div>
+	</EditForm>
+}
+
+
+<!-- save changes modal -->
+<ConfirmationModal @ref="this.SaveChangesModal"
+				   HeaderBackgroundColor="NamedColor.Success"
+				   HeaderTextColor="NamedColor.White"
+				   ConfirmButtonColor="NamedColor.Success"
+				   ConfirmButtonCallback="this.OnSaveChangesConfirmedAsync"
+				   CancelButtonColor="NamedColor.Secondary"
+				   CancelButtonCallback="this.OnSaveChangesCancelledAsync">
+	<!-- header -->
+	<HeaderContent>
+		<span class="fas fa-save"></span> @this.Localizer.GetString(SharedResources.MODAL_SAVE_CHANGES_TITLE)
+	</HeaderContent>
+	<!-- body -->
+	<BodyContent>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_SAVE_CHANGES_BODY)</p>
+	</BodyContent>
+</ConfirmationModal>
+
+<!-- discard changes modal -->
+<ConfirmationModal @ref="this.DiscardChangesModal"
+				   HeaderBackgroundColor="NamedColor.Warning"
+				   HeaderTextColor="NamedColor.White"
+				   ConfirmButtonColor="NamedColor.Warning"
+				   ConfirmButtonCallback="this.OnDiscardChangesConfirmedAsync"
+				   CancelButtonColor="NamedColor.Secondary"
+				   CancelButtonCallback="this.OnDiscardChangesCancelledAsync">
+	<!-- header -->
+	<HeaderContent>
+		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DISCARD_CHANGES_TITLE)
+	</HeaderContent>
+	<!-- body -->
+	<BodyContent>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_DISCARD_CHANGES_BODY)</p>
+	</BodyContent>
+</ConfirmationModal>

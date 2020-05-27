@@ -2,6 +2,7 @@
 using Memento.Movies.Client.Shared.Routes;
 using Memento.Movies.Shared.Models.Contracts.Genres;
 using Memento.Movies.Shared.Models.Repositories.Genres;
+using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
 using Microsoft.AspNetCore.Components;
@@ -43,7 +44,23 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
 		{
-			this.Genres = await this.GenreService.GetAllAsync();
+			var response = await this.GenreService.GetAllAsync();
+			if (response.Success)
+			{
+				// Update the genres
+				this.Genres = response.Data;
+
+				// Show a toast message
+				this.Toaster.Success(response.Message);
+			}
+			else
+			{
+				// Clear the genres
+				this.Genres = null;
+
+				// Show a toast message
+				this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_LOADING));
+			}
 		}
 		#endregion
 	}

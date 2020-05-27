@@ -3,7 +3,7 @@
 @if (this.Genre == null)
 {
 	<h3>
-		<i class="fas fa-spinner fa-pulse"></i> Loading...
+		<i class="fas fa-spinner fa-pulse"></i> @this.Localizer.GetString(SharedResources.GENERIC_LOADING)...
 	</h3>
 }
 else
@@ -31,13 +31,49 @@ else
 
 		<div class="row">
 			<div class="col-md-12">
-				<button class="btn btn-success" type="submit">
-					<span class="fas fa-save"></span> Save Changes
-				</button>
-				<Button Color="NamedColor.Secondary" OnClicked="this.OnCancel">
-					<span class="fas fa-trash"></span> Discard Changes
+				<Button Color="NamedColor.Success" IsSubmit="true">
+					<span class="fas fa-save"></span> @this.Localizer.GetString(SharedResources.BUTTON_SAVE_CHANGES)...
+				</Button>
+				<Button Color="NamedColor.Secondary" IsSubmit="false" OnClicked="this.OnCancelAsync">
+					<span class="fas fa-trash"></span> @this.Localizer.GetString(SharedResources.BUTTON_DISCARD_CHANGES)...
 				</Button>
 			</div>
 		</div>
 	</EditForm>
-}	
+}
+
+<!-- save changes modal -->
+<ConfirmationModal @ref="this.SaveChangesModal"
+				   HeaderBackgroundColor="NamedColor.Success"
+				   HeaderTextColor="NamedColor.White"
+				   ConfirmButtonColor="NamedColor.Success"
+				   ConfirmButtonCallback="this.OnSaveChangesConfirmedAsync"
+				   CancelButtonColor="NamedColor.Secondary"
+				   CancelButtonCallback="this.OnSaveChangesCancelledAsync">
+	<!-- header -->
+	<HeaderContent>
+		<span class="fas fa-save"></span> @this.Localizer.GetString(SharedResources.MODAL_SAVE_CHANGES_TITLE)
+	</HeaderContent>
+	<!-- body -->
+	<BodyContent>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_SAVE_CHANGES_BODY)</p>
+	</BodyContent>
+</ConfirmationModal>
+
+<!-- discard changes modal -->
+<ConfirmationModal @ref="this.DiscardChangesModal"
+				   HeaderBackgroundColor="NamedColor.Warning"
+				   HeaderTextColor="NamedColor.White"
+				   ConfirmButtonColor="NamedColor.Warning"
+				   ConfirmButtonCallback="this.OnDiscardChangesConfirmedAsync"
+				   CancelButtonColor="NamedColor.Secondary"
+				   CancelButtonCallback="this.OnDiscardChangesCancelledAsync">
+	<!-- header -->
+	<HeaderContent>
+		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DISCARD_CHANGES_TITLE)
+	</HeaderContent>
+	<!-- body -->
+	<BodyContent>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_DISCARD_CHANGES_BODY)</p>
+	</BodyContent>
+</ConfirmationModal>

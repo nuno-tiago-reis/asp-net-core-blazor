@@ -1,4 +1,5 @@
 ﻿using Memento.Movies.Client.Services.Genres;
+using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
 using Memento.Movies.Shared.Models.Contracts.Genres;
 using Memento.Shared.Components;
@@ -38,30 +39,39 @@ namespace Memento.Movies.Client.Pages.Genres
 		public IGenreService GenreService { get; set; }
 		#endregion
 
+		#region [Properties] References
+		/// <summary>
+		/// The confirmation modal.
+		/// </summary>
+		public ConfirmationModal ConfirmationModal { get; set; }
+		#endregion
+
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
 		{
-			try
+			// Get the genre
+			var response = await this.GenreService.GetAsync(this.GenreId);
+			if (response.Success)
 			{
-				// Get the genre
-				this.Genre = await this.GenreService.GetAsync(this.GenreId);
-			}
-			catch (MementoException exception)
-			{
-				if (exception.Type == MementoExceptionType.NotFound)
-				{
-					// Navigate to the list
-					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+				// Update the genre
+				this.Genre = response.Data;
 
-					// Show the user a notification
-					this.Toaster.Error($"The {nameof(this.Genre)} does not exist.");
-				}
+				// Show a toast message
+				this.Toaster.Success(response.Message);
+			}
+			else
+			{
+				// Navigate to the list
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+
+				// Show a toast message
+				this.Toaster.Error(response.Message);
 			}
 		}
 		#endregion
 
-		#region [Methods]
+		#region [Methods] Events
 		/// <summary>
 		/// Callback that is invoked when the user clicks the update button.
 		/// </summary>
@@ -76,14 +86,45 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// </summary>
 		public async Task OnDeleteAsync()
 		{
+			// Show the modal
+			await this.ConfirmationModal.ShowAsync();
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the user clicks on the confirm button in the delete modal.
+		/// </summary>
+		public async Task OnDeleteConfirmedAsync()
+		{
 			// Delete the genre
-			await this.GenreService.DeleteAsync(this.Genre.Id);
+			var response = await this.GenreService.DeleteAsync(this.Genre.Id);
+			if (response.Success)
+			{
+				// Hide the modal
+				await this.ConfirmationModal.HideAsync();
 
-			// Navigate to the detail
-			this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+				// Navigate to the detail
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
 
-			// Show the user a notification
-			this.Toaster.Success($"The {nameof(this.Genre)} has been deleted successfully.");
+				// Show a toast message
+				this.Toaster.Success(response.Message);
+			}
+			else
+			{
+				// Hide the modal
+				await this.ConfirmationModal.HideAsync();
+
+				// Show a toast message
+				this.Toaster.Error(response.Message);
+			}
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the user clicks on the cancel button in the delete modal.
+		/// </summary>
+		public async Task OnDeleteCancelledAsync()
+		{
+			// Hide the modal
+			await this.ConfirmationModal.HideAsync();
 		}
 		#endregion
 	}

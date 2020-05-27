@@ -1,4 +1,5 @@
 ﻿using Blazorade.Bootstrap.Components;
+using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Memento.Movies.Client.Shared.Components
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
-	public sealed partial class ConfirmationModal : ComponentBase
+	public sealed partial class ConfirmationModal : MementoComponent<ConfirmationModal>
 	{
 		#region [Properties] Parameters
 		/// <summary>
@@ -38,6 +39,12 @@ namespace Memento.Movies.Client.Shared.Components
 		public RenderFragment BodyContent { get; set; }
 
 		/// <summary>
+		/// The confirm button icon.
+		/// </summary>
+		[Parameter]
+		public string ConfirmButtonIcon { get; set; }
+
+		/// <summary>
 		/// The confirm button color.
 		/// </summary>
 		[Parameter]
@@ -54,6 +61,12 @@ namespace Memento.Movies.Client.Shared.Components
 		/// </summary>
 		[Parameter]
 		public EventCallback<Button> ConfirmButtonCallback { get; set; }
+
+		/// <summary>
+		/// The cancel button icon.
+		/// </summary>
+		[Parameter]
+		public string CancelButtonIcon { get; set; }
 
 		/// <summary>
 		/// The cancel button color.
@@ -76,7 +89,7 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Properties] References
 		/// <summary>
-		/// The javascript runtime.
+		/// The modal.
 		/// </summary>
 		private Modal Modal { get; set; }
 		#endregion

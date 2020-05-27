@@ -1,5 +1,4 @@
 ﻿<div class="top-row pl-4 navbar navbar-dark">
-	aria-hidden="true"
 	<a class="navbar-brand" href="">Memento.Movies</a>
 	<button class="navbar-toggler" @onclick="ToggleNavMenu">
 		<span class="navbar-toggler-icon"></span>
@@ -15,17 +14,17 @@
 		</li>
 		<li class="nav-item px-3">
 			<NavLink class="nav-link" href="@Routes.GenreRoutes.Root" Match="NavLinkMatch.Prefix">
-				<span class="fas fa-presentation"></span> Genres
+				<span class="fas fa-presentation"></span> @this.Localizer.GetString(SharedResources.GENRE_PLURAL)
 			</NavLink>
 		</li>
 		<li class="nav-item px-3">
 			<NavLink class="nav-link" href="@Routes.MovieRoutes.Root" Match="NavLinkMatch.Prefix">
-				<span class="fas fa-film"></span> Movies
+				<span class="fas fa-film"></span> @this.Localizer.GetString(SharedResources.MOVIE_PLURAL)
 			</NavLink>
 		</li>
 		<li class="nav-item px-3">
 			<NavLink class="nav-link" href="@Routes.PersonRoutes.Root" Match="NavLinkMatch.Prefix">
-				<span class="fas fa-user-friends"></span> Persons
+				<span class="fas fa-user-friends"></span> @this.Localizer.GetString(SharedResources.PERSON_PLURAL)
 			</NavLink>
 		</li>
 	</ul>

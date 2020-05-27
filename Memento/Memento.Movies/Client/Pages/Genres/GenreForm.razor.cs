@@ -1,6 +1,8 @@
 ﻿using Memento.Movies.Client.Services.Genres;
+using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
 using Memento.Movies.Shared.Models.Contracts.Genres;
+using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Exceptions;
 using Microsoft.AspNetCore.Components;
@@ -40,70 +42,60 @@ namespace Memento.Movies.Client.Pages.Genres
 		public IGenreService GenreService { get; set; }
 		#endregion
 
+		#region [Properties] References
+		/// <summary>
+		/// The save changes modal.
+		/// </summary>
+		public ConfirmationModal SaveChangesModal { get; set; }
+
+		/// <summary>
+		/// The discard changes modal.
+		/// </summary>
+		public ConfirmationModal DiscardChangesModal { get; set; }
+		#endregion
+
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
 		{
-			if (this.GenreId.HasValue == false)
+			if (this.GenreId.HasValue)
 			{
-				// Create the contract
-				this.Genre = new GenreFormContract();
+				// Get the genre
+				var response = await this.GenreService.GetAsync(this.GenreId.Value);
+				if (response.Success)
+				{
+					// Create the contract
+					this.Genre = this.Mapper.Map<GenreFormContract>(response.Data);
+
+					// Show a toast message
+					this.Toaster.Success(response.Message);
+				}
+				else
+				{
+					// Navigate to the list
+					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+
+					// Show a toast message
+					this.Toaster.Error(response.Message);
+				}
 			}
 			else
 			{
-				try
-				{
-					// Get the genre
-					var genre = await this.GenreService.GetAsync(this.GenreId.Value);
-
-					// Create the contract
-					this.Genre = this.Mapper.Map<GenreFormContract>(genre);
-				}
-				catch (MementoException exception)
-				{
-					if (exception.Type == MementoExceptionType.NotFound)
-					{
-						// Navigate to the list
-						this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
-
-						// Show the user a notification
-						this.Toaster.Error($"The {nameof(this.Genre)} does not exist.");
-					}
-				}
+				// Create the contract
+				this.Genre = new GenreFormContract();
 			}
 		}
 		#endregion
 
 		#region [Methods] Form
 		/// <summary>
-		/// Callback that is invoked when the form is submited with no errors
+		/// Callback that is invoked when the form is submited with no errors.
 		/// </summary>
 		/// 
 		/// <param name="context">The context.</param>.</param>
 		public async Task OnValidSubmitAsync(EditContext _)
 		{
-			if (this.GenreId.HasValue == false)
-			{
-				// Create the genre
-				var genre = await this.GenreService.CreateAsync(this.Genre);
-
-				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, genre.Id));
-
-				// Show the user a notification
-				this.Toaster.Success($"The {nameof(this.Genre)} has been created successfully.");
-			}
-			else
-			{
-				// Update the genre
-				await this.GenreService.UpdateAsync(this.GenreId.Value, this.Genre);
-
-				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.GenreId.Value));
-
-				// Show the user a notification
-				this.Toaster.Success($"The {nameof(this.Genre)} has been updated successfully.");
-			}
+			await this.SaveChangesModal.ShowAsync();
 		}
 
 		/// <summary>
@@ -113,16 +105,109 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <param name="context">The context.</param>.</param>
 		public void OnInvalidSubmit(EditContext _)
 		{
-			this.Toaster.Error("The form has invalid fields.");
+			// Show a toast message
+			this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_FORM_INVALID_FIELDS));
 		}
 
 		/// <summary>
 		/// Callback that is invoked when the form is cancelled.
 		/// </summary>
-		public void OnCancel()
+		public async Task OnCancelAsync()
 		{
-			// Navigate to the detail
-			this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.GenreId.Value));
+			await this.DiscardChangesModal.ShowAsync();
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the user clicks on the confirm button in the save changes modal.
+		/// </summary>
+		public async Task OnSaveChangesConfirmedAsync()
+		{
+			if (this.GenreId.HasValue)
+			{
+				// Update the genre
+				var response = await this.GenreService.UpdateAsync(this.GenreId.Value, this.Genre);
+				if (response.Success)
+				{
+					// Hide the modal
+					await this.SaveChangesModal.HideAsync();
+
+					// Navigate to the detail
+					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.GenreId.Value));
+
+					// Show a toast message
+					this.Toaster.Success(response.Message);
+				}
+				else
+				{
+					// Hide the modal
+					await this.SaveChangesModal.HideAsync();
+
+					// Show a toast message
+					this.Toaster.Error(string.Join("\r\n", response.Errors), response.Message);
+				}
+			}
+			else
+			{
+				// Create the genre
+				var response = await this.GenreService.CreateAsync(this.Genre);
+				if (response.Success)
+				{
+					// Hide the modal
+					await this.SaveChangesModal.HideAsync();
+
+					// Navigate to the detail
+					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, response.Data.Id));
+
+					// Show a toast message
+					this.Toaster.Success(response.Message);
+				}
+				else
+				{
+					// Hide the modal
+					await this.SaveChangesModal.HideAsync();
+
+					// Show a toast message
+					this.Toaster.Error(string.Join("\r\n", response.Errors), response.Message);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the user clicks on the cancel button in the save changes modal.
+		/// </summary>
+		public async Task OnSaveChangesCancelledAsync()
+		{
+			// Hide the modal
+			await this.SaveChangesModal.HideAsync();
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the user clicks on the confirm button in the save changes modal.
+		/// </summary>
+		public async Task OnDiscardChangesConfirmedAsync()
+		{
+			// Hide the modal
+			await this.DiscardChangesModal.HideAsync();
+
+			if (this.GenreId.HasValue)
+			{
+				// Navigate to the detail
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.GenreId.Value));
+			}
+			else
+			{
+				// Navigate to the detail
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+			}
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the user clicks on the cancel button in the discard changes modal.
+		/// </summary>
+		public async Task OnDiscardChangesCancelledAsync()
+		{
+			// Hide the modal
+			await this.DiscardChangesModal.HideAsync();
 		}
 		#endregion
 	}

@@ -1,4 +1,5 @@
-﻿using Memento.Movies.Shared.Models.Repositories.Movies;
+﻿using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Models.Contracts.Movies;
 using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 
@@ -16,15 +17,18 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// The movie.
 		/// </summary>
 		[Parameter]
-		public Movie Movie { get; set; }
+		public MovieListContract Movie { get; set; }
 		#endregion
 
-		#region [Properties] Services
+		#region [Methods] Events
 		/// <summary>
-		/// The movie repository.
+		/// Callback that is invoked when the user clicks the view button.
 		/// </summary>
-		[Inject]
-		public IMovieRepository Repository { get; set; }
+		public void OnView()
+		{
+			// Navigate to the detail
+			this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.DetailIndexed, this.Movie.Id));
+		}
 		#endregion
 	}
 }

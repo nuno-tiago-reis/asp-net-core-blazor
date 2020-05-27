@@ -1,5 +1,8 @@
-﻿using Memento.Movies.Client.Shared.Routes;
+﻿using Memento.Movies.Client.Services.Movies;
+using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Models.Contracts.Movies;
 using Memento.Movies.Shared.Models.Repositories.Movies;
+using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
 using Microsoft.AspNetCore.Components;
@@ -26,24 +29,38 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// The movies.
 		/// </summary>
 		[Parameter]
-		public IPage<Movie> Movies { get; set; }
+		public IPage<MovieListContract> Movies { get; set; }
 		#endregion
 
 		#region [Properties] Services
 		/// <summary>
-		/// The movie repository.
+		/// The movie service.
 		/// </summary>
 		[Inject]
-		public IMovieRepository Repository { get; set; }
+		public IMovieService MovieService { get; set; }
 		#endregion
 
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
 		{
-			await Task.Delay(1000);
+			var response = await this.MovieService.GetAllAsync();
+			if (response.Success)
+			{
+				// Update the movies
+				this.Movies = response.Data;
 
-			this.Movies = await this.Repository.GetAllAsync();
+				// Show a toast message
+				this.Toaster.Success(response.Message);
+			}
+			else
+			{
+				// Clear the movies
+				this.Movies = null;
+
+				// Show a toast message
+				this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_LOADING));
+			}
 		}
 		#endregion
 	}

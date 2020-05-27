@@ -3,38 +3,60 @@
 @if (this.Genre == null)
 {
 	<h3>
-		<i class="fas fa-spinner fa-pulse"></i> Loading...
+		<i class="fas fa-spinner fa-pulse"></i> @this.Localizer.GetString(SharedResources.GENERIC_LOADING)...
 	</h3>
 }
 else
 {
 	<div class="card mb-md-2">
+		<!-- header -->
 		<div class="card-header">
 			<h3 class="mb-md-0">
 				@this.Genre.Name
 			</h3>
 		</div>
+		<!-- body -->
 		<div class="card-body">
+			<!-- data -->
 			<div class="row">
 				<div class="col-md-12">
 					<dl>
-						<dt>Title</dt>
+						<dt>@this.Localizer.GetString(SharedResources.GENRE_NAME)</dt>
 						<dd>@this.Genre.Name</dd>
 					</dl>
 				</div>
 			</div>
+			<!-- buttons -->
 			<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-block btn-success mb-1" type="button" @onclick="this.OnUpdate">
-						<span class="fas fa-sign-in"></span> Update
-					</button>
+					<Button Color="NamedColor.Success" IsBlockLevel="true" IsSubmit="false" OnClicked="this.OnUpdate">
+						<span class="fas fa-sign-in"></span> @this.Localizer.GetString(SharedResources.BUTTON_UPDATE)
+					</Button>
 				</div>
 				<div class="col-md-6">
-					<button class="btn btn-block btn-danger mt-auto mb-1" type="button" @onclick="this.OnDeleteAsync">
-						<span class="fas fa-trash-alt"></span> Delete
-					</button>
+					<Button Color="NamedColor.Danger" IsBlockLevel="true" IsSubmit="false" OnClicked="this.OnDeleteAsync">
+						<span class="fas fa-trash-alt"></span> @this.Localizer.GetString(SharedResources.BUTTON_DELETE)
+					</Button>
 				</div>
 			</div>
 		</div>
 	</div>
 }
+
+<!-- modal -->
+<ConfirmationModal @ref="this.ConfirmationModal"
+				   HeaderBackgroundColor="NamedColor.Danger"
+				   HeaderTextColor="NamedColor.White"
+				   ConfirmButtonColor="NamedColor.Danger"
+				   ConfirmButtonCallback="this.OnDeleteConfirmedAsync"
+				   CancelButtonColor="NamedColor.Secondary"
+				   CancelButtonCallback="this.OnDeleteCancelledAsync">
+	<!-- header -->
+	<HeaderContent>
+		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DELETE_GENRE_TITLE)
+	</HeaderContent>
+	<!-- body -->
+	<BodyContent>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_DELETE_GENRE_BODY)</p>
+	</BodyContent>
+</ConfirmationModal>

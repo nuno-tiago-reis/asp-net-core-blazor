@@ -10,20 +10,23 @@
 		<div class="row">
 			<div class="col-md-6">
 				<a>
+					<!-- thumbnail -->
 					<img class="img-thumbnail h-md-350-px" src="@this.Person.PictureUrl" alt="@this.Person.Name" />
 				</a>
 			</div>
 			<div class="col-md-6">
 				<div class="d-flex flex-column h-100">
+					<!-- data -->
 					<dl>
-						<dt>Name</dt>
+						<dt>@this.Localizer.GetString(SharedResources.PERSON_NAME)</dt>
 						<dd>@this.Person.Name</dd>
-						<dt>Brith Date:</dt>
-						<dd>@this.Person.BirthDate.ToString("yyyy-MM-dd")</dd>
+						<dt>@this.Localizer.GetString(SharedResources.PERSON_BIRTHDATE)</dt>
+						<dd>@this.Person.BirthDate.ToShortDateString()</dd>
 					</dl>
-					<button class="btn btn-block btn-success mt-auto mb-1" type="button">
-						<span class="fas fa-sign-in"></span> View
-					</button>
+					<!-- button -->
+					<Button class="btn btn-block btn-primary mt-auto mb-1" IsSubmit="false" OnClicked="this.OnView">
+						<span class="fas fa-sign-in"></span> @this.Localizer.GetString(SharedResources.BUTTON_VIEW)
+					</Button>
 				</div>
 			</div>
 		</div>

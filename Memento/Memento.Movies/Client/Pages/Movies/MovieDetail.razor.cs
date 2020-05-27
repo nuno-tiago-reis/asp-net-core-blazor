@@ -1,6 +1,7 @@
-﻿using Memento.Movies.Client.Shared.Components;
+﻿using Memento.Movies.Client.Services.Movies;
+using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Repositories.Movies;
+using Memento.Movies.Shared.Models.Contracts.Movies;
 using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
@@ -26,15 +27,15 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// The movie.
 		/// </summary>
 		[Parameter]
-		public Movie Movie { get; set; }
+		public MovieDetailContract Movie { get; set; }
 		#endregion
 
 		#region [Properties] Services
 		/// <summary>
-		/// The movie repository.
+		/// The movie service.
 		/// </summary>
 		[Inject]
-		public IMovieRepository Repository { get; set; }
+		public IMovieService MovieService { get; set; }
 		#endregion
 
 		#region [Properties] References
@@ -44,21 +45,85 @@ namespace Memento.Movies.Client.Pages.Movies
 		public ConfirmationModal ConfirmationModal { get; set; }
 		#endregion
 
-		#region [Methods] ConfirmationModal
-		/// <summary>
-		/// Callback that is invoked when the confirm button is clicked in the confirmation modal.
-		/// </summary>
-		private async Task OnConfirm()
+		#region [Methods] Component
+		/// <inheritdoc />
+		protected async override Task OnInitializedAsync()
 		{
-			System.Console.WriteLine("Confirm!");
+			// Get the person
+			var response = await this.MovieService.GetAsync(this.MovieId);
+			if (response.Success)
+			{
+				// Update the person
+				this.Movie = response.Data;
+
+				// Show a toast message
+				this.Toaster.Success(response.Message);
+			}
+			else
+			{
+				// Navigate to the list
+				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.Root));
+
+				// Show a toast message
+				this.Toaster.Error(response.Message);
+			}
+		}
+		#endregion
+
+		#region [Methods] Events
+		/// <summary>
+		/// Callback that is invoked when the user clicks the update button.
+		/// </summary>
+		public void OnUpdate()
+		{
+			// Navigate to the detail
+			this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.UpdateIndexed, this.Movie.Id));
 		}
 
 		/// <summary>
-		/// Callback that is invoked when the cancel button is clicked in the confirmation modal.
+		/// Callback that is invoked when the user clicks the delete button.
 		/// </summary>
-		private async Task OnCancel()
+		public async Task OnDeleteAsync()
 		{
-			System.Console.WriteLine("Cancel!");
+			// Show the modal
+			await this.ConfirmationModal.ShowAsync();
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the user clicks on the confirm button in the delete modal.
+		/// </summary>
+		public async Task OnDeleteConfirmedAsync()
+		{
+			// Delete the genre
+			var response = await this.MovieService.DeleteAsync(this.Movie.Id);
+			if (response.Success)
+			{
+				// Hide the modal
+				await this.ConfirmationModal.HideAsync();
+
+				// Navigate to the detail
+				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.Root));
+
+				// Show a toast message
+				this.Toaster.Success(response.Message);
+			}
+			else
+			{
+				// Hide the modal
+				await this.ConfirmationModal.HideAsync();
+
+				// Show a toast message
+				this.Toaster.Error(response.Message);
+			}
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the user clicks on the cancel button in the delete modal.
+		/// </summary>
+		public async Task OnDeleteCancelledAsync()
+		{
+			// Hide the modal
+			await this.ConfirmationModal.HideAsync();
 		}
 		#endregion
 	}

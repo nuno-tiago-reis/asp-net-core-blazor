@@ -1,6 +1,7 @@
 ﻿using Memento.Movies.Shared.Models.Contracts.Genres;
 using Memento.Movies.Shared.Models.Repositories.Genres;
 using Memento.Shared.Models.Pagination;
+using Memento.Shared.Models.Responses;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Services.Genres
@@ -17,7 +18,7 @@ namespace Memento.Movies.Client.Services.Genres
 		/// </summary>
 		/// 
 		/// <param name="genre">The genre.</param>
-		Task<GenreDetailContract> CreateAsync(GenreFormContract genre);
+		Task<MementoResponse<GenreDetailContract>> CreateAsync(GenreFormContract genre);
 
 		/// <summary>
 		/// Invokes the API to update the given 'Genre'.
@@ -25,28 +26,28 @@ namespace Memento.Movies.Client.Services.Genres
 		/// 
 		/// <param name="genreId">The genre identifier.</param>
 		/// <param name="genre">The genre.</param>
-		Task UpdateAsync(long genreId, GenreFormContract genre);
+		Task<MementoResponse> UpdateAsync(long genreId, GenreFormContract genre);
 
 		/// <summary>
 		/// Invokes the API to delete the 'Genre' with the given identifier.
 		/// </summary>
 		/// 
 		/// <param name="genreId">The genre identifier.</param>
-		Task DeleteAsync(long genreId);
+		Task<MementoResponse> DeleteAsync(long genreId);
 
 		/// <summary>
 		/// Invokes the API to get the 'Genre' with the given identifier.
 		/// </summary>
 		/// 
 		/// <param name="genreId">The genre identifier.</param>
-		Task<GenreDetailContract> GetAsync(long genreId);
+		Task<MementoResponse<GenreDetailContract>> GetAsync(long genreId);
 
 		/// <summary>
 		/// Invokes the API to get the 'Genres' according to the given filter.
 		/// </summary>
 		/// 
 		/// <param name="genreFilter">The genre filter.</param>
-		Task<Page<GenreListContract>> GetAllAsync(GenreFilter genreFilter = null);
+		Task<MementoResponse<Page<GenreListContract>>> GetAllAsync(GenreFilter genreFilter = null);
 		#endregion
 	}
 }

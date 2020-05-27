@@ -1,4 +1,5 @@
-﻿using Memento.Movies.Shared.Models.Repositories.Persons;
+﻿using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Models.Contracts.Persons;
 using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 
@@ -13,24 +14,21 @@ namespace Memento.Movies.Client.Pages.Persons
 	{
 		#region [Properties] Parameters
 		/// <summary>
-		/// The person identifier.
-		/// </summary>
-		[Parameter]
-		public long PersonId { get; set; }
-
-		/// <summary>
 		/// The person.
 		/// </summary>
 		[Parameter]
-		public Person Person { get; set; }
+		public PersonListContract Person { get; set; }
 		#endregion
 
-		#region [Properties] Services
+		#region [Methods] Events
 		/// <summary>
-		/// The person repository.
+		/// Callback that is invoked when the user clicks the view button.
 		/// </summary>
-		[Inject]
-		public IPersonRepository Repository { get; set; }
+		public void OnView()
+		{
+			// Navigate to the detail
+			this.NavigationManager.NavigateTo(string.Format(Routes.PersonRoutes.DetailIndexed, this.Person.Id));
+		}
 		#endregion
 	}
 }

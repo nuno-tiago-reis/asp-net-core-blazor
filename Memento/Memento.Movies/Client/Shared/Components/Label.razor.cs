@@ -83,7 +83,7 @@ namespace Memento.Movies.Client.Shared.Components
 			var propertyDisplayName = property.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
 
 			this.LabelName = ((MemberExpression)this.For.Body).Member.Name;
-			this.LabelDisplayName = propertyDisplayName?.Name ?? this.LabelName.SpacesFromCamel();
+			this.LabelDisplayName = propertyDisplayName?.GetName() ?? this.LabelName.SpacesFromCamel();
 		}
 
 		/// <inheritdoc />

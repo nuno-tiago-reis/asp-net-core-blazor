@@ -1,4 +1,5 @@
-﻿using Memento.Shared.Models.Pagination;
+﻿using Memento.Shared.Components;
+using Memento.Shared.Models.Pagination;
 using Microsoft.AspNetCore.Components;
 using System;
 
@@ -9,7 +10,7 @@ namespace Memento.Movies.Client.Shared.Components
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
-	public sealed partial class PaginatedTable<T> : ComponentBase
+	public sealed partial class PaginatedTable<T> : MementoComponent<PaginatedTable<T>>
 	{
 		#region [Properties]
 		/// <summary>

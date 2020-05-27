@@ -2,6 +2,7 @@
 using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Shared.Extensions;
 using Memento.Shared.Models.Pagination;
+using Memento.Shared.Models.Responses;
 using Memento.Shared.Services.Http;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace Memento.Movies.Client.Services.Persons
 
 		#region [Methods]
 		/// <inheritdoc />
-		public async Task<PersonDetailContract> CreateAsync(PersonFormContract person)
+		public async Task<MementoResponse<PersonDetailContract>> CreateAsync(PersonFormContract person)
 		{
 			// Invoke the API
 			var response = await this.HttpService.Post<PersonFormContract, PersonDetailContract>($"{API_URL}", person);
@@ -53,12 +54,12 @@ namespace Memento.Movies.Client.Services.Persons
 			}
 			else
 			{
-				return response.Data;
+				return response;
 			}
 		}
 
 		/// <inheritdoc />
-		public async Task UpdateAsync(long personId, PersonFormContract person)
+		public async Task<MementoResponse> UpdateAsync(long personId, PersonFormContract person)
 		{
 			// Invoke the API
 			var response = await this.HttpService.Put($"{API_URL}{personId}", person);
@@ -68,12 +69,12 @@ namespace Memento.Movies.Client.Services.Persons
 			}
 			else
 			{
-				return;
+				return response;
 			}
 		}
 
 		/// <inheritdoc />
-		public async Task DeleteAsync(long personId)
+		public async Task<MementoResponse> DeleteAsync(long personId)
 		{
 			// Invoke the API
 			var response = await this.HttpService.Delete($"{API_URL}{personId}");
@@ -83,12 +84,12 @@ namespace Memento.Movies.Client.Services.Persons
 			}
 			else
 			{
-				return;
+				return response;
 			}
 		}
 
 		/// <inheritdoc />
-		public async Task<PersonDetailContract> GetAsync(long personId)
+		public async Task<MementoResponse<PersonDetailContract>> GetAsync(long personId)
 		{
 			// Invoke the API
 			var response = await this.HttpService.Get<PersonDetailContract>($"{API_URL}{personId}");
@@ -98,12 +99,12 @@ namespace Memento.Movies.Client.Services.Persons
 			}
 			else
 			{
-				return response.Data;
+				return response;
 			}
 		}
 
 		/// <inheritdoc />
-		public async Task<Page<PersonListContract>> GetAllAsync(PersonFilter personFilter = null)
+		public async Task<MementoResponse<Page<PersonListContract>>> GetAllAsync(PersonFilter personFilter = null)
 		{
 			var parameters = new Dictionary<string, string>();
 
@@ -143,7 +144,7 @@ namespace Memento.Movies.Client.Services.Persons
 			}
 			else
 			{
-				return response.Data;
+				return response;
 			}
 		}
 		#endregion
