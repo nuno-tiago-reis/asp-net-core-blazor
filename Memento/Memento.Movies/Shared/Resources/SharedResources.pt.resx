@@ -67,20 +67,20 @@
 	<data name="BUTTON_CREATE" xml:space="preserve">
 		<value>Criar</value>
 	</data>
-	<data name="BUTTON_UPDATE" xml:space="preserve">
-		<value>Atualizar</value>
-	</data>
 	<data name="BUTTON_DELETE" xml:space="preserve">
 		<value>Apagar</value>
 	</data>
-	<data name="BUTTON_VIEW" xml:space="preserve">
-		<value>Ver</value>
+	<data name="BUTTON_DISCARD_CHANGES" xml:space="preserve">
+		<value>Descartar</value>
 	</data>
 	<data name="BUTTON_SAVE_CHANGES" xml:space="preserve">
 		<value>Guardar</value>
 	</data>
-	<data name="BUTTON_DISCARD_CHANGES" xml:space="preserve">
-		<value>Descartar</value>
+	<data name="BUTTON_UPDATE" xml:space="preserve">
+		<value>Atualizar</value>
+	</data>
+	<data name="BUTTON_VIEW" xml:space="preserve">
+		<value>Ver</value>
 	</data>
 	<data name="ERROR_FORM_INVALID_FIELDS" xml:space="preserve">
 		<value>O formulário contém campos inválidos.</value>
@@ -90,6 +90,12 @@
 	</data>
 	<data name="ERROR_UNEXPECTED" xml:space="preserve">
 		<value>Ocorreu um erro inesperado. Por favor tente novamente mais tarde.</value>
+	</data>
+	<data name="FORM_IMAGE_PREVIEW" xml:space="preserve">
+		<value>Pré-Visualização</value>
+	</data>
+	<data name="FORM_MARKDOWN_PREVIEW" xml:space="preserve">
+		<value>Pré-Visualização</value>
 	</data>
 	<data name="GENERIC_LOADING" xml:space="preserve">
 		<value>Carregando</value>
@@ -142,35 +148,35 @@
 	<data name="GENRE_UPDATEDBY" xml:space="preserve">
 		<value>Atualizado Por</value>
 	</data>
-	<data name="MODAL_DELETE_GENRE_TITLE" xml:space="preserve">
-		<value>Apagar Género</value>
-	</data>
 	<data name="MODAL_DELETE_GENRE_BODY" xml:space="preserve">
 		<value>Tem a certeza que quer apagar este género?</value>
 	</data>
-	<data name="MODAL_DELETE_MOVIE_TITLE" xml:space="preserve">
-		<value>Apagar Filme</value>
+	<data name="MODAL_DELETE_GENRE_TITLE" xml:space="preserve">
+		<value>Apagar Género</value>
 	</data>
 	<data name="MODAL_DELETE_MOVIE_BODY" xml:space="preserve">
 		<value>Tem a certeza que quer apagar este filme?</value>
 	</data>
-	<data name="MODAL_DELETE_PERSON_TITLE" xml:space="preserve">
-		<value>Apagar Pessoa</value>
+	<data name="MODAL_DELETE_MOVIE_TITLE" xml:space="preserve">
+		<value>Apagar Filme</value>
 	</data>
 	<data name="MODAL_DELETE_PERSON_BODY" xml:space="preserve">
 		<value>Tem a certeza que quer apagar esta pessoa?</value>
 	</data>
-	<data name="MODAL_DISCARD_CHANGES_TITLE" xml:space="preserve">
-		<value>Descartar Alterações</value>
+	<data name="MODAL_DELETE_PERSON_TITLE" xml:space="preserve">
+		<value>Apagar Pessoa</value>
 	</data>
 	<data name="MODAL_DISCARD_CHANGES_BODY" xml:space="preserve">
 		<value>Tem a certeza que quer descartar as suas alterações?</value>
 	</data>
-	<data name="MODAL_SAVE_CHANGES_TITLE" xml:space="preserve">
-		<value>Guardar Alterações</value>
+	<data name="MODAL_DISCARD_CHANGES_TITLE" xml:space="preserve">
+		<value>Descartar Alterações</value>
 	</data>
 	<data name="MODAL_SAVE_CHANGES_BODY" xml:space="preserve">
 		<value>Tem a certeza que quer guardar as suas alterações?</value>
+	</data>
+	<data name="MODAL_SAVE_CHANGES_TITLE" xml:space="preserve">
+		<value>Guardar Alterações</value>
 	</data>
 	<data name="MODEL_HAS_DUPLICATE_FIELD" xml:space="preserve">
 		<value>O campo '{0}' já existe.</value>
@@ -226,8 +232,11 @@
 	<data name="MOVIE_PERSONS" xml:space="preserve">
 		<value>Pessoas</value>
 	</data>
+	<data name="MOVIE_PICTURE" xml:space="preserve">
+		<value>Foto</value>
+	</data>
 	<data name="MOVIE_PICTUREURL" xml:space="preserve">
-		<value>Imagem (URL)</value>
+		<value>Foto (URL)</value>
 	</data>
 	<data name="MOVIE_PLURAL" xml:space="preserve">
 		<value>Filmes</value>
@@ -370,8 +379,11 @@
 	<data name="PERSON_NAME" xml:space="preserve">
 		<value>Nome</value>
 	</data>
+	<data name="PERSON_PICTURE" xml:space="preserve">
+		<value>Foto</value>
+	</data>
 	<data name="PERSON_PICTUREURL" xml:space="preserve">
-		<value>Imagem (URL)</value>
+		<value>Foto (URL)</value>
 	</data>
 	<data name="PERSON_PLURAL" xml:space="preserve">
 		<value>Pessoas</value>

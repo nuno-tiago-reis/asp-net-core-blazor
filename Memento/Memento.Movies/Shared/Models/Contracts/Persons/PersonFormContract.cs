@@ -32,9 +32,8 @@ namespace Memento.Movies.Shared.Models.Contracts.Persons
 		/// The Person's picture url.
 		/// </summary>
 		[Required]
-		[MaxLength(PersonConfiguration.PICTURE_URL_MAXIMUM_LENGTH)]
-		[Display(Name = nameof(SharedResources.PERSON_PICTUREURL), ResourceType = typeof(SharedResources))]
-		public string PictureUrl { get; set; }
+		[Display(Name = nameof(SharedResources.PERSON_PICTURE), ResourceType = typeof(SharedResources))]
+		public string Picture { get; set; }
 
 		/// <summary>
 		/// The Person's birth date.

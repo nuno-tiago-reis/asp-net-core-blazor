@@ -32,9 +32,8 @@ namespace Memento.Movies.Shared.Models.Contracts.Movies
 		/// The Movie's picture url.
 		/// </summary>
 		[Required]
-		[MaxLength(MovieConfiguration.PICTURE_URL_MAXIMUM_LENGTH)]
-		[Display(Name = nameof(SharedResources.MOVIE_PICTUREURL), ResourceType = typeof(SharedResources))]
-		public string PictureUrl { get; set; }
+		[Display(Name = nameof(SharedResources.MOVIE_PICTURE), ResourceType = typeof(SharedResources))]
+		public string Picture { get; set; }
 
 		/// <summary>
 		/// The Movie's trailer url.
@@ -56,7 +55,7 @@ namespace Memento.Movies.Shared.Models.Contracts.Movies
 		/// </summary>
 		[Required]
 		[Display(Name = nameof(SharedResources.MOVIE_INTHEATERS), ResourceType = typeof(SharedResources))]
-		public bool? InTheaters { get; set; }
+		public bool InTheaters { get; set; }
 
 		/// <summary>
 		/// The Genres associated with the Movie.

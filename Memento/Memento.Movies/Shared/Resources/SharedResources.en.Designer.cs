@@ -187,6 +187,28 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to Preview.
+		/// </summary>
+		public static string FORM_IMAGE_PREVIEW
+		{
+			get
+			{
+				return ResourceManager.GetString("FORM_IMAGE_PREVIEW", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Preview.
+		/// </summary>
+		public static string FORM_MARKDOWN_PREVIEW
+		{
+			get
+			{
+				return ResourceManager.GetString("FORM_MARKDOWN_PREVIEW", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to Loading.
 		/// </summary>
 		public static string GENERIC_LOADING
@@ -678,6 +700,17 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("MOVIE_PERSONS", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Picture.
+		/// </summary>
+		public static string MOVIE_PICTURE
+		{
+			get
+			{
+				return ResourceManager.GetString("MOVIE_PICTURE", resourceCulture);
 			}
 		}
 
@@ -1206,6 +1239,17 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("PERSON_NAME", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Picture.
+		/// </summary>
+		public static string PERSON_PICTURE
+		{
+			get
+			{
+				return ResourceManager.GetString("PERSON_PICTURE", resourceCulture);
 			}
 		}
 

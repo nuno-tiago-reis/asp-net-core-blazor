@@ -59,17 +59,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Resources\SharedResources.Designer.cs">
+		<Compile Update="Resources\SharedResources.en.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
-			<DependentUpon>SharedResources.resx</DependentUpon>
+			<DependentUpon>SharedResources.en.resx</DependentUpon>
 		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Update="Resources\SharedResources.resx">
+		<EmbeddedResource Update="Resources\SharedResources.en.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
-			<LastGenOutput>SharedResources.Designer.cs</LastGenOutput>
+			<LastGenOutput>SharedResources.en.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
 
