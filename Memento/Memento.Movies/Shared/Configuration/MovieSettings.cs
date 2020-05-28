@@ -16,14 +16,14 @@ namespace Memento.Movies.Shared.Configuration
 		public FileSystemDataProtectionOptions DataProtection { get; set; }
 
 		/// <summary>
+		/// Gets or sets the storage options.
+		/// </summary>
+		public AzureStorageOptions Storage { get; set; }
+
+		/// <summary>
 		/// Gets or sets the localization options.
 		/// </summary>
 		public SharedLocalizerOptions Localization { get; set; }
-
-		/// <summary>
-		/// Gets or sets the storage options.
-		/// </summary>
-		public FileSystemStorageOptions Storage { get; set; }
 
 		/// <summary>
 		/// Gets or sets the connection strings.
