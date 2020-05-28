@@ -144,7 +144,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 		}
 
 		/// <inheritdoc />
-		protected override void FilterQueryable(IQueryable<Genre> genreQueryable, GenreFilter genreFilter)
+		protected override IQueryable<Genre> FilterQueryable(IQueryable<Genre> genreQueryable, GenreFilter genreFilter)
 		{
 			// Apply the filter
 			if (string.IsNullOrWhiteSpace(genreFilter.Name) == false)
@@ -194,6 +194,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 					throw new ArgumentOutOfRangeException(nameof(genreFilter.OrderBy));
 				}
 			}
+
+			return genreQueryable;
 		}
 		#endregion
 	}

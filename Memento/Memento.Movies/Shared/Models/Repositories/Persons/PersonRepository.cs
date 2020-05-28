@@ -163,7 +163,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 		}
 
 		/// <inheritdoc />
-		protected override void FilterQueryable(IQueryable<Person> personQueryable, PersonFilter personFilter)
+		protected override IQueryable<Person> FilterQueryable(IQueryable<Person> personQueryable, PersonFilter personFilter)
 		{
 			// Apply the filter
 			if (string.IsNullOrWhiteSpace(personFilter.Name) == false)
@@ -234,6 +234,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 					throw new ArgumentOutOfRangeException(nameof(personFilter.OrderBy));
 				}
 			}
+
+			return personQueryable;
 		}
 		#endregion
 	}
