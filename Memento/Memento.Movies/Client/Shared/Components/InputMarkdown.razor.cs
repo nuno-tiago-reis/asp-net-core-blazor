@@ -1,4 +1,5 @@
 ﻿using Memento.Shared.Extensions;
+using Memento.Shared.Services.Localization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
@@ -10,44 +11,40 @@ using System.Reflection;
 namespace Memento.Movies.Client.Shared.Components
 {
 	/// <summary>
-	/// Displays a label for a specified field within a cascaded <see cref="Microsoft.AspNetCore.Components.Forms.EditContext"/>.
+	/// Displays a markdown input for specified field within a cascaded <see cref="EditContext"/>.
 	/// </summary>
-	public sealed partial class Label<T> : ComponentBase
+	public sealed partial class InputMarkdown : InputTextArea
 	{
 		#region [Properties] Parameters
 		/// <summary>
-		/// The edit context to which the label belongs.
-		/// </summary>
-		[CascadingParameter]
-		public EditContext EditContext { get; set; }
-
-		/// <summary>
-		/// The content to be shown inside the label.
+		/// The content to be shown inside the markdown label.
 		/// </summary>
 		[Parameter]
-		public RenderFragment Content { get; set; }
+		public RenderFragment MarkdownLabelContent { get; set; }
 
 		/// <summary>
-		/// The field for which the label should be displayed.
+		/// The content to be shown inside the preview label.
 		/// </summary>
 		[Parameter]
-		public Expression<Func<T>> For { get; set; }
+		public RenderFragment PreviewLabelContent { get; set; }
+		#endregion
 
+		#region [Properties] Services
 		/// <summary>
-		/// Gets or sets a collection of additional attributes that will be applied to the created <c>div</c> element.
+		/// The localizer service.
 		/// </summary>
-		[Parameter(CaptureUnmatchedValues = true)]
-		public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+		[Inject]
+		private ILocalizerService Localizer { get; set; }
 		#endregion
 
 		#region [Properties] Internal
 		/// <summary>
-		/// The name for the labels field.
+		/// The name for the markdowns field.
 		/// </summary>
 		private string ForName { get; set; }
 
 		/// <summary>
-		/// The display name for the labels field.
+		/// The display name for the markdowns field.
 		/// </summary>
 		private string ForDisplayName { get; set; }
 		#endregion
@@ -71,18 +68,10 @@ namespace Memento.Movies.Client.Shared.Components
 				);
 			}
 
-			if (this.For == null)
-			{
-				throw new InvalidOperationException
-				(
-					$"{this.GetType()} requires a value for the {nameof(this.For)} parameter."
-				);
-			}
-
-			var property = ((MemberExpression)this.For.Body).Member;
+			var property = ((MemberExpression)this.ValueExpression.Body).Member;
 			var propertyDisplayName = property.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
 
-			this.ForName = ((MemberExpression)this.For.Body).Member.Name;
+			this.ForName = ((MemberExpression)this.ValueExpression.Body).Member.Name;
 			this.ForDisplayName = propertyDisplayName?.GetName() ?? this.ForName.SpacesFromCamel();
 		}
 

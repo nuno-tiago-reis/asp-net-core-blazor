@@ -1,0 +1,40 @@
+﻿@inherits InputTextArea
+
+<div class="row">
+	<div class="col-md-6">
+		<label for="this.ForName">
+			@if (this.MarkdownLabelContent != null)
+			{
+				@this.MarkdownLabelContent
+			}
+			else
+			{
+				@this.ForDisplayName
+			}
+		</label>
+	</div>
+	<div class="col-md-6">
+		<label for="this.ForName">
+			@if (this.PreviewLabelContent != null)
+			{
+				@this.PreviewLabelContent
+			}
+			else
+			{
+				@this.Localizer.GetString(SharedResources.FORM_MARKDOWN_PREVIEW)
+			}
+		</label>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-6">
+		<InputTextArea @bind-Value="this.CurrentValue" @attributes="this.AdditionalAttributes" />
+	</div>
+	<div class="col-md-6">
+		<div class="border border-secondary h-100">
+			<Markdown Content="@this.CurrentValue" />
+		</div>
+	</div>
+</div>

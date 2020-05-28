@@ -1,12 +1,12 @@
 ﻿@typeparam T
 
-<label for="@this.LabelName">
-	@if (this.LabelContent != null)
+<label @attributes="this.AdditionalAttributes" for="@this.ForName">
+	@if (this.Content != null)
 	{
-		@this.LabelContent
+		@this.Content
 	}
 	else
 	{
-		@this.LabelDisplayName
+		@this.ForDisplayName
 	}
 </label>
