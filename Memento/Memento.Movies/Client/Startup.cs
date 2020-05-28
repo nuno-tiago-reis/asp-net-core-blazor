@@ -1,4 +1,5 @@
 using AutoMapper;
+using Blazor.FileReader;
 using Memento.Movies.Client.Services.Genres;
 using Memento.Movies.Client.Services.Movies;
 using Memento.Movies.Client.Services.Persons;
@@ -61,6 +62,14 @@ namespace Memento.Movies.Client
 				.AddSingleton<IGenreService, GenreService>()
 				.AddSingleton<IMovieService, MovieService>()
 				.AddSingleton<IPersonService, PersonService>();
+			#endregion
+
+			#region [Required: FileReader]
+			builder.Services
+				.AddFileReaderService(options =>
+				{
+					options.InitializeOnFirstCall = true;
+				});
 			#endregion
 
 			#region [Required: Toastr]

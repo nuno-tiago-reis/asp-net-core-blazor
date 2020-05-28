@@ -6,6 +6,7 @@ using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using System;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Movies
@@ -53,6 +54,13 @@ namespace Memento.Movies.Client.Pages.Movies
 		public ConfirmationModal DiscardChangesModal { get; set; }
 		#endregion
 
+		#region [Properties] Internal
+		/// <summary>
+		/// The movie picture url.
+		/// </summary>
+		private string MoviePictureUrl { get; set; }
+		#endregion
+
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
@@ -65,6 +73,9 @@ namespace Memento.Movies.Client.Pages.Movies
 				{
 					// Create the contract
 					this.Movie = this.Mapper.Map<MovieFormContract>(response.Data);
+
+					// Store the picture url
+					this.MoviePictureUrl = response.Data.PictureUrl;
 
 					// Show a toast message
 					this.Toaster.Success(response.Message);
@@ -81,7 +92,10 @@ namespace Memento.Movies.Client.Pages.Movies
 			else
 			{
 				// Create the contract
-				this.Movie = new MovieFormContract();
+				this.Movie = new MovieFormContract
+				{
+					ReleaseDate = DateTime.Today
+				};
 			}
 		}
 		#endregion

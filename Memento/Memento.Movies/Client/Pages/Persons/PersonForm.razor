@@ -27,29 +27,37 @@ else
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
-					<Label For="@(() => this.Person.Biography)">
-					</Label>
-					<InputText class="form-control"
-							   @bind-Value="this.Person.Biography">
-					</InputText>
+					<InputMarkdown class="form-control"
+								   @bind-Value="this.Person.Biography">
+						<MarkdownLabelContent>
+							@this.Localizer.GetString(SharedResources.PERSON_BIOGRAPHY)
+						</MarkdownLabelContent>
+						<PreviewLabelContent>
+							@this.Localizer.GetString(SharedResources.FORM_MARKDOWN_PREVIEW)
+						</PreviewLabelContent>
+					</InputMarkdown>
 					<ValidationMessage For="@(() => this.Person.Biography)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
-					<Label For="@(() => this.Person.PictureUrl)">
-					</Label>
-					<InputText class="form-control"
-							   @bind-Value="this.Person.PictureUrl">
-					</InputText>
-					<ValidationMessage For="@(() => this.Person.PictureUrl)">
+					<InputImage class="form-control"
+								@bind-Value="this.Person.Picture"
+								InitialImageUrl="@this.PersonPictureUrl">
+						<ImageLabelContent>
+							@this.Localizer.GetString(SharedResources.PERSON_PICTURE)
+						</ImageLabelContent>
+						<PreviewLabelContent>
+							@this.Localizer.GetString(SharedResources.FORM_IMAGE_PREVIEW)
+						</PreviewLabelContent>
+					</InputImage>
+					<ValidationMessage For="@(() => this.Person.Picture)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
 					<Label For="@(() => this.Person.BirthDate)">
 					</Label>
-					<InputDate class="form-control" TValue="DateTime"
-							   value="@(this.Person.BirthDate != null ? this.Person.BirthDate.Value : DateTime.Today)"
-							   @onchange="@((@event) => this.Person.BirthDate = (DateTime)@event.Value)">
+					<InputDate class="form-control"
+							   @bind-Value="this.Person.BirthDate">
 					</InputDate>
 					<ValidationMessage For="@(() => this.Person.BirthDate)">
 					</ValidationMessage>

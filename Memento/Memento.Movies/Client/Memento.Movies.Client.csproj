@@ -16,6 +16,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Watch Remove="Shared\Components\InputImage.razor" />
+	  <Watch Remove="Shared\Components\Markdown.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<!-- AutoMapper -->
 		<PackageReference Include="AutoMapper" Version="9.0.0" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
@@ -23,6 +28,8 @@
 		<PackageReference Include="Blazorade.Bootstrap.Components" Version="1.0.0" />
 		<!-- BuildWebCompiler -->
 		<PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+		<!-- Markdig -->
+		<PackageReference Include="Markdig" Version="0.20.0" />
 		<!-- Microsoft.AspNetCore -->
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0" PrivateAssets="all" />
@@ -33,6 +40,8 @@
 		<PackageReference Include="Sotsera.Blazor.Toaster" Version="3.0.0" />
 		<!-- System -->
 		<PackageReference Include="System.Net.Http.Json" Version="3.2.0" />
+		<!-- Tewr -->
+		<PackageReference Include="Tewr.Blazor.FileReader" Version="1.5.0.20109" />
 	</ItemGroup>
 
 	<ItemGroup>
