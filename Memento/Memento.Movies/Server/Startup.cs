@@ -5,6 +5,7 @@ using Memento.Movies.Shared.Models.Repositories.Genres;
 using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Movies.Shared.Resources;
+using Memento.Shared.Middleware.DataProtection;
 using Memento.Shared.Models.Bindings;
 using Memento.Shared.Routing;
 using Memento.Shared.Services.Localization;
@@ -66,18 +67,15 @@ namespace Memento.Movies.Server
 		/// <param name="services">The services.</param>
 		public void ConfigureServices(IServiceCollection services)
 		{
-			#region [Required: AspNet AppSettings]
+			#region [Required: ASP.NET AppSettings]
 			services
 				.Configure<MovieSettings>(this.Configuration);
 			#endregion
 
-			#region [Required: AspNet Middleware]
+			#region [Required: ASP.NET Middleware]
 			services
 				.AddControllers()
 				.AddSharedLocalization<SharedResources>(this.MovieSettings.Localization);
-
-			services
-				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
 
 			services
 				.Configure<ApiBehaviorOptions>(options =>
@@ -139,7 +137,12 @@ namespace Memento.Movies.Server
 				});
 			#endregion
 
-			#region [Required: AspNet EntityFramework]
+			#region [Required: ASP.NET DataProtection]
+			//services
+				//.AddAzureDataProtection(this.MovieSettings.DataProtection);
+			#endregion
+
+			#region [Required: ASP.NET EntityFramework]
 			services
 				.AddDbContext<MovieContext>(options =>
 				{
@@ -154,6 +157,11 @@ namespace Memento.Movies.Server
 				.AddTransient<IGenreRepository, GenreRepository>()
 				.AddTransient<IMovieRepository, MovieRepository>()
 				.AddTransient<IPersonRepository, PersonRepository>();
+			#endregion
+
+			#region [Required: ASP.NET Services]
+			services
+				.AddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
 			#endregion
 
 			#region [Required: AutoMapper]

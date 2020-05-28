@@ -8,6 +8,7 @@
 	<ItemGroup>
 		<!-- Extend Watch -->
 		<Watch Include="..\**\*.razor" />
+		<Watch Include="..\**\*.scss" />
 	</ItemGroup>
 
 	<PropertyGroup>
