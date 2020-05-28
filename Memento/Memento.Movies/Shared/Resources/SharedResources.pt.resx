@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+	<xsd:schema id="root" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -96,6 +96,12 @@
 	</data>
 	<data name="FORM_MARKDOWN_PREVIEW" xml:space="preserve">
 		<value>Pré-Visualização</value>
+	</data>
+	<data name="FORM_TYPEAHEAD_LOADING" xml:space="preserve">
+		<value>Carregando...</value>
+	</data>
+	<data name="FORM_TYPEAHEAD_NOT_FOUND" xml:space="preserve">
+		<value>Não foram encontrados registos</value>
 	</data>
 	<data name="GENERIC_LOADING" xml:space="preserve">
 		<value>Carregando</value>

@@ -209,6 +209,28 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to Loading....
+		/// </summary>
+		public static string FORM_TYPEAHEAD_LOADING
+		{
+			get
+			{
+				return ResourceManager.GetString("FORM_TYPEAHEAD_LOADING", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to No records were found.
+		/// </summary>
+		public static string FORM_TYPEAHEAD_NOT_FOUND
+		{
+			get
+			{
+				return ResourceManager.GetString("FORM_TYPEAHEAD_NOT_FOUND", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to Loading.
 		/// </summary>
 		public static string GENERIC_LOADING
