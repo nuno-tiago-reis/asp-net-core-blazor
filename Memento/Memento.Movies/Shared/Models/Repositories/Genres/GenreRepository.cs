@@ -1,4 +1,6 @@
-﻿using Memento.Shared.Exceptions;
+﻿using Memento.Movies.Shared.Resources;
+using Memento.Shared.Exceptions;
+using Memento.Shared.Extensions;
 using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Repositories;
 using Memento.Shared.Services.Localization;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Shared.Models.Repositories.Genres
@@ -196,6 +199,35 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 			}
 
 			return genreQueryable;
+		}
+		#endregion
+
+		#region [Methods] Messages
+		/// <inheritdoc />
+		protected override string GetModelDoesNotMessage()
+		{
+			// Get the name
+			var name = this.Localizer.GetString(SharedResources.GENRE);
+
+			return this.Localizer.GetString(SharedResources.ERROR_NOT_FOUND, name);
+		}
+
+		/// <inheritdoc />
+		protected override string GetModelHasDuplicateFieldMessage<TProperty>(Expression<Func<Genre, TProperty>> expression)
+		{
+			// Get the name
+			var name = expression.GetDisplayName();
+
+			return this.Localizer.GetString(SharedResources.ERROR_DUPLICATE_FIELD, name);
+		}
+
+		/// <inheritdoc />
+		protected override string GetModelHasInvalidFieldMessage<TProperty>(Expression<Func<Genre, TProperty>> expression)
+		{
+			// Get the name
+			var name = expression.GetDisplayName();
+
+			return this.Localizer.GetString(SharedResources.ERROR_INVALID_FIELD, name);
 		}
 		#endregion
 	}

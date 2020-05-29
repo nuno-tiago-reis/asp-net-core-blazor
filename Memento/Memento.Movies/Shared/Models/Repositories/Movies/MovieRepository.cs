@@ -1,4 +1,6 @@
-﻿using Memento.Shared.Exceptions;
+﻿using Memento.Movies.Shared.Resources;
+using Memento.Shared.Exceptions;
+using Memento.Shared.Extensions;
 using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Repositories;
 using Memento.Shared.Services.Localization;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Shared.Models.Repositories.Movies
@@ -160,7 +163,9 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 		{
 			return this.Models
 				.Include(movie => movie.Genres)
-				.Include(movie => movie.Persons);
+				.ThenInclude(movieGenre => movieGenre.Genre)
+				.Include(movie => movie.Persons)
+				.ThenInclude(moviePerson => moviePerson.Person);
 		}
 
 		/// <inheritdoc />
@@ -168,7 +173,9 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 		{
 			return this.Models
 				.Include(movie => movie.Genres)
-				.Include(movie => movie.Persons);
+				.ThenInclude(movieGenre => movieGenre.Genre)
+				.Include(movie => movie.Persons)
+				.ThenInclude(moviePerson => moviePerson.Person);
 		}
 
 		/// <inheritdoc />
@@ -252,6 +259,35 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 			}
 
 			return movieQueryable;
+		}
+		#endregion
+
+		#region [Methods] Messages
+		/// <inheritdoc />
+		protected override string GetModelDoesNotMessage()
+		{
+			// Get the name
+			var name = this.Localizer.GetString(SharedResources.MOVIE);
+
+			return this.Localizer.GetString(SharedResources.ERROR_NOT_FOUND, name);
+		}
+
+		/// <inheritdoc />
+		protected override string GetModelHasDuplicateFieldMessage<TProperty>(Expression<Func<Movie, TProperty>> expression)
+		{
+			// Get the name
+			var name = expression.GetDisplayName();
+
+			return this.Localizer.GetString(SharedResources.ERROR_DUPLICATE_FIELD, name);
+		}
+
+		/// <inheritdoc />
+		protected override string GetModelHasInvalidFieldMessage<TProperty>(Expression<Func<Movie, TProperty>> expression)
+		{
+			// Get the name
+			var name = expression.GetDisplayName();
+
+			return this.Localizer.GetString(SharedResources.ERROR_INVALID_FIELD, name);
 		}
 		#endregion
 	}
