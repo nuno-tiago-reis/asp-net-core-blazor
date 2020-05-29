@@ -39,122 +39,176 @@ namespace Memento.Movies.Shared.Configuration
 			// Genres: Model => Contract
 			this.CreateMap<Genre, GenreDetailContract>();
 			// Genres: Model => Contract
+			this.CreateMap<Genre, GenreFormContract>();
+			// Genres: Model => Contract
 			this.CreateMap<Genre, GenreListContract>();
 
 			// Genres: Contract => Model
 			this.CreateMap<GenreFormContract, Genre>();
-			// Genres: Model => Contract
-			this.CreateMap<Genre, GenreFormContract>();
 
 			// Genres: Contract => Contract
-			this.CreateMap<GenreFormContract, GenreDetailContract>();
-			// Genres: Contract => Contract
 			this.CreateMap<GenreDetailContract, GenreFormContract>();
+			// Genres: Contract => Contract
+			this.CreateMap<GenreListContract, GenreFormContract>();
 			#endregion
 
 			#region [Contracts: Movies]
 			// Movies: Model => Contract
 			this.CreateMap<Movie, MovieDetailContract>();
 			// Movies: Model => Contract
+			this.CreateMap<Movie, MovieFormContract>();
+			// Movies: Model => Contract
 			this.CreateMap<Movie, MovieListContract>();
 
 			// Movies: Contract => Model
 			this.CreateMap<MovieFormContract, Movie>();
-			// Movies: Model => Contract
-			this.CreateMap<Movie, MovieFormContract>();
 
 			// Movies: Contract => Contract
-			this.CreateMap<MovieFormContract, MovieDetailContract>();
-			// Movies: Contract => Contract
 			this.CreateMap<MovieDetailContract, MovieFormContract>();
+			// Movies: Contract => Contract
+			this.CreateMap<MovieListContract, MovieFormContract>();
 			#endregion
 
 			#region [Contracts: MovieGenres]
-			// Persons: Model => Contract
+			// MovieGenres: Model => Contract
 			this.CreateMap<MovieGenre, MovieGenreDetailContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Genre));
-			// Persons: Model => Contract
+				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreDetailContract>(model.Genre));
+			// MovieGenres: Model => Contract
 			this.CreateMap<MovieGenre, MovieGenreFormContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Genre));
-			// Persons: Model => Contract
+				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreFormContract>(model.Genre));
+			// MovieGenres: Model => Contract
 			this.CreateMap<MovieGenre, MovieGenreListContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Genre));
+				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreListContract>(model.Genre));
 
-			// Persons: Contract => Model
+			// MovieGenres: Model => Contract
+			this.CreateMap<Genre, MovieGenreDetailContract>();
+			// MovieGenres: Model => Contract
+			this.CreateMap<Genre, MovieGenreFormContract>();
+			// MovieGenres: Model => Contract
+			this.CreateMap<Genre, MovieGenreListContract>();
+
+			// MovieGenres: Contract => Model
 			this.CreateMap<MovieGenreFormContract, MovieGenre>()
-				.ForPath(model => model.GenreId, expression => expression.MapFrom(contract => contract.Id));
+				.ForMember(model => model.GenreId, expression => expression.MapFrom(contract => contract.Id))
+				.ForAllOtherMembers(model => model.Ignore());
 
-			// Persons: Contract => Contract
-			this.CreateMap<MovieGenreFormContract, MovieGenreDetailContract>();
-			// Persons: Contract => Contract
+			// MovieGenres: Contract => Contract
 			this.CreateMap<MovieGenreDetailContract, MovieGenreFormContract>();
+			// MovieGenres: Contract => Contract
+			this.CreateMap<MovieGenreListContract, MovieGenreFormContract>();
+
+			// MovieGenres: Contract => Contract
+			this.CreateMap<GenreDetailContract, MovieGenreFormContract>();
+			// MovieGenres: Contract => Contract
+			this.CreateMap<GenreListContract, MovieGenreFormContract>();
+
+			// MovieGenres: Contract => Contract
+			this.CreateMap<MovieGenreDetailContract, GenreListContract>();
+			// MovieGenres: Contract => Contract
+			this.CreateMap<MovieGenreListContract, GenreListContract>();
 			#endregion
 
 			#region [Contracts: MoviePersons]
-			// Persons: Model => Contract
+			// MoviePersons: Model => Contract
 			this.CreateMap<MoviePerson, MoviePersonDetailContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Person))
+				.ConstructUsing((model, context) => context.Mapper.Map<MoviePersonDetailContract>(model.Person))
 				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
-			// Persons: Model => Contract
+			// MoviePersons: Model => Contract
 			this.CreateMap<MoviePerson, MoviePersonFormContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Person))
+				.ConstructUsing((model, context) => context.Mapper.Map<MoviePersonFormContract>(model.Person))
 				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
-			// Persons: Model => Contract
+			// MoviePersons: Model => Contract
 			this.CreateMap<MoviePerson, MoviePersonListContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Person))
+				.ConstructUsing((model, context) => context.Mapper.Map<MoviePersonListContract>(model.Person))
 				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
 
-			// Persons: Contract => Model
-			this.CreateMap<MoviePersonFormContract, MoviePerson>()
-				.ForPath(model => model.PersonId, expression => expression.MapFrom(contract => contract.Id))
-				.ForPath(model => model.Role, expression => expression.MapFrom(contract => contract.Role));
+			// MoviePersons: Model => Contract
+			this.CreateMap<Person, MoviePersonDetailContract>();
+			// MoviePersons: Model => Contract
+			this.CreateMap<Person, MoviePersonFormContract>();
+			// MoviePersons: Model => Contract
+			this.CreateMap<Person, MoviePersonListContract>();
 
-			// Persons: Contract => Contract
-			this.CreateMap<MoviePersonFormContract, MoviePersonDetailContract>();
-			// Persons: Contract => Contract
+			// MoviePersons: Contract => Model
+			this.CreateMap<MoviePersonFormContract, MoviePerson>()
+				.ForMember(model => model.PersonId, expression => expression.MapFrom(contract => contract.Id))
+				.ForMember(model => model.Role, expression => expression.MapFrom(contract => contract.Role))
+				.ForAllOtherMembers(model => model.Ignore());
+
+			// MoviePersons: Contract => Contract
 			this.CreateMap<MoviePersonDetailContract, MoviePersonFormContract>();
+			// MoviePersons: Contract => Contract
+			this.CreateMap<MoviePersonListContract, MoviePersonFormContract>();
+
+			// MoviePersons: Contract => Contract
+			this.CreateMap<PersonDetailContract, MoviePersonFormContract>();
+			// MoviePersons: Contract => Contract
+			this.CreateMap<PersonListContract, MoviePersonFormContract>();
+
+			// MovieGenres: Contract => Contract
+			this.CreateMap<MoviePersonDetailContract, PersonListContract>();
+			// MovieGenres: Contract => Contract
+			this.CreateMap<MoviePersonListContract, PersonListContract>();
 			#endregion
 
 			#region [Contracts: Persons]
 			// Persons: Model => Contract
 			this.CreateMap<Person, PersonDetailContract>();
 			// Persons: Model => Contract
+			this.CreateMap<Person, PersonFormContract>();
+			// Persons: Model => Contract
 			this.CreateMap<Person, PersonListContract>();
 
 			// Persons: Contract => Model
 			this.CreateMap<PersonFormContract, Person>();
-			// Persons: Model => Contract
-			this.CreateMap<Person, PersonFormContract>();
 
 			// Persons: Contract => Contract
-			this.CreateMap<PersonFormContract, PersonDetailContract>();
-			// Persons: Contract => Contract
 			this.CreateMap<PersonDetailContract, PersonFormContract>();
+			// Persons: Contract => Contract
+			this.CreateMap<PersonListContract, PersonFormContract>();
 			#endregion
 
 			#region [Contracts: PersonMovies]
 			// PersonMovies: Model => Contract
 			this.CreateMap<MoviePerson, PersonMovieDetailContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Movie))
+				.ConstructUsing((model, context) => context.Mapper.Map<PersonMovieDetailContract>(model.Movie))
 				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
 			// PersonMovies: Model => Contract
 			this.CreateMap<MoviePerson, PersonMovieFormContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Movie))
+				.ConstructUsing((model, context) => context.Mapper.Map<PersonMovieFormContract>(model.Movie))
 				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
 			// PersonMovies: Model => Contract
 			this.CreateMap<MoviePerson, PersonMovieListContract>()
-				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Movie))
+				.ConstructUsing((model, context) => context.Mapper.Map<PersonMovieListContract>(model.Movie))
 				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+
+			// PersonMovies: Model => Contract
+			this.CreateMap<Movie, PersonMovieDetailContract>();
+			// PersonMovies: Model => Contract
+			this.CreateMap<Movie, PersonMovieFormContract>();
+			// PersonMovies: Model => Contract
+			this.CreateMap<Movie, PersonMovieListContract>();
 
 			// PersonMovies: Contract => Model
 			this.CreateMap<PersonMovieFormContract, MoviePerson>()
-				.ForPath(model => model.MovieId, expression => expression.MapFrom(contract => contract.Id))
-				.ForPath(model => model.Role, expression => expression.MapFrom(contract => contract.Role));
+				.ForMember(model => model.MovieId, expression => expression.MapFrom(contract => contract.Id))
+				.ForMember(model => model.Role, expression => expression.MapFrom(contract => contract.Role))
+				.ForAllOtherMembers(model => model.Ignore());
 
 			// PersonMovies: Contract => Contract
-			this.CreateMap<PersonMovieFormContract, PersonMovieDetailContract>();
-			// PersonMovies: Contract => Contract
 			this.CreateMap<PersonMovieDetailContract, PersonMovieFormContract>();
+			// PersonMovies: Contract => Contract
+			this.CreateMap<PersonMovieListContract, PersonMovieFormContract>();
+
+			// PersonMovies: Contract => Contract
+			this.CreateMap<MovieDetailContract, PersonMovieFormContract>();
+			// PersonMovies: Contract => Contract
+			this.CreateMap<MovieListContract, PersonMovieFormContract>();
+
+			// MovieGenres: Contract => Contract
+			this.CreateMap<PersonMovieDetailContract, MovieListContract>();
+			// MovieGenres: Contract => Contract
+			this.CreateMap<PersonMovieListContract, MovieListContract>();
 			#endregion
 		}
 		#endregion
