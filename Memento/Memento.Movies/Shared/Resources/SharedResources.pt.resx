@@ -82,17 +82,41 @@
 	<data name="BUTTON_VIEW" xml:space="preserve">
 		<value>Ver</value>
 	</data>
-	<data name="ERROR_FORM_INVALID_FIELDS" xml:space="preserve">
-		<value>O formulário contém campos inválidos.</value>
+	<data name="CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
+		<value>A criação foi concluída com successo.</value>
+	</data>
+	<data name="CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
+		<value>A remoção foi concluída com successo.</value>
+	</data>
+	<data name="CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
+		<value>A listagem foi obtida com successo.</value>
+	</data>
+	<data name="CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
+		<value>O detalhe foi obtido successo.</value>
+	</data>
+	<data name="CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
+		<value>A atualização foi concluída com successo.</value>
+	</data>
+	<data name="ERROR_DUPLICATE_FIELD" xml:space="preserve">
+		<value>O campo '{0}' já existe.</value>
+	</data>
+	<data name="ERROR_INVALID_FIELD" xml:space="preserve">
+		<value>O campo '{0}' é inválido.</value>
 	</data>
 	<data name="ERROR_LOADING" xml:space="preserve">
 		<value>Ocorreu um erro durante o carregamento da página. Por favor tente novamente mais tarde.</value>
+	</data>
+	<data name="ERROR_NOT_FOUND" xml:space="preserve">
+		<value>O {0} não existe.</value>
 	</data>
 	<data name="ERROR_UNEXPECTED" xml:space="preserve">
 		<value>Ocorreu um erro inesperado. Por favor tente novamente mais tarde.</value>
 	</data>
 	<data name="FORM_IMAGE_PREVIEW" xml:space="preserve">
 		<value>Pré-Visualização</value>
+	</data>
+	<data name="FORM_INVALID_FIELDS" xml:space="preserve">
+		<value>O formulário contém campos inválidos.</value>
 	</data>
 	<data name="FORM_MARKDOWN_PREVIEW" xml:space="preserve">
 		<value>Pré-Visualização</value>
@@ -112,29 +136,11 @@
 	<data name="GENRE" xml:space="preserve">
 		<value>Género</value>
 	</data>
-	<data name="GENRE_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
-		<value>O género foi criado com successo.</value>
-	</data>
-	<data name="GENRE_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
-		<value>O género foi apagado com successo.</value>
-	</data>
-	<data name="GENRE_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
-		<value>Os géneros foram obtidos com successo.</value>
-	</data>
-	<data name="GENRE_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
-		<value>O género foi obtido com successo.</value>
-	</data>
-	<data name="GENRE_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
-		<value>O género foi atualizado com successo.</value>
-	</data>
 	<data name="GENRE_CREATEDAT" xml:space="preserve">
 		<value>Criado Em</value>
 	</data>
 	<data name="GENRE_CREATEDBY" xml:space="preserve">
 		<value>Criado Por</value>
-	</data>
-	<data name="GENRE_DOES_NOT_EXIST" xml:space="preserve">
-		<value>O género não existe.</value>
 	</data>
 	<data name="GENRE_ID" xml:space="preserve">
 		<value>Identificador</value>
@@ -154,23 +160,11 @@
 	<data name="GENRE_UPDATEDBY" xml:space="preserve">
 		<value>Atualizado Por</value>
 	</data>
-	<data name="MODAL_DELETE_GENRE_BODY" xml:space="preserve">
-		<value>Tem a certeza que quer apagar este género?</value>
+	<data name="MODAL_DELETE_BODY" xml:space="preserve">
+		<value>Tem a certeza que quer apagar este {0}?</value>
 	</data>
-	<data name="MODAL_DELETE_GENRE_TITLE" xml:space="preserve">
-		<value>Apagar Género</value>
-	</data>
-	<data name="MODAL_DELETE_MOVIE_BODY" xml:space="preserve">
-		<value>Tem a certeza que quer apagar este filme?</value>
-	</data>
-	<data name="MODAL_DELETE_MOVIE_TITLE" xml:space="preserve">
-		<value>Apagar Filme</value>
-	</data>
-	<data name="MODAL_DELETE_PERSON_BODY" xml:space="preserve">
-		<value>Tem a certeza que quer apagar esta pessoa?</value>
-	</data>
-	<data name="MODAL_DELETE_PERSON_TITLE" xml:space="preserve">
-		<value>Apagar Pessoa</value>
+	<data name="MODAL_DELETE_TITLE" xml:space="preserve">
+		<value>Apagar {0}</value>
 	</data>
 	<data name="MODAL_DISCARD_CHANGES_BODY" xml:space="preserve">
 		<value>Tem a certeza que quer descartar as suas alterações?</value>
@@ -184,32 +178,11 @@
 	<data name="MODAL_SAVE_CHANGES_TITLE" xml:space="preserve">
 		<value>Guardar Alterações</value>
 	</data>
-	<data name="MODEL_HAS_DUPLICATE_FIELD" xml:space="preserve">
-		<value>O campo '{0}' já existe.</value>
-	</data>
-	<data name="MODEL_HAS_INVALID_FIELD" xml:space="preserve">
-		<value>O campo '{0}' é inválido.</value>
-	</data>
 	<data name="MOVIE" xml:space="preserve">
 		<value>Filme</value>
 	</data>
 	<data name="MOVIE_ACTORS" xml:space="preserve">
 		<value>Atores</value>
-	</data>
-	<data name="MOVIE_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
-		<value>O filme foi criado com successo.</value>
-	</data>
-	<data name="MOVIE_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
-		<value>O filme foi apagado com successo.</value>
-	</data>
-	<data name="MOVIE_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
-		<value>Os filmes foram obtidos com successo.</value>
-	</data>
-	<data name="MOVIE_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
-		<value>O filme foi obtido com successo.</value>
-	</data>
-	<data name="MOVIE_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
-		<value>O filme foi atualizado com successo.</value>
 	</data>
 	<data name="MOVIE_CREATEDAT" xml:space="preserve">
 		<value>Criado Em</value>
@@ -219,9 +192,6 @@
 	</data>
 	<data name="MOVIE_DIRECTORS" xml:space="preserve">
 		<value>Diretores</value>
-	</data>
-	<data name="MOVIE_DOES_NOT_EXIST" xml:space="preserve">
-		<value>O filme não existe.</value>
 	</data>
 	<data name="MOVIE_GENRES" xml:space="preserve">
 		<value>Géneros</value>
@@ -352,29 +322,11 @@
 	<data name="PERSON_BORNBEFORE" xml:space="preserve">
 		<value>Nascido Depois</value>
 	</data>
-	<data name="PERSON_CONTROLLER_CREATE_SUCCESSFUL" xml:space="preserve">
-		<value>A pessoa foi criada com successo.</value>
-	</data>
-	<data name="PERSON_CONTROLLER_DELETE_SUCCESSFUL" xml:space="preserve">
-		<value>A pessoa foi apagada com successo.</value>
-	</data>
-	<data name="PERSON_CONTROLLER_GET_ALL_SUCCESSFUL" xml:space="preserve">
-		<value>As pessoas foram obtidas com successo.</value>
-	</data>
-	<data name="PERSON_CONTROLLER_GET_SUCCESSFUL" xml:space="preserve">
-		<value>A pessoa foi obtida com successo.</value>
-	</data>
-	<data name="PERSON_CONTROLLER_UPDATE_SUCCESSFUL" xml:space="preserve">
-		<value>A pessoa foi atualizada com successo.</value>
-	</data>
 	<data name="PERSON_CREATEDAT" xml:space="preserve">
 		<value>Criado Em</value>
 	</data>
 	<data name="PERSON_CREATEDBY" xml:space="preserve">
 		<value>Criado Por</value>
-	</data>
-	<data name="PERSON_DOES_NOT_EXIST" xml:space="preserve">
-		<value>A pessoa não existe.</value>
 	</data>
 	<data name="PERSON_ID" xml:space="preserve">
 		<value>Identificador</value>

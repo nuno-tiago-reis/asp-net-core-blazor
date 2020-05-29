@@ -154,13 +154,79 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The form has invalid fields..
+		///   Looks up a localized string similar to The {0} was created successfully..
 		/// </summary>
-		public static string ERROR_FORM_INVALID_FIELDS
+		public static string CONTROLLER_CREATE_SUCCESSFUL
 		{
 			get
 			{
-				return ResourceManager.GetString("ERROR_FORM_INVALID_FIELDS", resourceCulture);
+				return ResourceManager.GetString("CONTROLLER_CREATE_SUCCESSFUL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to The {0} was deleted successfully..
+		/// </summary>
+		public static string CONTROLLER_DELETE_SUCCESSFUL
+		{
+			get
+			{
+				return ResourceManager.GetString("CONTROLLER_DELETE_SUCCESSFUL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to The {0} were obtained successfully..
+		/// </summary>
+		public static string CONTROLLER_GET_ALL_SUCCESSFUL
+		{
+			get
+			{
+				return ResourceManager.GetString("CONTROLLER_GET_ALL_SUCCESSFUL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to The {0} was obtained successfully..
+		/// </summary>
+		public static string CONTROLLER_GET_SUCCESSFUL
+		{
+			get
+			{
+				return ResourceManager.GetString("CONTROLLER_GET_SUCCESSFUL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to The {0} was updated successfully..
+		/// </summary>
+		public static string CONTROLLER_UPDATE_SUCCESSFUL
+		{
+			get
+			{
+				return ResourceManager.GetString("CONTROLLER_UPDATE_SUCCESSFUL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to The field &apos;{0}&apos; already exists..
+		/// </summary>
+		public static string ERROR_DUPLICATE_FIELD
+		{
+			get
+			{
+				return ResourceManager.GetString("ERROR_DUPLICATE_FIELD", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to The field &apos;{0}&apos; is invalid..
+		/// </summary>
+		public static string ERROR_INVALID_FIELD
+		{
+			get
+			{
+				return ResourceManager.GetString("ERROR_INVALID_FIELD", resourceCulture);
 			}
 		}
 
@@ -172,6 +238,17 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("ERROR_LOADING", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to The {0} does not exist..
+		/// </summary>
+		public static string ERROR_NOT_FOUND
+		{
+			get
+			{
+				return ResourceManager.GetString("ERROR_NOT_FOUND", resourceCulture);
 			}
 		}
 
@@ -194,6 +271,17 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("FORM_IMAGE_PREVIEW", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to The form has invalid fields..
+		/// </summary>
+		public static string FORM_INVALID_FIELDS
+		{
+			get
+			{
+				return ResourceManager.GetString("FORM_INVALID_FIELDS", resourceCulture);
 			}
 		}
 
@@ -264,61 +352,6 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The genre was created successfully..
-		/// </summary>
-		public static string GENRE_CONTROLLER_CREATE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("GENRE_CONTROLLER_CREATE_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The genre was deleted successfully..
-		/// </summary>
-		public static string GENRE_CONTROLLER_DELETE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("GENRE_CONTROLLER_DELETE_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The genres were obtained successfully..
-		/// </summary>
-		public static string GENRE_CONTROLLER_GET_ALL_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("GENRE_CONTROLLER_GET_ALL_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The genre was obtained successfully..
-		/// </summary>
-		public static string GENRE_CONTROLLER_GET_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("GENRE_CONTROLLER_GET_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The genre was updated successfully..
-		/// </summary>
-		public static string GENRE_CONTROLLER_UPDATE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("GENRE_CONTROLLER_UPDATE_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
 		///   Looks up a localized string similar to Created At.
 		/// </summary>
 		public static string GENRE_CREATEDAT
@@ -337,17 +370,6 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("GENRE_CREATEDBY", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The gender does not exist..
-		/// </summary>
-		public static string GENRE_DOES_NOT_EXIST
-		{
-			get
-			{
-				return ResourceManager.GetString("GENRE_DOES_NOT_EXIST", resourceCulture);
 			}
 		}
 
@@ -418,68 +440,24 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to Are you sure you want to delete this genre?.
+		///   Looks up a localized string similar to Are you sure you want to delete this {0}?.
 		/// </summary>
-		public static string MODAL_DELETE_GENRE_BODY
+		public static string MODAL_DELETE_BODY
 		{
 			get
 			{
-				return ResourceManager.GetString("MODAL_DELETE_GENRE_BODY", resourceCulture);
+				return ResourceManager.GetString("MODAL_DELETE_BODY", resourceCulture);
 			}
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to Delete Genre.
+		///   Looks up a localized string similar to Delete {0}.
 		/// </summary>
-		public static string MODAL_DELETE_GENRE_TITLE
+		public static string MODAL_DELETE_TITLE
 		{
 			get
 			{
-				return ResourceManager.GetString("MODAL_DELETE_GENRE_TITLE", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to Are you sure you want to delete this movie?.
-		/// </summary>
-		public static string MODAL_DELETE_MOVIE_BODY
-		{
-			get
-			{
-				return ResourceManager.GetString("MODAL_DELETE_MOVIE_BODY", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to Delete Movie.
-		/// </summary>
-		public static string MODAL_DELETE_MOVIE_TITLE
-		{
-			get
-			{
-				return ResourceManager.GetString("MODAL_DELETE_MOVIE_TITLE", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to Are you sure you want to delete this person?.
-		/// </summary>
-		public static string MODAL_DELETE_PERSON_BODY
-		{
-			get
-			{
-				return ResourceManager.GetString("MODAL_DELETE_PERSON_BODY", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to Delete Person.
-		/// </summary>
-		public static string MODAL_DELETE_PERSON_TITLE
-		{
-			get
-			{
-				return ResourceManager.GetString("MODAL_DELETE_PERSON_TITLE", resourceCulture);
+				return ResourceManager.GetString("MODAL_DELETE_TITLE", resourceCulture);
 			}
 		}
 
@@ -528,28 +506,6 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The field &apos;{0}&apos; already exists..
-		/// </summary>
-		public static string MODEL_HAS_DUPLICATE_FIELD
-		{
-			get
-			{
-				return ResourceManager.GetString("MODEL_HAS_DUPLICATE_FIELD", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The field &apos;{0}&apos; is invalid..
-		/// </summary>
-		public static string MODEL_HAS_INVALID_FIELD
-		{
-			get
-			{
-				return ResourceManager.GetString("MODEL_HAS_INVALID_FIELD", resourceCulture);
-			}
-		}
-
-		/// <summary>
 		///   Looks up a localized string similar to Movie.
 		/// </summary>
 		public static string MOVIE
@@ -568,61 +524,6 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("MOVIE_ACTORS", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The movie was created successfully..
-		/// </summary>
-		public static string MOVIE_CONTROLLER_CREATE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("MOVIE_CONTROLLER_CREATE_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The movie was deleted successfully..
-		/// </summary>
-		public static string MOVIE_CONTROLLER_DELETE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("MOVIE_CONTROLLER_DELETE_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The movies were obtained successfully..
-		/// </summary>
-		public static string MOVIE_CONTROLLER_GET_ALL_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("MOVIE_CONTROLLER_GET_ALL_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The movie was obtained successfully..
-		/// </summary>
-		public static string MOVIE_CONTROLLER_GET_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("MOVIE_CONTROLLER_GET_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The movie was updated successfully..
-		/// </summary>
-		public static string MOVIE_CONTROLLER_UPDATE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("MOVIE_CONTROLLER_UPDATE_SUCCESSFUL", resourceCulture);
 			}
 		}
 
@@ -656,17 +557,6 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("MOVIE_DIRECTORS", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The movie does not exist..
-		/// </summary>
-		public static string MOVIE_DOES_NOT_EXIST
-		{
-			get
-			{
-				return ResourceManager.GetString("MOVIE_DOES_NOT_EXIST", resourceCulture);
 			}
 		}
 
@@ -1144,61 +1034,6 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The person was created successfully..
-		/// </summary>
-		public static string PERSON_CONTROLLER_CREATE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("PERSON_CONTROLLER_CREATE_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The person was deleted successfully..
-		/// </summary>
-		public static string PERSON_CONTROLLER_DELETE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("PERSON_CONTROLLER_DELETE_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The persons were obtained successfully..
-		/// </summary>
-		public static string PERSON_CONTROLLER_GET_ALL_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("PERSON_CONTROLLER_GET_ALL_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The person was obtained successfully..
-		/// </summary>
-		public static string PERSON_CONTROLLER_GET_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("PERSON_CONTROLLER_GET_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The person was updated successfully..
-		/// </summary>
-		public static string PERSON_CONTROLLER_UPDATE_SUCCESSFUL
-		{
-			get
-			{
-				return ResourceManager.GetString("PERSON_CONTROLLER_UPDATE_SUCCESSFUL", resourceCulture);
-			}
-		}
-
-		/// <summary>
 		///   Looks up a localized string similar to Created At.
 		/// </summary>
 		public static string PERSON_CREATEDAT
@@ -1217,17 +1052,6 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("PERSON_CREATEDBY", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to The person does not exist..
-		/// </summary>
-		public static string PERSON_DOES_NOT_EXIST
-		{
-			get
-			{
-				return ResourceManager.GetString("PERSON_DOES_NOT_EXIST", resourceCulture);
 			}
 		}
 
