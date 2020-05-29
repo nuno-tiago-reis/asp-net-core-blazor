@@ -133,6 +133,7 @@ namespace Memento.Movies.Server
 			#region [Required: ASP.NET DataProtection]
 			//services
 				//.AddAzureDataProtection(this.MovieSettings.DataProtection);
+				//.AddFileSystemDataProtection(this.MovieSettings.DataProtection);
 			#endregion
 
 			#region [Required: ASP.NET EntityFramework]
@@ -165,7 +166,8 @@ namespace Memento.Movies.Server
 			#region [Required: Services]
 			services
 				.AddToasterService()
-				.AddAzureStorageService(this.MovieSettings.Storage);
+				//.AddAzureStorageService(this.MovieSettings.Storage);
+				.AddFileSystemStorageService(this.MovieSettings.Storage);
 			#endregion
 		}
 

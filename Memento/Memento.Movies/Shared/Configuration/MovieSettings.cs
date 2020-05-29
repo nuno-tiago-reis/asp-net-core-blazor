@@ -18,7 +18,7 @@ namespace Memento.Movies.Shared.Configuration
 		/// <summary>
 		/// Gets or sets the storage options.
 		/// </summary>
-		public AzureStorageOptions Storage { get; set; }
+		public FileSystemStorageOptions Storage { get; set; }
 
 		/// <summary>
 		/// Gets or sets the localization options.
