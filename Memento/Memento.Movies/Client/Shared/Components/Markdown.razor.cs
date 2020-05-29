@@ -26,12 +26,17 @@ namespace Memento.Movies.Client.Shared.Components
 		/// <inheritdoc />
 		protected override void OnInitialized()
 		{
+			base.OnInitialized();
+
 			// Nothing to do here.
 		}
 
 		/// <inheritdoc />
 		protected override void OnParametersSet()
 		{
+			base.OnParametersSet();
+
+			// Initializations
 			if (!string.IsNullOrWhiteSpace(this.Content))
 			{
 				this.ConvertedContent = Markdig.Markdown.ToHtml(this.Content);
@@ -45,13 +50,17 @@ namespace Memento.Movies.Client.Shared.Components
 		/// <inheritdoc />
 		protected override void OnAfterRender(bool firstRender)
 		{
+			base.OnAfterRender(firstRender);
+
 			// Nothing to do here.
 		}
 
 		/// <inheritdoc />
 		protected override bool ShouldRender()
 		{
-			return true;
+			return base.ShouldRender();
+
+			// Nothing to do here.
 		}
 		#endregion
 	}

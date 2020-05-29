@@ -56,12 +56,17 @@ namespace Memento.Movies.Client.Shared.Components
 		/// <inheritdoc />
 		protected override void OnInitialized()
 		{
+			base.OnInitialized();
+
 			// Nothing to do here.
 		}
 
 		/// <inheritdoc />
 		protected override void OnParametersSet()
 		{
+			base.OnParametersSet();
+
+			// Validations
 			if (this.EditContext == null)
 			{
 				throw new InvalidOperationException
@@ -79,23 +84,25 @@ namespace Memento.Movies.Client.Shared.Components
 				);
 			}
 
-			var property = ((MemberExpression)this.For.Body).Member;
-			var propertyDisplayName = property.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
-
-			this.ForName = ((MemberExpression)this.For.Body).Member.Name;
-			this.ForDisplayName = propertyDisplayName?.GetName() ?? this.ForName.SpacesFromCamel();
+			// Initializations
+			this.ForName = this.For.Body.GetName();
+			this.ForDisplayName = this.For.Body.GetDisplayName();
 		}
 
 		/// <inheritdoc />
 		protected override void OnAfterRender(bool firstRender)
 		{
+			base.OnAfterRender(firstRender);
+
 			// Nothing to do here.
 		}
 
 		/// <inheritdoc />
 		protected override bool ShouldRender()
 		{
-			return true;
+			return base.ShouldRender();
+
+			// Nothing to do here.
 		}
 		#endregion
 	}
