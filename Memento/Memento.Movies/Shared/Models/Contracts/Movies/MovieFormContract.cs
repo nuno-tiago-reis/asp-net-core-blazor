@@ -1,5 +1,6 @@
 ﻿using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
+using Memento.Shared.Models.Files;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,19 +30,18 @@ namespace Memento.Movies.Shared.Models.Contracts.Movies
 		public string Summary { get; set; }
 
 		/// <summary>
-		/// The Movie's picture url.
-		/// </summary>
-		[Required]
-		[Display(Name = nameof(SharedResources.MOVIE_PICTURE), ResourceType = typeof(SharedResources))]
-		public string Picture { get; set; }
-
-		/// <summary>
 		/// The Movie's trailer url.
 		/// </summary>
 		[Required]
 		[MaxLength(MovieConfiguration.TRAILER_URL_MAXIMUM_LENGTH)]
 		[Display(Name = nameof(SharedResources.MOVIE_TRAILERURL), ResourceType = typeof(SharedResources))]
 		public string TrailerUrl { get; set; }
+
+		/// <summary>
+		/// The Movie's picture.
+		/// </summary>
+		[Display(Name = nameof(SharedResources.MOVIE_PICTURE), ResourceType = typeof(SharedResources))]
+		public File Picture { get; set; }
 
 		/// <summary>
 		/// The Movie's release date.

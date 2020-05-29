@@ -1,5 +1,6 @@
 ﻿using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Movies.Shared.Resources;
+using Memento.Shared.Models.Files;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,11 +30,10 @@ namespace Memento.Movies.Shared.Models.Contracts.Persons
 		public string Biography { get; set; }
 
 		/// <summary>
-		/// The Person's picture url.
+		/// The Person's picture.
 		/// </summary>
-		[Required]
 		[Display(Name = nameof(SharedResources.PERSON_PICTURE), ResourceType = typeof(SharedResources))]
-		public string Picture { get; set; }
+		public File Picture { get; set; }
 
 		/// <summary>
 		/// The Person's birth date.
