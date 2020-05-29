@@ -1,3 +1,37 @@
-﻿@page "/"
+﻿@inherits MementoComponent<Index>
 
-<p>Nothing to see here!</p>
+<div class="row">
+	<div class="col-md-12">
+		<!-- heading -->
+		<h2>@this.Localizer.GetString(SharedResources.GENERIC_IN_THEATERS)</h2>
+	</div>
+</div>
+<div class="row">
+	<!-- cards -->
+	<PaginatedList Page="this.InTheaters">
+		<PageItemTemplate>
+			<div class="col-md-4">
+				<MovieCard Movie="@context">
+				</MovieCard>
+			</div>
+		</PageItemTemplate>
+	</PaginatedList>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- heading -->
+		<h2>@this.Localizer.GetString(SharedResources.GENERIC_UPCOMING_RELEASES)</h2>
+	</div>
+</div>
+<div class="row">
+	<!-- cards -->
+	<PaginatedList Page="this.UpcomingReleases">
+		<PageItemTemplate>
+			<div class="col-md-4">
+				<MovieCard Movie="@context">
+				</MovieCard>
+			</div>
+		</PageItemTemplate>
+	</PaginatedList>
+</div>
