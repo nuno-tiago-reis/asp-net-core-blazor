@@ -24,12 +24,6 @@ namespace Memento.Movies.Shared.Models.Contracts.Movies
 		public string Name { get; set; }
 
 		/// <summary>
-		/// The Movie's normalized name.
-		/// </summary>
-		[Display(Name = nameof(SharedResources.MOVIE_NAME), ResourceType = typeof(SharedResources))]
-		public string NormalizedName { get; set; }
-
-		/// <summary>
 		/// The Movie's summary.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIE_SUMMARY), ResourceType = typeof(SharedResources))]
@@ -63,13 +57,13 @@ namespace Memento.Movies.Shared.Models.Contracts.Movies
 		/// The Genres associated with the Movie.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIE_GENRES), ResourceType = typeof(SharedResources))]
-		public List<string> Genres { get; set; }
+		public List<MovieGenreListContract> Genres { get; set; }
 
 		/// <summary>
 		/// The Persons associated with the Movie.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIE_PERSONS), ResourceType = typeof(SharedResources))]
-		public List<Tuple<string, string>> Persons { get; set; }
+		public List<MoviePersonListContract> Persons { get; set; }
 
 		/// <summary>
 		/// The Movie's created by user identifier.

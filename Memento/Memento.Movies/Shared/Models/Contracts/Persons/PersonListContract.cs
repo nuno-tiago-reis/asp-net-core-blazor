@@ -51,7 +51,7 @@ namespace Memento.Movies.Shared.Models.Contracts.Persons
 		/// The Movies associated with the Person.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.PERSON_MOVIES), ResourceType = typeof(SharedResources))]
-		public List<Tuple<string, DateTime, string>> Movies { get; set; }
+		public List<PersonMovieListContract> Movies { get; set; }
 
 		/// <summary>
 		/// The Person's created by user identifier.

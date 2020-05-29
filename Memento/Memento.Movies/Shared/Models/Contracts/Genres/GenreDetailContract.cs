@@ -23,12 +23,6 @@ namespace Memento.Movies.Shared.Models.Contracts.Genres
 		public string Name { get; set; }
 
 		/// <summary>
-		/// The Genre's normalized name.
-		/// </summary>
-		[Display(Name = nameof(SharedResources.GENRE_NAME), ResourceType = typeof(SharedResources))]
-		public string NormalizedName { get; set; }
-
-		/// <summary>
 		/// The Genre's created by user identifier.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.GENRE_CREATEDBY), ResourceType = typeof(SharedResources))]

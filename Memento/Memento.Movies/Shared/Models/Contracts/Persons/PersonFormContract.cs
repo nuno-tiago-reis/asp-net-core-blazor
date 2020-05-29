@@ -46,7 +46,7 @@ namespace Memento.Movies.Shared.Models.Contracts.Persons
 		/// The Movies associated with the Person.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.PERSON_MOVIES), ResourceType = typeof(SharedResources))]
-		public List<Tuple<long, MoviePersonRole>> Movies { get; set; }
+		public List<PersonMovieFormContract> Movies { get; set; }
 		#endregion
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Memento.Movies.Shared.Models.Repositories.Movies;
+﻿using Memento.Movies.Shared.Models.Contracts.Genres;
+using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Models.Files;
 using System;
@@ -61,13 +62,13 @@ namespace Memento.Movies.Shared.Models.Contracts.Movies
 		/// The Genres associated with the Movie.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIE_GENRES), ResourceType = typeof(SharedResources))]
-		public List<long> Genres { get; set; }
+		public List<MovieGenreFormContract> Genres { get; set; }
 
 		/// <summary>
 		/// The Persons associated with the Movie.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIE_PERSONS), ResourceType = typeof(SharedResources))]
-		public List<Tuple<long, MoviePersonRole>> Persons { get; set; }
+		public List<MoviePersonFormContract> Persons { get; set; }
 		#endregion
 	}
 }

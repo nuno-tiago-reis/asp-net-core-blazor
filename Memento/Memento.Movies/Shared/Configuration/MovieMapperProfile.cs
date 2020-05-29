@@ -69,6 +69,52 @@ namespace Memento.Movies.Shared.Configuration
 			this.CreateMap<MovieDetailContract, MovieFormContract>();
 			#endregion
 
+			#region [Contracts: MovieGenres]
+			// Persons: Model => Contract
+			this.CreateMap<MovieGenre, MovieGenreDetailContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Genre));
+			// Persons: Model => Contract
+			this.CreateMap<MovieGenre, MovieGenreFormContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Genre));
+			// Persons: Model => Contract
+			this.CreateMap<MovieGenre, MovieGenreListContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Genre));
+
+			// Persons: Contract => Model
+			this.CreateMap<MovieGenreFormContract, MovieGenre>()
+				.ForPath(model => model.GenreId, expression => expression.MapFrom(contract => contract.Id));
+
+			// Persons: Contract => Contract
+			this.CreateMap<MovieGenreFormContract, MovieGenreDetailContract>();
+			// Persons: Contract => Contract
+			this.CreateMap<MovieGenreDetailContract, MovieGenreFormContract>();
+			#endregion
+
+			#region [Contracts: MoviePersons]
+			// Persons: Model => Contract
+			this.CreateMap<MoviePerson, MoviePersonDetailContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Person))
+				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+			// Persons: Model => Contract
+			this.CreateMap<MoviePerson, MoviePersonFormContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Person))
+				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+			// Persons: Model => Contract
+			this.CreateMap<MoviePerson, MoviePersonListContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Person))
+				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+
+			// Persons: Contract => Model
+			this.CreateMap<MoviePersonFormContract, MoviePerson>()
+				.ForPath(model => model.PersonId, expression => expression.MapFrom(contract => contract.Id))
+				.ForPath(model => model.Role, expression => expression.MapFrom(contract => contract.Role));
+
+			// Persons: Contract => Contract
+			this.CreateMap<MoviePersonFormContract, MoviePersonDetailContract>();
+			// Persons: Contract => Contract
+			this.CreateMap<MoviePersonDetailContract, MoviePersonFormContract>();
+			#endregion
+
 			#region [Contracts: Persons]
 			// Persons: Model => Contract
 			this.CreateMap<Person, PersonDetailContract>();
@@ -84,6 +130,31 @@ namespace Memento.Movies.Shared.Configuration
 			this.CreateMap<PersonFormContract, PersonDetailContract>();
 			// Persons: Contract => Contract
 			this.CreateMap<PersonDetailContract, PersonFormContract>();
+			#endregion
+
+			#region [Contracts: PersonMovies]
+			// PersonMovies: Model => Contract
+			this.CreateMap<MoviePerson, PersonMovieDetailContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Movie))
+				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+			// PersonMovies: Model => Contract
+			this.CreateMap<MoviePerson, PersonMovieFormContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Movie))
+				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+			// PersonMovies: Model => Contract
+			this.CreateMap<MoviePerson, PersonMovieListContract>()
+				.ForPath(contract => contract, expression => expression.MapFrom(model => model.Movie))
+				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+
+			// PersonMovies: Contract => Model
+			this.CreateMap<PersonMovieFormContract, MoviePerson>()
+				.ForPath(model => model.MovieId, expression => expression.MapFrom(contract => contract.Id))
+				.ForPath(model => model.Role, expression => expression.MapFrom(contract => contract.Role));
+
+			// PersonMovies: Contract => Contract
+			this.CreateMap<PersonMovieFormContract, PersonMovieDetailContract>();
+			// PersonMovies: Contract => Contract
+			this.CreateMap<PersonMovieDetailContract, PersonMovieFormContract>();
 			#endregion
 		}
 		#endregion

@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 namespace Memento.Movies.Shared.Models.Contracts.Movies
 {
 	/// <summary>
-	/// Implements the 'MoviePerson' contract.
+	/// Implements the 'MoviePersonDetail' contract.
 	/// </summary>
-	public sealed class MoviePersonContract
+	public sealed class MoviePersonDetailContract
 	{
 		#region [Properties]
 		/// <summary>
@@ -27,12 +27,6 @@ namespace Memento.Movies.Shared.Models.Contracts.Movies
 		/// </summary>
 		[Display(Name = nameof(SharedResources.PERSON_NAME), ResourceType = typeof(SharedResources))]
 		public string Name { get; set; }
-
-		/// <summary>
-		/// The Person's normalized name.
-		/// </summary>
-		[Display(Name = nameof(SharedResources.PERSON_NAME), ResourceType = typeof(SharedResources))]
-		public string NormalizedName { get; set; }
 
 		/// <summary>
 		/// The Person's biography.

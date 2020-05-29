@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 namespace Memento.Movies.Shared.Models.Contracts.Persons
 {
 	/// <summary>
-	/// Implements the 'PersonMovie' contract.
+	/// Implements the 'PersonMovieDetail' contract.
 	/// </summary>
-	public sealed class PersonMovieContract
+	public sealed class PersonMovieDetailContract
 	{
 		#region [Properties]
 		/// <summary>
