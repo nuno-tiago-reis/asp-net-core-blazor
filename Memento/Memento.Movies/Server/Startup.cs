@@ -9,6 +9,7 @@ using Memento.Shared.Middleware.DataProtection;
 using Memento.Shared.Models.Bindings;
 using Memento.Shared.Routing;
 using Memento.Shared.Services.Localization;
+using Memento.Shared.Services.Storage;
 using Memento.Shared.Services.Toaster;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -171,7 +172,8 @@ namespace Memento.Movies.Server
 
 			#region [Required: Services]
 			services
-				.AddToasterService();
+				.AddToasterService()
+				.AddAzureStorageService(this.MovieSettings.Storage);
 			#endregion
 		}
 

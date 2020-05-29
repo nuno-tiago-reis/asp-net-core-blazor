@@ -6,10 +6,8 @@ using Memento.Shared.Controllers;
 using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Responses;
 using Memento.Shared.Services.Localization;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Server.Controllers
@@ -38,7 +36,7 @@ namespace Memento.Movies.Server.Controllers
 		/// <param name="repository">The repository.</param>
 		/// <param name="logger">The logger.</param>
 		/// <param name="mapper">The mapper.</param>
-		/// <param name="localizer">The string localizer.</param>
+		/// <param name="localizer">The localizer.</param>
 		public GenresController
 		(
 			IGenreRepository repository,

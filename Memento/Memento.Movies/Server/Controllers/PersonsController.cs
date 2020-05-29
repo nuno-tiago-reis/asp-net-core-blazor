@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using Memento.Movies.Server.Shared.Routes;
 using Memento.Movies.Shared.Models.Contracts.Persons;
-using Memento.Movies.Shared.Models.Repositories.Genres;
 using Memento.Movies.Shared.Models.Repositories.Persons;
+using Memento.Movies.Shared.Resources;
 using Memento.Shared.Controllers;
+using Memento.Shared.Exceptions;
 using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Responses;
 using Memento.Shared.Services.Localization;
-using Microsoft.AspNetCore.Http.Extensions;
+using Memento.Shared.Services.Storage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Server.Controllers
@@ -29,6 +29,11 @@ namespace Memento.Movies.Server.Controllers
 		/// The 'Person' repository.
 		/// </summary>
 		private readonly IPersonRepository Repository;
+
+		/// <summary>
+		/// The 'Storage' service.
+		/// </summary>
+		private readonly IStorageService Storage;
 		#endregion
 
 		#region [Constructors]
@@ -39,17 +44,20 @@ namespace Memento.Movies.Server.Controllers
 		/// <param name="repository">The repository.</param>
 		/// <param name="logger">The logger.</param>
 		/// <param name="mapper">The mapper.</param>
-		/// <param name="stringLocalizer">The string localizer.</param>
+		/// <param name="localizer">The localizer.</param>
+		/// <param name="storage">The storage.</param>
 		public PersonsController
 		(
 			IPersonRepository repository,
 			ILogger<PersonsController> logger,
 			IMapper mapper,
-			ILocalizerService localizer
+			ILocalizerService localizer,
+			IStorageService storage
 		)
 		: base(logger, mapper, localizer)
 		{
 			this.Repository = repository;
+			this.Storage = storage;
 		}
 		#endregion
 
@@ -59,11 +67,25 @@ namespace Memento.Movies.Server.Controllers
 		/// </summary>
 		/// 
 		/// <param name="contract">The contract.</param>
+		/// <param name="file">The file.</param>
 		[HttpPost]
 		public async Task<ActionResult<MementoResponse<PersonDetailContract>>> CreateAsync([FromBody] PersonFormContract contract)
 		{
+			// Check if there's a picture in the contract
+			if (contract.Picture == null)
+			{
+				// Create the message with the given context
+				var message = this.Localizer.GetString(SharedResources.MODEL_HAS_INVALID_FIELD, this.Localizer.GetString(SharedResources.PERSON_PICTURE));
+
+				// Throw an exception due to the missing picture
+				throw new MementoException(message, MementoExceptionType.BadRequest);
+			}
+
 			// Map the person
 			var person = this.Mapper.Map<Person>(contract);
+
+			// Create the picture in the storage
+			person.PictureUrl = await this.Storage.CreateAsync(contract.Picture.FileBase64, contract.Picture.FileName);
 
 			// Create the person
 			var createdPerson = await this.Repository.CreateAsync(person);
@@ -78,12 +100,20 @@ namespace Memento.Movies.Server.Controllers
 		/// 
 		/// <param name="id">The identifer.</param>
 		/// <param name="contract">The contract.</param>
+		/// <param name="file">The file.</param>
 		[HttpPut("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] PersonFormContract contract)
 		{
 			// Map the person
 			var person = this.Mapper.Map<Person>(contract);
 			person.Id = id;
+
+			// Check if there's a picture in the contract
+			if (contract.Picture != null)
+			{
+				// Create the picture in the storage
+				person.PictureUrl = await this.Storage.CreateAsync(contract.Picture.FileBase64, contract.Picture.FileName);
+			}
 
 			// Update the person
 			await this.Repository.UpdateAsync(person);
