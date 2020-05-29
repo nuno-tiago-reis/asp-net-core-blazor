@@ -1,0 +1,67 @@
+﻿@inherits InputBase<T>
+@typeparam T
+
+<input type="text"
+	   class="form-control"
+	   value="@this.SearchText"
+	   autocomplete="off"
+	   @oninput="@this.OnInputChanges"
+	   @onfocusin="(() => this.OnInputFocusIn())"
+	   @onfocusout="(() => this.OnInputFocusOut())"
+	   @attributes="this.AdditionalAttributes" />
+
+@switch (this.State)
+{
+	case InputTypeaheadState.Idle:
+	{
+		break;
+	}
+	case InputTypeaheadState.Searching:
+	{
+		<div class="typeahead-container">
+			<div class="typeahead-message">
+				@if (this.SearchingContent != null)
+				{
+					@this.SearchingContent
+				}
+				else
+				{
+					<p>@this.Localizer.GetString(SharedResources.FORM_TYPEAHEAD_LOADING)</p>
+				}
+			</div>
+		</div>
+		break;
+	}
+	case InputTypeaheadState.SearchedWithResults:
+	{
+		<div class="typeahead-container">
+			@foreach (var suggestion in this.SearchSuggestions)
+			{
+				<div class="typeahead-suggestion"
+					 @key="suggestion"
+					 @onclick="@(() => this.OnSuggestionClickAsync(suggestion))"
+					 @onmouseenter="(() => this.OnSuggestionMouseEnter())"
+					 @onmouseleave="(() => this.OnSuggestionMouseLeave())">
+					@this.SuggestionContent(suggestion)
+				</div>
+			}
+		</div>
+		break;
+	}
+	case InputTypeaheadState.SearchedWithoutResults:
+	{
+		<div class="typeahead-container">
+			<div class="typeahead-message">
+				@if (this.NotFoundContent != null)
+				{
+					@this.NotFoundContent
+				}
+				else
+				{
+					<p>@this.Localizer.GetString(SharedResources.FORM_TYPEAHEAD_NOT_FOUND)</p>
+				}
+			</div>
+		</div>
+		break;
+	}
+}
