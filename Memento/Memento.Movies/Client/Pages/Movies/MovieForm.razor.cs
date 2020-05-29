@@ -1,5 +1,4 @@
-﻿using Blazor.FileReader;
-using Memento.Movies.Client.Services.Genres;
+﻿using Memento.Movies.Client.Services.Genres;
 using Memento.Movies.Client.Services.Movies;
 using Memento.Movies.Client.Services.Persons;
 using Memento.Movies.Client.Shared.Components;
@@ -19,7 +18,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using Memento.Shared.Models.Files;
 
 namespace Memento.Movies.Client.Pages.Movies
 {
@@ -66,9 +64,9 @@ namespace Memento.Movies.Client.Pages.Movies
 		public InputImage PictureInputImage { get; set; }
 
 		/// <summary>
-		/// The movie genre selected usthroughing typeahead.
+		/// The last genre to be selected through typeahead.
 		/// </summary>
-		private GenreListContract Genre { get; set; }
+		private GenreListContract GenreModelTypeahead { get; set; }
 
 		/// <summary>
 		/// The genre input typeahead.
@@ -78,7 +76,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <summary>
 		/// The last person to be selected through typeahead.
 		/// </summary>
-		private PersonListContract Person { get; set; }
+		private PersonListContract PersonModelTypeahead { get; set; }
 
 		/// <summary>
 		/// The person input typeahead.
@@ -110,17 +108,17 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <summary>
 		/// The movie genres selected through typeahead.
 		/// </summary>
-		private List<GenreListContract> MovieGenres { get; set; }
-
-		/// <summary>
-		/// The last movie person role to be selected.
-		/// </summary>
-		private MoviePersonRole? MoviePersonRole { get; set; }
+		private List<GenreListContract> Genres { get; set; }
 
 		/// <summary>
 		/// The movie persons selected through typeahead.
 		/// </summary>
-		private Dictionary<MoviePersonRole, List<PersonListContract>> MoviePersons { get; set; }
+		private Dictionary<MoviePersonRole, List<PersonListContract>> PersonsByRole { get; set; }
+
+		/// <summary>
+		/// The last movie person role to be selected.
+		/// </summary>
+		private MoviePersonRole? PersonRole { get; set; }
 		#endregion
 
 		#region [Methods] Component
@@ -154,21 +152,37 @@ namespace Memento.Movies.Client.Pages.Movies
 				// Create the contracts
 				this.Movie = new MovieDetailContract
 				{
-					ReleaseDate = DateTime.Today
+					ReleaseDate = DateTime.Today,
+					Genres = new List<MovieGenreContract>(),
+					Persons = new List<MoviePersonContract>()
 				};
 				this.MovieChanges = new MovieFormContract
 				{
-					ReleaseDate = DateTime.Today
+					ReleaseDate = DateTime.Today,
+					Genres = new List<long>(),
+					Persons = new List<Tuple<long, MoviePersonRole>>()
 				};
 			}
 
-			// Initialize the genre typeahead collection
-			this.MovieGenres = new List<GenreListContract>();
-			// Initialize the person typeahead collection
-			this.MoviePersons = new Dictionary<MoviePersonRole, List<PersonListContract>>();
-			foreach (var moviePersonRole in Enum.GetValues(typeof(MoviePersonRole)))
+			// Initialize the genres
+			this.Genres = new List<GenreListContract>();
+			foreach (var genre in this.Movie.Genres)
 			{
-				this.MoviePersons.Add((MoviePersonRole)moviePersonRole, new List<PersonListContract>());
+				this.Genres.Add(this.Mapper.Map<GenreListContract>(genre));
+			}
+
+			// Initialize the persons
+			this.PersonsByRole = new Dictionary<MoviePersonRole, List<PersonListContract>>();
+			foreach (MoviePersonRole role in Enum.GetValues(typeof(MoviePersonRole)))
+			{
+				var persons = new List<PersonListContract>();
+
+				foreach (var person in this.Movie.Persons.Where(p => p.Role == role))
+				{
+					persons.Add(this.Mapper.Map<PersonListContract>(person));
+				}
+
+				this.PersonsByRole.Add(role, persons);
 			}
 		}
 		#endregion
@@ -210,6 +224,21 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// </summary>
 		public async Task OnSaveChangesConfirmedAsync()
 		{
+			// Update the genres
+			foreach (var genre in this.Genres)
+			{
+				this.MovieChanges.Genres.Add(genre.Id);
+			}
+
+			// Update the persons
+			foreach (var personsByRole in this.PersonsByRole)
+			{
+				foreach (var person in personsByRole.Value)
+				{
+					this.MovieChanges.Persons.Add(new Tuple<long, MoviePersonRole>(person.Id, personsByRole.Key));
+				}
+			}
+
 			if (this.MovieId.HasValue)
 			{
 				// Update the movie
@@ -321,7 +350,7 @@ namespace Memento.Movies.Client.Pages.Movies
 			var genres = await this.GenreService.GetAllAsync(genreFilter);
 
 			// Filter the items
-			return genres.Data.Items.Where(item => !this.MovieGenres.Any(genre => genre.Id == item.Id));
+			return genres.Data.Items.Where(item => !this.Genres.Any(genre => genre.Id == item.Id));
 		}
 
 		/// <summary>
@@ -331,8 +360,11 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <param name="genre">The genre</param>
 		public void OnGenreSelected(GenreListContract genre)
 		{
-			this.Genre = null;
-			this.MovieGenres.Add(genre);
+			// Clear the bound genre
+			this.GenreModelTypeahead = null;
+			// Store the genre
+			this.Genres.Add(genre);
+			// Reset the typeahead
 			this.GenreInputTypeahead.Reset();
 		}
 
@@ -354,10 +386,11 @@ namespace Memento.Movies.Client.Pages.Movies
 			// Invoke the API
 			var persons = await this.PersonService.GetAllAsync(personFilter);
 
-			return persons.Data.Items;
+			// Filter the persons
+			var filteredPersons = this.PersonsByRole.First(person => person.Key == this.PersonRole).Value;
 
 			// Filter the items
-			// return persons.Data.Items.Where(item => !this.MoviePersons.Any(person => person.Id == item.Id));
+			return persons.Data.Items.Where(item => !filteredPersons.Any(person => person.Id == item.Id));
 		}
 
 		/// <summary>
@@ -367,11 +400,16 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <param name="person">The person</param>
 		public void OnPersonSelected(PersonListContract person)
 		{
-			this.Person = null;
-			// this.MoviePersons.Add(person);
+			// Filter the persons
+			var filteredPersons = this.PersonsByRole.First(person => person.Key == this.PersonRole).Value;
+
+			// Clear the bound person
+			this.PersonModelTypeahead = null;
+			// Store the person
+			filteredPersons.Add(person);
+			// Reset the typeahead
 			this.PersonInputTypeahead.Reset();
 		}
-
 		#endregion
 	}
 }

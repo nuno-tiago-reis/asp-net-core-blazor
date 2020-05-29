@@ -1,5 +1,4 @@
-﻿using Blazor.FileReader;
-using Memento.Movies.Client.Services.Movies;
+﻿using Memento.Movies.Client.Services.Movies;
 using Memento.Movies.Client.Services.Persons;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
@@ -14,6 +13,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Persons
@@ -56,9 +56,14 @@ namespace Memento.Movies.Client.Pages.Persons
 		public InputImage InputImage { get; set; }
 
 		/// <summary>
+		/// The last movie to be selected through typeahead.
+		/// </summary>
+		private MovieListContract MovieModelTypeahead { get; set; }
+
+		/// <summary>
 		/// The movie input typeahead.
 		/// </summary>
-		public InputTypeahead<MovieListContract> MovieTypeahead { get; set; }
+		public InputTypeahead<MovieListContract> MovieInputTypeahead { get; set; }
 
 		/// <summary>
 		/// The save changes modal.
@@ -83,14 +88,14 @@ namespace Memento.Movies.Client.Pages.Persons
 		private PersonFormContract PersonChanges { get; set; }
 
 		/// <summary>
-		/// The last movie person to be selected through typeahead.
-		/// </summary>
-		private MovieListContract PersonMovie { get; set; }
-
-		/// <summary>
 		/// The persons movies selected through typeahead.
 		/// </summary>
-		private Dictionary<MoviePersonRole, List<MovieListContract>> PersonMovies { get; set; }
+		private Dictionary<MoviePersonRole, List<MovieListContract>> MoviesByRole { get; set; }
+
+		/// <summary>
+		/// The last movie person role to be selected.
+		/// </summary>
+		private MoviePersonRole? MovieRole { get; set; }
 		#endregion
 
 		#region [Methods] Component
@@ -124,19 +129,28 @@ namespace Memento.Movies.Client.Pages.Persons
 				// Create the contracts
 				this.Person = new PersonDetailContract
 				{
-					BirthDate = DateTime.Today
+					BirthDate = DateTime.Today,
+					Movies = new List<PersonMovieContract>()
 				};
 				this.PersonChanges = new PersonFormContract
 				{
-					BirthDate = DateTime.Today
+					BirthDate = DateTime.Today,
+					Movies = new List<Tuple<long, MoviePersonRole>>()
 				};
 			}
 
-			// Initialize the movie typeahead collection
-			this.PersonMovies = new Dictionary<MoviePersonRole, List<MovieListContract>>();
-			foreach (var moviePersonRole in Enum.GetValues(typeof(MoviePersonRole)))
+			// Initialize the movies
+			this.MoviesByRole = new Dictionary<MoviePersonRole, List<MovieListContract>>();
+			foreach (MoviePersonRole role in Enum.GetValues(typeof(MoviePersonRole)))
 			{
-				this.PersonMovies.Add((MoviePersonRole)moviePersonRole, new List<MovieListContract>());
+				var movies = new List<MovieListContract>();
+
+				foreach (var movie in this.Person.Movies.Where(m => m.Role == role))
+				{
+					movies.Add(this.Mapper.Map<MovieListContract>(movie));
+				}
+
+				this.MoviesByRole.Add(role, movies);
 			}
 		}
 		#endregion
@@ -178,6 +192,15 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		public async Task OnSaveChangesConfirmedAsync()
 		{
+			// Update the movies
+			foreach (var movies in this.MoviesByRole)
+			{
+				foreach (var movie in movies.Value)
+				{
+					this.PersonChanges.Movies.Add(new Tuple<long, MoviePersonRole>(movie.Id, movies.Key));
+				}
+			}
+
 			if (this.PersonId.HasValue)
 			{
 				// Update the person
@@ -288,7 +311,29 @@ namespace Memento.Movies.Client.Pages.Persons
 			// Invoke the API
 			var movies = await this.MovieService.GetAllAsync(movieFilter);
 
-			return movies.Data.Items;
+			// Filter the persons
+			var filteredMovies = this.MoviesByRole.First(movie => movie.Key == this.MovieRole).Value;
+
+			// Filter the items
+			return movies.Data.Items.Where(item => !filteredMovies.Any(movie => movie.Id == item.Id));
+		}
+
+		/// <summary>
+		/// Invoked when a movie is selected from the typeahead.
+		/// </summary>
+		/// 
+		/// <param name="movie">The movie</param>
+		public void OnMovieSelected(MovieListContract movie)
+		{
+			// Filter the movies
+			var filteredMovies = this.MoviesByRole.First(movie => movie.Key == this.MovieRole).Value;
+
+			// Clear the bound movie
+			this.MovieModelTypeahead = null;
+			// Store the movie
+			filteredMovies.Add(movie);
+			// Reset the typeahead
+			this.MovieInputTypeahead.Reset();
 		}
 		#endregion
 	}

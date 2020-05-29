@@ -19,6 +19,7 @@ else
 		<!-- inputs -->
 		<div class="row">
 			<div class="col-md-12">
+				<!-- name -->
 				<div class="form-group">
 					<Label For="@(() => this.MovieChanges.Name)">
 					</Label>
@@ -28,6 +29,7 @@ else
 					<ValidationMessage For="@(() => this.MovieChanges.Name)">
 					</ValidationMessage>
 				</div>
+				<!-- summary -->
 				<div class="form-group">
 					<InputMarkdown class="form-control"
 								   @bind-Value="this.MovieChanges.Summary">
@@ -41,40 +43,62 @@ else
 					<ValidationMessage For="@(() => this.MovieChanges.Summary)">
 					</ValidationMessage>
 				</div>
+				<!-- genres -->
 				<div class="form-group">
 					<Label For="@(() => this.Movie.Genres)">
 					</Label>
 					<InputTypeahead @ref="this.GenreInputTypeahead"
 									T="GenreListContract"
 									SearchMethod="@((name) => this.GetGenresAsync(name))"
-									Value="this.Genre"
+									Value="this.GenreModelTypeahead"
 									ValueChanged="@((genre) => this.OnGenreSelected(genre))"
-									ValueExpression="@(() => this.Genre)">
+									ValueExpression="@(() => this.GenreModelTypeahead)">
 						<SuggestionContent Context="genre">
 							<span>@genre.Name</span>
 						</SuggestionContent>
 					</InputTypeahead>
 				</div>
 				<ul>
-					@foreach (var genre in this.MovieGenres ?? new List<GenreListContract>())
+					@foreach (var genre in this.Genres)
 					{
 						<li>@genre.Name</li>
 					}
 				</ul>
+				<!-- persons -->
 				<div class="form-group">
 					<Label For="@(() => this.Movie.Persons)">
 					</Label>
-					<InputTypeahead @ref="this.PersonInputTypeahead"
-									T="PersonListContract"
-									SearchMethod="@((name) => this.GetPersonsAsync(name))"
-									Value="this.Person"
-									ValueChanged="@((genre) => this.OnPersonSelected(genre))"
-									ValueExpression="@(() => this.Person)">
-						<SuggestionContent Context="person">
-							<span>@person.Name</span>
-						</SuggestionContent>
-					</InputTypeahead>
+					<InputNullableSelect class="form-control mb-2"
+								 @bind-Value="this.PersonRole">
+						@foreach (MoviePersonRole role in Enum.GetValues(typeof(MoviePersonRole)))
+						{
+							<option value="@role">@role.GetLocalizedName()</option>
+						}
+					</InputNullableSelect>
+					@if (this.PersonRole != null)
+					{
+						<InputTypeahead @ref="this.PersonInputTypeahead"
+										T="PersonListContract"
+										SearchMethod="@((name) => this.GetPersonsAsync(name))"
+										Value="this.PersonModelTypeahead"
+										ValueChanged="@((person) => this.OnPersonSelected(person))"
+										ValueExpression="@(() => this.PersonModelTypeahead)">
+							<SuggestionContent Context="person">
+								<span>@person.Name</span>
+							</SuggestionContent>
+						</InputTypeahead>
+					}
 				</div>
+				<ul>
+					@foreach (var roles in this.PersonsByRole)
+					{
+						@foreach (var role in roles.Value)
+						{
+							<li>@role.Name (@roles.Key)</li>
+						}
+					}
+				</ul>
+				<!-- picture -->
 				<div class="form-group">
 					<InputImage @ref="this.PictureInputImage"
 								@bind-Value="this.MovieChanges.Picture"
@@ -89,6 +113,7 @@ else
 					<ValidationMessage For="@(() => this.MovieChanges.Picture)">
 					</ValidationMessage>
 				</div>
+				<!-- trailer -->
 				<div class="form-group">
 					<Label For="@(() => this.MovieChanges.TrailerUrl)">
 					</Label>
@@ -98,6 +123,7 @@ else
 					<ValidationMessage For="@(() => this.MovieChanges.TrailerUrl)">
 					</ValidationMessage>
 				</div>
+				<!-- in theaters -->
 				<div class="form-group">
 					<Label For="@(() => this.MovieChanges.InTheaters)">
 					</Label>
@@ -107,6 +133,7 @@ else
 					<ValidationMessage For="@(() => this.MovieChanges.InTheaters)">
 					</ValidationMessage>
 				</div>
+				<!-- release date -->
 				<div class="form-group">
 					<Label For="@(() => this.MovieChanges.ReleaseDate)">
 					</Label>

@@ -19,6 +19,7 @@ else
 		<!-- inputs -->
 		<div class="row">
 			<div class="col-md-12">
+				<!-- name -->
 				<div class="form-group">
 					<Label For="@(() => this.PersonChanges.Name)">
 					</Label>
@@ -28,6 +29,7 @@ else
 					<ValidationMessage For="@(() => this.PersonChanges.Name)">
 					</ValidationMessage>
 				</div>
+				<!-- biography -->
 				<div class="form-group">
 					<InputMarkdown class="form-control"
 								   @bind-Value="this.PersonChanges.Biography">
@@ -41,6 +43,7 @@ else
 					<ValidationMessage For="@(() => this.PersonChanges.Biography)">
 					</ValidationMessage>
 				</div>
+				<!-- picture -->
 				<div class="form-group">
 					<InputImage @ref="this.InputImage"
 								@bind-Value="this.PersonChanges.Picture"
@@ -55,6 +58,41 @@ else
 					<ValidationMessage For="@(() => this.PersonChanges.Picture)">
 					</ValidationMessage>
 				</div>
+				<!-- movies -->
+				<div class="form-group">
+					<Label For="@(() => this.Person.Movies)">
+					</Label>
+					<InputNullableSelect class="form-control mb-2"
+										 @bind-Value="this.MovieRole">
+						@foreach (MoviePersonRole role in Enum.GetValues(typeof(MoviePersonRole)))
+							{
+							<option value="@role">@role.GetLocalizedName()</option>
+							}
+					</InputNullableSelect>
+					@if (this.MovieRole != null)
+					{
+						<InputTypeahead @ref="this.MovieInputTypeahead"
+										T="MovieListContract"
+										SearchMethod="@((name) => this.GetMoviesAsync(name))"
+										Value="this.MovieModelTypeahead"
+										ValueChanged="@((movie) => this.OnMovieSelected(movie))"
+										ValueExpression="@(() => this.MovieModelTypeahead)">
+							<SuggestionContent Context="movie">
+								<span>@movie.Name</span>
+							</SuggestionContent>
+						</InputTypeahead>
+					}
+				</div>
+				<ul>
+					@foreach (var roles in this.MoviesByRole)
+					{
+						@foreach (var role in roles.Value)
+						{
+							<li>@role.Name (@roles.Key)</li>
+						}
+					}
+				</ul>
+				<!-- birth date -->
 				<div class="form-group">
 					<Label For="@(() => this.PersonChanges.BirthDate)">
 					</Label>
