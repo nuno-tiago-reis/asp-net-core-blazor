@@ -23,7 +23,7 @@ namespace Memento.Movies.Shared.Models
 			// Properties (MoviePerson)
 			builder.Property(moviePerson => moviePerson.MovieId).IsRequired();
 			builder.Property(moviePerson => moviePerson.PersonId).IsRequired();
-			builder.Property(moviePerson => moviePerson.PersonRole).IsRequired();
+			builder.Property(moviePerson => moviePerson.Role).IsRequired();
 
 			// Properties (Model)
 			builder.Property(moviePerson => moviePerson.CreatedBy).IsRequired();

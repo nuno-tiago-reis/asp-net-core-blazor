@@ -319,8 +319,8 @@
 	<data name="MOVIEPERSON_PERSONID" xml:space="preserve">
 		<value>Identificador da Pessoa</value>
 	</data>
-	<data name="MOVIEPERSON_PERSONROLE" xml:space="preserve">
-		<value>Papel da Pessoa</value>
+	<data name="MOVIEPERSON_ROLE" xml:space="preserve">
+		<value>Papel</value>
 	</data>
 	<data name="MOVIEPERSON_UPDATEDAT" xml:space="preserve">
 		<value>Atualizado Em</value>

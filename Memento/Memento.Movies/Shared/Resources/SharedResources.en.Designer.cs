@@ -1023,13 +1023,13 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to Person Role.
+		///   Looks up a localized string similar to Role.
 		/// </summary>
-		public static string MOVIEPERSON_PERSONROLE
+		public static string MOVIEPERSON_ROLE
 		{
 			get
 			{
-				return ResourceManager.GetString("MOVIEPERSON_PERSONROLE", resourceCulture);
+				return ResourceManager.GetString("MOVIEPERSON_ROLE", resourceCulture);
 			}
 		}
 

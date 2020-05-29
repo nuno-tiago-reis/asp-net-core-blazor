@@ -13,7 +13,7 @@ namespace Memento.Movies.Shared.Models.Contracts.Movies
 		/// <summary>
 		/// The Person's role in the Movie.
 		/// </summary>
-		[Display(Name = nameof(SharedResources.MOVIEPERSON_PERSONROLE), ResourceType = typeof(SharedResources))]
+		[Display(Name = nameof(SharedResources.MOVIEPERSON_ROLE), ResourceType = typeof(SharedResources))]
 		public MoviePersonRole Role { get; set; }
 
 		/// <summary>

@@ -46,10 +46,10 @@ namespace Memento.Movies.Shared.Models
 		public Person Person { get; set; }
 
 		/// <summary>
-		/// The persons role.
+		/// The role.
 		/// </summary>
-		[Display(Name = nameof(SharedResources.MOVIEPERSON_PERSONROLE), ResourceType = typeof(SharedResources))]
-		public MoviePersonRole PersonRole { get; set; }
+		[Display(Name = nameof(SharedResources.MOVIEPERSON_ROLE), ResourceType = typeof(SharedResources))]
+		public MoviePersonRole Role { get; set; }
 
 		/// <summary>
 		/// The created by user identifier.

@@ -2,14 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
 namespace Memento.Movies.Shared.Models.Migrations
 {
 	[DbContext(typeof(MovieContext))]
-	internal partial class MovieContextModelSnapshot : ModelSnapshot
+	[Migration("20200529022013_RenamedPersonRoleToRole")]
+	internal partial class RenamedPersonRoleToRole
 	{
-		protected override void BuildModel(ModelBuilder modelBuilder)
+		protected override void BuildTargetModel(ModelBuilder modelBuilder)
 		{
 			#pragma warning disable 612, 618
 			modelBuilder
