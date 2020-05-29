@@ -74,8 +74,11 @@ namespace Memento.Movies.Server.Controllers
 			// Check if there's a picture in the contract
 			if (contract.Picture == null)
 			{
+				// Get the field name
+				var name = this.Localizer.GetString(SharedResources.MOVIE_PICTURE);
+
 				// Create the message with the given context
-				var message =  this.Localizer.GetString(SharedResources.MODEL_HAS_INVALID_FIELD, this.Localizer.GetString(SharedResources.MOVIE_PICTURE));
+				var message =  this.Localizer.GetString(SharedResources.ERROR_INVALID_FIELD, name);
 
 				// Throw an exception due to the missing picture
 				throw new MementoException(message, MementoExceptionType.BadRequest);
@@ -165,6 +168,53 @@ namespace Memento.Movies.Server.Controllers
 
 			// Build the response
 			return this.BuildGetAllResponse<Movie, MovieListContract>(movies);
+		}
+		#endregion
+
+		#region [Methods] Messages
+		/// <inheritdoc />
+		protected override string BuildCreateSuccessfulMessage()
+		{
+			// Build the message
+			var message = this.Localizer.GetString(SharedResources.CONTROLLER_CREATE_SUCCESSFUL);
+
+			return message;
+		}
+
+		/// <inheritdoc />
+		protected override string BuildUpdateSuccessfulMessage()
+		{
+			// Build the message
+			var message = this.Localizer.GetString(SharedResources.CONTROLLER_UPDATE_SUCCESSFUL);
+
+			return message;
+		}
+
+		/// <inheritdoc />
+		protected override string BuildDeleteSuccessfulMessage()
+		{
+			// Build the message
+			var message = this.Localizer.GetString(SharedResources.CONTROLLER_DELETE_SUCCESSFUL);
+
+			return message;
+		}
+
+		/// <inheritdoc />
+		protected override string BuildGetSuccessfulMessage()
+		{
+			// Build the message
+			var message = this.Localizer.GetString(SharedResources.CONTROLLER_GET_SUCCESSFUL);
+
+			return message;
+		}
+
+		/// <inheritdoc />
+		protected override string BuildGetAllSuccessfulMessage()
+		{
+			// Build the message
+			var message = this.Localizer.GetString(SharedResources.CONTROLLER_GET_ALL_SUCCESSFUL);
+
+			return message;
 		}
 		#endregion
 	}

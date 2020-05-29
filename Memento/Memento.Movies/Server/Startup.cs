@@ -5,7 +5,7 @@ using Memento.Movies.Shared.Models.Repositories.Genres;
 using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Movies.Shared.Resources;
-using Memento.Shared.Middleware.DataProtection;
+using Memento.Shared.Extensions;
 using Memento.Shared.Models.Bindings;
 using Memento.Shared.Routing;
 using Memento.Shared.Services.Localization;
@@ -117,16 +117,8 @@ namespace Memento.Movies.Server
 			services
 				.Configure<JsonOptions>(options =>
 				{
-					// convert enums to strings
-					options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, false));
-					// don't convert dictionary keys
-					options.JsonSerializerOptions.DictionaryKeyPolicy = null;
-					// dont ignore null values
-					options.JsonSerializerOptions.IgnoreNullValues = false;
-					// ignore casing when deserializing
-					options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-					// convert properties to camel case
-					options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+					// configure the default options
+					options.JsonSerializerOptions.ConfigureDefaultOptions();
 				});
 			services
 				.Configure<RouteOptions>(options =>
