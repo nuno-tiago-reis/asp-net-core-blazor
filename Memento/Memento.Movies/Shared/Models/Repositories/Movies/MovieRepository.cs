@@ -314,6 +314,14 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 					break;
 				}
 
+				case MovieFilterOrderBy.ReleaseDate:
+				{
+					movieQueryable = movieFilter.OrderDirection == FilterOrderDirection.Ascending
+						? movieQueryable.OrderBy(movie => movie.ReleaseDate)
+						: movieQueryable.OrderByDescending(movie => movie.ReleaseDate);
+					break;
+				}
+
 				case MovieFilterOrderBy.CreatedAt:
 				{
 					movieQueryable = movieFilter.OrderDirection == FilterOrderDirection.Ascending

@@ -62,14 +62,19 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 		[Display(Name = nameof(SharedResources.MOVIE_NAME), ResourceType = typeof(SharedResources))]
 		Name = 1,
 		/// <summary>
+		/// By 'ReleaseDate'.
+		/// </summary>
+		[Display(Name = nameof(SharedResources.MOVIE_RELEASEDATE), ResourceType = typeof(SharedResources))]
+		ReleaseDate = 2,
+		/// <summary>
 		/// By 'CreatedAt'.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIE_CREATEDAT), ResourceType = typeof(SharedResources))]
-		CreatedAt = 2,
+		CreatedAt = 3,
 		/// <summary>
 		/// By 'UpdatedAt'.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIE_UPDATEDAT), ResourceType = typeof(SharedResources))]
-		UpdatedAt = 3
+		UpdatedAt = 4
 	}
 }
