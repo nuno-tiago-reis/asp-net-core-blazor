@@ -154,7 +154,7 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The {0} was created successfully..
+		///   Looks up a localized string similar to The creation was completed successfully..
 		/// </summary>
 		public static string CONTROLLER_CREATE_SUCCESSFUL
 		{
@@ -165,7 +165,7 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The {0} was deleted successfully..
+		///   Looks up a localized string similar to The deletion was completed successfully..
 		/// </summary>
 		public static string CONTROLLER_DELETE_SUCCESSFUL
 		{
@@ -176,7 +176,7 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The {0} were obtained successfully..
+		///   Looks up a localized string similar to The listing was obtained successfully..
 		/// </summary>
 		public static string CONTROLLER_GET_ALL_SUCCESSFUL
 		{
@@ -187,7 +187,7 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The {0} was obtained successfully..
+		///   Looks up a localized string similar to The detail was obtained successfully..
 		/// </summary>
 		public static string CONTROLLER_GET_SUCCESSFUL
 		{
@@ -198,7 +198,7 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
-		///   Looks up a localized string similar to The {0} was updated successfully..
+		///   Looks up a localized string similar to The update was completed successfully..
 		/// </summary>
 		public static string CONTROLLER_UPDATE_SUCCESSFUL
 		{
@@ -319,6 +319,17 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to In Theaters.
+		/// </summary>
+		public static string GENERIC_IN_THEATERS
+		{
+			get
+			{
+				return ResourceManager.GetString("GENERIC_IN_THEATERS", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to Loading.
 		/// </summary>
 		public static string GENERIC_LOADING
@@ -337,6 +348,17 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("GENERIC_NO_RECORDS_FOUND", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Upcoming Releases.
+		/// </summary>
+		public static string GENERIC_UPCOMING_RELEASES
+		{
+			get
+			{
+				return ResourceManager.GetString("GENERIC_UPCOMING_RELEASES", resourceCulture);
 			}
 		}
 

@@ -127,11 +127,17 @@
 	<data name="FORM_TYPEAHEAD_NOT_FOUND" xml:space="preserve">
 		<value>No records were found</value>
 	</data>
+	<data name="GENERIC_IN_THEATERS" xml:space="preserve">
+		<value>In Theaters</value>
+	</data>
 	<data name="GENERIC_LOADING" xml:space="preserve">
 		<value>Loading</value>
 	</data>
 	<data name="GENERIC_NO_RECORDS_FOUND" xml:space="preserve">
 		<value>No records were found</value>
+	</data>
+	<data name="GENERIC_UPCOMING_RELEASES" xml:space="preserve">
+		<value>Upcoming Releases</value>
 	</data>
 	<data name="GENRE" xml:space="preserve">
 		<value>Genre</value>
