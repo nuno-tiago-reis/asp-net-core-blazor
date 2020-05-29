@@ -68,10 +68,10 @@ else
 				   CancelButtonCallback="this.OnDeleteCancelledAsync">
 	<!-- header -->
 	<HeaderContent>
-		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DELETE_MOVIE_TITLE)
+		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DELETE_TITLE, this.Localizer.GetString(SharedResources.MOVIE))
 	</HeaderContent>
 	<!-- body -->
 	<BodyContent>
-		<p>@this.Localizer.GetString(SharedResources.MODAL_DELETE_MOVIE_BODY)</p>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_DELETE_BODY, this.Localizer.GetString(SharedResources.MOVIE))</p>
 	</BodyContent>
 </ConfirmationModal>

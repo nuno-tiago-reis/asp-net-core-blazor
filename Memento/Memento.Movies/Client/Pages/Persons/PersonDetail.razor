@@ -64,10 +64,10 @@ else
 				   CancelButtonCallback="this.OnDeleteCancelledAsync">
 	<!-- header -->
 	<HeaderContent>
-		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DELETE_PERSON_TITLE)
+		<span class="fas fa-exclamation-triangle"></span> @this.Localizer.GetString(SharedResources.MODAL_DELETE_TITLE, this.Localizer.GetString(SharedResources.PERSON))
 	</HeaderContent>
 	<!-- body -->
 	<BodyContent>
-		<p>@this.Localizer.GetString(SharedResources.MODAL_DELETE_PERSON_BODY)</p>
+		<p>@this.Localizer.GetString(SharedResources.MODAL_DELETE_BODY, this.Localizer.GetString(SharedResources.PERSON))</p>
 	</BodyContent>
 </ConfirmationModal>

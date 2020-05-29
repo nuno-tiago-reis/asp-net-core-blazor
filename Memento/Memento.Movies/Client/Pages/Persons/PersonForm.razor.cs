@@ -130,12 +130,12 @@ namespace Memento.Movies.Client.Pages.Persons
 				this.Person = new PersonDetailContract
 				{
 					BirthDate = DateTime.Today,
-					Movies = new List<PersonMovieContract>()
+					Movies = new List<PersonMovieDetailContract>()
 				};
 				this.PersonChanges = new PersonFormContract
 				{
 					BirthDate = DateTime.Today,
-					Movies = new List<Tuple<long, MoviePersonRole>>()
+					Movies = new List<PersonMovieFormContract>()
 				};
 			}
 
@@ -174,7 +174,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		public void OnInvalidSubmit(EditContext _)
 		{
 			// Show a toast message
-			this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_FORM_INVALID_FIELDS));
+			this.Toaster.Error(this.Localizer.GetString(SharedResources.FORM_INVALID_FIELDS));
 		}
 
 		/// <summary>
@@ -193,11 +193,14 @@ namespace Memento.Movies.Client.Pages.Persons
 		public async Task OnSaveChangesConfirmedAsync()
 		{
 			// Update the movies
-			foreach (var movies in this.MoviesByRole)
+			foreach (var moviesByRole in this.MoviesByRole)
 			{
-				foreach (var movie in movies.Value)
+				foreach (var movieByRole in moviesByRole.Value)
 				{
-					this.PersonChanges.Movies.Add(new Tuple<long, MoviePersonRole>(movie.Id, movies.Key));
+					var movie = this.Mapper.Map<PersonMovieFormContract>(movieByRole);
+					movie.Role = moviesByRole.Key;
+
+					this.PersonChanges.Movies.Add(movie);
 				}
 			}
 

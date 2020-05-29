@@ -118,7 +118,7 @@ namespace Memento.Movies.Client.Pages.Genres
 		public void OnInvalidSubmit(EditContext _)
 		{
 			// Show a toast message
-			this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_FORM_INVALID_FIELDS));
+			this.Toaster.Error(this.Localizer.GetString(SharedResources.FORM_INVALID_FIELDS));
 		}
 
 		/// <summary>

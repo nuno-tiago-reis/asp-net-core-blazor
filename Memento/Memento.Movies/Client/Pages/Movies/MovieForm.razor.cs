@@ -153,14 +153,14 @@ namespace Memento.Movies.Client.Pages.Movies
 				this.Movie = new MovieDetailContract
 				{
 					ReleaseDate = DateTime.Today,
-					Genres = new List<MovieGenreContract>(),
-					Persons = new List<MoviePersonContract>()
+					Genres = new List<MovieGenreDetailContract>(),
+					Persons = new List<MoviePersonDetailContract>()
 				};
 				this.MovieChanges = new MovieFormContract
 				{
 					ReleaseDate = DateTime.Today,
-					Genres = new List<long>(),
-					Persons = new List<Tuple<long, MoviePersonRole>>()
+					Genres = new List<MovieGenreFormContract>(),
+					Persons = new List<MoviePersonFormContract>()
 				};
 			}
 
@@ -206,7 +206,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		public void OnInvalidSubmit(EditContext _)
 		{
 			// Show a toast message
-			this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_FORM_INVALID_FIELDS));
+			this.Toaster.Error(this.Localizer.GetString(SharedResources.FORM_INVALID_FIELDS));
 		}
 
 		/// <summary>
@@ -227,15 +227,18 @@ namespace Memento.Movies.Client.Pages.Movies
 			// Update the genres
 			foreach (var genre in this.Genres)
 			{
-				this.MovieChanges.Genres.Add(genre.Id);
+				this.MovieChanges.Genres.Add(this.Mapper.Map<MovieGenreFormContract>(genre));
 			}
 
 			// Update the persons
 			foreach (var personsByRole in this.PersonsByRole)
 			{
-				foreach (var person in personsByRole.Value)
+				foreach (var personByRole in personsByRole.Value)
 				{
-					this.MovieChanges.Persons.Add(new Tuple<long, MoviePersonRole>(person.Id, personsByRole.Key));
+					var person = this.Mapper.Map<MoviePersonFormContract>(personByRole);
+					person.Role = personsByRole.Key;
+
+					this.MovieChanges.Persons.Add(person);
 				}
 			}
 
