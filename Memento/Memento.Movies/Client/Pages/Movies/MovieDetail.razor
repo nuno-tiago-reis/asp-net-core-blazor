@@ -21,24 +21,28 @@ else
 			<div class="row">
 				<div class="col-md-6">
 					<a>
-						<img class="img-thumbnail h-md-350-px" src="@this.Movie.PictureUrl" alt="@this.Movie.Name" />
+						<img class="img-thumbnail w-md-200-px" src="@this.Movie.PictureUrl" alt="@this.Movie.Name" />
 					</a>
 				</div>
-				<div class="col-md-6">
-					<div class="d-flex flex-column h-100">
-						<dl>
-							<dt>@this.Localizer.GetString(SharedResources.MOVIE_NAME)</dt>
-							<dd>@Movie.Name</dd>
-							<dt>@this.Localizer.GetString(SharedResources.MOVIE_SUMMARY)</dt>
-							<dd>@Movie.Summary</dd>
-							<dt>@this.Localizer.GetString(SharedResources.MOVIE_TRAILERURL)</dt>
-							<dd>@Movie.TrailerUrl</dd>
-							<dt>@this.Localizer.GetString(SharedResources.MOVIE_INTHEATERS)</dt>
-							<dd>@Movie.InTheaters</dd>
-							<dt>@this.Localizer.GetString(SharedResources.MOVIE_RELEASEDATE)</dt>
-							<dd>@Movie.ReleaseDate.ToShortDateString()</dd>
-						</dl>
+				@if (!string.IsNullOrWhiteSpace(this.Movie.TrailerUrl))
+				{
+					<div class="col-md-6">
+						<iframe class="w-100 h-100" src="@this.Movie.TrailerUrl" frameborder="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
+				}
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<dl>
+						<dt>@this.Localizer.GetString(SharedResources.MOVIE_NAME)</dt>
+						<dd>@Movie.Name</dd>
+						<dt>@this.Localizer.GetString(SharedResources.MOVIE_SUMMARY)</dt>
+						<dd>@Movie.Summary</dd>
+						<dt>@this.Localizer.GetString(SharedResources.MOVIE_INTHEATERS)</dt>
+						<dd>@Movie.InTheaters</dd>
+						<dt>@this.Localizer.GetString(SharedResources.MOVIE_RELEASEDATE)</dt>
+						<dd>@Movie.ReleaseDate.ToShortDateString()</dd>
+					</dl>
 				</div>
 			</div>
 			<!-- buttons -->
