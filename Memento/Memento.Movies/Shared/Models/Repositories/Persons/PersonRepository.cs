@@ -140,7 +140,48 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 			targetPerson.Biography = sourcePerson.Biography;
 			targetPerson.PictureUrl = sourcePerson.PictureUrl;
 			targetPerson.BirthDate = sourcePerson.BirthDate;
-			targetPerson.Movies = sourcePerson.Movies;
+		}
+
+		/// <inheritdoc />
+		protected override void UpdateModelRelations(Person sourcePerson, Person targetPerson)
+		{
+			// Check which movies need to be added
+			if (sourcePerson.Movies != null)
+			{
+				// Clear duplicates
+				sourcePerson.Movies = sourcePerson.Movies
+					.GroupBy(movie => new { movie.MovieId, movie.Role }, (key, movies) => movies.FirstOrDefault())
+					.ToList();
+
+				// Cross check the source with the target
+				foreach (var sourceMovie in sourcePerson.Movies)
+				{
+					if (targetPerson.Movies == null || targetPerson.Movies.All(movie => movie.MovieId != sourceMovie.MovieId || movie.Role != sourceMovie.Role))
+					{
+						// Make sure the link is there
+						sourceMovie.PersonId = targetPerson.Id;
+
+						// Add the connection to the context
+						this.Context.Add(sourceMovie);
+						continue;
+					}
+				}
+			}
+
+			// Check which movies need to be removed
+			if (targetPerson.Movies != null)
+			{
+				// Cross check the source with the target
+				foreach (var targetMovie in targetPerson.Movies)
+				{
+					if (sourcePerson.Movies == null || sourcePerson.Movies.All(movie => movie.MovieId != targetMovie.MovieId && movie.Role != targetMovie.Role))
+					{
+						// Remove the connection from the context
+						this.Context.Remove(targetMovie);
+						continue;
+					}
+				}
+			}
 		}
 		#endregion
 

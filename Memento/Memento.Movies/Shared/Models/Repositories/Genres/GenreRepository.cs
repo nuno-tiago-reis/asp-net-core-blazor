@@ -125,6 +125,12 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 			targetGenre.Name = sourceGenre.Name;
 			targetGenre.NormalizedName = sourceGenre.NormalizedName;
 		}
+
+		/// <inheritdoc />
+		protected override void UpdateModelRelations(Genre sourceGenre, Genre targetGenre)
+		{
+			// Nothing to do here.
+		}
 		#endregion
 
 		#region [Methods] Queryable

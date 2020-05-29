@@ -224,12 +224,16 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// </summary>
 		public async Task OnSaveChangesConfirmedAsync()
 		{
+			// Reset the genres
+			this.MovieChanges.Genres.Clear();
 			// Update the genres
 			foreach (var genre in this.Genres)
 			{
 				this.MovieChanges.Genres.Add(this.Mapper.Map<MovieGenreFormContract>(genre));
 			}
 
+			// Reset the persons
+			this.MovieChanges.Persons.Clear();
 			// Update the persons
 			foreach (var personsByRole in this.PersonsByRole)
 			{

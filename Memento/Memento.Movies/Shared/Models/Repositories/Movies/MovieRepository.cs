@@ -146,8 +146,86 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 			targetMovie.TrailerUrl = sourceMovie.TrailerUrl;
 			targetMovie.ReleaseDate = sourceMovie.ReleaseDate;
 			targetMovie.InTheaters = sourceMovie.InTheaters;
-			targetMovie.Genres = sourceMovie.Genres;
-			targetMovie.Persons = sourceMovie.Persons;
+		}
+
+		/// <inheritdoc />
+		protected override void UpdateModelRelations(Movie sourceMovie, Movie targetMovie)
+		{
+			// Check which genres need to be added
+			if (sourceMovie.Genres != null)
+			{
+				// Clear duplicates
+				sourceMovie.Genres = sourceMovie.Genres
+					.GroupBy(genre => new { genre.GenreId }, (key, genres) => genres.FirstOrDefault())
+					.ToList();
+
+				// Cross check the source with the target
+				foreach (var sourceGenre in sourceMovie.Genres)
+				{
+					if (targetMovie.Genres == null || targetMovie.Genres.All(genre => genre.GenreId != sourceGenre.GenreId))
+					{
+						// Make sure the link is there
+						sourceGenre.MovieId = targetMovie.Id;
+
+						// Add the connection to the context
+						this.Context.Add(sourceGenre);
+						continue;
+					}
+				}
+			}
+
+			// Check which genres need to be removed
+			if (targetMovie.Genres != null)
+			{
+				// Cross check the source with the target
+				foreach (var targetGenre in targetMovie.Genres)
+				{
+					if (sourceMovie.Genres == null || sourceMovie.Genres.All(genre => genre.GenreId != targetGenre.GenreId))
+					{
+						// Remove the connection from the context
+						this.Context.Remove(targetGenre);
+						continue;
+					}
+				}
+			}
+
+			// Check which persons need to be added
+			if (sourceMovie.Persons != null)
+			{
+				// Clear duplicates
+				sourceMovie.Persons = sourceMovie.Persons
+					.GroupBy(person => new { person.PersonId, person.Role }, (key, persons) => persons.FirstOrDefault())
+					.ToList();
+
+				// Cross check the source with the target
+				foreach (var sourcePerson in sourceMovie.Persons)
+				{
+					if (targetMovie.Persons == null || targetMovie.Persons.All(person => person.PersonId != sourcePerson.PersonId || person.Role != sourcePerson.Role))
+					{
+						// Make sure the link is there
+						sourcePerson.MovieId = targetMovie.Id;
+
+						// Add the connection to the context
+						this.Context.Add(sourcePerson);
+						continue;
+					}
+				}
+			}
+
+			// Check which persons need to be removed
+			if (targetMovie.Persons != null)
+			{
+				// Cross check the source with the target
+				foreach (var targetPerson in targetMovie.Persons)
+				{
+					if (sourceMovie.Persons == null || sourceMovie.Persons.All(person => person.PersonId != targetPerson.PersonId && person.Role != targetPerson.Role))
+					{
+						// Remove the connection from the context
+						this.Context.Remove(targetPerson);
+						continue;
+					}
+				}
+			}
 		}
 		#endregion
 

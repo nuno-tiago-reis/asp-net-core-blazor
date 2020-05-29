@@ -192,6 +192,9 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		public async Task OnSaveChangesConfirmedAsync()
 		{
+			// Reset the movies
+			this.PersonChanges.Movies.Clear();
+
 			// Update the movies
 			foreach (var moviesByRole in this.MoviesByRole)
 			{

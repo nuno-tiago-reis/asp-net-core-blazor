@@ -117,6 +117,10 @@ namespace Memento.Movies.Server.Controllers
 				// Create the picture in the storage
 				person.PictureUrl = await this.Storage.CreateAsync(contract.Picture.FileBase64, contract.Picture.FileName);
 			}
+			else
+			{
+				person.PictureUrl = (await this.Repository.GetAsync(id)).PictureUrl;
+			}
 
 			// Update the person
 			await this.Repository.UpdateAsync(person);

@@ -7,8 +7,6 @@ using Memento.Movies.Shared.Models.Repositories.Genres;
 using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Shared.Configuration;
-using System;
-using System.Linq;
 
 namespace Memento.Movies.Shared.Configuration
 {
@@ -72,13 +70,16 @@ namespace Memento.Movies.Shared.Configuration
 			#region [Contracts: MovieGenres]
 			// MovieGenres: Model => Contract
 			this.CreateMap<MovieGenre, MovieGenreDetailContract>()
-				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreDetailContract>(model.Genre));
+				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreDetailContract>(model.Genre))
+				.ForAllOtherMembers(model => model.Ignore());
 			// MovieGenres: Model => Contract
 			this.CreateMap<MovieGenre, MovieGenreFormContract>()
-				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreFormContract>(model.Genre));
+				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreFormContract>(model.Genre))
+				.ForAllOtherMembers(model => model.Ignore());
 			// MovieGenres: Model => Contract
 			this.CreateMap<MovieGenre, MovieGenreListContract>()
-				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreListContract>(model.Genre));
+				.ConstructUsing((model, context) => context.Mapper.Map<MovieGenreListContract>(model.Genre))
+				.ForAllOtherMembers(model => model.Ignore());
 
 			// MovieGenres: Model => Contract
 			this.CreateMap<Genre, MovieGenreDetailContract>();
@@ -112,15 +113,18 @@ namespace Memento.Movies.Shared.Configuration
 			// MoviePersons: Model => Contract
 			this.CreateMap<MoviePerson, MoviePersonDetailContract>()
 				.ConstructUsing((model, context) => context.Mapper.Map<MoviePersonDetailContract>(model.Person))
-				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+				.ForMember(contract => contract.Role, expression => expression.MapFrom(model => model.Role))
+				.ForAllOtherMembers(model => model.Ignore());
 			// MoviePersons: Model => Contract
 			this.CreateMap<MoviePerson, MoviePersonFormContract>()
 				.ConstructUsing((model, context) => context.Mapper.Map<MoviePersonFormContract>(model.Person))
-				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+				.ForMember(contract => contract.Role, expression => expression.MapFrom(model => model.Role))
+				.ForAllOtherMembers(model => model.Ignore());
 			// MoviePersons: Model => Contract
 			this.CreateMap<MoviePerson, MoviePersonListContract>()
 				.ConstructUsing((model, context) => context.Mapper.Map<MoviePersonListContract>(model.Person))
-				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+				.ForMember(contract => contract.Role, expression => expression.MapFrom(model => model.Role))
+				.ForAllOtherMembers(model => model.Ignore());
 
 			// MoviePersons: Model => Contract
 			this.CreateMap<Person, MoviePersonDetailContract>();
@@ -172,15 +176,18 @@ namespace Memento.Movies.Shared.Configuration
 			// PersonMovies: Model => Contract
 			this.CreateMap<MoviePerson, PersonMovieDetailContract>()
 				.ConstructUsing((model, context) => context.Mapper.Map<PersonMovieDetailContract>(model.Movie))
-				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+				.ForMember(contract => contract.Role, expression => expression.MapFrom(model => model.Role))
+				.ForAllOtherMembers(contract => contract.Ignore());
 			// PersonMovies: Model => Contract
 			this.CreateMap<MoviePerson, PersonMovieFormContract>()
 				.ConstructUsing((model, context) => context.Mapper.Map<PersonMovieFormContract>(model.Movie))
-				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+				.ForMember(contract => contract.Role, expression => expression.MapFrom(model => model.Role))
+				.ForAllOtherMembers(model => model.Ignore());
 			// PersonMovies: Model => Contract
 			this.CreateMap<MoviePerson, PersonMovieListContract>()
 				.ConstructUsing((model, context) => context.Mapper.Map<PersonMovieListContract>(model.Movie))
-				.ForPath(contract => contract.Role, expression => expression.MapFrom(model => model.Role));
+				.ForMember(contract => contract.Role, expression => expression.MapFrom(model => model.Role))
+				.ForAllOtherMembers(model => model.Ignore());
 
 			// PersonMovies: Model => Contract
 			this.CreateMap<Movie, PersonMovieDetailContract>();
