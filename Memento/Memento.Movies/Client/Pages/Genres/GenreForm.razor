@@ -12,23 +12,26 @@ else
 			  OnValidSubmit="this.OnValidSubmitAsync"
 			  OnInvalidSubmit="this.OnInvalidSubmit">
 
+		<!-- validation -->
 		<ValidationSummary />
 		<DataAnnotationsValidator />
 
+		<!-- inputs -->
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<Label For="@(() => this.Genre.Name)">
+					<Label For="@(() => this.GenreChanges.Name)">
 					</Label>
 					<InputText class="form-control"
-							   @bind-Value="this.Genre.Name">
+							   @bind-Value="this.GenreChanges.Name">
 					</InputText>
-					<ValidationMessage For="@(() => this.Genre.Name)">
+					<ValidationMessage For="@(() => this.GenreChanges.Name)">
 					</ValidationMessage>
 				</div>
 			</div>
 		</div>
 
+		<!-- buttons -->
 		<div class="row">
 			<div class="col-md-12">
 				<Button Color="NamedColor.Success" IsSubmit="true">

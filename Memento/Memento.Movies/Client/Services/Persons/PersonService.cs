@@ -4,6 +4,7 @@ using Memento.Shared.Extensions;
 using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Responses;
 using Memento.Shared.Services.Http;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace Memento.Movies.Client.Services.Persons
 		public async Task<MementoResponse<PersonDetailContract>> CreateAsync(PersonFormContract person)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Post<PersonFormContract, PersonDetailContract>($"{API_URL}", person);
+			var response = await this.HttpService.PostAsync<PersonFormContract, PersonDetailContract>($"{API_URL}", person);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -62,7 +63,7 @@ namespace Memento.Movies.Client.Services.Persons
 		public async Task<MementoResponse> UpdateAsync(long personId, PersonFormContract person)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Put($"{API_URL}{personId}", person);
+			var response = await this.HttpService.PutAsync($"{API_URL}{personId}", person);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -77,7 +78,7 @@ namespace Memento.Movies.Client.Services.Persons
 		public async Task<MementoResponse> DeleteAsync(long personId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Delete($"{API_URL}{personId}");
+			var response = await this.HttpService.DeleteAsync($"{API_URL}{personId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -92,7 +93,7 @@ namespace Memento.Movies.Client.Services.Persons
 		public async Task<MementoResponse<PersonDetailContract>> GetAsync(long personId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Get<PersonDetailContract>($"{API_URL}{personId}");
+			var response = await this.HttpService.GetAsync<PersonDetailContract>($"{API_URL}{personId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -137,7 +138,7 @@ namespace Memento.Movies.Client.Services.Persons
 			}
 
 			// Invoke the API
-			var response = await this.HttpService.Get<Page<PersonListContract>>($"{API_URL}", parameters);
+			var response = await this.HttpService.GetAsync<Page<PersonListContract>>($"{API_URL}", parameters);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));

@@ -26,12 +26,6 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// </summary>
 		[Parameter]
 		public long? GenreId { get; set; }
-
-		/// <summary>
-		/// The genre.
-		/// </summary>
-		[Parameter]
-		public GenreFormContract Genre { get; set; }
 		#endregion
 
 		#region [Properties] Services
@@ -54,6 +48,18 @@ namespace Memento.Movies.Client.Pages.Genres
 		public ConfirmationModal DiscardChangesModal { get; set; }
 		#endregion
 
+		#region [Properties] Internal
+		/// <summary>
+		/// The genre.
+		/// </summary>
+		private GenreDetailContract Genre { get; set; }
+
+		/// <summary>
+		/// The genre changes.
+		/// </summary>
+		private GenreFormContract GenreChanges { get; set; }
+		#endregion
+
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
@@ -64,14 +70,19 @@ namespace Memento.Movies.Client.Pages.Genres
 				var response = await this.GenreService.GetAsync(this.GenreId.Value);
 				if (response.Success)
 				{
-					// Create the contract
-					this.Genre = this.Mapper.Map<GenreFormContract>(response.Data);
+					// Create the contracts
+					this.Genre = response.Data;
+					this.GenreChanges = this.Mapper.Map<GenreFormContract>(response.Data);
 
 					// Show a toast message
 					this.Toaster.Success(response.Message);
 				}
 				else
 				{
+					// Create the contracts
+					this.Genre = response.Data;
+					this.GenreChanges = this.Mapper.Map<GenreFormContract>(response.Data);
+
 					// Navigate to the list
 					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
 
@@ -81,8 +92,9 @@ namespace Memento.Movies.Client.Pages.Genres
 			}
 			else
 			{
-				// Create the contract
-				this.Genre = new GenreFormContract();
+				// Create the contracts
+				this.Genre = new GenreDetailContract();
+				this.GenreChanges = new GenreFormContract();
 			}
 		}
 		#endregion
@@ -116,7 +128,9 @@ namespace Memento.Movies.Client.Pages.Genres
 		{
 			await this.DiscardChangesModal.ShowAsync();
 		}
+		#endregion
 
+		#region [Methods] Save Changes Modal
 		/// <summary>
 		/// Callback that is invoked when the user clicks on the confirm button in the save changes modal.
 		/// </summary>
@@ -125,7 +139,7 @@ namespace Memento.Movies.Client.Pages.Genres
 			if (this.GenreId.HasValue)
 			{
 				// Update the genre
-				var response = await this.GenreService.UpdateAsync(this.GenreId.Value, this.Genre);
+				var response = await this.GenreService.UpdateAsync(this.GenreId.Value, this.GenreChanges);
 				if (response.Success)
 				{
 					// Hide the modal
@@ -149,7 +163,7 @@ namespace Memento.Movies.Client.Pages.Genres
 			else
 			{
 				// Create the genre
-				var response = await this.GenreService.CreateAsync(this.Genre);
+				var response = await this.GenreService.CreateAsync(this.GenreChanges);
 				if (response.Success)
 				{
 					// Hide the modal
@@ -180,7 +194,9 @@ namespace Memento.Movies.Client.Pages.Genres
 			// Hide the modal
 			await this.SaveChangesModal.HideAsync();
 		}
+		#endregion
 
+		#region [Methods] Discard Changes Modal
 		/// <summary>
 		/// Callback that is invoked when the user clicks on the confirm button in the save changes modal.
 		/// </summary>

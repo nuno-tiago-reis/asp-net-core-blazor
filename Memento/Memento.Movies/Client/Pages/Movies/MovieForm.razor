@@ -11,24 +11,26 @@ else
 	<EditForm Model="this.Movie"
 			  OnValidSubmit="this.OnValidSubmitAsync"
 			  OnInvalidSubmit="this.OnInvalidSubmit">
-
+		
+		<!-- validation -->
 		<ValidationSummary />
 		<DataAnnotationsValidator />
-
+		
+		<!-- inputs -->
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<Label For="@(() => this.Movie.Name)">
+					<Label For="@(() => this.MovieChanges.Name)">
 					</Label>
 					<InputText class="form-control"
-							   @bind-Value="this.Movie.Name">
+							   @bind-Value="this.MovieChanges.Name">
 					</InputText>
-					<ValidationMessage For="@(() => this.Movie.Name)">
+					<ValidationMessage For="@(() => this.MovieChanges.Name)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
 					<InputMarkdown class="form-control"
-								   @bind-Value="this.Movie.Summary">
+								   @bind-Value="this.MovieChanges.Summary">
 						<MarkdownLabelContent>
 							@this.Localizer.GetString(SharedResources.MOVIE_SUMMARY)
 						</MarkdownLabelContent>
@@ -36,13 +38,47 @@ else
 							@this.Localizer.GetString(SharedResources.FORM_MARKDOWN_PREVIEW)
 						</PreviewLabelContent>
 					</InputMarkdown>
-					<ValidationMessage For="@(() => this.Movie.Summary)">
+					<ValidationMessage For="@(() => this.MovieChanges.Summary)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
-					<InputImage class="form-control"
-								@bind-Value="this.Movie.Picture"
-								InitialImageUrl="@this.MoviePictureUrl">
+					<Label For="@(() => this.Movie.Genres)">
+					</Label>
+					<InputTypeahead @ref="this.GenreInputTypeahead"
+									T="GenreListContract"
+									SearchMethod="@((name) => this.GetGenresAsync(name))"
+									Value="this.Genre"
+									ValueChanged="@((genre) => this.OnGenreSelected(genre))"
+									ValueExpression="@(() => this.Genre)">
+						<SuggestionContent Context="genre">
+							<span>@genre.Name</span>
+						</SuggestionContent>
+					</InputTypeahead>
+				</div>
+				<ul>
+					@foreach (var genre in this.MovieGenres ?? new List<GenreListContract>())
+					{
+						<li>@genre.Name</li>
+					}
+				</ul>
+				<div class="form-group">
+					<Label For="@(() => this.Movie.Persons)">
+					</Label>
+					<InputTypeahead @ref="this.PersonInputTypeahead"
+									T="PersonListContract"
+									SearchMethod="@((name) => this.GetPersonsAsync(name))"
+									Value="this.Person"
+									ValueChanged="@((genre) => this.OnPersonSelected(genre))"
+									ValueExpression="@(() => this.Person)">
+						<SuggestionContent Context="person">
+							<span>@person.Name</span>
+						</SuggestionContent>
+					</InputTypeahead>
+				</div>
+				<div class="form-group">
+					<InputImage @ref="this.PictureInputImage"
+								@bind-Value="this.MovieChanges.Picture"
+								ImageUrl="@this.Movie.PictureUrl">
 						<ImageLabelContent>
 							@this.Localizer.GetString(SharedResources.MOVIE_PICTURE)
 						</ImageLabelContent>
@@ -50,39 +86,40 @@ else
 							@this.Localizer.GetString(SharedResources.FORM_IMAGE_PREVIEW)
 						</PreviewLabelContent>
 					</InputImage>
-					<ValidationMessage For="@(() => this.Movie.Picture)">
+					<ValidationMessage For="@(() => this.MovieChanges.Picture)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
-					<Label For="@(() => this.Movie.TrailerUrl)">
+					<Label For="@(() => this.MovieChanges.TrailerUrl)">
 					</Label>
 					<InputText class="form-control"
-							   @bind-Value="this.Movie.TrailerUrl">
+							   @bind-Value="this.MovieChanges.TrailerUrl">
 					</InputText>
-					<ValidationMessage For="@(() => this.Movie.TrailerUrl)">
+					<ValidationMessage For="@(() => this.MovieChanges.TrailerUrl)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
-					<Label For="@(() => this.Movie.InTheaters)">
+					<Label For="@(() => this.MovieChanges.InTheaters)">
 					</Label>
 					<InputCheckbox class="form-control"
-								   @bind-Value="this.Movie.InTheaters">
+								   @bind-Value="this.MovieChanges.InTheaters">
 					</InputCheckbox>
-					<ValidationMessage For="@(() => this.Movie.InTheaters)">
+					<ValidationMessage For="@(() => this.MovieChanges.InTheaters)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
-					<Label For="@(() => this.Movie.ReleaseDate)">
+					<Label For="@(() => this.MovieChanges.ReleaseDate)">
 					</Label>
 					<InputDate class="form-control"
-							   @bind-Value="this.Movie.ReleaseDate">
+							   @bind-Value="this.MovieChanges.ReleaseDate">
 					</InputDate>
-					<ValidationMessage For="@(() => this.Movie.ReleaseDate)">
+					<ValidationMessage For="@(() => this.MovieChanges.ReleaseDate)">
 					</ValidationMessage>
 				</div>
 			</div>
 		</div>
-
+		
+		<!-- buttons -->
 		<div class="row">
 			<div class="col-md-12">
 				<Button Color="NamedColor.Success" IsSubmit="true">

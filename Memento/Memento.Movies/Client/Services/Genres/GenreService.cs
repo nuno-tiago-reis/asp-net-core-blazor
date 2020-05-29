@@ -46,7 +46,7 @@ namespace Memento.Movies.Client.Services.Genres
 		public async Task<MementoResponse<GenreDetailContract>> CreateAsync(GenreFormContract genre)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Post<GenreFormContract, GenreDetailContract>($"{API_URL}", genre);
+			var response = await this.HttpService.PostAsync<GenreFormContract, GenreDetailContract>($"{API_URL}", genre);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -61,7 +61,7 @@ namespace Memento.Movies.Client.Services.Genres
 		public async Task<MementoResponse> UpdateAsync(long genreId, GenreFormContract genre)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Put($"{API_URL}{genreId}", genre);
+			var response = await this.HttpService.PutAsync($"{API_URL}{genreId}", genre);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -76,7 +76,7 @@ namespace Memento.Movies.Client.Services.Genres
 		public async Task<MementoResponse> DeleteAsync(long genreId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Delete($"{API_URL}{genreId}");
+			var response = await this.HttpService.DeleteAsync($"{API_URL}{genreId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -91,7 +91,7 @@ namespace Memento.Movies.Client.Services.Genres
 		public async Task<MementoResponse<GenreDetailContract>> GetAsync(long genreId)
 		{
 			// Invoke the API
-			var response = await this.HttpService.Get<GenreDetailContract>($"{API_URL}{genreId}");
+			var response = await this.HttpService.GetAsync<GenreDetailContract>($"{API_URL}{genreId}");
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
@@ -124,7 +124,7 @@ namespace Memento.Movies.Client.Services.Genres
 			}
 
 			// Invoke the API
-			var response = await this.HttpService.Get<Page<GenreListContract>>($"{API_URL}", parameters);
+			var response = await this.HttpService.GetAsync<Page<GenreListContract>>($"{API_URL}", parameters);
 			if (!response.Success)
 			{
 				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));

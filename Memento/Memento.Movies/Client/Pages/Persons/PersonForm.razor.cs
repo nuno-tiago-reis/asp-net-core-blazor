@@ -1,12 +1,19 @@
-﻿using Memento.Movies.Client.Services.Persons;
+﻿using Blazor.FileReader;
+using Memento.Movies.Client.Services.Movies;
+using Memento.Movies.Client.Services.Persons;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
+using Memento.Movies.Shared.Models;
+using Memento.Movies.Shared.Models.Contracts.Movies;
 using Memento.Movies.Shared.Models.Contracts.Persons;
+using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
+using Memento.Shared.Models.Repositories;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Persons
@@ -26,15 +33,15 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		[Parameter]
 		public long? PersonId { get; set; }
-
-		/// <summary>
-		/// The person.
-		/// </summary>
-		[Parameter]
-		public PersonFormContract Person { get; set; }
 		#endregion
 
 		#region [Properties] Services
+		/// <summary>
+		/// The movie service.
+		/// </summary>
+		[Inject]
+		public IMovieService MovieService { get; set; }
+
 		/// <summary>
 		/// The person service.
 		/// </summary>
@@ -43,6 +50,16 @@ namespace Memento.Movies.Client.Pages.Persons
 		#endregion
 
 		#region [Properties] References
+		/// <summary>
+		/// The input image.
+		/// </summary>
+		public InputImage InputImage { get; set; }
+
+		/// <summary>
+		/// The movie input typeahead.
+		/// </summary>
+		public InputTypeahead<MovieListContract> MovieTypeahead { get; set; }
+
 		/// <summary>
 		/// The save changes modal.
 		/// </summary>
@@ -56,9 +73,24 @@ namespace Memento.Movies.Client.Pages.Persons
 
 		#region [Properties] Internal
 		/// <summary>
-		/// The person picture url.
+		/// The person.
 		/// </summary>
-		private string PersonPictureUrl { get; set; }
+		private PersonDetailContract Person { get; set; }
+
+		/// <summary>
+		/// The person changes.
+		/// </summary>
+		private PersonFormContract PersonChanges { get; set; }
+
+		/// <summary>
+		/// The last movie person to be selected through typeahead.
+		/// </summary>
+		private MovieListContract PersonMovie { get; set; }
+
+		/// <summary>
+		/// The persons movies selected through typeahead.
+		/// </summary>
+		private Dictionary<MoviePersonRole, List<MovieListContract>> PersonMovies { get; set; }
 		#endregion
 
 		#region [Methods] Component
@@ -72,10 +104,8 @@ namespace Memento.Movies.Client.Pages.Persons
 				if (response.Success)
 				{
 					// Create the contract
-					this.Person = this.Mapper.Map<PersonFormContract>(response.Data);
-
-					// Store the picture url
-					this.PersonPictureUrl = response.Data.PictureUrl;
+					this.Person = response.Data;
+					this.PersonChanges = this.Mapper.Map<PersonFormContract>(response.Data);
 
 					// Show a toast message
 					this.Toaster.Success(response.Message);
@@ -91,11 +121,22 @@ namespace Memento.Movies.Client.Pages.Persons
 			}
 			else
 			{
-				// Create the contract
-				this.Person = new PersonFormContract
+				// Create the contracts
+				this.Person = new PersonDetailContract
 				{
 					BirthDate = DateTime.Today
 				};
+				this.PersonChanges = new PersonFormContract
+				{
+					BirthDate = DateTime.Today
+				};
+			}
+
+			// Initialize the movie typeahead collection
+			this.PersonMovies = new Dictionary<MoviePersonRole, List<MovieListContract>>();
+			foreach (var moviePersonRole in Enum.GetValues(typeof(MoviePersonRole)))
+			{
+				this.PersonMovies.Add((MoviePersonRole)moviePersonRole, new List<MovieListContract>());
 			}
 		}
 		#endregion
@@ -129,7 +170,9 @@ namespace Memento.Movies.Client.Pages.Persons
 		{
 			await this.DiscardChangesModal.ShowAsync();
 		}
+		#endregion
 
+		#region [Methods] Save Changes Modal
 		/// <summary>
 		/// Callback that is invoked when the user clicks on the confirm button in the save changes modal.
 		/// </summary>
@@ -138,7 +181,7 @@ namespace Memento.Movies.Client.Pages.Persons
 			if (this.PersonId.HasValue)
 			{
 				// Update the person
-				var response = await this.PersonService.UpdateAsync(this.PersonId.Value, this.Person);
+				var response = await this.PersonService.UpdateAsync(this.PersonId.Value, this.PersonChanges);
 				if (response.Success)
 				{
 					// Hide the modal
@@ -162,7 +205,7 @@ namespace Memento.Movies.Client.Pages.Persons
 			else
 			{
 				// Create the person
-				var response = await this.PersonService.CreateAsync(this.Person);
+				var response = await this.PersonService.CreateAsync(this.PersonChanges);
 				if (response.Success)
 				{
 					// Hide the modal
@@ -193,7 +236,9 @@ namespace Memento.Movies.Client.Pages.Persons
 			// Hide the modal
 			await this.SaveChangesModal.HideAsync();
 		}
+		#endregion
 
+		#region [Methods] Discard Changes Modal
 		/// <summary>
 		/// Callback that is invoked when the user clicks on the confirm button in the save changes modal.
 		/// </summary>
@@ -221,6 +266,29 @@ namespace Memento.Movies.Client.Pages.Persons
 		{
 			// Hide the modal
 			await this.DiscardChangesModal.HideAsync();
+		}
+		#endregion
+
+		#region [Methods] Typeahead
+		/// <summary>
+		/// Gets the movies from the backend matching the given name.
+		/// </summary>
+		/// 
+		/// <param name="name">The name.</param>
+		public async Task<IEnumerable<MovieListContract>> GetMoviesAsync(string name)
+		{
+			// Build the filter
+			var movieFilter = new MovieFilter
+			{
+				Name = name,
+				OrderBy = MovieFilterOrderBy.Name,
+				OrderDirection = FilterOrderDirection.Ascending
+			};
+
+			// Invoke the API
+			var movies = await this.MovieService.GetAllAsync(movieFilter);
+
+			return movies.Data.Items;
 		}
 		#endregion
 	}

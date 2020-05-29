@@ -11,24 +11,26 @@ else
 	<EditForm Model="this.Person"
 			  OnValidSubmit="this.OnValidSubmitAsync"
 			  OnInvalidSubmit="this.OnInvalidSubmit">
-
+		
+		<!-- validation -->
 		<ValidationSummary />
 		<DataAnnotationsValidator />
-
+		
+		<!-- inputs -->
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<Label For="@(() => this.Person.Name)">
+					<Label For="@(() => this.PersonChanges.Name)">
 					</Label>
 					<InputText class="form-control"
-							   @bind-Value="this.Person.Name">
+							   @bind-Value="this.PersonChanges.Name">
 					</InputText>
-					<ValidationMessage For="@(() => this.Person.Name)">
+					<ValidationMessage For="@(() => this.PersonChanges.Name)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
 					<InputMarkdown class="form-control"
-								   @bind-Value="this.Person.Biography">
+								   @bind-Value="this.PersonChanges.Biography">
 						<MarkdownLabelContent>
 							@this.Localizer.GetString(SharedResources.PERSON_BIOGRAPHY)
 						</MarkdownLabelContent>
@@ -36,13 +38,13 @@ else
 							@this.Localizer.GetString(SharedResources.FORM_MARKDOWN_PREVIEW)
 						</PreviewLabelContent>
 					</InputMarkdown>
-					<ValidationMessage For="@(() => this.Person.Biography)">
+					<ValidationMessage For="@(() => this.PersonChanges.Biography)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
-					<InputImage class="form-control"
-								@bind-Value="this.Person.Picture"
-								InitialImageUrl="@this.PersonPictureUrl">
+					<InputImage @ref="this.InputImage"
+								@bind-Value="this.PersonChanges.Picture"
+								ImageUrl="@this.Person.PictureUrl">
 						<ImageLabelContent>
 							@this.Localizer.GetString(SharedResources.PERSON_PICTURE)
 						</ImageLabelContent>
@@ -50,21 +52,22 @@ else
 							@this.Localizer.GetString(SharedResources.FORM_IMAGE_PREVIEW)
 						</PreviewLabelContent>
 					</InputImage>
-					<ValidationMessage For="@(() => this.Person.Picture)">
+					<ValidationMessage For="@(() => this.PersonChanges.Picture)">
 					</ValidationMessage>
 				</div>
 				<div class="form-group">
-					<Label For="@(() => this.Person.BirthDate)">
+					<Label For="@(() => this.PersonChanges.BirthDate)">
 					</Label>
 					<InputDate class="form-control"
-							   @bind-Value="this.Person.BirthDate">
+							   @bind-Value="this.PersonChanges.BirthDate">
 					</InputDate>
-					<ValidationMessage For="@(() => this.Person.BirthDate)">
+					<ValidationMessage For="@(() => this.PersonChanges.BirthDate)">
 					</ValidationMessage>
 				</div>
 			</div>
 		</div>
-
+		
+		<!-- buttons -->
 		<div class="row">
 			<div class="col-md-12">
 				<Button Color="NamedColor.Success" IsSubmit="true">
