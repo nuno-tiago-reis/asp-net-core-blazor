@@ -137,5 +137,10 @@ Thumbs.db
 *.min.*
 *.xml
 
+styles.css
+bootstrap.css
+bootstrap-grid.css
+bootstrap-reboot.css
+
 tempkey.rsa
 appsettings.local.json
