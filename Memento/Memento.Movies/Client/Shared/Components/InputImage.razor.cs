@@ -1,12 +1,12 @@
 ﻿using Blazor.FileReader;
 using Memento.Shared.Extensions;
+using Memento.Shared.Models.Files;
 using Memento.Shared.Services.Localization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.StaticFiles;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq.Expressions;
-using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Shared.Components
@@ -14,7 +14,7 @@ namespace Memento.Movies.Client.Shared.Components
 	/// <summary>
 	/// Displays a markdown input for specified field within a cascaded <see cref="EditContext"/>.
 	/// </summary>
-	public sealed partial class InputImage : InputBase<string>
+	public sealed partial class InputImage : InputBase<File>
 	{
 		#region [Constants]
 		/// <summary>
@@ -36,16 +36,10 @@ namespace Memento.Movies.Client.Shared.Components
 		public string Accepts { get; set; }
 
 		/// <summary>
-		/// The initial image url.
+		/// The image url.
 		/// </summary>
 		[Parameter]
-		public string InitialImageUrl { get; set; }
-
-		/// <summary>
-		/// The initial image base64.
-		/// </summary>
-		[Parameter]
-		public string InitialImageBase64 { get; set; }
+		public string ImageUrl { get; set; }
 
 		/// <summary>
 		/// The content to be shown inside the image label.
@@ -97,12 +91,18 @@ namespace Memento.Movies.Client.Shared.Components
 		/// <inheritdoc />
 		protected override void OnInitialized()
 		{
-			// Nothing to do here.
+			base.OnInitialized();
+
+			// Initialize the file restrictions
+			this.Accepts = DEFAULT_ACCEPTS;
 		}
 
 		/// <inheritdoc />
 		protected override void OnParametersSet()
 		{
+			base.OnParametersSet();
+
+			// Validations
 			if (this.EditContext == null)
 			{
 				throw new InvalidOperationException
@@ -112,37 +112,34 @@ namespace Memento.Movies.Client.Shared.Components
 				);
 			}
 
-			if (string.IsNullOrWhiteSpace(this.Accepts))
-			{
-				this.Accepts = DEFAULT_ACCEPTS;
-			}
-
-			var property = ((MemberExpression)this.ValueExpression.Body).Member;
-			var propertyDisplayName = property.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
-
-			this.ForName = ((MemberExpression)this.ValueExpression.Body).Member.Name;
-			this.ForDisplayName = propertyDisplayName?.GetName() ?? this.ForName.SpacesFromCamel();
+			// Initializations
+			this.ForName = this.ValueExpression.GetName();
+			this.ForDisplayName = this.ValueExpression.GetDisplayName();
 		}
 
 		/// <inheritdoc />
 		protected override void OnAfterRender(bool firstRender)
 		{
+			base.OnAfterRender(firstRender);
+
 			// Nothing to do here.
 		}
 
 		/// <inheritdoc />
 		protected override bool ShouldRender()
 		{
-			return true;
+			return base.ShouldRender();
+
+			// Nothing to do here.
 		}
 
 		/// <inheritdoc />
-		protected override Boolean TryParseValueFromString(String value, out String result, out String validationErrorMessage)
+		protected override bool TryParseValueFromString(string value, out File result, out string validationErrorMessage)
 		{
-			result = value;
+			result = JsonSerializer.Deserialize<File>(value);
 			validationErrorMessage = string.Empty;
 
-			return true;
+			return false;
 		}
 		#endregion
 
@@ -154,22 +151,59 @@ namespace Memento.Movies.Client.Shared.Components
 		/// <param name="arguments">The arguments.</param>
 		private async Task OnInputChangesAsync(ChangeEventArgs arguments)
 		{
-			foreach (var file in await this.FileReader.CreateReference(this.Input).EnumerateFilesAsync())
+			var fileReader = this.FileReader.CreateReference(this.Input);
+
+			foreach (var file in await fileReader.EnumerateFilesAsync())
 			{
-				using (var stream = await file.CreateMemoryStreamAsync(DEFAULT_BUFFER_SIZE))
+				// Open a read stream
+				var stream = await file.CreateMemoryStreamAsync(DEFAULT_BUFFER_SIZE);
+	
+				// Get the file info
+				var fileInfo = await file.ReadFileInfoAsync();
+				// Get the file bytes
+				var fileBytes = new byte[stream.Length];
+				stream.Read(fileBytes, 0, (int)stream.Length);
+				// Get the file content type
+				var provider = new FileExtensionContentTypeProvider();
+				if (!provider.TryGetContentType(fileInfo.Name, out var fileContentType))
 				{
-					// Convert the image into bytes
-					var bytes = new byte[stream.Length];
-					stream.Read(bytes, 0, (int)stream.Length);
-
-					// Convert the image into base64
-					this.CurrentValue = Convert.ToBase64String(bytes);
-
-					// Notify blazor
-					this.StateHasChanged();
+					fileContentType = "application/octet-stream";
 				}
+
+				// Change the state
+				this.CurrentValue = new File
+				{
+					FileBase64 = Convert.ToBase64String(fileBytes),
+					FileName = fileInfo.Name,
+					FileContentType = fileContentType
+				};
+				this.StateHasChanged();
 			}
 		}
 		#endregion
 	}
+
+	/// <summary>
+	/// Implements the 'Image' contract.
+	/// </summary>
+	public sealed class ImageContract
+	{
+		#region [Properties]
+		/// <summary>
+		/// The image (base64).
+		/// </summary>
+		public string File { get; set; }
+
+		/// <summary>
+		/// The image name.
+		/// </summary>
+		public string FileName { get; set; }
+
+		/// <summary>
+		/// The image content type.
+		/// </summary>
+		public string FileContentType { get; set; }
+		#endregion
+	}
+
 }

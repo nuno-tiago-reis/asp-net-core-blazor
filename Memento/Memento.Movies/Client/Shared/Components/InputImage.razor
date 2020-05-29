@@ -1,8 +1,8 @@
-﻿@inherits InputBase<string>
+﻿@inherits InputBase<File>
 
 <div class="row">
 	<div class="col-md-6">
-		<label for="this.ForName">
+		<label for="@this.ForName">
 			@if (this.ImageLabelContent != null)
 			{
 				@this.ImageLabelContent
@@ -14,7 +14,7 @@
 		</label>
 	</div>
 	<div class="col-md-6">
-		<label for="this.ForName">
+		<label for="@this.ForName">
 			@if (this.PreviewLabelContent != null)
 			{
 				@this.PreviewLabelContent
@@ -27,23 +27,19 @@
 	</div>
 </div>
 
-<div class="row h-350-px">
+<div class="row">
 	<div class="col-md-6">
 		<input type="file" accept="@this.Accepts" @ref="this.Input" @onchange="this.OnInputChangesAsync" @attributes="this.AdditionalAttributes" />
 	</div>
 	<div class="col-md-6">
 		<div class="border border-secondary">
-			@if (string.IsNullOrWhiteSpace(this.CurrentValue) && !string.IsNullOrWhiteSpace(this.InitialImageUrl))
+			@if (string.IsNullOrWhiteSpace(this.CurrentValue?.FileBase64) && !string.IsNullOrWhiteSpace(this.ImageUrl))
 			{
-				<img class="img-fluid" src="@this.InitialImageUrl" />
+				<img class="img-fluid" src="@this.ImageUrl" />
 			}
-			@if (string.IsNullOrWhiteSpace(this.CurrentValue) && !string.IsNullOrWhiteSpace(this.InitialImageBase64))
+			@if (!string.IsNullOrWhiteSpace(this.CurrentValue?.FileBase64))
 			{
-				<img class="img-fluid" src="data:image/jpeg;base64, @this.InitialImageBase64" />
-			}
-			@if (!string.IsNullOrWhiteSpace(this.CurrentValue))
-			{
-				<img class="img-fluid" src="data:image/jpeg;base64, @this.CurrentValue" />
+				<img class="img-fluid" src="data:image/jpeg;base64, @this.CurrentValue?.FileBase64" />
 			}
 		</div>
 	</div>

@@ -8,17 +8,13 @@
 	<ItemGroup>
 		<!-- Extend Watch -->
 		<Watch Include="..\**\*.razor" />
+		<Watch Include="..\**\*.scss" />
 	</ItemGroup>
 
 	<PropertyGroup>
 		<!-- Faster Debug Builds-->
 		<BlazorWebAssemblyEnableLinking Condition="'$(Configuration)'!='Release'">false</BlazorWebAssemblyEnableLinking>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <Watch Remove="Shared\Components\InputImage.razor" />
-	  <Watch Remove="Shared\Components\Markdown.razor" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<!-- AutoMapper -->
@@ -34,6 +30,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
 		<!-- Microsoft.Extensions -->
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.0" />
 		<!-- Sotsera -->
