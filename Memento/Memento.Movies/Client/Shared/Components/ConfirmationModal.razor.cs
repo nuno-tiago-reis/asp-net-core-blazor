@@ -156,7 +156,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 		#endregion
 
-		#region [Methods] ConfirmationModal
+		#region [Methods] Modal
 		/// <summary>
 		/// Shows the modal.
 		/// </summary>
