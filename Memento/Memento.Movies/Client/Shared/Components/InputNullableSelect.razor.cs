@@ -99,11 +99,11 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Events
 		/// <summary>
-		/// Invoked when the input changes.
+		/// Invoked when the inputs value changes.
 		/// </summary>
 		/// 
 		/// <param name="arguments">The arguments.</param>
-		private void OnInputChanges(ChangeEventArgs arguments)
+		private void OnInputChange(ChangeEventArgs arguments)
 		{
 			this.CurrentValueAsString = arguments.Value.ToString();
 			this.StateHasChanged();

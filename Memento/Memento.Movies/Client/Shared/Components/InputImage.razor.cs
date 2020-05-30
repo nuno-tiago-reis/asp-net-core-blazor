@@ -145,11 +145,11 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Events
 		/// <summary>
-		/// Invoked when the input changes
+		/// Invoked when the inputs value changes.
 		/// </summary>
 		///
 		/// <param name="arguments">The arguments.</param>
-		private async Task OnInputChangesAsync(ChangeEventArgs arguments)
+		private async Task OnInputChangeAsync(ChangeEventArgs arguments)
 		{
 			var fileReader = this.FileReader.CreateReference(this.Input);
 

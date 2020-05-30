@@ -242,7 +242,7 @@ namespace Memento.Movies.Client.Shared.Components
 			if (!string.IsNullOrWhiteSpace(this.SearchText))
 			{
 				// Attempt to trigger a search
-				this.OnInputChanges(new ChangeEventArgs { Value = this.SearchText });
+				this.OnInputChange(new ChangeEventArgs { Value = this.SearchText });
 			}
 		}
 
@@ -260,11 +260,11 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <summary>
-		/// Invoked when the input changes.
+		/// Invoked when the inputs value changes.
 		/// </summary>
 		/// 
 		/// <param name="arguments">The arguments.</param>
-		private void OnInputChanges(ChangeEventArgs arguments)
+		private void OnInputChange(ChangeEventArgs arguments)
 		{
 			// Update the search text
 			this.SearchText = arguments.Value.ToString();
