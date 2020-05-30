@@ -6,11 +6,13 @@ using System;
 namespace Memento.Movies.Client.Shared.Components
 {
 	/// <summary>
-	/// Implements the 'PaginatedList' component.
+	/// Implements the 'PageList' component.
 	/// </summary>
-	/// 
+	///
+	/// <typeparam name="T">The type.</typeparam>
+	///
 	/// <seealso cref="ComponentBase"/>
-	public sealed partial class PaginatedList<T> : MementoComponent<PaginatedList<T>>
+	public sealed partial class PageList<T> : MementoComponent<PageList<T>>
 	{
 		#region [Properties]
 		/// <summary>
@@ -23,22 +25,22 @@ namespace Memento.Movies.Client.Shared.Components
 		/// The template to be used for the page items.
 		/// </summary>
 		[Parameter]
-		public RenderFragment<T> PageItemTemplate { get; set; }
+		public RenderFragment<T> ItemTemplate { get; set; }
 
 		/// <summary>
-		/// The template to be used when the page is empty.
+		/// The template to be used when the no results are found.
 		/// </summary>
 		[Parameter]
-		public RenderFragment<T> PageEmptyTemplate { get; set; }
+		public RenderFragment<T> EmptyTemplate { get; set; }
 
 		/// <summary>
-		/// The template to be used when the page is loading.
+		/// The template to be used when the results are loading.
 		/// </summary>
 		[Parameter]
-		public RenderFragment<T> PageLoadingTemplate { get; set; }
+		public RenderFragment<T> LoadingTemplate { get; set; }
 		#endregion
 
-		#region [Methods]
+		#region [Methods] Component
 		/// <inheritdoc />
 		protected override void OnInitialized()
 		{
@@ -53,11 +55,11 @@ namespace Memento.Movies.Client.Shared.Components
 			base.OnParametersSet();
 
 			// Validations
-			if (this.PageItemTemplate == null)
+			if (this.ItemTemplate == null)
 			{
 				throw new InvalidOperationException
 				(
-					$"{this.GetType()} requires a value for the {nameof(this.PageItemTemplate)} parameter."
+					$"{this.GetType()} requires a value for the {nameof(this.ItemTemplate)} parameter."
 				);
 			}
 		}
