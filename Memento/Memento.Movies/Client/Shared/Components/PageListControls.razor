@@ -1,0 +1,128 @@
+﻿@inherits MementoComponent<PageListControls<TOrderBy, TOrderDirection>>
+@typeparam TOrderBy
+@typeparam TOrderDirection
+
+<EditForm Model="this">
+	<div class="row">
+		<div class="col-md-3">
+			<!-- order by -->
+			<InputSelect class="form-control mb-2"
+							TValue="TOrderBy"
+							Value="this.OrderBy"
+							ValueExpression="@(()=> this.OrderBy)"
+							ValueChanged="@((value) => this.OnOrderByChangeAsync(value))">
+				@foreach (Enum orderBy in Enum.GetValues(this.OrderBy.GetType()))
+				{
+					<option value="@orderBy">@orderBy.GetLocalizedName()</option>
+				}
+			</InputSelect>
+		</div>
+		<div class="col-md-3">
+			<!-- order direction -->
+			<InputSelect class="form-control mb-2"
+							TValue="TOrderDirection"
+							Value="this.OrderDirection"
+							ValueExpression="@(()=> this.OrderDirection)"
+							ValueChanged="@((value) => this.OnOrderDirectionChangeAsync(value))">
+				@foreach (Enum orderDirection in Enum.GetValues(this.OrderDirection.GetType()))
+				{
+					<option value="@orderDirection">@orderDirection.GetLocalizedName()</option>
+				}
+			</InputSelect>
+		</div>
+		<div class="col-md-6">
+			<div class="d-flex justify-content-end">
+				<!-- page size -->
+				<InputNumberSelect class="form-control w-md-10 mb-2"
+								Value="this.PageSize"
+								ValueExpression="@(()=> this.PageSize)"
+								ValueChanged="@((value) => this.OnPageSizeChangeAsync(value))">
+					@foreach (int pageSize in this.PageSizes)
+					{
+						<option value="@pageSize">@pageSize</option>
+					}
+				</InputNumberSelect>
+				<!-- page number -->
+				<ul class="pagination ml-3">
+					@if (this.PageNumber == 1)
+					{
+						<!-- first page-->
+						<li class="page-item disabled">
+							<a class="page-link">
+								<i class="fas fa-chevron-double-left"></i>
+							</a>
+						</li>
+						<!-- previous page-->
+						<li class="page-item disabled">
+							<a class="page-link">
+								<i class="fas fa-chevron-left"></i>
+							</a>
+						</li>
+					}
+					else
+					{
+						<!-- first page-->
+						<li class="page-item" @onclick="@(() => this.OnPageNumberChangeAsync(1))">
+							<a class="page-link">
+								<i class="fas fa-chevron-double-left"></i>
+							</a>
+						</li>
+						<!-- previous page-->
+						<li class="page-item" @onclick="@(() => this.OnPageNumberChangeAsync(this.PageNumber - 1))">
+							<a class="page-link">
+								<i class="fas fa-chevron-left"></i>
+							</a>
+						</li>
+					}
+					@for (int i = 1; i <= this.TotalPages; i++)
+					{
+						var pageNumber = i;
+
+						@if (this.PageNumber == i)
+						{
+							<li class="page-item active">
+								<a class="page-link">@i</a>
+							</li>
+						}
+						else
+						{
+							<li class="page-item" @onclick="@(() => this.OnPageNumberChangeAsync(pageNumber))">
+								<a class="page-link">@i</a>
+							</li>
+						}
+					}
+					@if (this.PageNumber == this.TotalPages)
+					{
+						<!-- next page-->
+						<li class="page-item disabled">
+							<a class="page-link">
+								<i class="fas fa-chevron-right"></i>
+							</a>
+						</li>
+						<!-- last page-->
+						<li class="page-item disabled">
+							<a class="page-link">
+								<i class="fas fa-chevron-double-right"></i>
+							</a>
+						</li>
+					}
+					else
+					{
+						<!-- next page-->
+						<li class="page-item" @onclick="@(() => this.OnPageNumberChangeAsync(this.PageNumber + 1))">
+							<a class="page-link">
+								<i class="fas fa-chevron-right"></i>
+							</a>
+						</li>
+						<!-- last page-->
+						<li class="page-item" @onclick="@(() => this.OnPageNumberChangeAsync(this.TotalPages))">
+							<a class="page-link">
+								<i class="fas fa-chevron-double-right"></i>
+							</a>
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</EditForm>
