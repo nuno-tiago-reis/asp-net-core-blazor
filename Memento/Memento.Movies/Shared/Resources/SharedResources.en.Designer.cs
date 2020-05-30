@@ -429,6 +429,28 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to Ascending.
+		/// </summary>
+		public static string GENRE_ORDER_ASCENDING
+		{
+			get
+			{
+				return ResourceManager.GetString("GENRE_ORDER_ASCENDING", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Descending.
+		/// </summary>
+		public static string GENRE_ORDER_DESCENDING
+		{
+			get
+			{
+				return ResourceManager.GetString("GENRE_ORDER_DESCENDING", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to Genres.
 		/// </summary>
 		public static string GENRE_PLURAL
@@ -623,6 +645,28 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("MOVIE_NAME", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Ascending.
+		/// </summary>
+		public static string MOVIE_ORDER_ASCENDING
+		{
+			get
+			{
+				return ResourceManager.GetString("MOVIE_ORDER_ASCENDING", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Descending.
+		/// </summary>
+		public static string MOVIE_ORDER_DESCENDING
+		{
+			get
+			{
+				return ResourceManager.GetString("MOVIE_ORDER_DESCENDING", resourceCulture);
 			}
 		}
 
@@ -1107,6 +1151,28 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("PERSON_NAME", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Ascending.
+		/// </summary>
+		public static string PERSON_ORDER_ASCENDING
+		{
+			get
+			{
+				return ResourceManager.GetString("PERSON_ORDER_ASCENDING", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Descending.
+		/// </summary>
+		public static string PERSON_ORDER_DESCENDING
+		{
+			get
+			{
+				return ResourceManager.GetString("PERSON_ORDER_DESCENDING", resourceCulture);
 			}
 		}
 

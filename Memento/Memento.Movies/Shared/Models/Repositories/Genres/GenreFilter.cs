@@ -9,8 +9,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 	/// </summary
 	///
 	/// <seealso cref="GenreFilterOrderBy" />
-	/// <seealso cref="FilterOrderDirection" />
-	public sealed class GenreFilter : ModelFilter<GenreFilterOrderBy, FilterOrderDirection>
+	/// <seealso cref="GenreFilterOrderDirection" />
+	public sealed class GenreFilter : ModelFilter<GenreFilterOrderBy, GenreFilterOrderDirection>
 	{
 		#region [Properties]
 		/// <summary>
@@ -46,5 +46,22 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 		/// </summary>
 		[Display(Name = nameof(SharedResources.GENRE_UPDATEDAT), ResourceType = typeof(SharedResources))]
 		UpdatedAt = 3
+	}
+
+	/// <summary>
+	/// Defines the direction over which 'Genres' can be ordered by.
+	/// </summary>
+	public enum GenreFilterOrderDirection
+	{
+		/// <summary>
+		/// In 'Ascending' order.
+		/// </summary>
+		[Display(Name = nameof(SharedResources.GENRE_ORDER_ASCENDING), ResourceType = typeof(SharedResources))]
+		Ascending = 0,
+		/// <summary>
+		/// In 'Descending' order.
+		/// </summary>
+		[Display(Name = nameof(SharedResources.GENRE_ORDER_DESCENDING), ResourceType = typeof(SharedResources))]
+		Descending = 1
 	}
 }

@@ -7,6 +7,9 @@ using Memento.Movies.Shared.Models.Repositories.Genres;
 using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Models.Repositories.Persons;
 using Memento.Shared.Configuration;
+using Memento.Shared.Models.Pagination;
+using Memento.Shared.Models.Repositories;
+using System;
 
 namespace Memento.Movies.Shared.Configuration
 {
@@ -216,6 +219,27 @@ namespace Memento.Movies.Shared.Configuration
 			this.CreateMap<PersonMovieDetailContract, MovieListContract>();
 			// MovieGenres: Contract => Contract
 			this.CreateMap<PersonMovieListContract, MovieListContract>();
+			#endregion
+
+			#region [Models: Genres]
+			// Genres: Page => Filter
+			this.CreateMap<Page<GenreListContract>, GenreFilter>()
+				.ForMember(filter => filter.OrderBy, expression => expression.MapFrom(page => Enum.Parse(typeof(GenreFilterOrderBy), page.OrderBy)))
+				.ForMember(filter => filter.OrderDirection, expression => expression.MapFrom(page => Enum.Parse(typeof(GenreFilterOrderDirection), page.OrderDirection)));
+			#endregion
+
+			#region [Models: Movies]
+			// Genres: Page => Filter
+			this.CreateMap<Page<MovieListContract>, MovieFilter>()
+				.ForMember(filter => filter.OrderBy, expression => expression.MapFrom(page => Enum.Parse(typeof(MovieFilterOrderBy), page.OrderBy)))
+				.ForMember(filter => filter.OrderDirection, expression => expression.MapFrom(page => Enum.Parse(typeof(MovieFilterOrderDirection), page.OrderDirection)));
+			#endregion
+
+			#region [Models: Persons]
+			// Genres: Page => Filter
+			this.CreateMap<Page<PersonListContract>, PersonFilter>()
+				.ForMember(filter => filter.OrderBy, expression => expression.MapFrom(page => Enum.Parse(typeof(PersonFilterOrderBy), page.OrderBy)))
+				.ForMember(filter => filter.OrderDirection, expression => expression.MapFrom(page => Enum.Parse(typeof(MovieFilterOrderDirection), page.OrderDirection)));
 			#endregion
 		}
 		#endregion

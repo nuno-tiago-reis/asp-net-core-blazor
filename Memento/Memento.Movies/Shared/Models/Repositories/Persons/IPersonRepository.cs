@@ -10,8 +10,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 	/// <seealso cref="Person" />
 	/// <seealso cref="PersonFilter" />
 	/// <seealso cref="PersonFilterOrderBy" />
-	/// <seealso cref="FilterOrderDirection" />
-	public interface IPersonRepository : IModelRepository<Person, PersonFilter, PersonFilterOrderBy, FilterOrderDirection>
+	/// <seealso cref="PersonFilterOrderDirection" />
+	public interface IPersonRepository : IModelRepository<Person, PersonFilter, PersonFilterOrderBy, PersonFilterOrderDirection>
 	{
 		#region [Methods] IPersonRepository
 		#endregion

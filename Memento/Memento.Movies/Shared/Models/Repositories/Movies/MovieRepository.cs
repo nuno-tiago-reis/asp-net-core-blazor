@@ -23,8 +23,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 	/// <seealso cref="Movie" />
 	/// <seealso cref="MovieFilter" />
 	/// <seealso cref="MovieFilterOrderBy" />
-	/// <seealso cref="FilterOrderDirection" />
-	public sealed class MovieRepository : ModelRepository<Movie, MovieFilter, MovieFilterOrderBy, FilterOrderDirection>, IMovieRepository
+	/// <seealso cref="MovieFilterOrderDirection" />
+	public sealed class MovieRepository : ModelRepository<Movie, MovieFilter, MovieFilterOrderBy, MovieFilterOrderDirection>, IMovieRepository
 	{
 		#region [Constructors]
 		/// <summary>
@@ -300,7 +300,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 			{
 				case MovieFilterOrderBy.Id:
 				{
-					movieQueryable = movieFilter.OrderDirection == FilterOrderDirection.Ascending
+					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
 						? movieQueryable.OrderBy(movie => movie.Id)
 						: movieQueryable.OrderByDescending(movie => movie.Id);
 					break;
@@ -308,7 +308,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 
 				case MovieFilterOrderBy.Name:
 				{
-					movieQueryable = movieFilter.OrderDirection == FilterOrderDirection.Ascending
+					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
 						? movieQueryable.OrderBy(movie => movie.Name)
 						: movieQueryable.OrderByDescending(movie => movie.Name);
 					break;
@@ -316,7 +316,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 
 				case MovieFilterOrderBy.ReleaseDate:
 				{
-					movieQueryable = movieFilter.OrderDirection == FilterOrderDirection.Ascending
+					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
 						? movieQueryable.OrderBy(movie => movie.ReleaseDate)
 						: movieQueryable.OrderByDescending(movie => movie.ReleaseDate);
 					break;
@@ -324,7 +324,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 
 				case MovieFilterOrderBy.CreatedAt:
 				{
-					movieQueryable = movieFilter.OrderDirection == FilterOrderDirection.Ascending
+					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
 						? movieQueryable.OrderBy(movie => movie.CreatedAt)
 						: movieQueryable.OrderByDescending(movie => movie.CreatedAt);
 					break;
@@ -332,7 +332,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 
 				case MovieFilterOrderBy.UpdatedAt:
 				{
-					movieQueryable = movieFilter.OrderDirection == FilterOrderDirection.Ascending
+					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
 						? movieQueryable.OrderBy(movie => movie.UpdatedAt)
 						: movieQueryable.OrderByDescending(movie => movie.UpdatedAt);
 					break;

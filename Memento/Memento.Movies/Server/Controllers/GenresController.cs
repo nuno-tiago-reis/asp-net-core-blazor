@@ -126,7 +126,7 @@ namespace Memento.Movies.Server.Controllers
 		/// 
 		/// <param name="filter">The filter.</param>
 		[HttpGet]
-		public async Task<ActionResult<MementoResponse<Page<GenreListContract>>>> GetAsync([FromQuery] GenreFilter filter)
+		public async Task<ActionResult<MementoResponse<IPage<GenreListContract>>>> GetAsync([FromQuery] GenreFilter filter)
 		{
 			// Get the genres
 			var genres = await this.Repository.GetAllAsync(filter);

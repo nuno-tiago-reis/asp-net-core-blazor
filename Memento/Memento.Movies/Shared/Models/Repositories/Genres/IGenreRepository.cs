@@ -10,8 +10,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 	/// <seealso cref="Genre" />
 	/// <seealso cref="GenreFilter" />
 	/// <seealso cref="GenreFilterOrderBy" />
-	/// <seealso cref="FilterOrderDirection" />
-	public interface IGenreRepository : IModelRepository<Genre, GenreFilter, GenreFilterOrderBy, FilterOrderDirection>
+	/// <seealso cref="GenreFilterOrderDirection" />
+	public interface IGenreRepository : IModelRepository<Genre, GenreFilter, GenreFilterOrderBy, GenreFilterOrderDirection>
 	{
 		#region [Methods] IGenreRepository
 		#endregion

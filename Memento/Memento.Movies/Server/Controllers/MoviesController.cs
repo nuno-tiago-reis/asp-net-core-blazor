@@ -165,7 +165,7 @@ namespace Memento.Movies.Server.Controllers
 		/// 
 		/// <param name="filter">The filter.</param>
 		[HttpGet]
-		public async Task<ActionResult<MementoResponse<Page<MovieListContract>>>> GetAsync([FromQuery] MovieFilter filter)
+		public async Task<ActionResult<MementoResponse<IPage<MovieListContract>>>> GetAsync([FromQuery] MovieFilter filter)
 		{
 			// Get the movies
 			var movies = await this.Repository.GetAllAsync(filter);

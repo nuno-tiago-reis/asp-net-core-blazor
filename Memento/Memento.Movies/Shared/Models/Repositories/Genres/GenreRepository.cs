@@ -23,8 +23,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 	/// <seealso cref="Genre" />
 	/// <seealso cref="GenreFilter" />
 	/// <seealso cref="GenreFilterOrderBy" />
-	/// <seealso cref="FilterOrderDirection" />
-	public sealed class GenreRepository : ModelRepository<Genre, GenreFilter, GenreFilterOrderBy, FilterOrderDirection>, IGenreRepository
+	/// <seealso cref="GenreFilterOrderDirection" />
+	public sealed class GenreRepository : ModelRepository<Genre, GenreFilter, GenreFilterOrderBy, GenreFilterOrderDirection>, IGenreRepository
 	{
 		#region [Constructors]
 		/// <summary>
@@ -168,7 +168,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 			{
 				case GenreFilterOrderBy.Id:
 				{
-					genreQueryable = genreFilter.OrderDirection == FilterOrderDirection.Ascending
+					genreQueryable = genreFilter.OrderDirection == GenreFilterOrderDirection.Ascending
 						? genreQueryable.OrderBy(genre => genre.Id)
 						: genreQueryable.OrderByDescending(genre => genre.Id);
 					break;
@@ -176,7 +176,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 
 				case GenreFilterOrderBy.Name:
 				{
-					genreQueryable = genreFilter.OrderDirection == FilterOrderDirection.Ascending
+					genreQueryable = genreFilter.OrderDirection == GenreFilterOrderDirection.Ascending
 						? genreQueryable.OrderBy(genre => genre.Name)
 						: genreQueryable.OrderByDescending(genre => genre.Name);
 					break;
@@ -184,7 +184,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 
 				case GenreFilterOrderBy.CreatedAt:
 				{
-					genreQueryable = genreFilter.OrderDirection == FilterOrderDirection.Ascending
+					genreQueryable = genreFilter.OrderDirection == GenreFilterOrderDirection.Ascending
 						? genreQueryable.OrderBy(genre => genre.CreatedAt)
 						: genreQueryable.OrderByDescending(genre => genre.CreatedAt);
 					break;
@@ -192,7 +192,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 
 				case GenreFilterOrderBy.UpdatedAt:
 				{
-					genreQueryable = genreFilter.OrderDirection == FilterOrderDirection.Ascending
+					genreQueryable = genreFilter.OrderDirection == GenreFilterOrderDirection.Ascending
 						? genreQueryable.OrderBy(genre => genre.UpdatedAt)
 						: genreQueryable.OrderByDescending(genre => genre.UpdatedAt);
 					break;

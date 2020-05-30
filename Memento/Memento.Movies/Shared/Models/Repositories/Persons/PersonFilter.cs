@@ -10,8 +10,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 	/// </summary
 	///
 	/// <seealso cref="PersonFilterOrderBy" />
-	/// <seealso cref="FilterOrderDirection" />
-	public sealed class PersonFilter : ModelFilter<PersonFilterOrderBy, FilterOrderDirection>
+	/// <seealso cref="PersonFilterOrderDirection" />
+	public sealed class PersonFilter : ModelFilter<PersonFilterOrderBy, PersonFilterOrderDirection>
 	{
 		#region [Properties]
 		/// <summary>
@@ -65,5 +65,22 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 		/// </summary>
 		[Display(Name = nameof(SharedResources.PERSON_UPDATEDAT), ResourceType = typeof(SharedResources))]
 		UpdatedAt = 3
+	}
+
+	/// <summary>
+	/// Defines the direction over which 'Persons' can be ordered by.
+	/// </summary>
+	public enum PersonFilterOrderDirection
+	{
+		/// <summary>
+		/// In 'Ascending' order.
+		/// </summary>
+		[Display(Name = nameof(SharedResources.PERSON_ORDER_ASCENDING), ResourceType = typeof(SharedResources))]
+		Ascending = 0,
+		/// <summary>
+		/// In 'Descending' order.
+		/// </summary>
+		[Display(Name = nameof(SharedResources.PERSON_ORDER_DESCENDING), ResourceType = typeof(SharedResources))]
+		Descending = 1
 	}
 }

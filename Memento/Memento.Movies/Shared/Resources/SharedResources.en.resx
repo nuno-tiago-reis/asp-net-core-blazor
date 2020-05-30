@@ -157,6 +157,12 @@
 	<data name="GENRE_NAME" xml:space="preserve">
 		<value>Name</value>
 	</data>
+	<data name="GENRE_ORDER_ASCENDING" xml:space="preserve">
+		<value>Ascending</value>
+	</data>
+	<data name="GENRE_ORDER_DESCENDING" xml:space="preserve">
+		<value>Descending</value>
+	</data>
 	<data name="GENRE_PLURAL" xml:space="preserve">
 		<value>Genres</value>
 	</data>
@@ -210,6 +216,12 @@
 	</data>
 	<data name="MOVIE_NAME" xml:space="preserve">
 		<value>Name</value>
+	</data>
+	<data name="MOVIE_ORDER_ASCENDING" xml:space="preserve">
+		<value>Ascending</value>
+	</data>
+	<data name="MOVIE_ORDER_DESCENDING" xml:space="preserve">
+		<value>Descending</value>
 	</data>
 	<data name="MOVIE_PERSONS" xml:space="preserve">
 		<value>Persons</value>
@@ -342,6 +354,12 @@
 	</data>
 	<data name="PERSON_NAME" xml:space="preserve">
 		<value>Name</value>
+	</data>
+	<data name="PERSON_ORDER_ASCENDING" xml:space="preserve">
+		<value>Ascending</value>
+	</data>
+	<data name="PERSON_ORDER_DESCENDING" xml:space="preserve">
+		<value>Descending</value>
 	</data>
 	<data name="PERSON_PICTURE" xml:space="preserve">
 		<value>Picture</value>

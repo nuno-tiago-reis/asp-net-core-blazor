@@ -23,8 +23,8 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 	/// <seealso cref="Person" />
 	/// <seealso cref="PersonFilter" />
 	/// <seealso cref="PersonFilterOrderBy" />
-	/// <seealso cref="FilterOrderDirection" />
-	public sealed class PersonRepository : ModelRepository<Person, PersonFilter, PersonFilterOrderBy, FilterOrderDirection>, IPersonRepository
+	/// <seealso cref="PersonFilterOrderDirection" />
+	public sealed class PersonRepository : ModelRepository<Person, PersonFilter, PersonFilterOrderBy, PersonFilterOrderDirection>, IPersonRepository
 	{
 		#region [Constructors]
 		/// <summary>
@@ -245,7 +245,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 			{
 				case PersonFilterOrderBy.Id:
 				{
-					personQueryable = personFilter.OrderDirection == FilterOrderDirection.Ascending
+					personQueryable = personFilter.OrderDirection == PersonFilterOrderDirection.Ascending
 						? personQueryable.OrderBy(person => person.Id)
 						: personQueryable.OrderByDescending(person => person.Id);
 					break;
@@ -253,7 +253,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 
 				case PersonFilterOrderBy.Name:
 				{
-					personQueryable = personFilter.OrderDirection == FilterOrderDirection.Ascending
+					personQueryable = personFilter.OrderDirection == PersonFilterOrderDirection.Ascending
 						? personQueryable.OrderBy(person => person.Name)
 						: personQueryable.OrderByDescending(person => person.Name);
 					break;
@@ -261,7 +261,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 
 				case PersonFilterOrderBy.CreatedAt:
 				{
-					personQueryable = personFilter.OrderDirection == FilterOrderDirection.Ascending
+					personQueryable = personFilter.OrderDirection == PersonFilterOrderDirection.Ascending
 						? personQueryable.OrderBy(person => person.CreatedAt)
 						: personQueryable.OrderByDescending(person => person.CreatedAt);
 					break;
@@ -269,7 +269,7 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 
 				case PersonFilterOrderBy.UpdatedAt:
 				{
-					personQueryable = personFilter.OrderDirection == FilterOrderDirection.Ascending
+					personQueryable = personFilter.OrderDirection == PersonFilterOrderDirection.Ascending
 						? personQueryable.OrderBy(person => person.UpdatedAt)
 						: personQueryable.OrderByDescending(person => person.UpdatedAt);
 					break;
