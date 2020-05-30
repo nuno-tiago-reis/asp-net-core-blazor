@@ -62,7 +62,7 @@ namespace Memento.Movies.Client.Pages
 				PageNumber = 1,
 				PageSize = 3,
 				OrderBy = MovieFilterOrderBy.ReleaseDate,
-				OrderDirection = FilterOrderDirection.Descending
+				OrderDirection = MovieFilterOrderDirection.Descending
 			};
 
 			// Invoke the API
@@ -92,7 +92,7 @@ namespace Memento.Movies.Client.Pages
 				PageNumber = 1,
 				PageSize = 3,
 				OrderBy = MovieFilterOrderBy.ReleaseDate,
-				OrderDirection = FilterOrderDirection.Ascending
+				OrderDirection = MovieFilterOrderDirection.Ascending
 			};
 
 			// Invoke the API

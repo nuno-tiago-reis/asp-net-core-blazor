@@ -1,15 +1,32 @@
 ﻿@inherits MementoComponent<MovieList>
 
 <div class="row">
-	<PaginatedList Page="this.Movies">
-		<PageItemTemplate>
+	<PageList Page="this.Movies">
+		<ItemTemplate>
 			<div class="col-md-4">
 				<MovieCard Movie="@context">
 				</MovieCard>
 			</div>
-		</PageItemTemplate>
-	</PaginatedList>
+		</ItemTemplate>
+	</PageList>
 </div>
+
+@if (this.Movies != null)
+{
+	<PageListControls PageNumber="this.Filter.PageNumber"
+						PageNumberChanged="@((value) => this.OnPageNumberChangeAsync(value))"
+						PageSize="this.Filter.PageSize"
+						PageSizeChanged="@((value) => this.OnPageSizeChangeAsync(value))"
+						TotalPages="this.Movies.TotalPages"
+						TotalItems="this.Movies.TotalItems"
+						TOrderBy="MovieFilterOrderBy"
+						OrderBy="this.Filter.OrderBy"
+						OrderByChanged="@((value) => this.OnOrderByChangeAsync(value))"
+						TOrderDirection="MovieFilterOrderDirection"
+						OrderDirection="this.Filter.OrderDirection"
+						OrderDirectionChanged="@((value) => this.OnOrderDirectionChangeAsync(value))">
+	</PageListControls>
+}
 
 <div class="row">
 	<div class="col-md-12">

@@ -6,17 +6,17 @@
 		<h2>@this.Localizer.GetString(SharedResources.GENERIC_IN_THEATERS)</h2>
 	</div>
 </div>
-<div class="row">
+@*<div class="row">
 	<!-- cards -->
-	<PaginatedList Page="this.InTheaters">
-		<PageItemTemplate>
+	<PageList Page="this.InTheaters">
+		<ItemTemplate>
 			<div class="col-md-4">
 				<MovieCard Movie="@context">
 				</MovieCard>
 			</div>
-		</PageItemTemplate>
-	</PaginatedList>
-</div>
+		</ItemTemplate>
+	</PageList>
+</div>*@
 
 <div class="row">
 	<div class="col-md-12">
@@ -24,7 +24,7 @@
 		<h2>@this.Localizer.GetString(SharedResources.GENERIC_UPCOMING_RELEASES)</h2>
 	</div>
 </div>
-<div class="row">
+@*<div class="row">
 	<!-- cards -->
 	<PaginatedList Page="this.UpcomingReleases">
 		<PageItemTemplate>
@@ -34,4 +34,4 @@
 			</div>
 		</PageItemTemplate>
 	</PaginatedList>
-</div>
+</div>*@

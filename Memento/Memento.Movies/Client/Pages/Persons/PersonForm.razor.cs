@@ -311,7 +311,7 @@ namespace Memento.Movies.Client.Pages.Persons
 			{
 				Name = name,
 				OrderBy = MovieFilterOrderBy.Name,
-				OrderDirection = FilterOrderDirection.Ascending
+				OrderDirection = MovieFilterOrderDirection.Ascending
 			};
 
 			// Invoke the API

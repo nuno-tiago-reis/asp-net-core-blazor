@@ -350,7 +350,7 @@ namespace Memento.Movies.Client.Pages.Movies
 			{
 				Name = name,
 				OrderBy = GenreFilterOrderBy.Name,
-				OrderDirection = FilterOrderDirection.Ascending
+				OrderDirection = GenreFilterOrderDirection.Ascending
 			};
 
 			// Invoke the API
@@ -387,7 +387,7 @@ namespace Memento.Movies.Client.Pages.Movies
 			{
 				Name = name,
 				OrderBy = PersonFilterOrderBy.Name,
-				OrderDirection = FilterOrderDirection.Ascending
+				OrderDirection = PersonFilterOrderDirection.Ascending
 			};
 
 			// Invoke the API

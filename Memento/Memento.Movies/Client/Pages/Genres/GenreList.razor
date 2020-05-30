@@ -1,15 +1,32 @@
 ﻿@inherits MementoComponent<GenreList>
 
 <div class="row">
-	<PaginatedList Page="this.Genres">
-		<PageItemTemplate>
+	<PageList Page="this.Genres">
+		<ItemTemplate>
 			<div class="col-md-4">
 				<GenreCard Genre="@context">
 				</GenreCard>
 			</div>
-		</PageItemTemplate>
-	</PaginatedList>
+		</ItemTemplate>
+	</PageList>
 </div>
+
+@if (this.Genres != null)
+{
+	<PageListControls PageNumber="this.Filter.PageNumber"
+					  PageNumberChanged="@((value) => this.OnPageNumberChangeAsync(value))"
+					  PageSize="this.Filter.PageSize"
+					  PageSizeChanged="@((value) => this.OnPageSizeChangeAsync(value))"
+					  TotalPages="this.Genres.TotalPages"
+					  TotalItems="this.Genres.TotalItems"
+					  TOrderBy="GenreFilterOrderBy"
+					  OrderBy="this.Filter.OrderBy"
+					  OrderByChanged="@((value) => this.OnOrderByChangeAsync(value))"
+					  TOrderDirection="GenreFilterOrderDirection"
+					  OrderDirection="this.Filter.OrderDirection"
+					  OrderDirectionChanged="@((value) => this.OnOrderDirectionChangeAsync(value))">
+	</PageListControls>
+}
 
 <div class="row">
 	<div class="col-md-12">
