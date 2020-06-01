@@ -1,4 +1,4 @@
-﻿@inherits MementoComponent<GenreCard>
+﻿@inherits MementoComponent<GenreCardFragment>
 
 <div class="card mb-md-2">
 	<div class="card-header">
@@ -16,7 +16,7 @@
 						<dd>@this.Genre.Name</dd>
 					</dl>
 					<!-- button -->
-					<Button class="btn btn-block btn-primary mt-auto mb-1" IsSubmit="false" OnClicked="this.OnView">
+					<Button class="btn btn-block btn-primary mt-auto mb-1" IsSubmit="false" OnClicked="this.OnViewClick">
 						<span class="fas fa-sign-in"></span> @this.Localizer.GetString(SharedResources.BUTTON_VIEW)
 					</Button>
 				</div>

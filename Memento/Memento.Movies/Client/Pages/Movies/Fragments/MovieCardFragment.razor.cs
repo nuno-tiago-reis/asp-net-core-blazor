@@ -3,14 +3,14 @@ using Memento.Movies.Shared.Models.Contracts.Movies;
 using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 
-namespace Memento.Movies.Client.Pages.Movies
+namespace Memento.Movies.Client.Pages.Movies.Fragments
 {
 	/// <summary>
-	/// Implements the 'MovieCard' component.
+	/// Implements the 'MovieCardFragment' component.
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
-	public sealed partial class MovieCard : MementoComponent<MovieCard>
+	public sealed partial class MovieCardFragment : MementoComponent<MovieCardFragment>
 	{
 		#region [Properties] Parameters
 		/// <summary>

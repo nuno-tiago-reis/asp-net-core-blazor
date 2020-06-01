@@ -6,6 +6,8 @@ using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Genres
@@ -57,13 +59,7 @@ namespace Memento.Movies.Client.Pages.Genres
 		protected async override Task OnInitializedAsync()
 		{
 			// Initialize the filter
-			this.Filter = new GenreFilter
-			{
-				PageNumber = INITIAL_PAGE_NUMBER,
-				PageSize = INITIAL_PAGE_SIZE,
-				OrderBy = GenreFilterOrderBy.Name,
-				OrderDirection = GenreFilterOrderDirection.Ascending
-			};
+			this.GetFilter();
 
 			// Initalize the movies
 			await this.GetGenresAsync();
@@ -83,8 +79,8 @@ namespace Memento.Movies.Client.Pages.Genres
 				// Update the movies
 				this.Genres = response.Data;
 
-				// Update the filter
-				this.Filter = this.Mapper.Map<GenreFilter>(response.Data);
+				// Update the paging
+				this.Mapper.Map(response.Data, this.Filter);
 
 				// Show a toast message
 				this.Toaster.Success(response.Message);
@@ -97,6 +93,61 @@ namespace Memento.Movies.Client.Pages.Genres
 				// Show a toast message
 				this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_LOADING));
 			}
+
+			// Build the url
+			var uri = this.NavigationManager.Uri.Split("?").First();
+			var uriWithQuery = QueryHelpers.AddQueryString(uri, this.Filter.WriteToQuery());
+
+			// Update the url
+			this.NavigationManager.NavigateTo(uriWithQuery);
+		}
+		#endregion
+
+		#region [Methods] Filtering
+		/// <summary>
+		/// Gets the filter from the query string.
+		/// </summary>
+		private void GetFilter()
+		{
+			// Get the query from the url
+			var query = QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query);
+
+			// Create the filter
+			this.Filter = new GenreFilter
+			{
+				PageNumber = INITIAL_PAGE_NUMBER,
+				PageSize = INITIAL_PAGE_SIZE,
+				OrderBy = GenreFilterOrderBy.Name,
+				OrderDirection = GenreFilterOrderDirection.Ascending
+			};
+
+			// Parse the query
+			this.Filter.ReadFromQuery(query);
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the filter is applied.
+		/// </summary>
+		private async Task OnFilterSearchAsync(GenreFilter _)
+		{
+			// Reset the paging
+			this.Filter.PageNumber = 1;
+			this.Filter.PageSize = this.Filter.PageSize;
+
+			// Update the genres
+			await this.GetGenresAsync();
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the filter is reset.
+		/// </summary>
+		private async Task OnFilterResetAsync(GenreFilter _)
+		{
+			// Reset the filter
+			this.Filter = new GenreFilter();
+
+			// Update the genres
+			await this.GetGenresAsync();
 		}
 		#endregion
 
@@ -108,11 +159,11 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <param name="pageNumber">The page number.</param>
 		private async Task OnPageNumberChangeAsync(int pageNumber)
 		{
-			// Update the filter
+			// Update the paging
 			this.Filter.PageNumber = pageNumber;
 			this.Filter.PageSize = this.Filter.PageSize;
 
-			// Update the movies
+			// Update the genres
 			await this.GetGenresAsync();
 		}
 
@@ -123,11 +174,11 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <param name="pageSize">The page size.</param>
 		private async Task OnPageSizeChangeAsync(int pageSize)
 		{
-			// Update the filter
+			// Update the paging
 			this.Filter.PageNumber = 1;
 			this.Filter.PageSize = pageSize;
 
-			// Update the movies
+			// Update the genres
 			await this.GetGenresAsync();
 		}
 		#endregion
@@ -140,10 +191,10 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <param name="orderBy">The order by.</param>
 		private async Task OnOrderByChangeAsync(GenreFilterOrderBy orderBy)
 		{
-			// Update the filter
+			// Update the ordering
 			this.Filter.OrderBy = orderBy;
 
-			// Update the movies
+			// Update the genres
 			await this.GetGenresAsync();
 		}
 
@@ -154,10 +205,10 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <param name="orderDirection">The order direction.</param>
 		private async Task OnOrderDirectionChangeAsync(GenreFilterOrderDirection orderDirection)
 		{
-			// Update the filter
+			// Update the ordering
 			this.Filter.OrderDirection = orderDirection;
 
-			// Update the movies
+			// Update the genres
 			await this.GetGenresAsync();
 		}
 		#endregion

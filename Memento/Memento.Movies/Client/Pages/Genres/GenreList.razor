@@ -1,11 +1,33 @@
 ﻿@inherits MementoComponent<GenreList>
 
+@if (this.Genres != null)
+{
+	<PageListFilter T="GenreFilter"
+					Filter="this.Filter"
+					OnSearch="this.OnFilterSearchAsync"
+					OnReset="this.OnFilterResetAsync">
+		<FilterContent>
+			<div class="row mb-1">
+				<div class="col-md-6">
+					<!-- name -->
+					<Label class="mb-0"
+						   For="@(() => this.Filter.Name)">
+					</Label>
+					<InputText class="form-control"
+							   @bind-Value="this.Filter.Name">
+					</InputText>
+				</div>
+			</div>
+		</FilterContent>
+	</PageListFilter>
+}
+
 <div class="row">
 	<PageList Page="this.Genres">
 		<ItemTemplate>
 			<div class="col-md-4">
-				<GenreCard Genre="@context">
-				</GenreCard>
+				<GenreCardFragment Genre="@context">
+				</GenreCardFragment>
 			</div>
 		</ItemTemplate>
 	</PageList>

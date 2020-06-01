@@ -57,7 +57,7 @@ namespace Memento.Movies.Client.Pages
 			// Build the in theaters filter
 			this.InTheatersFilter = new MovieFilter
 			{
-				InTheaters = true,
+				InTheaters = MovieFilterInTheaters.Checked,
 				ReleasedBefore = DateTime.Today,
 				PageNumber = 1,
 				PageSize = 3,
@@ -87,7 +87,7 @@ namespace Memento.Movies.Client.Pages
 			// Build the in upcoming releases filter
 			this.UpcomingReleasesFilter = new MovieFilter
 			{
-				InTheaters = false,
+				InTheaters = MovieFilterInTheaters.Unchecked,
 				ReleasedAfter = DateTime.Today,
 				PageNumber = 1,
 				PageSize = 3,

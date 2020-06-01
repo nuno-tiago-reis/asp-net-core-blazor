@@ -7,6 +7,8 @@ using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Repositories;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Movies
@@ -58,13 +60,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		protected async override Task OnInitializedAsync()
 		{
 			// Initialize the filter
-			this.Filter = new MovieFilter
-			{
-				PageNumber = INITIAL_PAGE_NUMBER,
-				PageSize = INITIAL_PAGE_SIZE,
-				OrderBy = MovieFilterOrderBy.ReleaseDate,
-				OrderDirection = MovieFilterOrderDirection.Descending
-			};
+			this.GetFilter();
 
 			// Initalize the movies
 			await this.GetMoviesAsync();
@@ -84,8 +80,8 @@ namespace Memento.Movies.Client.Pages.Movies
 				// Update the movies
 				this.Movies = response.Data;
 
-				// Update the filter
-				this.Filter = this.Mapper.Map<MovieFilter>(response.Data);
+				// Update the paging
+				this.Mapper.Map(response.Data, this.Filter);
 
 				// Show a toast message
 				this.Toaster.Success(response.Message);
@@ -98,6 +94,61 @@ namespace Memento.Movies.Client.Pages.Movies
 				// Show a toast message
 				this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_LOADING));
 			}
+
+			// Build the url
+			var uri = this.NavigationManager.Uri.Split("?").First();
+			var uriWithQuery = QueryHelpers.AddQueryString(uri, this.Filter.WriteToQuery());
+
+			// Update the url
+			this.NavigationManager.NavigateTo(uriWithQuery);
+		}
+		#endregion
+
+		#region [Methods] Filtering
+		/// <summary>
+		/// Gets the filter from the query string.
+		/// </summary>
+		private void GetFilter()
+		{
+			// Get the query from the url
+			var query = QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query);
+
+			// Create the filter
+			this.Filter = new MovieFilter
+			{
+				PageNumber = INITIAL_PAGE_NUMBER,
+				PageSize = INITIAL_PAGE_SIZE,
+				OrderBy = MovieFilterOrderBy.Name,
+				OrderDirection = MovieFilterOrderDirection.Ascending
+			};
+
+			// Parse the query
+			this.Filter.ReadFromQuery(query);
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the filter is applied.
+		/// </summary>
+		private async Task OnFilterSearchAsync(MovieFilter _)
+		{
+			// Reset the paging
+			this.Filter.PageNumber = 1;
+			this.Filter.PageSize = this.Filter.PageSize;
+
+			// Update the movies
+			await this.GetMoviesAsync();
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the filter is reset.
+		/// </summary>
+		private async Task OnFilterResetAsync(MovieFilter _)
+		{
+			// Reset the filter
+			this.Filter = new MovieFilter();
+
+			// Update the movies
+			await this.GetMoviesAsync();
 		}
 		#endregion
 
@@ -109,7 +160,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <param name="pageNumber">The page number.</param>
 		private async Task OnPageNumberChangeAsync(int pageNumber)
 		{
-			// Update the filter
+			// Update the paging
 			this.Filter.PageNumber = pageNumber;
 			this.Filter.PageSize = this.Filter.PageSize;
 
@@ -124,7 +175,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <param name="pageSize">The page size.</param>
 		private async Task OnPageSizeChangeAsync(int pageSize)
 		{
-			// Update the filter
+			// Update the paging
 			this.Filter.PageNumber = 1;
 			this.Filter.PageSize = pageSize;
 
@@ -141,7 +192,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <param name="orderBy">The order by.</param>
 		private async Task OnOrderByChangeAsync(MovieFilterOrderBy orderBy)
 		{
-			// Update the filter
+			// Update the ordering
 			this.Filter.OrderBy = orderBy;
 
 			// Update the movies
@@ -155,7 +206,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <param name="orderDirection">The order direction.</param>
 		private async Task OnOrderDirectionChangeAsync(MovieFilterOrderDirection orderDirection)
 		{
-			// Update the filter
+			// Update the ordering
 			this.Filter.OrderDirection = orderDirection;
 
 			// Update the movies

@@ -6,6 +6,8 @@ using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages.Persons
@@ -57,13 +59,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		protected async override Task OnInitializedAsync()
 		{
 			// Initialize the filter
-			this.Filter = new PersonFilter
-			{
-				PageNumber = INITIAL_PAGE_NUMBER,
-				PageSize = INITIAL_PAGE_SIZE,
-				OrderBy = PersonFilterOrderBy.Name,
-				OrderDirection = PersonFilterOrderDirection.Ascending
-			};
+			this.GetFilter();
 
 			// Initalize the movies
 			await this.GetPersonsAsync();
@@ -83,8 +79,8 @@ namespace Memento.Movies.Client.Pages.Persons
 				// Update the movies
 				this.Persons = response.Data;
 
-				// Update the filter
-				this.Filter = this.Mapper.Map<PersonFilter>(response.Data);
+				// Update the paging
+				this.Mapper.Map(response.Data, this.Filter);
 
 				// Show a toast message
 				this.Toaster.Success(response.Message);
@@ -97,6 +93,61 @@ namespace Memento.Movies.Client.Pages.Persons
 				// Show a toast message
 				this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_LOADING));
 			}
+
+			// Build the url
+			var uri = this.NavigationManager.Uri.Split("?").First();
+			var uriWithQuery = QueryHelpers.AddQueryString(uri, this.Filter.WriteToQuery());
+
+			// Update the url
+			this.NavigationManager.NavigateTo(uriWithQuery);
+		}
+		#endregion
+
+		#region [Methods] Filtering
+		/// <summary>
+		/// Gets the filter from the query string.
+		/// </summary>
+		private void GetFilter()
+		{
+			// Get the query from the url
+			var query = QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query);
+
+			// Create the filter
+			this.Filter = new PersonFilter
+			{
+				PageNumber = INITIAL_PAGE_NUMBER,
+				PageSize = INITIAL_PAGE_SIZE,
+				OrderBy = PersonFilterOrderBy.Name,
+				OrderDirection = PersonFilterOrderDirection.Ascending
+			};
+
+			// Parse the query
+			this.Filter.ReadFromQuery(query);
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the filter is applied.
+		/// </summary>
+		private async Task OnFilterSearchAsync(PersonFilter _)
+		{
+			// Reset the paging
+			this.Filter.PageNumber = 1;
+			this.Filter.PageSize = this.Filter.PageSize;
+
+			// Update the persons
+			await this.GetPersonsAsync();
+		}
+
+		/// <summary>
+		/// Callback that is invoked when the filter is reset.
+		/// </summary>
+		private async Task OnFilterResetAsync(PersonFilter _)
+		{
+			// Reset the filter
+			this.Filter = new PersonFilter();
+
+			// Update the persons
+			await this.GetPersonsAsync();
 		}
 		#endregion
 
@@ -108,11 +159,11 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <param name="pageNumber">The page number.</param>
 		private async Task OnPageNumberChangeAsync(int pageNumber)
 		{
-			// Update the filter
+			// Update the paging
 			this.Filter.PageNumber = pageNumber;
 			this.Filter.PageSize = this.Filter.PageSize;
 
-			// Update the movies
+			// Update the persons
 			await this.GetPersonsAsync();
 		}
 
@@ -123,11 +174,11 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <param name="pageSize">The page size.</param>
 		private async Task OnPageSizeChangeAsync(int pageSize)
 		{
-			// Update the filter
+			// Update the paging
 			this.Filter.PageNumber = 1;
 			this.Filter.PageSize = pageSize;
 
-			// Update the movies
+			// Update the persons
 			await this.GetPersonsAsync();
 		}
 		#endregion
@@ -140,10 +191,10 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <param name="orderBy">The order by.</param>
 		private async Task OnOrderByChangeAsync(PersonFilterOrderBy orderBy)
 		{
-			// Update the filter
+			// Update the ordering
 			this.Filter.OrderBy = orderBy;
 
-			// Update the movies
+			// Update the persons
 			await this.GetPersonsAsync();
 		}
 
@@ -154,10 +205,10 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <param name="orderDirection">The order direction.</param>
 		private async Task OnOrderDirectionChangeAsync(PersonFilterOrderDirection orderDirection)
 		{
-			// Update the filter
+			// Update the ordering
 			this.Filter.OrderDirection = orderDirection;
 
-			// Update the movies
+			// Update the persons
 			await this.GetPersonsAsync();
 		}
 		#endregion
