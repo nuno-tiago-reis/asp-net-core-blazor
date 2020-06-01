@@ -30,6 +30,8 @@ app
 	height: 3.5rem;
 	display: flex;
 	align-items: center;
+	z-index: 90000;
+	background-image: linear-gradient(180deg, #052767 0%, #3a0647 70%);
 }
 
 .main
@@ -117,11 +119,6 @@ app
 	color: white;
 }
 
-.content
-{
-	padding-top: 1.1rem;
-}
-
 .navbar-toggler
 {
 	background-color: rgba(255, 255, 255, 0.1);
@@ -202,12 +199,6 @@ app
 		top: 0;
 	}
 
-	.main > div
-	{
-		padding-left: 2rem !important;
-		padding-right: 1.5rem !important;
-	}
-
 	.navbar-toggler
 	{
 		display: none;
@@ -226,6 +217,13 @@ $phone-breakpoint: 575.98px;
 $tablet-breakpoint: 767.98px;
 $desktop-breakpoint: 991.98px;
 $large-desktop-breakpoint: 1199.98px;
+/* #endregion */
+
+/* #region [breadcrumb] */
+.bg-breadcrumb
+{
+	background-color: $breadcrumb-bg;
+}
 /* #endregion */
 
 /* #region [typeahead] */

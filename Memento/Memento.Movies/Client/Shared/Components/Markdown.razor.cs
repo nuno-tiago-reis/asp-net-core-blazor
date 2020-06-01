@@ -5,6 +5,8 @@ namespace Memento.Movies.Client.Shared.Components
 	/// <summary>
 	/// Displays a markdown formatted content.
 	/// </summary>
+	///
+	/// <seealso cref="ComponentBase"/>
 	public sealed partial class Markdown : ComponentBase
 	{
 		#region [Properties] Parameters

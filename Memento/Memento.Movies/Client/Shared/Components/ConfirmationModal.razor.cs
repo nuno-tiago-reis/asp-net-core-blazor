@@ -10,7 +10,7 @@ namespace Memento.Movies.Client.Shared.Components
 	/// Implements the 'ConfirmationModal' component.
 	/// </summary>
 	/// 
-	/// <seealso cref="ComponentBase"/>
+	/// <seealso cref="MementoComponent{}"/>
 	public sealed partial class ConfirmationModal : MementoComponent<ConfirmationModal>
 	{
 		#region [Properties] Parameters

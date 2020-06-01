@@ -12,6 +12,8 @@ namespace Memento.Movies.Client.Shared.Components
 	/// <summary>
 	/// Displays a label for a specified field within a cascaded <see cref="Microsoft.AspNetCore.Components.Forms.EditContext"/>.
 	/// </summary>
+	///
+	/// <seealso cref="ComponentBase"/>
 	public sealed partial class Label<T> : ComponentBase
 	{
 		#region [Properties] Parameters
