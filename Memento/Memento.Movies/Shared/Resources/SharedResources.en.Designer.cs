@@ -66,6 +66,94 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to Create {0}.
+		/// </summary>
+		public static string BREADCRUMB_CREATE_HEADER
+		{
+			get
+			{
+				return ResourceManager.GetString("BREADCRUMB_CREATE_HEADER", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Create.
+		/// </summary>
+		public static string BREADCRUMB_CREATE_LINK_LABEL
+		{
+			get
+			{
+				return ResourceManager.GetString("BREADCRUMB_CREATE_LINK_LABEL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to {0}.
+		/// </summary>
+		public static string BREADCRUMB_DETAIL_HEADER
+		{
+			get
+			{
+				return ResourceManager.GetString("BREADCRUMB_DETAIL_HEADER", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Detail.
+		/// </summary>
+		public static string BREADCRUMB_DETAIL_LINK_LABEL
+		{
+			get
+			{
+				return ResourceManager.GetString("BREADCRUMB_DETAIL_LINK_LABEL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to {0}.
+		/// </summary>
+		public static string BREADCRUMB_LIST_HEADER
+		{
+			get
+			{
+				return ResourceManager.GetString("BREADCRUMB_LIST_HEADER", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to {0}.
+		/// </summary>
+		public static string BREADCRUMB_LIST_LINK_LABEL
+		{
+			get
+			{
+				return ResourceManager.GetString("BREADCRUMB_LIST_LINK_LABEL", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Update {0}..
+		/// </summary>
+		public static string BREADCRUMB_UPDATE_HEADER
+		{
+			get
+			{
+				return ResourceManager.GetString("BREADCRUMB_UPDATE_HEADER", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Update.
+		/// </summary>
+		public static string BREADCRUMB_UPDATE_LINK_LABEL
+		{
+			get
+			{
+				return ResourceManager.GetString("BREADCRUMB_UPDATE_LINK_LABEL", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to Cancel.
 		/// </summary>
 		public static string BUTTON_CANCEL
@@ -513,6 +601,17 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("GENRE_UPDATEDBY", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Home.
+		/// </summary>
+		public static string HOME
+		{
+			get
+			{
+				return ResourceManager.GetString("HOME", resourceCulture);
 			}
 		}
 

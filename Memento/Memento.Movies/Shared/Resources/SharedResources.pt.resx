@@ -58,6 +58,30 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="BREADCRUMB_CREATE_HEADER" xml:space="preserve">
+		<value>Criar {0}</value>
+	</data>
+	<data name="BREADCRUMB_CREATE_LINK_LABEL" xml:space="preserve">
+		<value>Criar</value>
+	</data>
+	<data name="BREADCRUMB_DETAIL_HEADER" xml:space="preserve">
+		<value>{0}</value>
+	</data>
+	<data name="BREADCRUMB_DETAIL_LINK_LABEL" xml:space="preserve">
+		<value>Detalhe</value>
+	</data>
+	<data name="BREADCRUMB_LIST_HEADER" xml:space="preserve">
+		<value>{0}</value>
+	</data>
+	<data name="BREADCRUMB_LIST_LINK_LABEL" xml:space="preserve">
+		<value>{0}</value>
+	</data>
+	<data name="BREADCRUMB_UPDATE_HEADER" xml:space="preserve">
+		<value>Atualizar {0}.</value>
+	</data>
+	<data name="BREADCRUMB_UPDATE_LINK_LABEL" xml:space="preserve">
+		<value>Atualizar</value>
+	</data>
 	<data name="BUTTON_CANCEL" xml:space="preserve">
 		<value>Cancelar</value>
 	</data>
@@ -180,6 +204,9 @@
 	</data>
 	<data name="GENRE_UPDATEDBY" xml:space="preserve">
 		<value>Atualizado Por</value>
+	</data>
+	<data name="HOME" xml:space="preserve">
+		<value>Home</value>
 	</data>
 	<data name="MODAL_DELETE_BODY" xml:space="preserve">
 		<value>Tem a certeza que quer apagar este {0}?</value>
