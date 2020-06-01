@@ -89,7 +89,7 @@ namespace Memento.Movies.Client.Shared.Components
 				}
 				else
 				{
-					throw new InvalidOperationException($"{this.GetType()} does not support the value '{typeof(T)}'.");
+					throw new InvalidOperationException($"{this.GetType()} does not support the value '{value}'.");
 				}
 			}
 
