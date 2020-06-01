@@ -8,14 +8,20 @@
 }
 else
 {
-	<EditForm Model="this.Movie"
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
+	<EditForm @ref="this.EditForm"
+			  EditContext="this.EditContext"
 			  OnValidSubmit="this.OnValidSubmitAsync"
 			  OnInvalidSubmit="this.OnInvalidSubmit">
-		
+
 		<!-- validation -->
 		<ValidationSummary />
 		<DataAnnotationsValidator />
-		
+
 		<!-- inputs -->
 		<div class="row">
 			<div class="col-md-12">
@@ -69,11 +75,11 @@ else
 					<Label For="@(() => this.Movie.Persons)">
 					</Label>
 					<InputNullableSelect class="form-control mb-2"
-								 @bind-Value="this.PersonRole">
+										 @bind-Value="this.PersonRole">
 						@foreach (MoviePersonRole role in Enum.GetValues(typeof(MoviePersonRole)))
-						{
+							{
 							<option value="@role">@role.GetLocalizedName()</option>
-						}
+							}
 					</InputNullableSelect>
 					@if (this.PersonRole != null)
 					{
@@ -100,8 +106,7 @@ else
 				</ul>
 				<!-- picture -->
 				<div class="form-group">
-					<InputImage @ref="this.PictureInputImage"
-								@bind-Value="this.MovieChanges.Picture"
+					<InputImage @bind-Value="this.MovieChanges.Picture"
 								ImageUrl="@this.Movie.PictureUrl">
 						<ImageLabelContent>
 							@this.Localizer.GetString(SharedResources.MOVIE_PICTURE)
@@ -145,18 +150,7 @@ else
 				</div>
 			</div>
 		</div>
-		
-		<!-- buttons -->
-		<div class="row">
-			<div class="col-md-12">
-				<Button Color="NamedColor.Success" IsSubmit="true">
-					<span class="fas fa-save"></span> @this.Localizer.GetString(SharedResources.BUTTON_SAVE_CHANGES)...
-				</Button>
-				<Button Color="NamedColor.Secondary" IsSubmit="false" OnClicked="this.OnCancelAsync">
-					<span class="fas fa-trash"></span> @this.Localizer.GetString(SharedResources.BUTTON_DISCARD_CHANGES)...
-				</Button>
-			</div>
-		</div>
+
 	</EditForm>
 }
 
@@ -180,9 +174,9 @@ else
 
 <!-- discard changes modal -->
 <ConfirmationModal @ref="this.DiscardChangesModal"
-				   HeaderBackgroundColor="NamedColor.Warning"
+				   HeaderBackgroundColor="NamedColor.Danger"
 				   HeaderTextColor="NamedColor.White"
-				   ConfirmButtonColor="NamedColor.Warning"
+				   ConfirmButtonColor="NamedColor.Danger"
 				   ConfirmButtonCallback="this.OnDiscardChangesConfirmedAsync"
 				   CancelButtonColor="NamedColor.Secondary"
 				   CancelButtonCallback="this.OnDiscardChangesCancelledAsync">

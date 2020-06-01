@@ -5,7 +5,6 @@ using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
-using Memento.Shared.Models.Repositories;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;

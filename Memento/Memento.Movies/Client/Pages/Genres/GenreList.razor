@@ -1,7 +1,13 @@
 ﻿@inherits MementoComponent<GenreList>
 
+
 @if (this.Genres != null)
 {
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
 	<PageListFilter T="GenreFilter"
 					Filter="this.Filter"
 					OnSearch="this.OnFilterSearchAsync"
@@ -22,16 +28,14 @@
 	</PageListFilter>
 }
 
-<div class="row">
-	<PageList Page="this.Genres">
-		<ItemTemplate>
-			<div class="col-md-4">
-				<GenreCardFragment Genre="@context">
-				</GenreCardFragment>
-			</div>
-		</ItemTemplate>
-	</PageList>
-</div>
+<PageList Page="this.Genres">
+	<ItemTemplate>
+		<div class="col-md-4">
+			<GenreCardFragment Genre="@context">
+			</GenreCardFragment>
+		</div>
+	</ItemTemplate>
+</PageList>
 
 @if (this.Genres != null)
 {
@@ -49,11 +53,3 @@
 					  OrderDirectionChanged="@((value) => this.OnOrderDirectionChangeAsync(value))">
 	</PageListControls>
 }
-
-<div class="row">
-	<div class="col-md-12">
-		<Anchor class="btn btn-success" Url="@Routes.GenreRoutes.Create">
-			<span class="fas fa-plus"></span> @this.Localizer.GetString(SharedResources.BUTTON_CREATE)
-		</Anchor>
-	</div>
-</div>

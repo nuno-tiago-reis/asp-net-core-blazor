@@ -2,6 +2,11 @@
 
 @if (this.Movies != null)
 {
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
 	<PageListFilter T="MovieFilter"
 					Filter="this.Filter"
 					OnSearch="this.OnFilterSearchAsync"
@@ -57,9 +62,9 @@
 										 @bind-Value="this.Filter.InTheaters">
 						<option selected></option>
 						@foreach (MovieFilterInTheaters inTheaters in Enum.GetValues(typeof(MovieFilterInTheaters)))
-						{
+							{
 							<option value="@inTheaters">@inTheaters.GetLocalizedName()</option>
-						}
+							}
 					</InputNullableSelect>
 				</div>
 			</div>
@@ -67,16 +72,14 @@
 	</PageListFilter>
 }
 
-<div class="row">
-	<PageList Page="this.Movies">
-		<ItemTemplate>
-			<div class="col-md-4">
-				<MovieCardFragment Movie="@context">
-				</MovieCardFragment>
-			</div>
-		</ItemTemplate>
-	</PageList>
-</div>
+<PageList Page="this.Movies">
+	<ItemTemplate>
+		<div class="col-md-4">
+			<MovieCardFragment Movie="@context">
+			</MovieCardFragment>
+		</div>
+	</ItemTemplate>
+</PageList>
 
 @if (this.Movies != null)
 {
@@ -94,11 +97,3 @@
 					  OrderDirectionChanged="@((value) => this.OnOrderDirectionChangeAsync(value))">
 	</PageListControls>
 }
-
-<div class="row">
-	<div class="col-md-12">
-		<Anchor class="btn btn-success" Url="@Routes.MovieRoutes.Create">
-			<span class="fas fa-plus"></span> @this.Localizer.GetString(SharedResources.BUTTON_CREATE)
-		</Anchor>
-	</div>
-</div>

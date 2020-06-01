@@ -8,7 +8,13 @@
 }
 else
 {
-	<EditForm Model="this.Genre"
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
+	<EditForm @ref="this.EditForm"
+			  EditContext="this.EditContext"
 			  OnValidSubmit="this.OnValidSubmitAsync"
 			  OnInvalidSubmit="this.OnInvalidSubmit">
 
@@ -32,17 +38,6 @@ else
 			</div>
 		</div>
 
-		<!-- buttons -->
-		<div class="row">
-			<div class="col-md-12">
-				<Button Color="NamedColor.Success" IsSubmit="true">
-					<span class="fas fa-save"></span> @this.Localizer.GetString(SharedResources.BUTTON_SAVE_CHANGES)...
-				</Button>
-				<Button Color="NamedColor.Secondary" IsSubmit="false" OnClicked="this.OnCancelAsync">
-					<span class="fas fa-trash"></span> @this.Localizer.GetString(SharedResources.BUTTON_DISCARD_CHANGES)...
-				</Button>
-			</div>
-		</div>
 	</EditForm>
 }
 
@@ -66,9 +61,9 @@ else
 
 <!-- discard changes modal -->
 <ConfirmationModal @ref="this.DiscardChangesModal"
-				   HeaderBackgroundColor="NamedColor.Warning"
+				   HeaderBackgroundColor="NamedColor.Danger"
 				   HeaderTextColor="NamedColor.White"
-				   ConfirmButtonColor="NamedColor.Warning"
+				   ConfirmButtonColor="NamedColor.Danger"
 				   ConfirmButtonCallback="this.OnDiscardChangesConfirmedAsync"
 				   CancelButtonColor="NamedColor.Secondary"
 				   CancelButtonCallback="this.OnDiscardChangesCancelledAsync">

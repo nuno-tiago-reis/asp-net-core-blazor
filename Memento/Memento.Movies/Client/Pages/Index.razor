@@ -1,37 +1,33 @@
 ﻿@inherits MementoComponent<Index>
 
+<!-- heading -->
 <div class="row">
 	<div class="col-md-12">
-		<!-- heading -->
 		<h2>@this.Localizer.GetString(SharedResources.GENERIC_IN_THEATERS)</h2>
 	</div>
 </div>
-<div class="row">
-	<!-- cards -->
-	<PageList Page="this.InTheaters">
-		<ItemTemplate>
-			<div class="col-md-4">
-				<MovieCardFragment Movie="@context">
-				</MovieCardFragment>
-			</div>
-		</ItemTemplate>
-	</PageList>
-</div>
+<!-- cards -->
+<PageList Page="this.InTheaters">
+	<ItemTemplate>
+		<div class="col-md-4">
+			<MovieCardFragment Movie="@context">
+			</MovieCardFragment>
+		</div>
+	</ItemTemplate>
+</PageList>
 
+<!-- heading -->
 <div class="row">
 	<div class="col-md-12">
-		<!-- heading -->
 		<h2>@this.Localizer.GetString(SharedResources.GENERIC_UPCOMING_RELEASES)</h2>
 	</div>
 </div>
-<div class="row">
-	<!-- cards -->
-	<PageList Page="this.UpcomingReleases">
-		<ItemTemplate>
-			<div class="col-md-4">
-				<MovieCardFragment Movie="@context">
-				</MovieCardFragment>
-			</div>
-		</ItemTemplate>
-	</PageList>
-</div>
+<!-- cards -->
+<PageList Page="this.UpcomingReleases">
+	<ItemTemplate>
+		<div class="col-md-4">
+			<MovieCardFragment Movie="@context">
+			</MovieCardFragment>
+		</div>
+	</ItemTemplate>
+</PageList>

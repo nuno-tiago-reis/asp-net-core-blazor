@@ -8,6 +8,11 @@
 }
 else
 {
+	<BreadcrumbHeader Header="@this.BreadcrumbHeader"
+					  Actions="@this.BreadcrumbActions"
+					  Links="@this.BreadcrumbLinks">
+	</BreadcrumbHeader>
+
 	<div class="card mb-md-2">
 		<!-- header -->
 		<div class="card-header">
@@ -43,19 +48,6 @@ else
 						<dt>@this.Localizer.GetString(SharedResources.MOVIE_RELEASEDATE)</dt>
 						<dd>@Movie.ReleaseDate.ToShortDateString()</dd>
 					</dl>
-				</div>
-			</div>
-			<!-- buttons -->
-			<div class="row">
-				<div class="col-md-6">
-					<Button Color="NamedColor.Success" IsBlockLevel="true" IsSubmit="false" OnClicked="this.OnUpdate">
-						<span class="fas fa-sign-in"></span> @this.Localizer.GetString(SharedResources.BUTTON_UPDATE)
-					</Button>
-				</div>
-				<div class="col-md-6">
-					<Button Color="NamedColor.Danger" IsBlockLevel="true" IsSubmit="false" OnClicked="this.OnDeleteAsync">
-						<span class="fas fa-trash-alt"></span> @this.Localizer.GetString(SharedResources.BUTTON_DELETE)
-					</Button>
 				</div>
 			</div>
 		</div>

@@ -8,9 +8,10 @@ using Memento.Movies.Shared.Models.Contracts.Persons;
 using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
-using Memento.Shared.Models.Repositories;
+using Memento.Shared.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,47 +36,6 @@ namespace Memento.Movies.Client.Pages.Persons
 		public long? PersonId { get; set; }
 		#endregion
 
-		#region [Properties] Services
-		/// <summary>
-		/// The movie service.
-		/// </summary>
-		[Inject]
-		public IMovieService MovieService { get; set; }
-
-		/// <summary>
-		/// The person service.
-		/// </summary>
-		[Inject]
-		public IPersonService PersonService { get; set; }
-		#endregion
-
-		#region [Properties] References
-		/// <summary>
-		/// The input image.
-		/// </summary>
-		public InputImage InputImage { get; set; }
-
-		/// <summary>
-		/// The last movie to be selected through typeahead.
-		/// </summary>
-		private MovieListContract MovieModelTypeahead { get; set; }
-
-		/// <summary>
-		/// The movie input typeahead.
-		/// </summary>
-		public InputTypeahead<MovieListContract> MovieInputTypeahead { get; set; }
-
-		/// <summary>
-		/// The save changes modal.
-		/// </summary>
-		public ConfirmationModal SaveChangesModal { get; set; }
-
-		/// <summary>
-		/// The discard changes modal.
-		/// </summary>
-		public ConfirmationModal DiscardChangesModal { get; set; }
-		#endregion
-
 		#region [Properties] Internal
 		/// <summary>
 		/// The person.
@@ -96,11 +56,91 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// The last movie person role to be selected.
 		/// </summary>
 		private MoviePersonRole? MovieRole { get; set; }
+
+		/// <summary>
+		/// The breadcrumb header.
+		/// </summary>
+		private string BreadcrumbHeader { get; set; }
+
+		/// <summary>
+		/// The breadcrumb links.
+		/// </summary>
+		private List<BreadcrumbLink> BreadcrumbLinks { get; set; }
+
+		/// <summary>
+		/// The breadcrumb actions.
+		/// </summary>
+		private List<BreadcrumbAction> BreadcrumbActions { get; set; }
+		#endregion
+
+		#region [Properties] Services
+		/// <summary>
+		/// The movie service.
+		/// </summary>
+		[Inject]
+		private IMovieService MovieService { get; set; }
+
+		/// <summary>
+		/// The person service.
+		/// </summary>
+		[Inject]
+		private IPersonService PersonService { get; set; }
+		#endregion
+
+		#region [Properties] References
+		/// <summary>
+		/// The edit form.
+		/// </summary>
+		private EditForm EditForm { get; set; }
+
+		/// <summary>
+		/// The edit context.
+		/// </summary>
+		private EditContext EditContext { get; set; }
+
+		/// <summary>
+		/// The last movie to be selected through typeahead.
+		/// </summary>
+		private MovieListContract MovieModelTypeahead { get; set; }
+
+		/// <summary>
+		/// The movie input typeahead.
+		/// </summary>
+		private InputTypeahead<MovieListContract> MovieInputTypeahead { get; set; }
+
+		/// <summary>
+		/// The save changes modal.
+		/// </summary>
+		private ConfirmationModal SaveChangesModal { get; set; }
+
+		/// <summary>
+		/// The discard changes modal.
+		/// </summary>
+		private ConfirmationModal DiscardChangesModal { get; set; }
 		#endregion
 
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
+		{
+			// Get the genre
+			await this.GetPerson();
+
+			// Build the context
+			this.BuildContext();
+
+			// Build the breadcrumb
+			this.BuildBreadcrumb();
+
+		}
+		#endregion
+
+		#region [Methods] Data
+		/// <summary>
+		/// Gets the person from the backend if the identifier is provided.
+		/// Otherwise creates a new person with no data.
+		/// </summary>
+		private async Task GetPerson()
 		{
 			if (this.PersonId.HasValue)
 			{
@@ -157,11 +197,19 @@ namespace Memento.Movies.Client.Pages.Persons
 
 		#region [Methods] Form
 		/// <summary>
+		/// Builds the forms edit context.
+		/// </summary>
+		private void BuildContext()
+		{
+			this.EditContext = new EditContext(this.PersonChanges);
+		}
+
+		/// <summary>
 		/// Callback that is invoked when the form is submited with no errors.
 		/// </summary>
 		/// 
 		/// <param name="context">The context.</param>.</param>
-		public async Task OnValidSubmitAsync(EditContext _)
+		private async Task OnValidSubmitAsync(EditContext _)
 		{
 			await this.SaveChangesModal.ShowAsync();
 		}
@@ -171,7 +219,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		/// 
 		/// <param name="context">The context.</param>.</param>
-		public void OnInvalidSubmit(EditContext _)
+		private void OnInvalidSubmit(EditContext _)
 		{
 			// Show a toast message
 			this.Toaster.Error(this.Localizer.GetString(SharedResources.FORM_INVALID_FIELDS));
@@ -180,7 +228,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <summary>
 		/// Callback that is invoked when the form is cancelled.
 		/// </summary>
-		public async Task OnCancelAsync()
+		private async Task OnCancelAsync()
 		{
 			await this.DiscardChangesModal.ShowAsync();
 		}
@@ -190,7 +238,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <summary>
 		/// Callback that is invoked when the user clicks on the confirm button in the save changes modal.
 		/// </summary>
-		public async Task OnSaveChangesConfirmedAsync()
+		private async Task OnSaveChangesConfirmedAsync()
 		{
 			// Reset the movies
 			this.PersonChanges.Movies.Clear();
@@ -260,7 +308,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <summary>
 		/// Callback that is invoked when the user clicks on the cancel button in the save changes modal.
 		/// </summary>
-		public async Task OnSaveChangesCancelledAsync()
+		private async Task OnSaveChangesCancelledAsync()
 		{
 			// Hide the modal
 			await this.SaveChangesModal.HideAsync();
@@ -271,7 +319,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <summary>
 		/// Callback that is invoked when the user clicks on the confirm button in the save changes modal.
 		/// </summary>
-		public async Task OnDiscardChangesConfirmedAsync()
+		private async Task OnDiscardChangesConfirmedAsync()
 		{
 			// Hide the modal
 			await this.DiscardChangesModal.HideAsync();
@@ -291,7 +339,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <summary>
 		/// Callback that is invoked when the user clicks on the cancel button in the discard changes modal.
 		/// </summary>
-		public async Task OnDiscardChangesCancelledAsync()
+		private async Task OnDiscardChangesCancelledAsync()
 		{
 			// Hide the modal
 			await this.DiscardChangesModal.HideAsync();
@@ -304,7 +352,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		/// 
 		/// <param name="name">The name.</param>
-		public async Task<IEnumerable<MovieListContract>> GetMoviesAsync(string name)
+		private async Task<IEnumerable<MovieListContract>> GetMoviesAsync(string name)
 		{
 			// Build the filter
 			var movieFilter = new MovieFilter
@@ -329,7 +377,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		/// 
 		/// <param name="movie">The movie</param>
-		public void OnMovieSelected(MovieListContract movie)
+		private void OnMovieSelected(MovieListContract movie)
 		{
 			// Filter the movies
 			var filteredMovies = this.MoviesByRole.First(movie => movie.Key == this.MovieRole).Value;
@@ -340,6 +388,92 @@ namespace Memento.Movies.Client.Pages.Persons
 			filteredMovies.Add(movie);
 			// Reset the typeahead
 			this.MovieInputTypeahead.Reset();
+		}
+		#endregion
+
+		#region [Methods] Breadcrumb
+		/// <summary>
+		/// Builds the default breadcrumb.
+		/// </summary>
+		private void BuildBreadcrumb()
+		{
+			var name = this.PersonId.HasValue == false
+				? this.Localizer.GetString(SharedResources.PERSON)
+				: this.Person.Name;
+			var header = this.PersonId.HasValue == false
+				? this.Localizer.GetString(SharedResources.BREADCRUMB_CREATE_HEADER, name)
+				: this.Localizer.GetString(SharedResources.BREADCRUMB_UPDATE_HEADER, name);
+
+			this.BreadcrumbHeader = header;
+			this.BuildBreadcrumbLinks();
+			this.BuildBreadcrumbActions();
+		}
+
+		/// <summary>
+		/// Builds the default breadcrumb links from the built-in constants.
+		/// </summary>
+		private void BuildBreadcrumbLinks()
+		{
+			if (this.PersonId.HasValue == false)
+			{
+				this.BreadcrumbLinks = new List<BreadcrumbLink>
+				{
+					// Previous
+					Routes.HomeRoutes.GetRootBreadcrumbLink(),
+					// Previous
+					Routes.PersonRoutes.GetRootBreadcrumbLink(),
+					// Current
+					Routes.PersonRoutes.GetCreateBreadcrumbLink()
+				};
+			}
+			else
+			{
+				this.BreadcrumbLinks = new List<BreadcrumbLink>
+				{
+					// Previous
+					Routes.HomeRoutes.GetRootBreadcrumbLink(),
+					// Previous
+					Routes.PersonRoutes.GetRootBreadcrumbLink(),
+					// Previous
+					Routes.PersonRoutes.GetDetailBreadcrumbLink(this.PersonId.Value),
+					// Current
+					Routes.PersonRoutes.GetUpdateBreadcrumbLink(this.PersonId.Value)
+				};
+			}
+		}
+
+		/// <summary>
+		/// Builds the default breadcrumb actions from the built-in constants.
+		/// </summary>
+		private void BuildBreadcrumbActions()
+		{
+			this.BreadcrumbActions = new List<BreadcrumbAction>()
+			{
+				new BreadcrumbAction
+				{
+					Label = this.Localizer.GetString(SharedResources.BUTTON_SAVE_CHANGES),
+					Tooltip = this.Localizer.GetString(SharedResources.BUTTON_SAVE_CHANGES),
+					ButtonClasses = "btn-success",
+					IconClasses = "fas fa-save",
+					Enabled = true,
+					OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, async (arguments) =>
+					{
+						await this.EditForm.SubmitAsync();
+					})
+				},
+				new BreadcrumbAction
+				{
+					Label = this.Localizer.GetString(SharedResources.BUTTON_DISCARD_CHANGES),
+					Tooltip = this.Localizer.GetString(SharedResources.BUTTON_DISCARD_CHANGES),
+					ButtonClasses = "btn-danger",
+					IconClasses = "fas fa-times",
+					Enabled = true,
+					OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, async (arguments) =>
+					{
+						await this.OnCancelAsync();
+					})
+				}
+			};
 		}
 		#endregion
 	}

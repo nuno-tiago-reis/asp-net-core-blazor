@@ -1,13 +1,15 @@
 ﻿using Memento.Movies.Client.Services.Movies;
+using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
 using Memento.Movies.Shared.Models.Contracts.Movies;
 using Memento.Movies.Shared.Models.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
-using Memento.Shared.Models.Repositories;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,18 +35,31 @@ namespace Memento.Movies.Client.Pages.Movies
 		private const int INITIAL_PAGE_SIZE = 6;
 		#endregion
 
-		#region [Properties] Parameters
+		#region [Properties] Internal
 		/// <summary>
 		/// The movies.
 		/// </summary>
-		[Parameter]
-		public Page<MovieListContract> Movies { get; set; }
+		private Page<MovieListContract> Movies { get; set; }
 
 		/// <summary>
 		/// The filter.
 		/// </summary>
-		[Parameter]
-		public MovieFilter Filter { get; set; }
+		private MovieFilter Filter { get; set; }
+
+		/// <summary>
+		/// The breadcrumb header.
+		/// </summary>
+		private string BreadcrumbHeader { get; set; }
+
+		/// <summary>
+		/// The breadcrumb links.
+		/// </summary>
+		private List<BreadcrumbLink> BreadcrumbLinks { get; set; }
+
+		/// <summary>
+		/// The breadcrumb actions.
+		/// </summary>
+		private List<BreadcrumbAction> BreadcrumbActions { get; set; }
 		#endregion
 
 		#region [Properties] Services
@@ -52,18 +67,21 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// The movie service.
 		/// </summary>
 		[Inject]
-		public IMovieService MovieService { get; set; }
+		private IMovieService MovieService { get; set; }
 		#endregion
 
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected async override Task OnInitializedAsync()
 		{
-			// Initialize the filter
-			this.GetFilter();
+			// Build the filter
+			this.BuildQueryFilter();
 
-			// Initalize the movies
+			// Get the movies
 			await this.GetMoviesAsync();
+
+			// Build the breadcrumb
+			this.BuildBreadcrumb();
 		}
 		#endregion
 
@@ -106,9 +124,9 @@ namespace Memento.Movies.Client.Pages.Movies
 
 		#region [Methods] Filtering
 		/// <summary>
-		/// Gets the filter from the query string.
+		/// Builds the filter from the query string.
 		/// </summary>
-		private void GetFilter()
+		private void BuildQueryFilter()
 		{
 			// Get the query from the url
 			var query = QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query);
@@ -222,6 +240,56 @@ namespace Memento.Movies.Client.Pages.Movies
 
 			// Update the movies
 			await this.GetMoviesAsync();
+		}
+		#endregion
+
+		#region [Methods] Breadcrumb
+		/// <summary>
+		/// Builds the default breadcrumb.
+		/// </summary>
+		private void BuildBreadcrumb()
+		{
+			var name = this.Localizer.GetString(SharedResources.MOVIE_PLURAL);
+
+			this.BreadcrumbHeader = this.Localizer.GetString(SharedResources.BREADCRUMB_LIST_HEADER, name);
+			this.BuildBreadcrumbLinks();
+			this.BuildBreadcrumbActions();
+		}
+
+		/// <summary>
+		/// Builds the default breadcrumb links from the built-in constants.
+		/// </summary>
+		private void BuildBreadcrumbLinks()
+		{
+			this.BreadcrumbLinks = new List<BreadcrumbLink>
+			{
+				// Previous
+				Routes.HomeRoutes.GetRootBreadcrumbLink(),
+				// Current
+				Routes.MovieRoutes.GetRootBreadcrumbLink()
+			};
+		}
+
+		/// <summary>
+		/// Builds the default breadcrumb actions from the built-in constants.
+		/// </summary>
+		private void BuildBreadcrumbActions()
+		{
+			this.BreadcrumbActions = new List<BreadcrumbAction>()
+			{
+				new BreadcrumbAction
+				{
+					Label =  this.Localizer.GetString(SharedResources.BUTTON_CREATE),
+					Tooltip = this.Localizer.GetString(SharedResources.BUTTON_CREATE),
+					ButtonClasses = "btn-success",
+					IconClasses = "fas fa-plus",
+					Enabled = true,
+					OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, (arguments) =>
+					{
+						this.NavigationManager.NavigateTo(Routes.MovieRoutes.Create);
+					})
+				}
+			};
 		}
 		#endregion
 	}

@@ -1,6 +1,8 @@
 ﻿using Memento.Movies.Client.Pages.Genres;
 using Memento.Movies.Client.Pages.Movies;
 using Memento.Movies.Client.Pages.Persons;
+using Memento.Movies.Client.Shared.Components;
+using Memento.Movies.Shared.Resources;
 
 namespace Memento.Movies.Client.Shared.Routes
 {
@@ -14,10 +16,26 @@ namespace Memento.Movies.Client.Shared.Routes
 		/// </summary>
 		public static class HomeRoutes
 		{
+			#region [Routes]
 			/// <summary>
 			/// The home root route.
 			/// </summary>
 			public const string Root = "/";
+			#endregion
+
+			#region [Breadcrumbs]
+			/// <summary>
+			/// Returns a breadcrumb link representing the root page.
+			/// </summary>
+			public static BreadcrumbLink GetRootBreadcrumbLink()
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.HOME,
+					Url = Root
+				};
+			}
+			#endregion
 		}
 
 		/// <summary>
@@ -25,6 +43,7 @@ namespace Memento.Movies.Client.Shared.Routes
 		/// </summary>
 		public static class GenreRoutes
 		{
+			#region [Routes]
 			/// <summary>
 			/// The genres root route.
 			/// </summary>
@@ -54,6 +73,63 @@ namespace Memento.Movies.Client.Shared.Routes
 			/// The genres update route (indexed).
 			/// </summary>
 			public const string UpdateIndexed = "/Genres/{0}/Update";
+			#endregion
+
+			#region [Breadcrumbs]
+			/// <summary>
+			/// Returns a breadcrumb link representing the root page.
+			/// </summary>
+			public static BreadcrumbLink GetRootBreadcrumbLink()
+			{
+				var name = SharedResources.GENRE_PLURAL;
+
+				return new BreadcrumbLink
+				{
+					Label = string.Format(SharedResources.BREADCRUMB_LIST_LINK_LABEL, name),
+					Url = Root
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the create page.
+			/// </summary>
+			public static BreadcrumbLink GetCreateBreadcrumbLink()
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_CREATE_LINK_LABEL,
+					Url = Create
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the detail page.
+			/// </summary>
+			///
+			/// <param name="genreId">The genre id.</param>
+			public static BreadcrumbLink GetDetailBreadcrumbLink(long genreId)
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_DETAIL_LINK_LABEL,
+					Url = string.Format(DetailIndexed, genreId)
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the update page.
+			/// </summary>
+			///
+			/// <param name="genreId">The genre id.</param>
+			public static BreadcrumbLink GetUpdateBreadcrumbLink(long genreId)
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_UPDATE_LINK_LABEL,
+					Url = string.Format(UpdateIndexed, genreId)
+				};
+			}
+			#endregion
 		}
 
 		/// <summary>
@@ -61,6 +137,7 @@ namespace Memento.Movies.Client.Shared.Routes
 		/// </summary>
 		public static class MovieRoutes
 		{
+			#region [Routes]
 			/// <summary>
 			/// The movies root route.
 			/// </summary>
@@ -90,6 +167,63 @@ namespace Memento.Movies.Client.Shared.Routes
 			/// The movies update route (indexed).
 			/// </summary>
 			public const string UpdateIndexed = "/Movies/{0}/Update";
+			#endregion
+
+			#region [Breadcrumbs]
+			/// <summary>
+			/// Returns a breadcrumb link representing the root page.
+			/// </summary>
+			public static BreadcrumbLink GetRootBreadcrumbLink()
+			{
+				var name = SharedResources.MOVIE_PLURAL;
+
+				return new BreadcrumbLink
+				{
+					Label = string.Format(SharedResources.BREADCRUMB_LIST_LINK_LABEL, name),
+					Url = Root
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the create page.
+			/// </summary>
+			public static BreadcrumbLink GetCreateBreadcrumbLink()
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_CREATE_LINK_LABEL,
+					Url = Create
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the detail page.
+			/// </summary>
+			///
+			/// <param name="movieId">The movie id.</param>
+			public static BreadcrumbLink GetDetailBreadcrumbLink(long movieId)
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_DETAIL_LINK_LABEL,
+					Url = string.Format(DetailIndexed, movieId)
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the update page.
+			/// </summary>
+			///
+			/// <param name="movieId">The movie id.</param>
+			public static BreadcrumbLink GetUpdateBreadcrumbLink(long movieId)
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_UPDATE_LINK_LABEL,
+					Url = string.Format(UpdateIndexed, movieId)
+				};
+			}
+			#endregion
 		}
 
 		/// <summary>
@@ -97,6 +231,7 @@ namespace Memento.Movies.Client.Shared.Routes
 		/// </summary>
 		public static class PersonRoutes
 		{
+			#region [Routes]
 			/// <summary>
 			/// The persons root route.
 			/// </summary>
@@ -126,6 +261,63 @@ namespace Memento.Movies.Client.Shared.Routes
 			/// The persons update route (indexed).
 			/// </summary>
 			public const string UpdateIndexed = "/Persons/{0}/Update";
+			#endregion
+
+			#region [Breadcrumbs]
+			/// <summary>
+			/// Returns a breadcrumb link representing the root page.
+			/// </summary>
+			public static BreadcrumbLink GetRootBreadcrumbLink()
+			{
+				var name = SharedResources.PERSON_PLURAL;
+
+				return new BreadcrumbLink
+				{
+					Label = string.Format(SharedResources.BREADCRUMB_LIST_LINK_LABEL, name),
+					Url = Root
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the create page.
+			/// </summary>
+			public static BreadcrumbLink GetCreateBreadcrumbLink()
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_CREATE_LINK_LABEL,
+					Url = Create
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the detail page.
+			/// </summary>
+			///
+			/// <param name="personId">The person id.</param>
+			public static BreadcrumbLink GetDetailBreadcrumbLink(long personId)
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_DETAIL_LINK_LABEL,
+					Url = string.Format(DetailIndexed, personId)
+				};
+			}
+
+			/// <summary>
+			/// Returns a breadcrumb link representing the update page.
+			/// </summary>
+			///
+			/// <param name="personId">The person id.</param>
+			public static BreadcrumbLink GetUpdateBreadcrumbLink(long personId)
+			{
+				return new BreadcrumbLink
+				{
+					Label = SharedResources.BREADCRUMB_UPDATE_LINK_LABEL,
+					Url = string.Format(UpdateIndexed, personId)
+				};
+			}
+			#endregion
 		}
 	}
 }

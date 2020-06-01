@@ -29,8 +29,10 @@ else if (this.Page.Count == 0)
 }
 else
 {
-	foreach (var pageItem in this.Page)
-	{
-		@this.ItemTemplate(pageItem)
-	}
+	<div class="row">
+		@foreach (var pageItem in this.Page)
+		{
+			@this.ItemTemplate(pageItem)
+		}
+	</div>
 }
