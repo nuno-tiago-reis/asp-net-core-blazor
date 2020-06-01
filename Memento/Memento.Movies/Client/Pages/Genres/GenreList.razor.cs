@@ -113,7 +113,19 @@ namespace Memento.Movies.Client.Pages.Genres
 			var query = QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query);
 
 			// Create the filter
-			this.Filter = new GenreFilter
+			this.Filter = this.BuildDefaultFilter();
+
+			// Parse the query
+			this.Filter.ReadFromQuery(query);
+		}
+
+		/// <summary>
+		/// Builds the default filter from the built-in constants.
+		/// </summary>
+		private GenreFilter BuildDefaultFilter()
+		{
+			// Create the filter
+			var filter = new GenreFilter
 			{
 				PageNumber = INITIAL_PAGE_NUMBER,
 				PageSize = INITIAL_PAGE_SIZE,
@@ -121,8 +133,7 @@ namespace Memento.Movies.Client.Pages.Genres
 				OrderDirection = GenreFilterOrderDirection.Ascending
 			};
 
-			// Parse the query
-			this.Filter.ReadFromQuery(query);
+			return filter;
 		}
 
 		/// <summary>
@@ -144,7 +155,7 @@ namespace Memento.Movies.Client.Pages.Genres
 		private async Task OnFilterResetAsync(GenreFilter _)
 		{
 			// Reset the filter
-			this.Filter = new GenreFilter();
+			this.Filter = this.BuildDefaultFilter();
 
 			// Update the genres
 			await this.GetGenresAsync();

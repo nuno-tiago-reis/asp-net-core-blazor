@@ -113,7 +113,19 @@ namespace Memento.Movies.Client.Pages.Persons
 			var query = QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query);
 
 			// Create the filter
-			this.Filter = new PersonFilter
+			this.Filter = this.BuildDefaultFilter();
+
+			// Parse the query
+			this.Filter.ReadFromQuery(query);
+		}
+
+		/// <summary>
+		/// Builds the default filter from the built-in constants.
+		/// </summary>
+		private PersonFilter BuildDefaultFilter()
+		{
+			// Create the filter
+			var filter = new PersonFilter
 			{
 				PageNumber = INITIAL_PAGE_NUMBER,
 				PageSize = INITIAL_PAGE_SIZE,
@@ -121,8 +133,7 @@ namespace Memento.Movies.Client.Pages.Persons
 				OrderDirection = PersonFilterOrderDirection.Ascending
 			};
 
-			// Parse the query
-			this.Filter.ReadFromQuery(query);
+			return filter;
 		}
 
 		/// <summary>
@@ -144,7 +155,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		private async Task OnFilterResetAsync(PersonFilter _)
 		{
 			// Reset the filter
-			this.Filter = new PersonFilter();
+			this.Filter = BuildDefaultFilter();
 
 			// Update the persons
 			await this.GetPersonsAsync();
