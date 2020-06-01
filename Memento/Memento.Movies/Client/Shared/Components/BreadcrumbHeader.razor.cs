@@ -15,16 +15,10 @@ namespace Memento.Movies.Client.Shared.Components
 	{
 		#region [Properties]
 		/// <summary>
-		/// The primary header.
+		/// The header.
 		/// </summary>
 		[Parameter]
-		public string PrimaryHeader { get; set; }
-
-		/// <summary>
-		/// The secondary header.
-		/// </summary>
-		[Parameter]
-		public string SecondaryHeader { get; set; }
+		public string Header { get; set; }
 
 		/// <summary>
 		/// The links.
@@ -54,19 +48,11 @@ namespace Memento.Movies.Client.Shared.Components
 			base.OnParametersSet();
 
 			// Validations
-			if (string.IsNullOrWhiteSpace(this.PrimaryHeader))
+			if (string.IsNullOrWhiteSpace(this.Header))
 			{
 				throw new InvalidOperationException
 				(
-					$"{this.GetType()} requires a value for the {nameof(this.PrimaryHeader)} parameter."
-				);
-			}
-
-			if (string.IsNullOrWhiteSpace(this.SecondaryHeader))
-			{
-				throw new InvalidOperationException
-				(
-					$"{this.GetType()} requires a value for the {nameof(this.SecondaryHeader)} parameter."
+					$"{this.GetType()} requires a value for the {nameof(this.Header)} parameter."
 				);
 			}
 
@@ -114,9 +100,14 @@ namespace Memento.Movies.Client.Shared.Components
 	public sealed class BreadcrumbAction
 	{
 		/// <summary>
-		/// The icon (css class).
+		/// The button classes (css classes).
 		/// </summary>
-		public string Icon { get; set; }
+		public string ButtonClasses { get; set; }
+
+		/// <summary>
+		/// The icon classes (css classes).
+		/// </summary>
+		public string IconClasses { get; set; }
 
 		/// <summary>
 		/// The label.

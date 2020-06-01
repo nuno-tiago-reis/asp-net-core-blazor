@@ -3,10 +3,7 @@
 <div class="row mb-2 bg-breadcrumb">
 	<div class="col-md-6 px-md-3 my-auto text-left">
 		<h2 class="py-md-2 px-md-0 m-md-0 ml-md-2">
-			@this.PrimaryHeader</h2>
-		<h6 class="py-md-1 px-md-0 m-md-0 ml-md-2">
-			@this.SecondaryHeader
-		</h6>
+			@this.Header</h2>
 		<nav>
 			<ol class="breadcrumb py-md-2 px-md-0 m-md-0 ml-md-2">
 				@foreach (var link in this.Links.Take(this.Links.Count - 1))
@@ -16,7 +13,7 @@
 					</li>
 				}
 				<li class="breadcrumb-item active">
-					@this.Links[this.Links.Count - 2].Label
+					@this.Links[this.Links.Count - 1].Label
 				</li>
 			</ol>
 		</nav>
@@ -24,9 +21,9 @@
 	<div class="col-md-6 my-auto text-right">
 		@foreach (var action in this.Actions)
 		{
-			<button class="btn btn-primary m-md-0 mr-md-2 @(!action.Enabled ? "disabled" : string.Empty)"
+			<button class="btn m-md-0 mr-md-2 @action.ButtonClasses @(!action.Enabled ? "disabled" : string.Empty)"
 					@onclick="action.OnClick">
-				<span class="@action.Icon"></span>
+				<span class="@action.IconClasses"></span>
 				@action.Label
 			</button>
 		}
