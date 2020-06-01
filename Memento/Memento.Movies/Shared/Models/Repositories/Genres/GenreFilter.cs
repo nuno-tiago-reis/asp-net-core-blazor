@@ -1,5 +1,7 @@
 ﻿using Memento.Movies.Shared.Resources;
 using Memento.Shared.Models.Repositories;
+using Microsoft.Extensions.Primitives;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Memento.Movies.Shared.Models.Repositories.Genres
@@ -18,6 +20,28 @@ namespace Memento.Movies.Shared.Models.Repositories.Genres
 		/// </summary>
 		[Display(Name = nameof(SharedResources.GENRE_NAME), ResourceType = typeof(SharedResources))]
 		public string Name { get; set; }
+		#endregion
+
+		#region [Methods]
+		/// <inheritdoc />
+		protected override void ReadFilterFromQuery(Dictionary<string, StringValues> query)
+		{
+			// Name
+			if (query.TryGetValue(nameof(this.Name), out var name))
+			{
+				this.Name = name;
+			}
+		}
+
+		/// <inheritdoc />
+		protected override void WriteFilterToQuery(Dictionary<string, string> query)
+		{
+			// Name
+			if (!string.IsNullOrWhiteSpace(this.Name))
+			{
+				query.Add(nameof(this.Name), this.Name);
+			}
+		}
 		#endregion
 	}
 

@@ -112,6 +112,15 @@
 	<data name="ERROR_UNEXPECTED" xml:space="preserve">
 		<value>An error unexpected error occurred. Please try again later.</value>
 	</data>
+	<data name="FILTER_HEADING" xml:space="preserve">
+		<value>Filter</value>
+	</data>
+	<data name="FILTER_RESET_BUTTON" xml:space="preserve">
+		<value>Reset</value>
+	</data>
+	<data name="FILTER_SEARCH_BUTTON" xml:space="preserve">
+		<value>Search</value>
+	</data>
 	<data name="FORM_IMAGE_PREVIEW" xml:space="preserve">
 		<value>Preview</value>
 	</data>
@@ -213,6 +222,12 @@
 	</data>
 	<data name="MOVIE_INTHEATERS" xml:space="preserve">
 		<value>In Theaters</value>
+	</data>
+	<data name="MOVIE_INTHEATERS_CHECKED" xml:space="preserve">
+		<value>In Theaters</value>
+	</data>
+	<data name="MOVIE_INTHEATERS_UNCHECKED" xml:space="preserve">
+		<value>Not In Theaters</value>
 	</data>
 	<data name="MOVIE_NAME" xml:space="preserve">
 		<value>Name</value>

@@ -264,6 +264,39 @@ namespace Memento.Movies.Shared.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to Filter.
+		/// </summary>
+		public static string FILTER_HEADING
+		{
+			get
+			{
+				return ResourceManager.GetString("FILTER_HEADING", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Reset.
+		/// </summary>
+		public static string FILTER_RESET_BUTTON
+		{
+			get
+			{
+				return ResourceManager.GetString("FILTER_RESET_BUTTON", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Search.
+		/// </summary>
+		public static string FILTER_SEARCH_BUTTON
+		{
+			get
+			{
+				return ResourceManager.GetString("FILTER_SEARCH_BUTTON", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to Preview.
 		/// </summary>
 		public static string FORM_IMAGE_PREVIEW
@@ -634,6 +667,28 @@ namespace Memento.Movies.Shared.Resources
 			get
 			{
 				return ResourceManager.GetString("MOVIE_INTHEATERS", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to In Theaters.
+		/// </summary>
+		public static string MOVIE_INTHEATERS_CHECKED
+		{
+			get
+			{
+				return ResourceManager.GetString("MOVIE_INTHEATERS_CHECKED", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized string similar to Not In Theaters.
+		/// </summary>
+		public static string MOVIE_INTHEATERS_UNCHECKED
+		{
+			get
+			{
+				return ResourceManager.GetString("MOVIE_INTHEATERS_UNCHECKED", resourceCulture);
 			}
 		}
 

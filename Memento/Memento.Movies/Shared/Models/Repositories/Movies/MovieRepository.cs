@@ -290,9 +290,21 @@ namespace Memento.Movies.Shared.Models.Repositories.Movies
 
 			if (movieFilter.InTheaters != null)
 			{
-				var inThreaters = movieFilter.InTheaters.Value;
+				switch (movieFilter.InTheaters)
+				{
+					case MovieFilterInTheaters.Checked:
+					{
+						movieQueryable = movieQueryable.Where(movie => movie.InTheaters == true);
+						break;
+					}
 
-				movieQueryable = movieQueryable.Where(movie => movie.InTheaters == inThreaters);
+
+					case MovieFilterInTheaters.Unchecked:
+					{
+						movieQueryable = movieQueryable.Where(movie => movie.InTheaters == false);
+						break;
+					}
+				}
 			}
 
 			// Apply the order

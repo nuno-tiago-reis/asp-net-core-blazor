@@ -112,6 +112,15 @@
 	<data name="ERROR_UNEXPECTED" xml:space="preserve">
 		<value>Ocorreu um erro inesperado. Por favor tente novamente mais tarde.</value>
 	</data>
+	<data name="FILTER_HEADING" xml:space="preserve">
+		<value>Filtrar</value>
+	</data>
+	<data name="FILTER_RESET_BUTTON" xml:space="preserve">
+		<value>Limpar</value>
+	</data>
+	<data name="FILTER_SEARCH_BUTTON" xml:space="preserve">
+		<value>Procurar</value>
+	</data>
 	<data name="FORM_IMAGE_PREVIEW" xml:space="preserve">
 		<value>Pré-Visualização</value>
 	</data>
@@ -213,6 +222,12 @@
 	</data>
 	<data name="MOVIE_INTHEATERS" xml:space="preserve">
 		<value>Em Exibição</value>
+	</data>
+	<data name="MOVIE_INTHEATERS_CHECKED" xml:space="preserve">
+		<value>Em Exibição</value>
+	</data>
+	<data name="MOVIE_INTHEATERS_UNCHECKED" xml:space="preserve">
+		<value>Fora de Exibição</value>
 	</data>
 	<data name="MOVIE_NAME" xml:space="preserve">
 		<value>Nome</value>
@@ -335,10 +350,10 @@
 		<value>Data de Nascimento</value>
 	</data>
 	<data name="PERSON_BORNAFTER" xml:space="preserve">
-		<value>Nascido Antes</value>
+		<value>Nascido Depois</value>
 	</data>
 	<data name="PERSON_BORNBEFORE" xml:space="preserve">
-		<value>Nascido Depois</value>
+		<value>Nascido Antes</value>
 	</data>
 	<data name="PERSON_CREATEDAT" xml:space="preserve">
 		<value>Criado Em</value>

@@ -1,6 +1,8 @@
 ﻿using Memento.Movies.Shared.Resources;
 using Memento.Shared.Models.Repositories;
+using Microsoft.Extensions.Primitives;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Memento.Movies.Shared.Models.Repositories.Persons
@@ -37,6 +39,70 @@ namespace Memento.Movies.Shared.Models.Repositories.Persons
 		/// </summary>
 		[Display(Name = nameof(SharedResources.PERSON_BORNBEFORE), ResourceType = typeof(SharedResources))]
 		public DateTime? BornBefore { get; set; }
+		#endregion
+
+		#region [Methods]
+		/// <inheritdoc />
+		protected override void ReadFilterFromQuery(Dictionary<string, StringValues> query)
+		{
+			// Name
+			if (query.TryGetValue(nameof(this.Name), out var name))
+			{
+				this.Name = name;
+			}
+
+			// Biography
+			if (query.TryGetValue(nameof(this.Biography), out var biography))
+			{
+				this.Biography = biography;
+			}
+
+			// BornAfter
+			if (query.TryGetValue(nameof(this.BornAfter), out var bornAfterQuery))
+			{
+				if (DateTime.TryParse(bornAfterQuery, out var bornAfter))
+				{
+					this.BornAfter = bornAfter;
+				}
+			}
+
+			// BornBefore
+			if (query.TryGetValue(nameof(this.BornBefore), out var bornBeforeQuery))
+			{
+				if (DateTime.TryParse(bornBeforeQuery, out var bornBefore))
+				{
+					this.BornBefore = bornBefore;
+				}
+			}
+		}
+
+		/// <inheritdoc />
+		protected override void WriteFilterToQuery(Dictionary<string, string> query)
+		{
+			// Name
+			if (!string.IsNullOrWhiteSpace(this.Name))
+			{
+				query.Add(nameof(this.Name), this.Name);
+			}
+
+			// Biography
+			if (!string.IsNullOrWhiteSpace(this.Biography))
+			{
+				query.Add(nameof(this.Biography), this.Biography);
+			}
+
+			// BornAfter
+			if (this.BornAfter != null)
+			{
+				query.Add(nameof(this.BornAfter), this.BornAfter.Value.ToShortDateString());
+			}
+
+			// BornBefore
+			if (this.BornBefore != null)
+			{
+				query.Add(nameof(this.BornBefore), this.BornBefore.Value.ToShortDateString());
+			}
+		}
 		#endregion
 	}
 
