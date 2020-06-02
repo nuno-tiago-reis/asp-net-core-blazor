@@ -1,9 +1,10 @@
 ﻿using Memento.Movies.Client.Services.Movies;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Movies;
+using Memento.Movies.Shared.Models.Movies.Contracts.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace Memento.Movies.Client.Pages.Movies
 	/// <summary>
 	/// Implements the 'MovieDetail' component.
 	/// </summary>
-	/// 
-	/// <seealso cref="ComponentBase"/>
-	[Route(Routes.MovieRoutes.Detail)]
+	///
+	/// <seealso cref="MementoComponent{MovieDetail}"/>
+	[Authorize]
+	[Route(Routes.MovieRoutes.DETAIL)]
 	public sealed partial class MovieDetail : MementoComponent<MovieDetail>
 	{
 		#region [Properties] Parameters
@@ -66,14 +68,13 @@ namespace Memento.Movies.Client.Pages.Movies
 
 		#region [Methods] Component
 		/// <inheritdoc />
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			// Get the movie
 			await this.GetMovie();
 
 			// Build the breadcrumb
 			this.BuildBreadcrumb();
-
 		}
 		#endregion
 
@@ -96,7 +97,7 @@ namespace Memento.Movies.Client.Pages.Movies
 			else
 			{
 				// Navigate to the list
-				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.Root));
+				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.ROOT));
 
 				// Show a toast message
 				this.Toaster.Error(response.Message);
@@ -111,7 +112,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		private void OnUpdate()
 		{
 			// Navigate to the detail
-			this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.UpdateIndexed, this.Movie.Id));
+			this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.UPDATE_INDEXED, this.Movie.Id));
 		}
 
 		/// <summary>
@@ -138,7 +139,7 @@ namespace Memento.Movies.Client.Pages.Movies
 				await this.ConfirmationModal.HideAsync();
 
 				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.Root));
+				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.ROOT));
 
 				// Show a toast message
 				this.Toaster.Success(response.Message);
@@ -224,6 +225,11 @@ namespace Memento.Movies.Client.Pages.Movies
 					})
 				}
 			};
+
+			if (this.IsAdministrator().Result == false)
+			{
+				this.BreadcrumbActions.Clear();
+			}
 		}
 		#endregion
 	}

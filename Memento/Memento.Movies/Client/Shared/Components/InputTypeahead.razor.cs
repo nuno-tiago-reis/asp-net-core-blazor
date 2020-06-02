@@ -3,15 +3,13 @@ using Memento.Shared.Extensions;
 using Memento.Shared.Services.Localization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore.Internal;
 using Sotsera.Blazor.Toaster;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-
 using Timer = System.Timers.Timer;
 
 namespace Memento.Movies.Client.Shared.Components
@@ -114,6 +112,7 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Component
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnInitialized()
 		{
 			base.OnInitialized();
@@ -124,6 +123,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnParametersSet()
 		{
 			base.OnParametersSet();
@@ -168,6 +168,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnAfterRender(bool firstRender)
 		{
 			base.OnAfterRender(firstRender);
@@ -176,6 +177,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool ShouldRender()
 		{
 			return base.ShouldRender();
@@ -184,6 +186,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
 		{
 			result = default;
@@ -198,9 +201,9 @@ namespace Memento.Movies.Client.Shared.Components
 		/// Invoked when the search is triggered.
 		/// </summary>
 		/// 
-		/// <param name="source">The source.</param>
+		/// <param name="sender">The sender.</param>
 		/// <param name="arguments">The arguments.</param>
-		private async void OnSearchAsync(Object source, ElapsedEventArgs arguments)
+		private async void OnSearchAsync(object sender, ElapsedEventArgs arguments)
 		{
 			// Change the state to searching
 			this.State = InputTypeaheadState.Searching;
@@ -210,7 +213,7 @@ namespace Memento.Movies.Client.Shared.Components
 			{
 				// Invoke the search method
 				this.SearchSuggestions = await this.SearchMethod.Invoke(this.SearchText);
-				if (this.SearchSuggestions.Count() > 0)
+				if (this.SearchSuggestions.Any())
 				{
 					// Change the state to searched with results
 					this.State = InputTypeaheadState.SearchedWithResults;
@@ -305,7 +308,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <summary>
-		/// Invoked when a suggestion is cliced.
+		/// Invoked when a suggestion is clicked.
 		/// </summary>
 		/// 
 		/// <param name="suggestion">The suggestion.</param>

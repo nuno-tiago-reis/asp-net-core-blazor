@@ -1,9 +1,10 @@
 ﻿using Memento.Movies.Client.Services.Persons;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Persons;
+using Memento.Movies.Shared.Models.Movies.Contracts.Persons;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace Memento.Movies.Client.Pages.Persons
 	/// <summary>
 	/// Implements the 'PersonDetail' component.
 	/// </summary>
-	/// 
-	/// <seealso cref="ComponentBase"/>
-	[Route(Routes.PersonRoutes.Detail)]
+	///
+	/// <seealso cref="MementoComponent{PersonDetail}"/>
+	[Authorize]
+	[Route(Routes.PersonRoutes.DETAIL)]
 	public sealed partial class PersonDetail : MementoComponent<PersonDetail>
 	{
 		#region [Properties] Parameters
@@ -66,14 +68,13 @@ namespace Memento.Movies.Client.Pages.Persons
 
 		#region [Methods] Component
 		/// <inheritdoc />
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			// Get the person
 			await this.GetPerson();
 
 			// Build the breadcrumb
 			this.BuildBreadcrumb();
-
 		}
 		#endregion
 
@@ -84,7 +85,6 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		private async Task GetPerson()
 		{
-
 			// Get the person
 			var response = await this.PersonService.GetAsync(this.PersonId);
 			if (response.Success)
@@ -98,7 +98,7 @@ namespace Memento.Movies.Client.Pages.Persons
 			else
 			{
 				// Navigate to the list
-				this.NavigationManager.NavigateTo(string.Format(Routes.PersonRoutes.Root));
+				this.NavigationManager.NavigateTo(string.Format(Routes.PersonRoutes.ROOT));
 
 				// Show a toast message
 				this.Toaster.Error(response.Message);
@@ -113,7 +113,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		private void OnUpdate()
 		{
 			// Navigate to the detail
-			this.NavigationManager.NavigateTo(string.Format(Routes.PersonRoutes.UpdateIndexed, this.Person.Id));
+			this.NavigationManager.NavigateTo(string.Format(Routes.PersonRoutes.UPDATE_INDEXED, this.Person.Id));
 		}
 
 		/// <summary>
@@ -140,7 +140,7 @@ namespace Memento.Movies.Client.Pages.Persons
 				await this.ConfirmationModal.HideAsync();
 
 				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.PersonRoutes.Root));
+				this.NavigationManager.NavigateTo(string.Format(Routes.PersonRoutes.ROOT));
 
 				// Show a toast message
 				this.Toaster.Success(response.Message);
@@ -226,6 +226,11 @@ namespace Memento.Movies.Client.Pages.Persons
 					})
 				}
 			};
+
+			if (this.IsAdministrator().Result == false)
+			{
+				this.BreadcrumbActions.Clear();
+			}
 		}
 		#endregion
 	}

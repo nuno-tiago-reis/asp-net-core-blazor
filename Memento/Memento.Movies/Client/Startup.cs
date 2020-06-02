@@ -26,7 +26,7 @@ namespace Memento.Movies.Client
 		/// Use this method to add services to the container.
 		/// </summary>
 		/// 
-		/// <param name="services">The services.</param>
+		/// <param name="builder">The builder.</param>
 		public static void ConfigureBuilder(WebAssemblyHostBuilder builder)
 		{
 			#region [Required: Blazor Components]
@@ -41,6 +41,11 @@ namespace Memento.Movies.Client
 					options.DefaultCulture = "en";
 					options.SupportedCultures = new[] { "en", "pt" };
 				});
+			#endregion
+
+			#region [Required: Blazor Authentication]
+			builder.Services
+				.AddAuthenticationCore();
 			#endregion
 
 			#region [Required: AutoMapper]

@@ -1,10 +1,11 @@
 ﻿using Memento.Movies.Client.Services.Genres;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Genres;
+using Memento.Movies.Shared.Models.Movies.Contracts.Genres;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
@@ -17,9 +18,10 @@ namespace Memento.Movies.Client.Pages.Genres
 	/// Implements the 'GenreForm' component.
 	/// </summary>
 	/// 
-	/// <seealso cref="ComponentBase"/>
-	[Route(Routes.GenreRoutes.Create)]
-	[Route(Routes.GenreRoutes.Update)]
+	/// <seealso cref="MementoComponent{GenreForm}"/>
+	[Authorize(Roles = "Administrator")]
+	[Route(Routes.GenreRoutes.CREATE)]
+	[Route(Routes.GenreRoutes.UPDATE)]
 	public sealed partial class GenreForm : MementoComponent<GenreForm>
 	{
 		#region [Properties] Parameters
@@ -89,7 +91,7 @@ namespace Memento.Movies.Client.Pages.Genres
 
 		#region [Methods] Component
 		/// <inheritdoc />
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			// Get the genre
 			await this.GetGenre();
@@ -129,7 +131,7 @@ namespace Memento.Movies.Client.Pages.Genres
 					this.GenreChanges = this.Mapper.Map<GenreFormContract>(response.Data);
 
 					// Navigate to the list
-					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.ROOT));
 
 					// Show a toast message
 					this.Toaster.Error(response.Message);
@@ -154,20 +156,20 @@ namespace Memento.Movies.Client.Pages.Genres
 		}
 
 		/// <summary>
-		/// Callback that is invoked when the form is submited with no errors.
+		/// Callback that is invoked when the form is submitted with no errors.
 		/// </summary>
 		/// 
-		/// <param name="context">The context.</param>.</param>
+		/// <param name="_">The context.</param>.
 		private async Task OnValidSubmitAsync(EditContext _)
 		{
 			await this.SaveChangesModal.ShowAsync();
 		}
 
 		/// <summary>
-		/// Callback that is invoked when the form is submited with errors.
+		/// Callback that is invoked when the form is submitted with errors.
 		/// </summary>
 		/// 
-		/// <param name="context">The context.</param>.</param>
+		/// <param name="_">The context.</param>.
 		private void OnInvalidSubmit(EditContext _)
 		{
 			// Show a toast message
@@ -199,7 +201,7 @@ namespace Memento.Movies.Client.Pages.Genres
 					await this.SaveChangesModal.HideAsync();
 
 					// Navigate to the detail
-					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.GenreId.Value));
+					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DETAIL_INDEXED, this.GenreId.Value));
 
 					// Show a toast message
 					this.Toaster.Success(response.Message);
@@ -223,7 +225,7 @@ namespace Memento.Movies.Client.Pages.Genres
 					await this.SaveChangesModal.HideAsync();
 
 					// Navigate to the detail
-					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, response.Data.Id));
+					this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DETAIL_INDEXED, response.Data.Id));
 
 					// Show a toast message
 					this.Toaster.Success(response.Message);
@@ -261,12 +263,12 @@ namespace Memento.Movies.Client.Pages.Genres
 			if (this.GenreId.HasValue)
 			{
 				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.GenreId.Value));
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DETAIL_INDEXED, this.GenreId.Value));
 			}
 			else
 			{
 				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.ROOT));
 			}
 		}
 

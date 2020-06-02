@@ -1,9 +1,10 @@
 ﻿using Memento.Movies.Client.Services.Genres;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Genres;
+using Memento.Movies.Shared.Models.Movies.Contracts.Genres;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace Memento.Movies.Client.Pages.Genres
 	/// <summary>
 	/// Implements the 'GenreDetail' component.
 	/// </summary>
-	/// 
-	/// <seealso cref="ComponentBase"/>
-	[Route(Routes.GenreRoutes.Detail)]
+	///
+	/// <seealso cref="MementoComponent{GenreDetail}"/>
+	[Authorize]
+	[Route(Routes.GenreRoutes.DETAIL)]
 	public sealed partial class GenreDetail : MementoComponent<GenreDetail>
 	{
 		#region [Properties] Parameters
@@ -66,7 +68,7 @@ namespace Memento.Movies.Client.Pages.Genres
 
 		#region [Methods] Component
 		/// <inheritdoc />
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			// Get the genre
 			await this.GetGenre();
@@ -95,7 +97,7 @@ namespace Memento.Movies.Client.Pages.Genres
 			else
 			{
 				// Navigate to the list
-				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.ROOT));
 
 				// Show a toast message
 				this.Toaster.Error(response.Message);
@@ -110,7 +112,7 @@ namespace Memento.Movies.Client.Pages.Genres
 		private void OnUpdate()
 		{
 			// Navigate to the detail
-			this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.UpdateIndexed, this.GenreId));
+			this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.UPDATE_INDEXED, this.GenreId));
 		}
 
 		/// <summary>
@@ -137,7 +139,7 @@ namespace Memento.Movies.Client.Pages.Genres
 				await this.ConfirmationModal.HideAsync();
 
 				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.Root));
+				this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.ROOT));
 
 				// Show a toast message
 				this.Toaster.Success(response.Message);
@@ -223,6 +225,11 @@ namespace Memento.Movies.Client.Pages.Genres
 					})
 				}
 			};
+
+			if (this.IsAdministrator().Result == false)
+			{
+				this.BreadcrumbActions.Clear();
+			}
 		}
 		#endregion
 	}

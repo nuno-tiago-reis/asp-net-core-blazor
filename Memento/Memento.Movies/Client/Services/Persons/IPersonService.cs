@@ -1,8 +1,7 @@
-﻿using Memento.Movies.Shared.Models.Contracts.Persons;
-using Memento.Movies.Shared.Models.Repositories.Persons;
+﻿using Memento.Movies.Shared.Models.Movies.Contracts.Persons;
+using Memento.Movies.Shared.Models.Movies.Repositories.Persons;
 using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Responses;
-using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Services.Persons

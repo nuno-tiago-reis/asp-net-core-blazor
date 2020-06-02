@@ -1,11 +1,12 @@
 ﻿using Memento.Movies.Client.Services.Persons;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Persons;
-using Memento.Movies.Shared.Models.Repositories.Persons;
+using Memento.Movies.Shared.Models.Movies.Contracts.Persons;
+using Memento.Movies.Shared.Models.Movies.Repositories.Persons;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.WebUtilities;
@@ -19,8 +20,9 @@ namespace Memento.Movies.Client.Pages.Persons
 	/// Implements the 'PersonList' component.
 	/// </summary>
 	/// 
-	/// <seealso cref="MementoComponent{}"/>
-	[Route(Routes.PersonRoutes.Root)]
+	/// <seealso cref="MementoComponent{PersonList}"/>
+	[Authorize]
+	[Route(Routes.PersonRoutes.ROOT)]
 	public sealed partial class PersonList : MementoComponent<PersonList>
 	{
 		#region [Properties] Constants
@@ -72,7 +74,7 @@ namespace Memento.Movies.Client.Pages.Persons
 
 		#region [Methods] Component
 		/// <inheritdoc />
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			// Build the filter
 			this.BuildQueryFilter();
@@ -158,6 +160,8 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <summary>
 		/// Callback that is invoked when the filter is applied.
 		/// </summary>
+		///
+		/// <param name="_">The filter.</param>
 		private async Task OnFilterSearchAsync(PersonFilter _)
 		{
 			// Reset the paging
@@ -171,6 +175,8 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// <summary>
 		/// Callback that is invoked when the filter is reset.
 		/// </summary>
+		///
+		/// <param name="_">The filter.</param>
 		private async Task OnFilterResetAsync(PersonFilter _)
 		{
 			// Reset the filter
@@ -286,10 +292,15 @@ namespace Memento.Movies.Client.Pages.Persons
 					Enabled = true,
 					OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, (arguments) =>
 					{
-						this.NavigationManager.NavigateTo(Routes.PersonRoutes.Create);
+						this.NavigationManager.NavigateTo(Routes.PersonRoutes.CREATE);
 					})
 				}
 			};
+
+			if (this.IsAdministrator().Result == false)
+			{
+				this.BreadcrumbActions.Clear();
+			}
 		}
 		#endregion
 	}

@@ -2,8 +2,8 @@
 @typeparam T
 
 <select value="@this.CurrentValue"
-		@onchange="@((arguments) => this.OnInputChange(arguments))"
-		@attributes="this.AdditionalAttributes">
+		@onchange="@this.OnInputChange"
+		@attributes="@this.AdditionalAttributes">
 	<!-- default option -->
 	<option disabled selected></option>
 	<!-- remaining options -->

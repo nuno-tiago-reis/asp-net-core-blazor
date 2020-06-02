@@ -8,22 +8,22 @@
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
 	<ul class="nav flex-column">
 		<li class="nav-item px-3">
-			<NavLink class="nav-link" href="@Routes.HomeRoutes.Root" Match="NavLinkMatch.All">
+			<NavLink class="nav-link" href="@Routes.HomeRoutes.ROOT" Match="NavLinkMatch.All">
 				<span class="fa fa-home"></span> Home
 			</NavLink>
 		</li>
 		<li class="nav-item px-3">
-			<NavLink class="nav-link" href="@Routes.GenreRoutes.Root" Match="NavLinkMatch.Prefix">
+			<NavLink class="nav-link" href="@Routes.GenreRoutes.ROOT" Match="NavLinkMatch.Prefix">
 				<span class="fas fa-presentation"></span> @this.Localizer.GetString(SharedResources.GENRE_PLURAL)
 			</NavLink>
 		</li>
 		<li class="nav-item px-3">
-			<NavLink class="nav-link" href="@Routes.MovieRoutes.Root" Match="NavLinkMatch.Prefix">
+			<NavLink class="nav-link" href="@Routes.MovieRoutes.ROOT" Match="NavLinkMatch.Prefix">
 				<span class="fas fa-film"></span> @this.Localizer.GetString(SharedResources.MOVIE_PLURAL)
 			</NavLink>
 		</li>
 		<li class="nav-item px-3">
-			<NavLink class="nav-link" href="@Routes.PersonRoutes.Root" Match="NavLinkMatch.Prefix">
+			<NavLink class="nav-link" href="@Routes.PersonRoutes.ROOT" Match="NavLinkMatch.Prefix">
 				<span class="fas fa-user-friends"></span> @this.Localizer.GetString(SharedResources.PERSON_PLURAL)
 			</NavLink>
 		</li>
@@ -32,12 +32,15 @@
 
 @code
 {
-	private bool collapseNavMenu = true;
+	private bool CollapseNavMenu = true;
 
-	private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+	private string NavMenuCssClass
+	{
+		get { return CollapseNavMenu ? "collapse" : null; }
+	}
 
 	private void ToggleNavMenu()
 	{
-		collapseNavMenu = !collapseNavMenu;
+		CollapseNavMenu = !CollapseNavMenu;
 	}
 }

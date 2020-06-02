@@ -28,12 +28,13 @@
 		<PackageReference Include="Markdig" Version="0.20.0" />
 		<!-- Microsoft.AspNetCore -->
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="3.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
 		<!-- Microsoft.Extensions -->
-		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.4" />
 		<!-- Sotsera -->
 		<PackageReference Include="Sotsera.Blazor.Toaster" Version="3.0.0" />
 		<!-- System -->

@@ -1,7 +1,7 @@
 ﻿using Memento.Movies.Client.Services.Movies;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Movies;
-using Memento.Movies.Shared.Models.Repositories.Movies;
+using Memento.Movies.Shared.Models.Movies.Contracts.Movies;
+using Memento.Movies.Shared.Models.Movies.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
@@ -16,7 +16,7 @@ namespace Memento.Movies.Client.Pages
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
-	[Route(Routes.HomeRoutes.Root)]
+	[Route(Routes.HomeRoutes.ROOT)]
 	public sealed partial class Index : MementoComponent<Index>
 	{
 		#region [Properties] Parameters
@@ -51,7 +51,7 @@ namespace Memento.Movies.Client.Pages
 
 		#region [Methods] Component
 		/// <inheritdoc />
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			// Build the in theaters filter
 			this.InTheatersFilter = new MovieFilter

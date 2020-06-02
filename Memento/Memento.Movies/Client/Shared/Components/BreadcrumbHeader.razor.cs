@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Memento.Movies.Client.Shared.Components
 {
@@ -10,7 +11,7 @@ namespace Memento.Movies.Client.Shared.Components
 	/// Implements the 'BreadcrumbHeader' component.
 	/// </summary>
 	///
-	/// <seealso cref="MementoComponent{}"/>
+	/// <seealso cref="MementoComponent{BreadcrumbHeader}"/>
 	public sealed partial class BreadcrumbHeader : MementoComponent<BreadcrumbHeader>
 	{
 		#region [Properties]
@@ -35,6 +36,7 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Component
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnInitialized()
 		{
 			base.OnInitialized();
@@ -43,6 +45,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnParametersSet()
 		{
 			base.OnParametersSet();
@@ -74,6 +77,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnAfterRender(bool firstRender)
 		{
 			base.OnAfterRender(firstRender);
@@ -82,6 +86,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool ShouldRender()
 		{
 			return base.ShouldRender();

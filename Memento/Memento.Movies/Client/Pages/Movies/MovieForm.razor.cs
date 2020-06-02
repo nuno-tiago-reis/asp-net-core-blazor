@@ -3,15 +3,16 @@ using Memento.Movies.Client.Services.Movies;
 using Memento.Movies.Client.Services.Persons;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models;
-using Memento.Movies.Shared.Models.Contracts.Genres;
-using Memento.Movies.Shared.Models.Contracts.Movies;
-using Memento.Movies.Shared.Models.Contracts.Persons;
-using Memento.Movies.Shared.Models.Repositories.Genres;
-using Memento.Movies.Shared.Models.Repositories.Persons;
+using Memento.Movies.Shared.Models.Movies.Contracts.Genres;
+using Memento.Movies.Shared.Models.Movies.Contracts.Movies;
+using Memento.Movies.Shared.Models.Movies.Contracts.Persons;
+using Memento.Movies.Shared.Models.Movies.Repositories;
+using Memento.Movies.Shared.Models.Movies.Repositories.Genres;
+using Memento.Movies.Shared.Models.Movies.Repositories.Persons;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
@@ -26,9 +27,10 @@ namespace Memento.Movies.Client.Pages.Movies
 	/// Implements the 'MovieForm' component.
 	/// </summary>
 	/// 
-	/// <seealso cref="ComponentBase"/>
-	[Route(Routes.MovieRoutes.Create)]
-	[Route(Routes.MovieRoutes.Update)]
+	/// <seealso cref="MementoComponent{MovieForm}"/>
+	[Authorize(Roles = "Administrator")]
+	[Route(Routes.MovieRoutes.CREATE)]
+	[Route(Routes.MovieRoutes.UPDATE)]
 	public sealed partial class MovieForm : MementoComponent<MovieForm>
 	{
 		#region [Properties] Parameters
@@ -145,7 +147,7 @@ namespace Memento.Movies.Client.Pages.Movies
 
 		#region [Methods] Component
 		/// <inheritdoc />
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			// Get the genre
 			await this.GetMovie();
@@ -181,7 +183,7 @@ namespace Memento.Movies.Client.Pages.Movies
 				else
 				{
 					// Navigate to the list
-					this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.Root));
+					this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.ROOT));
 
 					// Show a toast message
 					this.Toaster.Error(response.Message);
@@ -237,20 +239,20 @@ namespace Memento.Movies.Client.Pages.Movies
 		}
 
 		/// <summary>
-		/// Callback that is invoked when the form is submited with no errors.
+		/// Callback that is invoked when the form is submitted with no errors.
 		/// </summary>
 		/// 
-		/// <param name="context">The context.</param>.</param>
+		/// <param name="_">The context.</param>.
 		private async Task OnValidSubmitAsync(EditContext _)
 		{
 			await this.SaveChangesModal.ShowAsync();
 		}
 
 		/// <summary>
-		/// Callback that is invoked when the form is submited with errors.
+		/// Callback that is invoked when the form is submitted with errors.
 		/// </summary>
 		/// 
-		/// <param name="context">The context.</param>.</param>
+		/// <param name="_">The context.</param>.
 		private void OnInvalidSubmit(EditContext _)
 		{
 			// Show a toast message
@@ -304,7 +306,7 @@ namespace Memento.Movies.Client.Pages.Movies
 					await this.SaveChangesModal.HideAsync();
 
 					// Navigate to the detail
-					this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.DetailIndexed, this.MovieId.Value));
+					this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.DETAIL_INDEXED, this.MovieId.Value));
 
 					// Show a toast message
 					this.Toaster.Success(response.Message);
@@ -328,7 +330,7 @@ namespace Memento.Movies.Client.Pages.Movies
 					await this.SaveChangesModal.HideAsync();
 
 					// Navigate to the detail
-					this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.DetailIndexed, response.Data.Id));
+					this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.DETAIL_INDEXED, response.Data.Id));
 
 					// Show a toast message
 					this.Toaster.Success(response.Message);
@@ -366,12 +368,12 @@ namespace Memento.Movies.Client.Pages.Movies
 			if (this.MovieId.HasValue)
 			{
 				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.DetailIndexed, this.MovieId.Value));
+				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.DETAIL_INDEXED, this.MovieId.Value));
 			}
 			else
 			{
 				// Navigate to the detail
-				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.Root));
+				this.NavigationManager.NavigateTo(string.Format(Routes.MovieRoutes.ROOT));
 			}
 		}
 
@@ -405,7 +407,7 @@ namespace Memento.Movies.Client.Pages.Movies
 			var genres = await this.GenreService.GetAllAsync(genreFilter);
 
 			// Filter the items
-			return genres.Data.Items.Where(item => !this.Genres.Any(genre => genre.Id == item.Id));
+			return genres.Data.Items.Where(item => this.Genres.All(genre => genre.Id != item.Id));
 		}
 
 		/// <summary>
@@ -445,7 +447,7 @@ namespace Memento.Movies.Client.Pages.Movies
 			var filteredPersons = this.PersonsByRole.First(person => person.Key == this.PersonRole).Value;
 
 			// Filter the items
-			return persons.Data.Items.Where(item => !filteredPersons.Any(person => person.Id == item.Id));
+			return persons.Data.Items.Where(item => filteredPersons.All(person => person.Id != item.Id));
 		}
 
 		/// <summary>
@@ -456,7 +458,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		private void OnPersonSelected(PersonListContract person)
 		{
 			// Filter the persons
-			var filteredPersons = this.PersonsByRole.First(person => person.Key == this.PersonRole).Value;
+			var filteredPersons = this.PersonsByRole.First(personByRole => personByRole.Key == this.PersonRole).Value;
 
 			// Clear the bound person
 			this.PersonModelTypeahead = null;

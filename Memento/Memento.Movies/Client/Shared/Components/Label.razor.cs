@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Memento.Movies.Client.Shared.Components
 {
@@ -56,6 +55,7 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Component
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnInitialized()
 		{
 			base.OnInitialized();
@@ -64,6 +64,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnParametersSet()
 		{
 			base.OnParametersSet();
@@ -92,6 +93,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnAfterRender(bool firstRender)
 		{
 			base.OnAfterRender(firstRender);
@@ -100,6 +102,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool ShouldRender()
 		{
 			return base.ShouldRender();

@@ -1,6 +1,7 @@
 ﻿using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Shared.Components
@@ -12,14 +13,14 @@ namespace Memento.Movies.Client.Shared.Components
 	/// <typeparam name="TOrderBy">The order by type.</typeparam>
 	/// <typeparam name="TOrderDirection">The order direction type.</typeparam>
 	/// 
-	/// <seealso cref="MementoComponent{}"/>
+	/// <seealso cref="MementoComponent{PageListControls}"/>
 	public sealed partial class PageListControls<TOrderBy, TOrderDirection> : MementoComponent<PageListControls<TOrderBy, TOrderDirection>>
 	{
 		#region [Constants]
 		/// <summary>
 		/// The default page sizes.
 		/// </summary>
-		private static readonly int[] DEFAULT_PAGE_SIZES = new[] { 3, 6, 9, 12 };
+		private static readonly int[] DefaultPageSizes = { 3, 6, 9, 12 };
 		#endregion
 
 		#region [Properties]
@@ -39,7 +40,7 @@ namespace Memento.Movies.Client.Shared.Components
 		/// The page sizes.
 		/// </summary>
 		[Parameter]
-		public int[] PageSizes { get; set; } = DEFAULT_PAGE_SIZES;
+		public int[] PageSizes { get; set; } = DefaultPageSizes;
 
 		/// <summary>
 		/// The total items.
@@ -92,6 +93,7 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Component
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnInitialized()
 		{
 			base.OnInitialized();
@@ -100,6 +102,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnParametersSet()
 		{
 			base.OnParametersSet();
@@ -123,6 +126,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnAfterRender(bool firstRender)
 		{
 			base.OnAfterRender(firstRender);
@@ -131,6 +135,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool ShouldRender()
 		{
 			return base.ShouldRender();

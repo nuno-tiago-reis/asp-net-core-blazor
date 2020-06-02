@@ -1,5 +1,5 @@
 ﻿using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Genres;
+using Memento.Movies.Shared.Models.Movies.Contracts.Genres;
 using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using System;
@@ -45,7 +45,7 @@ namespace Memento.Movies.Client.Pages.Genres.Fragments
 		public void OnViewClick()
 		{
 			// Navigate to the detail
-			this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DetailIndexed, this.Genre.Id));
+			this.NavigationManager.NavigateTo(string.Format(Routes.GenreRoutes.DETAIL_INDEXED, this.Genre.Id));
 		}
 		#endregion
 	}

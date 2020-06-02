@@ -20,7 +20,7 @@ namespace Memento.Movies.Client.Shared.Routes
 			/// <summary>
 			/// The home root route.
 			/// </summary>
-			public const string Root = "/";
+			public const string ROOT = "/";
 			#endregion
 
 			#region [Breadcrumbs]
@@ -32,7 +32,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.HOME,
-					Url = Root
+					Url = ROOT
 				};
 			}
 			#endregion
@@ -47,32 +47,32 @@ namespace Memento.Movies.Client.Shared.Routes
 			/// <summary>
 			/// The genres root route.
 			/// </summary>
-			public const string Root = "/Genres/";
+			public const string ROOT = "/Genres/";
 
 			/// <summary>
 			/// The genres create route.
 			/// </summary>
-			public const string Create = "/Genres/Create";
+			public const string CREATE = "/Genres/Create";
 
 			/// <summary>
 			/// The genres detail route.
 			/// </summary>
-			public const string Detail = "/Genres/{" + nameof(GenreDetail.GenreId) + ":long}";
+			public const string DETAIL = "/Genres/{" + nameof(GenreDetail.GenreId) + ":long}";
 
 			/// <summary>
 			/// The genres detail route (indexed).
 			/// </summary>
-			public const string DetailIndexed = "/Genres/{0}";
+			public const string DETAIL_INDEXED = "/Genres/{0}";
 
 			/// <summary>
 			/// The genres update route.
 			/// </summary>
-			public const string Update = "/Genres/{" + nameof(GenreForm.GenreId) + ":long}/Update";
+			public const string UPDATE = "/Genres/{" + nameof(GenreForm.GenreId) + ":long}/Update";
 
 			/// <summary>
 			/// The genres update route (indexed).
 			/// </summary>
-			public const string UpdateIndexed = "/Genres/{0}/Update";
+			public const string UPDATE_INDEXED = "/Genres/{0}/Update";
 			#endregion
 
 			#region [Breadcrumbs]
@@ -86,7 +86,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = string.Format(SharedResources.BREADCRUMB_LIST_LINK_LABEL, name),
-					Url = Root
+					Url = ROOT
 				};
 			}
 
@@ -98,7 +98,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_CREATE_LINK_LABEL,
-					Url = Create
+					Url = CREATE
 				};
 			}
 
@@ -112,7 +112,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_DETAIL_LINK_LABEL,
-					Url = string.Format(DetailIndexed, genreId)
+					Url = string.Format(DETAIL_INDEXED, genreId)
 				};
 			}
 
@@ -126,7 +126,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_UPDATE_LINK_LABEL,
-					Url = string.Format(UpdateIndexed, genreId)
+					Url = string.Format(UPDATE_INDEXED, genreId)
 				};
 			}
 			#endregion
@@ -141,32 +141,32 @@ namespace Memento.Movies.Client.Shared.Routes
 			/// <summary>
 			/// The movies root route.
 			/// </summary>
-			public const string Root = "/Movies/";
+			public const string ROOT = "/Movies/";
 
 			/// <summary>
 			/// The movies create route.
 			/// </summary>
-			public const string Create = "/Movies/Create";
+			public const string CREATE = "/Movies/Create";
 
 			/// <summary>
 			/// The movies detail route.
 			/// </summary>
-			public const string Detail = "/Movies/{" + nameof(MovieDetail.MovieId) + ":long}";
+			public const string DETAIL = "/Movies/{" + nameof(MovieDetail.MovieId) + ":long}";
 
 			/// <summary>
 			/// The movies detail route (indexed).
 			/// </summary>
-			public const string DetailIndexed = "/Movies/{0}";
+			public const string DETAIL_INDEXED = "/Movies/{0}";
 
 			/// <summary>
 			/// The movies update route.
 			/// </summary>
-			public const string Update = "/Movies/{" + nameof(MovieForm.MovieId) + ":long}/Update";
+			public const string UPDATE = "/Movies/{" + nameof(MovieForm.MovieId) + ":long}/Update";
 
 			/// <summary>
 			/// The movies update route (indexed).
 			/// </summary>
-			public const string UpdateIndexed = "/Movies/{0}/Update";
+			public const string UPDATE_INDEXED = "/Movies/{0}/Update";
 			#endregion
 
 			#region [Breadcrumbs]
@@ -180,7 +180,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = string.Format(SharedResources.BREADCRUMB_LIST_LINK_LABEL, name),
-					Url = Root
+					Url = ROOT
 				};
 			}
 
@@ -192,7 +192,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_CREATE_LINK_LABEL,
-					Url = Create
+					Url = CREATE
 				};
 			}
 
@@ -206,7 +206,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_DETAIL_LINK_LABEL,
-					Url = string.Format(DetailIndexed, movieId)
+					Url = string.Format(DETAIL_INDEXED, movieId)
 				};
 			}
 
@@ -220,7 +220,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_UPDATE_LINK_LABEL,
-					Url = string.Format(UpdateIndexed, movieId)
+					Url = string.Format(UPDATE_INDEXED, movieId)
 				};
 			}
 			#endregion
@@ -235,32 +235,32 @@ namespace Memento.Movies.Client.Shared.Routes
 			/// <summary>
 			/// The persons root route.
 			/// </summary>
-			public const string Root = "/Persons/";
+			public const string ROOT = "/Persons/";
 
 			/// <summary>
 			/// The persons create route.
 			/// </summary>
-			public const string Create = "/Persons/Create";
+			public const string CREATE = "/Persons/Create";
 
 			/// <summary>
 			/// The persons detail route.
 			/// </summary>
-			public const string Detail = "/Persons/{" + nameof(PersonDetail.PersonId) + ":long}";
+			public const string DETAIL = "/Persons/{" + nameof(PersonDetail.PersonId) + ":long}";
 
 			/// <summary>
 			/// The persons detail route (indexed).
 			/// </summary>
-			public const string DetailIndexed = "/Persons/{0}";
+			public const string DETAIL_INDEXED = "/Persons/{0}";
 
 			/// <summary>
 			/// The persons update route.
 			/// </summary>
-			public const string Update = "/Persons/{" + nameof(PersonForm.PersonId) + ":long}/Update";
+			public const string UPDATE = "/Persons/{" + nameof(PersonForm.PersonId) + ":long}/Update";
 
 			/// <summary>
 			/// The persons update route (indexed).
 			/// </summary>
-			public const string UpdateIndexed = "/Persons/{0}/Update";
+			public const string UPDATE_INDEXED = "/Persons/{0}/Update";
 			#endregion
 
 			#region [Breadcrumbs]
@@ -274,7 +274,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = string.Format(SharedResources.BREADCRUMB_LIST_LINK_LABEL, name),
-					Url = Root
+					Url = ROOT
 				};
 			}
 
@@ -286,7 +286,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_CREATE_LINK_LABEL,
-					Url = Create
+					Url = CREATE
 				};
 			}
 
@@ -300,7 +300,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_DETAIL_LINK_LABEL,
-					Url = string.Format(DetailIndexed, personId)
+					Url = string.Format(DETAIL_INDEXED, personId)
 				};
 			}
 
@@ -314,7 +314,7 @@ namespace Memento.Movies.Client.Shared.Routes
 				return new BreadcrumbLink
 				{
 					Label = SharedResources.BREADCRUMB_UPDATE_LINK_LABEL,
-					Url = string.Format(UpdateIndexed, personId)
+					Url = string.Format(UPDATE_INDEXED, personId)
 				};
 			}
 			#endregion

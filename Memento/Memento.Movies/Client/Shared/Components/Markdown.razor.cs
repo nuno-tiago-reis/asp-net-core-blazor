@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Memento.Movies.Client.Shared.Components
 {
@@ -26,6 +27,7 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Component
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnInitialized()
 		{
 			base.OnInitialized();
@@ -34,6 +36,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnParametersSet()
 		{
 			base.OnParametersSet();
@@ -50,6 +53,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnAfterRender(bool firstRender)
 		{
 			base.OnAfterRender(firstRender);
@@ -58,6 +62,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool ShouldRender()
 		{
 			return base.ShouldRender();

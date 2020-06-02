@@ -1,10 +1,9 @@
-﻿using Memento.Movies.Shared.Models.Contracts.Movies;
-using Memento.Movies.Shared.Models.Repositories.Movies;
+﻿using Memento.Movies.Shared.Models.Movies.Contracts.Movies;
+using Memento.Movies.Shared.Models.Movies.Repositories.Movies;
 using Memento.Shared.Extensions;
 using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Responses;
 using Memento.Shared.Services.Http;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

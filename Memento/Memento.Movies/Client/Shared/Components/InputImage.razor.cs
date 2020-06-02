@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.StaticFiles;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -89,6 +90,7 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Component
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnInitialized()
 		{
 			base.OnInitialized();
@@ -98,6 +100,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnParametersSet()
 		{
 			base.OnParametersSet();
@@ -118,6 +121,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnAfterRender(bool firstRender)
 		{
 			base.OnAfterRender(firstRender);
@@ -126,6 +130,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool ShouldRender()
 		{
 			return base.ShouldRender();
@@ -134,6 +139,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool TryParseValueFromString(string value, out File result, out string validationErrorMessage)
 		{
 			result = JsonSerializer.Deserialize<File>(value);
@@ -182,28 +188,4 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 		#endregion
 	}
-
-	/// <summary>
-	/// Implements the 'Image' contract.
-	/// </summary>
-	public sealed class ImageContract
-	{
-		#region [Properties]
-		/// <summary>
-		/// The image (base64).
-		/// </summary>
-		public string File { get; set; }
-
-		/// <summary>
-		/// The image name.
-		/// </summary>
-		public string FileName { get; set; }
-
-		/// <summary>
-		/// The image content type.
-		/// </summary>
-		public string FileContentType { get; set; }
-		#endregion
-	}
-
 }

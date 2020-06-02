@@ -18,16 +18,6 @@ namespace Memento.Movies.Client.Shared.Layout
 		public ILocalizerService Localizer { get; set; }
 		#endregion
 
-		#region [Constructors]
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Menu"/> class.
-		/// </summary>
-		public Menu()
-		{
-			// Nothing do here.
-		}
-		#endregion
-
 		#region [Methods] Component
 		/// <inheritdoc />
 		protected override void OnInitialized()

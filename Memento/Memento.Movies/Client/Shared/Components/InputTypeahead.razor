@@ -6,9 +6,9 @@
 	   value="@this.SearchText"
 	   autocomplete="off"
 	   @oninput="@this.OnInputChange"
-	   @onfocusin="(() => this.OnInputFocusIn())"
-	   @onfocusout="(() => this.OnInputFocusOut())"
-	   @attributes="this.AdditionalAttributes" />
+	   @onfocusin="@this.OnInputFocusIn"
+	   @onfocusout="@this.OnInputFocusOut"
+	   @attributes="@this.AdditionalAttributes" />
 
 @switch (this.State)
 {

@@ -2,6 +2,7 @@
 using Memento.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Shared.Components
@@ -10,7 +11,7 @@ namespace Memento.Movies.Client.Shared.Components
 	/// Implements the 'ConfirmationModal' component.
 	/// </summary>
 	/// 
-	/// <seealso cref="MementoComponent{}"/>
+	/// <seealso cref="MementoComponent{ConfirmationModal}"/>
 	public sealed partial class ConfirmationModal : MementoComponent<ConfirmationModal>
 	{
 		#region [Properties] Parameters
@@ -109,6 +110,7 @@ namespace Memento.Movies.Client.Shared.Components
 
 		#region [Methods] Component
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnInitialized()
 		{
 			base.OnInitialized();
@@ -117,6 +119,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnParametersSet()
 		{
 			base.OnParametersSet();
@@ -140,6 +143,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override void OnAfterRender(bool firstRender)
 		{
 			base.OnAfterRender(firstRender);
@@ -148,6 +152,7 @@ namespace Memento.Movies.Client.Shared.Components
 		}
 
 		/// <inheritdoc />
+		[SuppressMessage("ReSharper", "RedundantOverriddenMember")]
 		protected override bool ShouldRender()
 		{
 			return base.ShouldRender();

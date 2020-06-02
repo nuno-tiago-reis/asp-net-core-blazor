@@ -1,7 +1,7 @@
 ﻿@inherits InputBase<int>
 
 <select value="@this.CurrentValue"
-		@onchange="@((arguments) => this.OnInputChange(arguments))"
+		@onchange="@this.OnInputChange"
 		@attributes="this.AdditionalAttributes">
 	@this.ChildContent
 </select>

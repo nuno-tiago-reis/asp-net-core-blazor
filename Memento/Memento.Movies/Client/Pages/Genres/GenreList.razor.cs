@@ -1,11 +1,12 @@
 ﻿using Memento.Movies.Client.Services.Genres;
 using Memento.Movies.Client.Shared.Components;
 using Memento.Movies.Client.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Genres;
-using Memento.Movies.Shared.Models.Repositories.Genres;
+using Memento.Movies.Shared.Models.Movies.Contracts.Genres;
+using Memento.Movies.Shared.Models.Movies.Repositories.Genres;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.WebUtilities;
@@ -19,8 +20,9 @@ namespace Memento.Movies.Client.Pages.Genres
 	/// Implements the 'GenreList' component.
 	/// </summary>
 	/// 
-	/// <seealso cref="MementoComponent{}"/>
-	[Route(Routes.GenreRoutes.Root)]
+	/// <seealso cref="MementoComponent{GenreList}"/>
+	[Authorize]
+	[Route(Routes.GenreRoutes.ROOT)]
 	public sealed partial class GenreList : MementoComponent<GenreList>
 	{
 		#region [Properties] Constants
@@ -72,7 +74,7 @@ namespace Memento.Movies.Client.Pages.Genres
 
 		#region [Methods] Component
 		/// <inheritdoc />
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			// Build the filter
 			this.BuildQueryFilter();
@@ -158,6 +160,8 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <summary>
 		/// Callback that is invoked when the filter is applied.
 		/// </summary>
+		///
+		/// <param name="_">The filter.</param>
 		private async Task OnFilterSearchAsync(GenreFilter _)
 		{
 			// Reset the paging
@@ -171,6 +175,8 @@ namespace Memento.Movies.Client.Pages.Genres
 		/// <summary>
 		/// Callback that is invoked when the filter is reset.
 		/// </summary>
+		///
+		/// <param name="_">The filter.</param>
 		private async Task OnFilterResetAsync(GenreFilter _)
 		{
 			// Reset the filter
@@ -286,10 +292,15 @@ namespace Memento.Movies.Client.Pages.Genres
 					Enabled = true,
 					OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, (arguments) =>
 					{
-						this.NavigationManager.NavigateTo(Routes.GenreRoutes.Create);
+						this.NavigationManager.NavigateTo(Routes.GenreRoutes.CREATE);
 					})
 				}
 			};
+
+			if (this.IsAdministrator().Result == false)
+			{
+				this.BreadcrumbActions.Clear();
+			}
 		}
 		#endregion
 	}
