@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Memento.Movies.Server.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Persons;
-using Memento.Movies.Shared.Models.Repositories.Persons;
+using Memento.Movies.Shared.Models.Movies.Contracts.Persons;
+using Memento.Movies.Shared.Models.Movies.Repositories.Persons;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Controllers;
 using Memento.Shared.Exceptions;
@@ -21,7 +21,7 @@ namespace Memento.Movies.Server.Controllers
 	///
 	/// <seealso cref="MementoApiController" />
 	[ApiController]
-	[Route(Routes.PersonRoutes.Root)]
+	[Route(Routes.PersonRoutes.ROOT)]
 	public sealed class PersonsController : MementoApiController
 	{
 		#region [Properties]
@@ -65,9 +65,8 @@ namespace Memento.Movies.Server.Controllers
 		/// <summary>
 		/// Creates a 'Person' in the backend.
 		/// </summary>
-		/// 
+		///
 		/// <param name="contract">The contract.</param>
-		/// <param name="file">The file.</param>
 		[HttpPost]
 		public async Task<ActionResult<MementoResponse<PersonDetailContract>>> CreateAsync([FromBody] PersonFormContract contract)
 		{
@@ -100,10 +99,9 @@ namespace Memento.Movies.Server.Controllers
 		/// <summary>
 		/// Updates a 'Person' in the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		/// <param name="contract">The contract.</param>
-		/// <param name="file">The file.</param>
 		[HttpPut("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] PersonFormContract contract)
 		{
@@ -126,14 +124,14 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.UpdateAsync(person);
 
 			// Build the response
-			return this.BuildUpdateResponse<Person>();
+			return this.BuildUpdateResponse();
 		}
 
 		/// <summary>
 		/// Deletes a 'Person' in the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		[HttpDelete("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> DeleteAsync([FromRoute] long id)
 		{
@@ -141,14 +139,14 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.DeleteAsync(id);
 
 			// Build the response
-			return this.BuildDeleteResponse<Person>();
+			return this.BuildDeleteResponse();
 		}
 
 		/// <summary>
 		/// Gets a 'Person' from the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		[HttpGet("{id:long}")]
 		public async Task<ActionResult<MementoResponse<PersonDetailContract>>> GetAsync([FromRoute] long id)
 		{

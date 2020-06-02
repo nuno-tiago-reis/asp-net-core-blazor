@@ -13,7 +13,7 @@
 			/// <summary>
 			/// The genres root route.
 			/// </summary>
-			public const string Root = "/Api/Genres/";
+			public const string ROOT = "/Api/Genres/";
 		}
 
 		/// <summary>
@@ -24,7 +24,7 @@
 			/// <summary>
 			/// The movies root route.
 			/// </summary>
-			public const string Root = "/Api/Movies/";
+			public const string ROOT = "/Api/Movies/";
 		}
 
 		/// <summary>
@@ -35,7 +35,7 @@
 			/// <summary>
 			/// The persons root route.
 			/// </summary>
-			public const string Root = "/Api/Persons/";
+			public const string ROOT = "/Api/Persons/";
 		}
 	}
 }

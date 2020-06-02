@@ -31,11 +31,11 @@
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
 		<!-- Microsoft.EntityFrameworkCore -->
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
 		<!-- Microsoft.Extensions -->
-		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.4" />
 		<!-- Sotsera -->
 		<PackageReference Include="Sotsera.Blazor.Toaster" Version="3.0.0" />
 		<!-- System -->

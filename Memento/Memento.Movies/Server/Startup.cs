@@ -1,13 +1,16 @@
 using AutoMapper;
 using Memento.Movies.Shared.Configuration;
-using Memento.Movies.Shared.Models;
-using Memento.Movies.Shared.Models.Repositories.Genres;
-using Memento.Movies.Shared.Models.Repositories.Movies;
-using Memento.Movies.Shared.Models.Repositories.Persons;
+using Memento.Movies.Shared.Models.Identity;
+using Memento.Movies.Shared.Models.Identity.Repositories.Roles;
+using Memento.Movies.Shared.Models.Identity.Repositories.Users;
+using Memento.Movies.Shared.Models.Movies;
+using Memento.Movies.Shared.Models.Movies.Repositories.Genres;
+using Memento.Movies.Shared.Models.Movies.Repositories.Movies;
+using Memento.Movies.Shared.Models.Movies.Repositories.Persons;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Extensions;
 using Memento.Shared.Models.Bindings;
-using Memento.Shared.Routing;
+using Memento.Shared.Routing.Transformers;
 using Memento.Shared.Services.Localization;
 using Memento.Shared.Services.Storage;
 using Memento.Shared.Services.Toaster;
@@ -49,7 +52,6 @@ namespace Memento.Movies.Server
 		/// </summary>
 		/// 
 		/// <param name="configuration">The configuration.</param>
-		/// <param name="environment">The environment.</param> 
 		public Startup(IConfiguration configuration)
 		{
 			this.Configuration = configuration;
@@ -128,13 +130,30 @@ namespace Memento.Movies.Server
 				});
 			#endregion
 
+			#region [Required: ASP.NET Identity]
+			#endregion
+
 			#region [Required: ASP.NET DataProtection]
 			//services
-				//.AddAzureDataProtection(this.MovieSettings.DataProtection);
-				//.AddFileSystemDataProtection(this.MovieSettings.DataProtection);
+			//.AddAzureDataProtection(this.MovieSettings.DataProtection);
+			//.AddFileSystemDataProtection(this.MovieSettings.DataProtection);
 			#endregion
 
 			#region [Required: ASP.NET EntityFramework]
+			services
+				.AddDbContext<IdentityContext>(options =>
+				{
+					options.UseSqlServer(this.MovieSettings.ConnectionStrings.DefaultConnection, builder =>
+					{
+						builder.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
+					});
+				})
+				.AddTransient<IdentitySeeder>();
+
+			services
+				.AddTransient<IRoleRepository, RoleRepository>()
+				.AddTransient<IUserRepository, UserRepository>();
+
 			services
 				.AddDbContext<MovieContext>(options =>
 				{
@@ -212,6 +231,9 @@ namespace Memento.Movies.Server
 			#region [Required: AspNet EntityFramework]
 			using (var scope = builder.ApplicationServices.CreateScope())
 			{
+				scope.ServiceProvider.GetService<IdentityContext>().Database.Migrate();
+				scope.ServiceProvider.GetService<IdentitySeeder>().Seed();
+
 				scope.ServiceProvider.GetService<MovieContext>().Database.Migrate();
 				scope.ServiceProvider.GetService<MovieSeeder>().Seed();
 			}

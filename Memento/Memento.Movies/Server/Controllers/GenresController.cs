@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Memento.Movies.Server.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Genres;
-using Memento.Movies.Shared.Models.Repositories.Genres;
+using Memento.Movies.Shared.Models.Movies.Contracts.Genres;
+using Memento.Movies.Shared.Models.Movies.Repositories.Genres;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Controllers;
 using Memento.Shared.Models.Pagination;
@@ -19,7 +19,7 @@ namespace Memento.Movies.Server.Controllers
 	///
 	/// <seealso cref="MementoApiController" />
 	[ApiController]
-	[Route(Routes.GenreRoutes.Root)]
+	[Route(Routes.GenreRoutes.ROOT)]
 	public sealed class GenresController : MementoApiController
 	{
 		#region [Properties]
@@ -73,8 +73,8 @@ namespace Memento.Movies.Server.Controllers
 		/// <summary>
 		/// Updates a 'Genre' in the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		/// <param name="contract">The contract.</param>
 		[HttpPut("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] GenreFormContract contract)
@@ -87,14 +87,14 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.UpdateAsync(genre);
 
 			// Build the response
-			return this.BuildUpdateResponse<Genre>();
+			return this.BuildUpdateResponse();
 		}
 
 		/// <summary>
 		/// Deletes a 'Genre' in the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		[HttpDelete("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> DeleteAsync([FromRoute] long id)
 		{
@@ -102,14 +102,14 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.DeleteAsync(id);
 
 			// Build the response
-			return this.BuildDeleteResponse<Genre>();
+			return this.BuildDeleteResponse();
 		}
 
 		/// <summary>
 		/// Gets a 'Genre' from the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		[HttpGet("{id:long}")]
 		public async Task<ActionResult<MementoResponse<GenreDetailContract>>> GetAsync([FromRoute] long id)
 		{

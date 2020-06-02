@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Memento.Movies.Server.Shared.Routes;
-using Memento.Movies.Shared.Models.Contracts.Movies;
-using Memento.Movies.Shared.Models.Repositories.Movies;
+using Memento.Movies.Shared.Models.Movies.Contracts.Movies;
+using Memento.Movies.Shared.Models.Movies.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Controllers;
 using Memento.Shared.Exceptions;
@@ -21,7 +21,7 @@ namespace Memento.Movies.Server.Controllers
 	///
 	/// <seealso cref="MementoApiController" />
 	[ApiController]
-	[Route(Routes.MovieRoutes.Root)]
+	[Route(Routes.MovieRoutes.ROOT)]
 	public sealed class MoviesController : MementoApiController
 	{
 		#region [Properties]
@@ -65,9 +65,8 @@ namespace Memento.Movies.Server.Controllers
 		/// <summary>
 		/// Creates a 'Movie' in the backend.
 		/// </summary>
-		/// 
+		///
 		/// <param name="contract">The contract.</param>
-		/// <param name="file">The file.</param>
 		[HttpPost]
 		public async Task<ActionResult<MementoResponse<MovieDetailContract>>> CreateAsync([FromBody] MovieFormContract contract)
 		{
@@ -100,10 +99,9 @@ namespace Memento.Movies.Server.Controllers
 		/// <summary>
 		/// Updates a 'Movie' in the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		/// <param name="contract">The contract.</param>
-		/// <param name="file">The file.</param>
 		[HttpPut("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> UpdateAsync([FromRoute] long id, [FromBody] MovieFormContract contract)
 		{
@@ -126,14 +124,14 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.UpdateAsync(movie);
 
 			// Build the response
-			return this.BuildUpdateResponse<Movie>();
+			return this.BuildUpdateResponse();
 		}
 
 		/// <summary>
 		/// Deletes a 'Movie' in the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		[HttpDelete("{id:long}")]
 		public async Task<ActionResult<MementoResponse>> DeleteAsync([FromRoute] long id)
 		{
@@ -141,14 +139,14 @@ namespace Memento.Movies.Server.Controllers
 			await this.Repository.DeleteAsync(id);
 
 			// Build the response
-			return this.BuildDeleteResponse<Movie>();
+			return this.BuildDeleteResponse();
 		}
 
 		/// <summary>
 		/// Gets a 'Movie' from the backend.
 		/// </summary>
-		/// 
-		/// <param name="id">The identifer.</param>
+		///
+		/// <param name="id">The identifier.</param>
 		[HttpGet("{id:long}")]
 		public async Task<ActionResult<MementoResponse<MovieDetailContract>>> GetAsync([FromRoute] long id)
 		{
