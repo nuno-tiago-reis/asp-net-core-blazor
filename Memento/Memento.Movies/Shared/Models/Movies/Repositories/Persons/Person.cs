@@ -93,7 +93,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 		/// <inheritdoc />
 		public override int GetHashCode()
 		{
-			return base.GetHashCode();
+			return HashCode.Combine(this.Id);
 		}
 		#endregion
 	}

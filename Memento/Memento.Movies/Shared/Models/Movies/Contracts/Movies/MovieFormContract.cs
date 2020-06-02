@@ -1,16 +1,17 @@
-﻿using Memento.Movies.Shared.Models.Movies.Contracts.Genres;
-using Memento.Movies.Shared.Models.Movies.Repositories.Movies;
+﻿using Memento.Movies.Shared.Models.Movies.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Models.Files;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Memento.Movies.Shared.Models.Movies.Contracts.Movies
 {
 	/// <summary>
 	/// Implements the 'MovieForm' contract.
 	/// </summary>
+	[SuppressMessage("ReSharper", "UnusedMember.Global")]
 	public sealed class MovieFormContract
 	{
 		#region [Properties]

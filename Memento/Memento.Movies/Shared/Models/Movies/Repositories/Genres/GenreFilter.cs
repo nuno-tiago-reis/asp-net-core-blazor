@@ -8,7 +8,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Genres
 {
 	/// <summary>
 	/// Defines the fields over which 'Genres' can be filtered.
-	/// </summary
+	/// </summary>
 	///
 	/// <seealso cref="GenreFilterOrderBy" />
 	/// <seealso cref="GenreFilterOrderDirection" />

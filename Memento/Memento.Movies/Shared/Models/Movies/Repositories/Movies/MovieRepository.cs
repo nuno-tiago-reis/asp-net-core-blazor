@@ -28,7 +28,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Movies
 	{
 		#region [Constructors]
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MovieRepository{Movie, MovieFilter, MovieFilterOrderBy, FilterOrderDirection}"/> class.
+		/// Initializes a new instance of the <see cref="MovieRepository"/> class.
 		/// </summary>
 		/// 
 		/// <param name="context">The context</param>
@@ -50,37 +50,37 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Movies
 
 		#region [Methods] IModelRepository
 		/// <inheritdoc />
-		public async override Task<Movie> CreateAsync(Movie movie)
+		public override async Task<Movie> CreateAsync(Movie movie)
 		{
 			return await base.CreateAsync(movie);
 		}
 
 		/// <inheritdoc />
-		public async override Task<Movie> UpdateAsync(Movie movie)
+		public override async Task<Movie> UpdateAsync(Movie movie)
 		{
 			return await base.UpdateAsync(movie);
 		}
 
 		/// <inheritdoc />
-		public async override Task DeleteAsync(long movieId)
+		public override async Task DeleteAsync(long movieId)
 		{
 			await base.DeleteAsync(movieId);
 		}
 
 		/// <inheritdoc />
-		public async override Task<Movie> GetAsync(long movieId)
+		public override async Task<Movie> GetAsync(long movieId)
 		{
 			return await base.GetAsync(movieId);
 		}
 
 		/// <inheritdoc />
-		public async override Task<IPage<Movie>> GetAllAsync(MovieFilter movieFilter = null)
+		public override async Task<IPage<Movie>> GetAllAsync(MovieFilter movieFilter = null)
 		{
 			return await base.GetAllAsync(movieFilter);
 		}
 
 		/// <inheritdoc />
-		public async override Task<bool> ExistsAsync(long movieId)
+		public override async Task<bool> ExistsAsync(long movieId)
 		{
 			return await base.ExistsAsync(movieId);
 		}
@@ -319,41 +319,31 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Movies
 			{
 				case MovieFilterOrderBy.Id:
 				{
-					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
-						? movieQueryable.OrderBy(movie => movie.Id)
-						: movieQueryable.OrderByDescending(movie => movie.Id);
+					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.Id);
 					break;
 				}
 
 				case MovieFilterOrderBy.Name:
 				{
-					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
-						? movieQueryable.OrderBy(movie => movie.Name)
-						: movieQueryable.OrderByDescending(movie => movie.Name);
+					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.Name);
 					break;
 				}
 
 				case MovieFilterOrderBy.ReleaseDate:
 				{
-					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
-						? movieQueryable.OrderBy(movie => movie.ReleaseDate)
-						: movieQueryable.OrderByDescending(movie => movie.ReleaseDate);
+					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.ReleaseDate);
 					break;
 				}
 
 				case MovieFilterOrderBy.CreatedAt:
 				{
-					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
-						? movieQueryable.OrderBy(movie => movie.CreatedAt)
-						: movieQueryable.OrderByDescending(movie => movie.CreatedAt);
+					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.CreatedAt);
 					break;
 				}
 
 				case MovieFilterOrderBy.UpdatedAt:
 				{
-					movieQueryable = movieFilter.OrderDirection == MovieFilterOrderDirection.Ascending
-						? movieQueryable.OrderBy(movie => movie.UpdatedAt)
-						: movieQueryable.OrderByDescending(movie => movie.UpdatedAt);
+					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.UpdatedAt);
 					break;
 				}
 
@@ -365,11 +355,39 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Movies
 
 			return movieQueryable;
 		}
+
+		/// <summary>
+		/// Returns an ordered queryable according to the filters OrderDirection and expressions Property.
+		/// </summary>
+		///
+		/// <typeparam name="TProperty">The property's type.</typeparam>
+		///
+		/// <param name="movieQueryable">The movie queryable.</param>
+		/// <param name="movieFilter">The movie filter.</param>
+		/// <param name="movieExpression">The movie expression</param>
+		private IQueryable<Movie> OrderQueryable<TProperty>(IQueryable<Movie> movieQueryable, MovieFilter movieFilter, Expression<Func<Movie, TProperty>> movieExpression)
+		{
+			switch (movieFilter.OrderDirection)
+			{
+				case MovieFilterOrderDirection.Ascending:
+				{
+					return movieQueryable.OrderBy(movieExpression);
+				}
+				case MovieFilterOrderDirection.Descending:
+				{
+					return movieQueryable.OrderByDescending(movieExpression);
+				}
+				default:
+				{
+					throw new ArgumentOutOfRangeException(nameof(movieFilter.OrderDirection));
+				}
+			}
+		}
 		#endregion
 
 		#region [Methods] Messages
 		/// <inheritdoc />
-		protected override string GetModelDoesNotMessage()
+		protected override string GetModelDoesNotExistMessage()
 		{
 			// Get the name
 			var name = this.Localizer.GetString(SharedResources.MOVIE);

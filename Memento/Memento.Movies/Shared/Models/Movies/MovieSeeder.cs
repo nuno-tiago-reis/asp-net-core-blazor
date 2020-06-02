@@ -57,7 +57,7 @@ namespace Memento.Movies.Shared.Models.Movies
 		/// Initializes a new instance of the <see cref="MovieSeeder"/> class.
 		/// </summary>
 		/// 
-		/// <param name="context">The identity context.</param
+		/// <param name="context">The identity context.</param>
 		/// <param name="environment">The environment.</param>
 		/// <param name="logger">The logger.</param>
 		public MovieSeeder

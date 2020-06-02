@@ -1,11 +1,14 @@
-﻿using Memento.Movies.Shared.Resources;
+﻿using Memento.Movies.Shared.Models.Movies.Repositories;
+using Memento.Movies.Shared.Resources;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Memento.Movies.Shared.Models.Movies.Contracts.Movies
 {
 	/// <summary>
 	/// Implements the 'MoviePersonList' contract.
 	/// </summary>
+	[SuppressMessage("ReSharper", "UnusedMember.Global")]
 	public sealed class MoviePersonListContract
 	{
 		#region [Properties]

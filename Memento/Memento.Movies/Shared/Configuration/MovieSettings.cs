@@ -1,5 +1,4 @@
-﻿using Memento.Shared.Middleware.DataProtection;
-using Memento.Shared.Services.Localization;
+﻿using Memento.Shared.Services.Localization;
 using Memento.Shared.Services.Storage;
 
 namespace Memento.Movies.Shared.Configuration
@@ -10,11 +9,6 @@ namespace Memento.Movies.Shared.Configuration
 	public sealed class MovieSettings
 	{
 		#region [Properties]
-		/// <summary>
-		/// Gets or sets the data protection options.
-		/// </summary>
-		public FileSystemDataProtectionOptions DataProtection { get; set; }
-
 		/// <summary>
 		/// Gets or sets the storage options.
 		/// </summary>

@@ -9,7 +9,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 {
 	/// <summary>
 	/// Defines the fields over which 'Persons' can be filtered.
-	/// </summary
+	/// </summary>
 	///
 	/// <seealso cref="PersonFilterOrderBy" />
 	/// <seealso cref="PersonFilterOrderDirection" />
@@ -122,15 +122,20 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 		[Display(Name = nameof(SharedResources.PERSON_NAME), ResourceType = typeof(SharedResources))]
 		Name = 1,
 		/// <summary>
+		/// By 'BirthDate'.
+		/// </summary>
+		[Display(Name = nameof(SharedResources.PERSON_BIRTHDATE), ResourceType = typeof(SharedResources))]
+		BirthDate = 2,
+		/// <summary>
 		/// By 'CreatedAt'.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.PERSON_CREATEDAT), ResourceType = typeof(SharedResources))]
-		CreatedAt = 2,
+		CreatedAt = 3,
 		/// <summary>
 		/// By 'UpdatedAt'.
 		/// </summary>
 		[Display(Name = nameof(SharedResources.PERSON_UPDATEDAT), ResourceType = typeof(SharedResources))]
-		UpdatedAt = 3
+		UpdatedAt = 4
 	}
 
 	/// <summary>

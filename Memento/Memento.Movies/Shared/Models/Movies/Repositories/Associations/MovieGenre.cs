@@ -5,7 +5,7 @@ using Memento.Shared.Models.Repositories;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Memento.Movies.Shared.Models.Movies
+namespace Memento.Movies.Shared.Models.Movies.Repositories
 {
 	/// <summary>
 	/// Implements the 'MovieGenre' model.

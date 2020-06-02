@@ -28,7 +28,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Genres
 	{
 		#region [Constructors]
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GenreRepository{Genre, GenreFilter, GenreFilterOrderBy, FilterOrderDirection}"/> class.
+		/// Initializes a new instance of the <see cref="GenreRepository"/> class.
 		/// </summary>
 		/// 
 		/// <param name="context">The context</param>
@@ -50,37 +50,37 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Genres
 
 		#region [Methods] IModelRepository
 		/// <inheritdoc />
-		public async override Task<Genre> CreateAsync(Genre genre)
+		public override async Task<Genre> CreateAsync(Genre genre)
 		{
 			return await base.CreateAsync(genre);
 		}
 
 		/// <inheritdoc />
-		public async override Task<Genre> UpdateAsync(Genre genre)
+		public override async Task<Genre> UpdateAsync(Genre genre)
 		{
 			return await base.UpdateAsync(genre);
 		}
 
 		/// <inheritdoc />
-		public async override Task DeleteAsync(long genreId)
+		public override async Task DeleteAsync(long genreId)
 		{
 			await base.DeleteAsync(genreId);
 		}
 
 		/// <inheritdoc />
-		public async override Task<Genre> GetAsync(long genreId)
+		public override async Task<Genre> GetAsync(long genreId)
 		{
 			return await base.GetAsync(genreId);
 		}
 
 		/// <inheritdoc />
-		public async override Task<IPage<Genre>> GetAllAsync(GenreFilter genreFilter = null)
+		public override async Task<IPage<Genre>> GetAllAsync(GenreFilter genreFilter = null)
 		{
 			return await base.GetAllAsync(genreFilter);
 		}
 
 		/// <inheritdoc />
-		public async override Task<bool> ExistsAsync(long genreId)
+		public override async Task<bool> ExistsAsync(long genreId)
 		{
 			return await base.ExistsAsync(genreId);
 		}
@@ -175,33 +175,25 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Genres
 			{
 				case GenreFilterOrderBy.Id:
 				{
-					genreQueryable = genreFilter.OrderDirection == GenreFilterOrderDirection.Ascending
-						? genreQueryable.OrderBy(genre => genre.Id)
-						: genreQueryable.OrderByDescending(genre => genre.Id);
+					genreQueryable = this.OrderQueryable(genreQueryable, genreFilter, genre => genre.Id);
 					break;
 				}
 
 				case GenreFilterOrderBy.Name:
 				{
-					genreQueryable = genreFilter.OrderDirection == GenreFilterOrderDirection.Ascending
-						? genreQueryable.OrderBy(genre => genre.Name)
-						: genreQueryable.OrderByDescending(genre => genre.Name);
+					genreQueryable = this.OrderQueryable(genreQueryable, genreFilter, genre => genre.Name);
 					break;
 				}
 
 				case GenreFilterOrderBy.CreatedAt:
 				{
-					genreQueryable = genreFilter.OrderDirection == GenreFilterOrderDirection.Ascending
-						? genreQueryable.OrderBy(genre => genre.CreatedAt)
-						: genreQueryable.OrderByDescending(genre => genre.CreatedAt);
+					genreQueryable = this.OrderQueryable(genreQueryable, genreFilter, genre => genre.CreatedAt);
 					break;
 				}
 
 				case GenreFilterOrderBy.UpdatedAt:
 				{
-					genreQueryable = genreFilter.OrderDirection == GenreFilterOrderDirection.Ascending
-						? genreQueryable.OrderBy(genre => genre.UpdatedAt)
-						: genreQueryable.OrderByDescending(genre => genre.UpdatedAt);
+					genreQueryable = this.OrderQueryable(genreQueryable, genreFilter, genre => genre.UpdatedAt);
 					break;
 				}
 
@@ -213,11 +205,39 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Genres
 
 			return genreQueryable;
 		}
+
+		/// <summary>
+		/// Returns an ordered queryable according to the filters OrderDirection and expressions Property.
+		/// </summary>
+		///
+		/// <typeparam name="TProperty">The property's type.</typeparam>
+		///
+		/// <param name="genreQueryable">The genre queryable.</param>
+		/// <param name="genreFilter">The genre filter.</param>
+		/// <param name="genreExpression">The genre expression</param>
+		private IQueryable<Genre> OrderQueryable<TProperty>(IQueryable<Genre> genreQueryable, GenreFilter genreFilter, Expression<Func<Genre, TProperty>> genreExpression)
+		{
+			switch (genreFilter.OrderDirection)
+			{
+				case GenreFilterOrderDirection.Ascending:
+				{
+					return genreQueryable.OrderBy(genreExpression);
+				}
+				case GenreFilterOrderDirection.Descending:
+				{
+					return genreQueryable.OrderByDescending(genreExpression);
+				}
+				default:
+				{
+					throw new ArgumentOutOfRangeException(nameof(genreFilter.OrderDirection));
+				}
+			}
+		}
 		#endregion
 
 		#region [Methods] Messages
 		/// <inheritdoc />
-		protected override string GetModelDoesNotMessage()
+		protected override string GetModelDoesNotExistMessage()
 		{
 			// Get the name
 			var name = this.Localizer.GetString(SharedResources.GENRE);

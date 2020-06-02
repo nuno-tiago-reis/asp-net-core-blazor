@@ -1,11 +1,13 @@
 ﻿using Memento.Movies.Shared.Resources;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Memento.Movies.Shared.Models.Movies.Contracts.Movies
 {
 	/// <summary>
 	/// Implements the 'MovieGenreList' contract.
 	/// </summary>
+	[SuppressMessage("ReSharper", "UnusedMember.Global")]
 	public sealed class MovieGenreListContract
 	{
 		#region [Properties]

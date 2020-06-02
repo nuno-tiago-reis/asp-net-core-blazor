@@ -28,7 +28,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 	{
 		#region [Constructors]
 		/// <summary>
-		/// Initializes a new instance of the <see cref="PersonRepository{Person, PersonFilter, PersonFilterOrderBy, FilterOrderDirection}"/> class.
+		/// Initializes a new instance of the <see cref="PersonRepository"/> class.
 		/// </summary>
 		/// 
 		/// <param name="context">The context</param>
@@ -50,37 +50,37 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 
 		#region [Methods] IModelRepository
 		/// <inheritdoc />
-		public async override Task<Person> CreateAsync(Person person)
+		public override async Task<Person> CreateAsync(Person person)
 		{
 			return await base.CreateAsync(person);
 		}
 
 		/// <inheritdoc />
-		public async override Task<Person> UpdateAsync(Person person)
+		public override async Task<Person> UpdateAsync(Person person)
 		{
 			return await base.UpdateAsync(person);
 		}
 
 		/// <inheritdoc />
-		public async override Task DeleteAsync(long personId)
+		public override async Task DeleteAsync(long personId)
 		{
 			await base.DeleteAsync(personId);
 		}
 
 		/// <inheritdoc />
-		public async override Task<Person> GetAsync(long personId)
+		public override async Task<Person> GetAsync(long personId)
 		{
 			return await base.GetAsync(personId);
 		}
 
 		/// <inheritdoc />
-		public async override Task<IPage<Person>> GetAllAsync(PersonFilter personFilter = null)
+		public override async Task<IPage<Person>> GetAllAsync(PersonFilter personFilter = null)
 		{
 			return await base.GetAllAsync(personFilter);
 		}
 
 		/// <inheritdoc />
-		public async override Task<bool> ExistsAsync(long personId)
+		public override async Task<bool> ExistsAsync(long personId)
 		{
 			return await base.ExistsAsync(personId);
 		}
@@ -252,33 +252,31 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 			{
 				case PersonFilterOrderBy.Id:
 				{
-					personQueryable = personFilter.OrderDirection == PersonFilterOrderDirection.Ascending
-						? personQueryable.OrderBy(person => person.Id)
-						: personQueryable.OrderByDescending(person => person.Id);
+					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.Id);
 					break;
 				}
 
 				case PersonFilterOrderBy.Name:
 				{
-					personQueryable = personFilter.OrderDirection == PersonFilterOrderDirection.Ascending
-						? personQueryable.OrderBy(person => person.Name)
-						: personQueryable.OrderByDescending(person => person.Name);
+					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.Name);
+					break;
+				}
+
+				case PersonFilterOrderBy.BirthDate:
+				{
+					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.BirthDate);
 					break;
 				}
 
 				case PersonFilterOrderBy.CreatedAt:
 				{
-					personQueryable = personFilter.OrderDirection == PersonFilterOrderDirection.Ascending
-						? personQueryable.OrderBy(person => person.CreatedAt)
-						: personQueryable.OrderByDescending(person => person.CreatedAt);
+					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.CreatedAt);
 					break;
 				}
 
 				case PersonFilterOrderBy.UpdatedAt:
 				{
-					personQueryable = personFilter.OrderDirection == PersonFilterOrderDirection.Ascending
-						? personQueryable.OrderBy(person => person.UpdatedAt)
-						: personQueryable.OrderByDescending(person => person.UpdatedAt);
+					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.UpdatedAt);
 					break;
 				}
 
@@ -290,11 +288,39 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 
 			return personQueryable;
 		}
+
+		/// <summary>
+		/// Returns an ordered queryable according to the filters OrderDirection and expressions Property.
+		/// </summary>
+		///
+		/// <typeparam name="TProperty">The property's type.</typeparam>
+		///
+		/// <param name="personQueryable">The person queryable.</param>
+		/// <param name="personFilter">The person filter.</param>
+		/// <param name="personExpression">The person expression</param>
+		private IQueryable<Person> OrderQueryable<TProperty>(IQueryable<Person> personQueryable, PersonFilter personFilter, Expression<Func<Person, TProperty>> personExpression)
+		{
+			switch (personFilter.OrderDirection)
+			{
+				case PersonFilterOrderDirection.Ascending:
+				{
+					return personQueryable.OrderBy(personExpression);
+				}
+				case PersonFilterOrderDirection.Descending:
+				{
+					return personQueryable.OrderByDescending(personExpression);
+				}
+				default:
+				{
+					throw new ArgumentOutOfRangeException(nameof(personFilter.OrderDirection));
+				}
+			}
+		}
 		#endregion
 
 		#region [Methods] Messages
 		/// <inheritdoc />
-		protected override string GetModelDoesNotMessage()
+		protected override string GetModelDoesNotExistMessage()
 		{
 			// Get the name
 			var name = this.Localizer.GetString(SharedResources.PERSON);

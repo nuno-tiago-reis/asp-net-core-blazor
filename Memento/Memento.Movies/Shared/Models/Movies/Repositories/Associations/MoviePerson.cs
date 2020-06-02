@@ -5,7 +5,7 @@ using Memento.Shared.Models.Repositories;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Memento.Movies.Shared.Models.Movies
+namespace Memento.Movies.Shared.Models.Movies.Repositories
 {
 	/// <summary>
 	/// Implements the 'MoviePerson' model.
@@ -28,13 +28,11 @@ namespace Memento.Movies.Shared.Models.Movies
 		/// <summary>
 		/// The 'Movie' navigation property.
 		/// </summary>
-		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIEPERSON_MOVIE), ResourceType = typeof(SharedResources))]
 		public Movie Movie { get; set; }
 
 		/// <summary>
 		/// The 'Person' identifier.
-		/// </summary>
 		/// </summary>
 		[Display(Name = nameof(SharedResources.MOVIEPERSON_PERSONID), ResourceType = typeof(SharedResources))]
 		public long PersonId { get; set; }

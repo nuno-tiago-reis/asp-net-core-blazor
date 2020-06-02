@@ -9,7 +9,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Movies
 {
 	/// <summary>
 	/// Defines the fields over which 'Movies' can be filtered.
-	/// </summary
+	/// </summary>
 	///
 	/// <seealso cref="MovieFilterOrderBy" />
 	/// <seealso cref="MovieFilterOrderDirection" />
