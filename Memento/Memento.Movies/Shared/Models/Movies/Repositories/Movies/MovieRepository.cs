@@ -319,31 +319,31 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Movies
 			{
 				case MovieFilterOrderBy.Id:
 				{
-					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.Id);
+					movieQueryable = OrderQueryable(movieQueryable, movieFilter, movie => movie.Id);
 					break;
 				}
 
 				case MovieFilterOrderBy.Name:
 				{
-					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.Name);
+					movieQueryable = OrderQueryable(movieQueryable, movieFilter, movie => movie.Name);
 					break;
 				}
 
 				case MovieFilterOrderBy.ReleaseDate:
 				{
-					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.ReleaseDate);
+					movieQueryable = OrderQueryable(movieQueryable, movieFilter, movie => movie.ReleaseDate);
 					break;
 				}
 
 				case MovieFilterOrderBy.CreatedAt:
 				{
-					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.CreatedAt);
+					movieQueryable = OrderQueryable(movieQueryable, movieFilter, movie => movie.CreatedAt);
 					break;
 				}
 
 				case MovieFilterOrderBy.UpdatedAt:
 				{
-					movieQueryable = this.OrderQueryable(movieQueryable, movieFilter, movie => movie.UpdatedAt);
+					movieQueryable = OrderQueryable(movieQueryable, movieFilter, movie => movie.UpdatedAt);
 					break;
 				}
 
@@ -365,7 +365,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Movies
 		/// <param name="movieQueryable">The movie queryable.</param>
 		/// <param name="movieFilter">The movie filter.</param>
 		/// <param name="movieExpression">The movie expression</param>
-		private IQueryable<Movie> OrderQueryable<TProperty>(IQueryable<Movie> movieQueryable, MovieFilter movieFilter, Expression<Func<Movie, TProperty>> movieExpression)
+		private static IQueryable<Movie> OrderQueryable<TProperty>(IQueryable<Movie> movieQueryable, MovieFilter movieFilter, Expression<Func<Movie, TProperty>> movieExpression)
 		{
 			switch (movieFilter.OrderDirection)
 			{

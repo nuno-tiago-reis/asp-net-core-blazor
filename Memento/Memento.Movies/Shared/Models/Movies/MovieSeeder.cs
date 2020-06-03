@@ -95,7 +95,7 @@ namespace Memento.Movies.Shared.Models.Movies
 			try
 			{
 				// Read the genres from the global file
-				string globalFile = $"{GENRE_FILE_NAME}.json";
+				var globalFile = $"{GENRE_FILE_NAME}.json";
 				genres.AddRange(JsonSerializer.Deserialize<List<Genre>>(File.ReadAllText(globalFile)));
 			}
 			catch (DirectoryNotFoundException)
@@ -110,7 +110,7 @@ namespace Memento.Movies.Shared.Models.Movies
 			try
 			{
 				// Read the genres from the environment specific file
-				string environmentFile = $"{GENRE_FILE_NAME}.{this.Environment.EnvironmentName}.json";
+				var environmentFile = $"{GENRE_FILE_NAME}.{this.Environment.EnvironmentName}.json";
 				genres.AddRange(JsonSerializer.Deserialize<List<Genre>>(File.ReadAllText(environmentFile)));
 			}
 			catch (DirectoryNotFoundException)
@@ -155,7 +155,7 @@ namespace Memento.Movies.Shared.Models.Movies
 			try
 			{
 				// Read the movies from the global file
-				string globalFile = $"{MOVIES_FILE_NAME}.json";
+				var globalFile = $"{MOVIES_FILE_NAME}.json";
 				movies.AddRange(JsonSerializer.Deserialize<List<Movie>>(File.ReadAllText(globalFile)));
 			}
 			catch (DirectoryNotFoundException)
@@ -170,7 +170,7 @@ namespace Memento.Movies.Shared.Models.Movies
 			try
 			{
 				// Read the movies from the environment specific file
-				string environmentFile = $"{MOVIES_FILE_NAME}.{this.Environment.EnvironmentName}.json";
+				var environmentFile = $"{MOVIES_FILE_NAME}.{this.Environment.EnvironmentName}.json";
 				movies.AddRange(JsonSerializer.Deserialize<List<Movie>>(File.ReadAllText(environmentFile)));
 			}
 			catch (DirectoryNotFoundException)
@@ -215,7 +215,7 @@ namespace Memento.Movies.Shared.Models.Movies
 			try
 			{
 				// Read the persons from the global file
-				string globalFile = $"{PERSONS_FILE_NAME}.json";
+				var globalFile = $"{PERSONS_FILE_NAME}.json";
 				persons.AddRange(JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(globalFile)));
 			}
 			catch (DirectoryNotFoundException)
@@ -230,7 +230,7 @@ namespace Memento.Movies.Shared.Models.Movies
 			try
 			{
 				// Read the persons from the environment specific file
-				string environmentFile = $"{PERSONS_FILE_NAME}.{this.Environment.EnvironmentName}.json";
+				var environmentFile = $"{PERSONS_FILE_NAME}.{this.Environment.EnvironmentName}.json";
 				persons.AddRange(JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(environmentFile)));
 			}
 			catch (DirectoryNotFoundException)

@@ -252,31 +252,31 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 			{
 				case PersonFilterOrderBy.Id:
 				{
-					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.Id);
+					personQueryable = OrderQueryable(personQueryable, personFilter, person => person.Id);
 					break;
 				}
 
 				case PersonFilterOrderBy.Name:
 				{
-					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.Name);
+					personQueryable = OrderQueryable(personQueryable, personFilter, person => person.Name);
 					break;
 				}
 
 				case PersonFilterOrderBy.BirthDate:
 				{
-					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.BirthDate);
+					personQueryable = OrderQueryable(personQueryable, personFilter, person => person.BirthDate);
 					break;
 				}
 
 				case PersonFilterOrderBy.CreatedAt:
 				{
-					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.CreatedAt);
+					personQueryable = OrderQueryable(personQueryable, personFilter, person => person.CreatedAt);
 					break;
 				}
 
 				case PersonFilterOrderBy.UpdatedAt:
 				{
-					personQueryable = this.OrderQueryable(personQueryable, personFilter, person => person.UpdatedAt);
+					personQueryable = OrderQueryable(personQueryable, personFilter, person => person.UpdatedAt);
 					break;
 				}
 
@@ -298,7 +298,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Persons
 		/// <param name="personQueryable">The person queryable.</param>
 		/// <param name="personFilter">The person filter.</param>
 		/// <param name="personExpression">The person expression</param>
-		private IQueryable<Person> OrderQueryable<TProperty>(IQueryable<Person> personQueryable, PersonFilter personFilter, Expression<Func<Person, TProperty>> personExpression)
+		private static IQueryable<Person> OrderQueryable<TProperty>(IQueryable<Person> personQueryable, PersonFilter personFilter, Expression<Func<Person, TProperty>> personExpression)
 		{
 			switch (personFilter.OrderDirection)
 			{

@@ -175,25 +175,25 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Genres
 			{
 				case GenreFilterOrderBy.Id:
 				{
-					genreQueryable = this.OrderQueryable(genreQueryable, genreFilter, genre => genre.Id);
+					genreQueryable = OrderQueryable(genreQueryable, genreFilter, genre => genre.Id);
 					break;
 				}
 
 				case GenreFilterOrderBy.Name:
 				{
-					genreQueryable = this.OrderQueryable(genreQueryable, genreFilter, genre => genre.Name);
+					genreQueryable = OrderQueryable(genreQueryable, genreFilter, genre => genre.Name);
 					break;
 				}
 
 				case GenreFilterOrderBy.CreatedAt:
 				{
-					genreQueryable = this.OrderQueryable(genreQueryable, genreFilter, genre => genre.CreatedAt);
+					genreQueryable = OrderQueryable(genreQueryable, genreFilter, genre => genre.CreatedAt);
 					break;
 				}
 
 				case GenreFilterOrderBy.UpdatedAt:
 				{
-					genreQueryable = this.OrderQueryable(genreQueryable, genreFilter, genre => genre.UpdatedAt);
+					genreQueryable = OrderQueryable(genreQueryable, genreFilter, genre => genre.UpdatedAt);
 					break;
 				}
 
@@ -215,7 +215,7 @@ namespace Memento.Movies.Shared.Models.Movies.Repositories.Genres
 		/// <param name="genreQueryable">The genre queryable.</param>
 		/// <param name="genreFilter">The genre filter.</param>
 		/// <param name="genreExpression">The genre expression</param>
-		private IQueryable<Genre> OrderQueryable<TProperty>(IQueryable<Genre> genreQueryable, GenreFilter genreFilter, Expression<Func<Genre, TProperty>> genreExpression)
+		private static IQueryable<Genre> OrderQueryable<TProperty>(IQueryable<Genre> genreQueryable, GenreFilter genreFilter, Expression<Func<Genre, TProperty>> genreExpression)
 		{
 			switch (genreFilter.OrderDirection)
 			{
