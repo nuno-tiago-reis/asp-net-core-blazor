@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace Memento.Movies.Server.Controllers
+namespace Memento.Movies.Server.Controllers.Movies
 {
 	/// <summary>
 	/// Implements the API controller for the genre model.

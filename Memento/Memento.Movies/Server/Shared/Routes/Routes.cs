@@ -5,6 +5,7 @@
 	/// </summary>
 	public static class Routes
 	{
+		#region [Movies]
 		/// <summary>
 		/// The genre routes.
 		/// </summary>
@@ -37,5 +38,6 @@
 			/// </summary>
 			public const string ROOT = "/Api/Persons/";
 		}
+		#endregion
 	}
 }
