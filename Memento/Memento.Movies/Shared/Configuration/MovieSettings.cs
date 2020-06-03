@@ -1,4 +1,5 @@
-﻿using Memento.Shared.Services.Localization;
+﻿using Memento.Shared.Configuration;
+using Memento.Shared.Services.Localization;
 using Memento.Shared.Services.Storage;
 
 namespace Memento.Movies.Shared.Configuration
@@ -10,14 +11,24 @@ namespace Memento.Movies.Shared.Configuration
 	{
 		#region [Properties]
 		/// <summary>
-		/// Gets or sets the storage options.
+		/// Gets or sets the identity server options.
 		/// </summary>
-		public FileSystemStorageOptions Storage { get; set; }
+		public IdentityServerClientOptions IdentityClientOptions { get; set; }
+
+		/// <summary>
+		/// Gets or sets the identity server options.
+		/// </summary>
+		public IdentityServerResourceOptions IdentityResourceOptions { get; set; }
 
 		/// <summary>
 		/// Gets or sets the localization options.
 		/// </summary>
 		public SharedLocalizerOptions Localization { get; set; }
+
+		/// <summary>
+		/// Gets or sets the storage options.
+		/// </summary>
+		public FileSystemStorageOptions Storage { get; set; }
 
 		/// <summary>
 		/// Gets or sets the connection strings.

@@ -1,8 +1,5 @@
 using AutoMapper;
 using Memento.Movies.Shared.Configuration;
-using Memento.Movies.Shared.Models.Identity;
-using Memento.Movies.Shared.Models.Identity.Repositories.Roles;
-using Memento.Movies.Shared.Models.Identity.Repositories.Users;
 using Memento.Movies.Shared.Models.Movies;
 using Memento.Movies.Shared.Models.Movies.Repositories.Genres;
 using Memento.Movies.Shared.Models.Movies.Repositories.Movies;
@@ -14,6 +11,7 @@ using Memento.Shared.Routing.Transformers;
 using Memento.Shared.Services.Localization;
 using Memento.Shared.Services.Storage;
 using Memento.Shared.Services.Toaster;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -84,13 +82,13 @@ namespace Memento.Movies.Server
 					// hide the default validation errors
 					options.InvalidModelStateResponseFactory = (context) =>
 					{
-						foreach (var keyValuePair in context.ModelState)
+						foreach (var (key, value) in context.ModelState)
 						{
-							if (keyValuePair.Value.ValidationState != ModelValidationState.Invalid)
+							if (value.ValidationState != ModelValidationState.Invalid)
 								continue;
 
-							keyValuePair.Value.Errors.Clear();
-							keyValuePair.Value.Errors.Add(new ModelError($"The '{keyValuePair.Key}' field is invalid."));
+							value.Errors.Clear();
+							value.Errors.Add(new ModelError($"The '{key}' field is invalid."));
 						}
 
 						return new BadRequestObjectResult(context.ModelState);
@@ -130,7 +128,14 @@ namespace Memento.Movies.Server
 				});
 			#endregion
 
-			#region [Required: ASP.NET Identity]
+			#region [Required: ASP.NET Authentication]
+			services
+				.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(options =>
+				{
+					options.Authority = this.MovieSettings.IdentityResourceOptions.Authority;
+					options.Audience = this.MovieSettings.IdentityResourceOptions.Audience;
+				});
 			#endregion
 
 			#region [Required: ASP.NET DataProtection]
@@ -140,20 +145,6 @@ namespace Memento.Movies.Server
 			#endregion
 
 			#region [Required: ASP.NET EntityFramework]
-			services
-				.AddDbContext<IdentityContext>(options =>
-				{
-					options.UseSqlServer(this.MovieSettings.ConnectionStrings.DefaultConnection, builder =>
-					{
-						builder.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
-					});
-				})
-				.AddTransient<IdentitySeeder>();
-
-			services
-				.AddTransient<IRoleRepository, RoleRepository>()
-				.AddTransient<IUserRepository, UserRepository>();
-
 			services
 				.AddDbContext<MovieContext>(options =>
 				{
@@ -195,10 +186,9 @@ namespace Memento.Movies.Server
 		/// 
 		/// <param name="builder">The builder.</param>
 		/// <param name="environment">The environment.</param>
-		// 
 		public void Configure(IApplicationBuilder builder, IWebHostEnvironment environment)
 		{
-			#region [Required: AspNet Errors]
+			#region [Required: ASP.NET Errors]
 			if (environment.IsDevelopment())
 			{
 				builder.UseDeveloperExceptionPage();
@@ -211,7 +201,7 @@ namespace Memento.Movies.Server
 			}
 			#endregion
 
-			#region [Required: AspNet Middleware]
+			#region [Required: ASP.NET Middleware]
 			builder.UseCors(action =>
 			{
 				action.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
@@ -224,22 +214,24 @@ namespace Memento.Movies.Server
 			builder.UseHsts();
 			#endregion
 
-			#region [Required: AspNet Localization]
+			#region [Required: ASP.NET Authentication]
+			builder.UseAuthentication();
+			builder.UseAuthorization();
+			#endregion
+
+			#region [Required: ASP.NET Localization]
 			builder.UseSharedLocalization(this.MovieSettings.Localization);
 			#endregion
 
-			#region [Required: AspNet EntityFramework]
+			#region [Required: ASP.NET EntityFramework]
 			using (var scope = builder.ApplicationServices.CreateScope())
 			{
-				scope.ServiceProvider.GetService<IdentityContext>().Database.Migrate();
-				scope.ServiceProvider.GetService<IdentitySeeder>().Seed();
-
 				scope.ServiceProvider.GetService<MovieContext>().Database.Migrate();
 				scope.ServiceProvider.GetService<MovieSeeder>().Seed();
 			}
 			#endregion
 
-			#region [Required: AspNet Routing]
+			#region [Required: ASP.NET Routing]
 			builder.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

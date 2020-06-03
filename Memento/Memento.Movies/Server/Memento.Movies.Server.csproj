@@ -20,28 +20,20 @@
 		<!-- AutoMapper -->
 		<PackageReference Include="AutoMapper" Version="9.0.0" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-		<!-- Blazorade -->
-		<PackageReference Include="Blazorade.Bootstrap.Components" Version="1.0.1" />
-		<!-- BuildWebCompiler -->
-		<PackageReference Include="BuildWebCompiler" Version="1.12.405" />
-		<!-- Markdig -->
-		<PackageReference Include="Markdig" Version="0.20.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
 		<!-- Microsoft.AspNetCore -->
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.4" />
 		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
 		<!-- Microsoft.EntityFrameworkCore -->
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4" />
 		<!-- Microsoft.Extensions -->
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.4" />
-		<!-- Sotsera -->
-		<PackageReference Include="Sotsera.Blazor.Toaster" Version="3.0.0" />
 		<!-- System -->
 		<PackageReference Include="System.Net.Http.Json" Version="3.2.0" />
-		<!-- Tewr -->
-		<PackageReference Include="Tewr.Blazor.FileReader" Version="1.5.0.20109" />
 	</ItemGroup>
 
 	<ItemGroup>
