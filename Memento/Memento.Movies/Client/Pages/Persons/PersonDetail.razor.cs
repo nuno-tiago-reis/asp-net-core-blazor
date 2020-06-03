@@ -199,7 +199,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		private void BuildBreadcrumbActions()
 		{
-			this.BreadcrumbActions = new List<BreadcrumbAction>()
+			this.BreadcrumbActions = new List<BreadcrumbAction>
 			{
 				new BreadcrumbAction
 				{

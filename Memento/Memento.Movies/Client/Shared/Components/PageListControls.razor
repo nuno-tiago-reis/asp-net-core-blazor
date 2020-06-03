@@ -32,12 +32,15 @@
 		</div>
 		<div class="col-md-6">
 			<div class="d-flex justify-content-end">
+				<p>
+					@this.TotalItems Results
+				</p>
 				<!-- page size -->
 				<InputNumberSelect class="form-control w-md-10 mb-2"
-								Value="this.PageSize"
-								ValueExpression="@(()=> this.PageSize)"
-								ValueChanged="@((value) => this.OnPageSizeChangeAsync(value))">
-					@foreach (int pageSize in this.PageSizes)
+				                   Value="this.PageSize"
+				                   ValueExpression="@(() => this.PageSize)"
+				                   ValueChanged="@((value) => this.OnPageSizeChangeAsync(value))">
+					@foreach (var pageSize in this.PageSizes)
 					{
 						<option value="@pageSize">@pageSize</option>
 					}
@@ -74,7 +77,7 @@
 							</a>
 						</li>
 					}
-					@for (int i = 1; i <= this.TotalPages; i++)
+					@for (var i = 1; i <= this.TotalPages; i++)
 					{
 						var pageNumber = i;
 

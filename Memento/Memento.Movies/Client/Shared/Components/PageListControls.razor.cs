@@ -16,13 +16,6 @@ namespace Memento.Movies.Client.Shared.Components
 	/// <seealso cref="MementoComponent{PageListControls}"/>
 	public sealed partial class PageListControls<TOrderBy, TOrderDirection> : MementoComponent<PageListControls<TOrderBy, TOrderDirection>>
 	{
-		#region [Constants]
-		/// <summary>
-		/// The default page sizes.
-		/// </summary>
-		private static readonly int[] DefaultPageSizes = { 3, 6, 9, 12 };
-		#endregion
-
 		#region [Properties]
 		/// <summary>
 		/// The page number.
@@ -40,7 +33,7 @@ namespace Memento.Movies.Client.Shared.Components
 		/// The page sizes.
 		/// </summary>
 		[Parameter]
-		public int[] PageSizes { get; set; } = DefaultPageSizes;
+		public int[] PageSizes { get; set; }
 
 		/// <summary>
 		/// The total items.
@@ -98,7 +91,8 @@ namespace Memento.Movies.Client.Shared.Components
 		{
 			base.OnInitialized();
 
-			// Nothing to do here.
+			// Initializations
+			this.PageSizes = new [] { 3, 6, 9, 12 };
 		}
 
 		/// <inheritdoc />

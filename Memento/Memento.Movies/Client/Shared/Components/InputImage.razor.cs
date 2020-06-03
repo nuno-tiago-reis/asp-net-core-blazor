@@ -110,7 +110,7 @@ namespace Memento.Movies.Client.Shared.Components
 			{
 				throw new InvalidOperationException
 				(
-					$"{this.GetType()} requires a cascading parameter of type {nameof(EditContext)}. " +
+					$"{this.GetType()} requires a cascading parameter of type {nameof(this.EditContext)}. " +
 					$"For example, you can use {this.GetType()} inside an {nameof(EditForm)}."
 				);
 			}

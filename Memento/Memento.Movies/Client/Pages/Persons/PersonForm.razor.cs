@@ -245,12 +245,12 @@ namespace Memento.Movies.Client.Pages.Persons
 			this.PersonChanges.Movies.Clear();
 
 			// Update the movies
-			foreach (var moviesByRole in this.MoviesByRole)
+			foreach (var (role, movies) in this.MoviesByRole)
 			{
-				foreach (var movieByRole in moviesByRole.Value)
+				foreach (var movieByRole in movies)
 				{
 					var movie = this.Mapper.Map<PersonMovieFormContract>(movieByRole);
-					movie.Role = moviesByRole.Key;
+					movie.Role = role;
 
 					this.PersonChanges.Movies.Add(movie);
 				}
@@ -448,7 +448,7 @@ namespace Memento.Movies.Client.Pages.Persons
 		/// </summary>
 		private void BuildBreadcrumbActions()
 		{
-			this.BreadcrumbActions = new List<BreadcrumbAction>()
+			this.BreadcrumbActions = new List<BreadcrumbAction>
 			{
 				new BreadcrumbAction
 				{

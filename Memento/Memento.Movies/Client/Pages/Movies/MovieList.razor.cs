@@ -131,10 +131,10 @@ namespace Memento.Movies.Client.Pages.Movies
 		private void BuildQueryFilter()
 		{
 			// Get the query from the url
-			var query = QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query);
+			var query = QueryHelpers.ParseQuery(this.NavigationManager.ToAbsoluteUri(this.NavigationManager.Uri).Query);
 
 			// Create the filter
-			this.Filter = this.BuildDefaultFilter();
+			this.Filter = BuildDefaultFilter();
 
 			// Parse the query
 			this.Filter.ReadFromQuery(query);
@@ -143,7 +143,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// <summary>
 		/// Builds the default filter from the built-in constants.
 		/// </summary>
-		private MovieFilter BuildDefaultFilter()
+		private static MovieFilter BuildDefaultFilter()
 		{
 			// Create the filter
 			var filter = new MovieFilter
@@ -180,7 +180,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		private async Task OnFilterResetAsync(MovieFilter _)
 		{
 			// Reset the filter
-			this.Filter = this.BuildDefaultFilter();
+			this.Filter = BuildDefaultFilter();
 
 			// Update the movies
 			await this.GetMoviesAsync();
@@ -281,7 +281,7 @@ namespace Memento.Movies.Client.Pages.Movies
 		/// </summary>
 		private void BuildBreadcrumbActions()
 		{
-			this.BreadcrumbActions = new List<BreadcrumbAction>()
+			this.BreadcrumbActions = new List<BreadcrumbAction>
 			{
 				new BreadcrumbAction
 				{

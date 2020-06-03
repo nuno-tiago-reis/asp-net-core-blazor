@@ -47,7 +47,7 @@ namespace Memento.Movies.Client.Shared.Components
 			{
 				throw new InvalidOperationException
 				(
-					$"{this.GetType()} requires a cascading parameter of type {nameof(EditContext)}. " +
+					$"{this.GetType()} requires a cascading parameter of type {nameof(this.EditContext)}. " +
 					$"For example, you can use {this.GetType()} inside an {nameof(EditForm)}."
 				);
 			}
@@ -84,7 +84,8 @@ namespace Memento.Movies.Client.Shared.Components
 				validationErrorMessage = null;
 				return true;
 			}
-			else if (typeof(T).IsEnum || (this.NullableUnderlyingType != null && this.NullableUnderlyingType.IsEnum))
+
+			if (typeof(T).IsEnum || this.NullableUnderlyingType != null && this.NullableUnderlyingType.IsEnum)
 			{
 				var success = BindConverter.TryConvertTo<T>(value, CultureInfo.CurrentCulture, out var parsedValue);
 				if (success)

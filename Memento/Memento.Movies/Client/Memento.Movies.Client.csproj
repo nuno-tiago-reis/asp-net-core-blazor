@@ -17,6 +17,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Watch Remove="Pages\Authentication.razor" />
+	  <Watch Remove="Shared\LoginDisplay.razor" />
+	  <Watch Remove="Shared\RedirectToLogin.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<!-- AutoMapper -->
 		<PackageReference Include="AutoMapper" Version="9.0.0" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
@@ -31,8 +37,6 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="3.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
 		<!-- Microsoft.Extensions -->
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.4" />
 		<!-- Sotsera -->
