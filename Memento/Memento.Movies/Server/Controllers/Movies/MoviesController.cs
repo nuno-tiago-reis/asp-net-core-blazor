@@ -9,8 +9,10 @@ using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Responses;
 using Memento.Shared.Services.Localization;
 using Memento.Shared.Services.Storage;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Server.Controllers.Movies
@@ -21,6 +23,7 @@ namespace Memento.Movies.Server.Controllers.Movies
 	///
 	/// <seealso cref="MementoApiController" />
 	[ApiController]
+	[Authorize]
 	[Route(Routes.MovieRoutes.ROOT)]
 	public sealed class MoviesController : MementoApiController
 	{
@@ -165,6 +168,56 @@ namespace Memento.Movies.Server.Controllers.Movies
 		[HttpGet]
 		public async Task<ActionResult<MementoResponse<IPage<MovieListContract>>>> GetAsync([FromQuery] MovieFilter filter)
 		{
+			// Get the movies
+			var movies = await this.Repository.GetAllAsync(filter);
+
+			// Build the response
+			return this.BuildGetAllResponse<Movie, MovieListContract>(movies);
+		}
+
+		/// <summary>
+		/// Gets 'Movies' from the backend that are in theaters
+		/// </summary>
+		[AllowAnonymous]
+		[HttpGet(Routes.MovieRoutes.IN_THEATERS)]
+		public async Task<ActionResult<MementoResponse<IPage<MovieListContract>>>> GetInTheatersAsync()
+		{
+			// Build the 'InTheaters' filter
+			var filter = new MovieFilter
+			{
+				InTheaters = MovieFilterInTheaters.Checked,
+				ReleasedBefore = DateTime.Today,
+				PageNumber = 1,
+				PageSize = 3,
+				OrderBy = MovieFilterOrderBy.ReleaseDate,
+				OrderDirection = MovieFilterOrderDirection.Descending
+			};
+
+			// Get the movies
+			var movies = await this.Repository.GetAllAsync(filter);
+
+			// Build the response
+			return this.BuildGetAllResponse<Movie, MovieListContract>(movies);
+		}
+
+		/// <summary>
+		/// Gets 'Movies' from the backend that are upcoming releases.
+		/// </summary>
+		[AllowAnonymous]
+		[HttpGet(Routes.MovieRoutes.UPCOMING_RELEASES)]
+		public async Task<ActionResult<MementoResponse<IPage<MovieListContract>>>> GetUpcomingReleasesAsync()
+		{
+			// Build the 'UpcomingReleases' filter
+			var filter = new MovieFilter
+			{
+				InTheaters = MovieFilterInTheaters.Unchecked,
+				ReleasedAfter = DateTime.Today,
+				PageNumber = 1,
+				PageSize = 3,
+				OrderBy = MovieFilterOrderBy.ReleaseDate,
+				OrderDirection = MovieFilterOrderDirection.Ascending
+			};
+
 			// Get the movies
 			var movies = await this.Repository.GetAllAsync(filter);
 

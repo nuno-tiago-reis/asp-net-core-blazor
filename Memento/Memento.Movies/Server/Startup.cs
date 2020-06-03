@@ -10,7 +10,6 @@ using Memento.Shared.Models.Bindings;
 using Memento.Shared.Routing.Transformers;
 using Memento.Shared.Services.Localization;
 using Memento.Shared.Services.Storage;
-using Memento.Shared.Services.Toaster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -140,8 +139,8 @@ namespace Memento.Movies.Server
 
 			#region [Required: ASP.NET DataProtection]
 			//services
-			//.AddAzureDataProtection(this.MovieSettings.DataProtection);
-			//.AddFileSystemDataProtection(this.MovieSettings.DataProtection);
+				//.AddAzureDataProtection(this.MovieSettings.DataProtection);
+				//.AddFileSystemDataProtection(this.MovieSettings.DataProtection);
 			#endregion
 
 			#region [Required: ASP.NET EntityFramework]
@@ -173,7 +172,6 @@ namespace Memento.Movies.Server
 
 			#region [Required: Services]
 			services
-				.AddToasterService()
 				//.AddAzureStorageService(this.MovieSettings.Storage);
 				.AddFileSystemStorageService(this.MovieSettings.Storage);
 			#endregion

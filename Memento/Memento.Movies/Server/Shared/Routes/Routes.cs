@@ -26,6 +26,16 @@
 			/// The movies root route.
 			/// </summary>
 			public const string ROOT = "/Api/Movies/";
+
+			/// <summary>
+			/// The movies 'InTheaters' route.
+			/// </summary>
+			public const string IN_THEATERS = "/Api/Movies/In-Theaters";
+
+			/// <summary>
+			/// The movies 'UpcomingReleases' route.
+			/// </summary>
+			public const string UPCOMING_RELEASES = "/Api/Movies/Upcoming-Releases";
 		}
 
 		/// <summary>

@@ -9,6 +9,7 @@ using Memento.Shared.Models.Pagination;
 using Memento.Shared.Models.Responses;
 using Memento.Shared.Services.Localization;
 using Memento.Shared.Services.Storage;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace Memento.Movies.Server.Controllers.Movies
 	///
 	/// <seealso cref="MementoApiController" />
 	[ApiController]
+	[Authorize]
 	[Route(Routes.PersonRoutes.ROOT)]
 	public sealed class PersonsController : MementoApiController
 	{
