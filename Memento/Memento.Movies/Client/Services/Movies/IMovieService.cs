@@ -48,6 +48,16 @@ namespace Memento.Movies.Client.Services.Movies
 		/// 
 		/// <param name="movieFilter">The movie filter.</param>
 		Task<MementoResponse<Page<MovieListContract>>> GetAllAsync(MovieFilter movieFilter = null);
+
+		/// <summary>
+		/// Invokes the API to get the 'Movies' that are 'InTheaters'.
+		/// </summary>
+		Task<MementoResponse<Page<MovieListContract>>> GetInTheatersAsync();
+
+		/// <summary>
+		/// Invokes the API to get the 'Movies' that are 'UpcomingReleases'.
+		/// </summary>
+		Task<MementoResponse<Page<MovieListContract>>> GetUpcomingReleasesAsync();
 		#endregion
 	}
 }

@@ -17,12 +17,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Watch Remove="Pages\Authentication.razor" />
-	  <Watch Remove="Shared\LoginDisplay.razor" />
-	  <Watch Remove="Shared\RedirectToLogin.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<!-- AutoMapper -->
 		<PackageReference Include="AutoMapper" Version="9.0.0" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />

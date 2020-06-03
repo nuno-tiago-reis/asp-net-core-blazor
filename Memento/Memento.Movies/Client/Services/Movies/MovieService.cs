@@ -151,6 +151,36 @@ namespace Memento.Movies.Client.Services.Movies
 				return response;
 			}
 		}
+
+		/// <inheritdoc />
+		public async Task<MementoResponse<Page<MovieListContract>>> GetInTheatersAsync()
+		{
+			// Invoke the API
+			var response = await this.HttpService.GetAsync<Page<MovieListContract>>($"{API_URL}in-theaters");
+			if (!response.Success)
+			{
+				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
+			}
+			else
+			{
+				return response;
+			}
+		}
+
+		/// <inheritdoc />
+		public async Task<MementoResponse<Page<MovieListContract>>> GetUpcomingReleasesAsync()
+		{
+			// Invoke the API
+			var response = await this.HttpService.GetAsync<Page<MovieListContract>>($"{API_URL}upcoming-releases");
+			if (!response.Success)
+			{
+				throw new ApplicationException(string.Join(Environment.NewLine, response.Errors));
+			}
+			else
+			{
+				return response;
+			}
+		}
 		#endregion
 	}
 }

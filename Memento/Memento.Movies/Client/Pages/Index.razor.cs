@@ -1,12 +1,11 @@
 ﻿using Memento.Movies.Client.Services.Movies;
 using Memento.Movies.Client.Shared.Routes;
 using Memento.Movies.Shared.Models.Movies.Contracts.Movies;
-using Memento.Movies.Shared.Models.Movies.Repositories.Movies;
 using Memento.Movies.Shared.Resources;
 using Memento.Shared.Components;
 using Memento.Shared.Models.Pagination;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Threading.Tasks;
 
 namespace Memento.Movies.Client.Pages
@@ -16,29 +15,20 @@ namespace Memento.Movies.Client.Pages
 	/// </summary>
 	/// 
 	/// <seealso cref="ComponentBase"/>
+	[AllowAnonymous]
 	[Route(Routes.HomeRoutes.ROOT)]
 	public sealed partial class Index : MementoComponent<Index>
 	{
 		#region [Properties] Parameters
 		/// <summary>
-		/// The movies in theaters filter.
-		/// </summary>
-		public MovieFilter InTheatersFilter { get; set; }
-
-		/// <summary>
 		/// The movies in theaters.
 		/// </summary>
-		public IPage<MovieListContract> InTheaters { get; set; }
-
-		/// <summary>
-		/// The upcoming movie releases filter.
-		/// </summary>
-		public MovieFilter UpcomingReleasesFilter { get; set; }
+		public Page<MovieListContract> InTheaters { get; set; }
 
 		/// <summary>
 		/// The upcoming movie releases.
 		/// </summary>
-		public IPage<MovieListContract> UpcomingReleases { get; set; }
+		public Page<MovieListContract> UpcomingReleases { get; set; }
 		#endregion
 
 		#region [Properties] Services
@@ -53,19 +43,8 @@ namespace Memento.Movies.Client.Pages
 		/// <inheritdoc />
 		protected override async Task OnInitializedAsync()
 		{
-			// Build the in theaters filter
-			this.InTheatersFilter = new MovieFilter
-			{
-				InTheaters = MovieFilterInTheaters.Checked,
-				ReleasedBefore = DateTime.Today,
-				PageNumber = 1,
-				PageSize = 3,
-				OrderBy = MovieFilterOrderBy.ReleaseDate,
-				OrderDirection = MovieFilterOrderDirection.Descending
-			};
-
 			// Invoke the API
-			var response = await this.MovieService.GetAllAsync(this.InTheatersFilter);
+			var response = await this.MovieService.GetInTheatersAsync();
 			if (response.Success)
 			{
 				// Update the movies
@@ -83,19 +62,8 @@ namespace Memento.Movies.Client.Pages
 				this.Toaster.Error(this.Localizer.GetString(SharedResources.ERROR_LOADING));
 			}
 
-			// Build the in upcoming releases filter
-			this.UpcomingReleasesFilter = new MovieFilter
-			{
-				InTheaters = MovieFilterInTheaters.Unchecked,
-				ReleasedAfter = DateTime.Today,
-				PageNumber = 1,
-				PageSize = 3,
-				OrderBy = MovieFilterOrderBy.ReleaseDate,
-				OrderDirection = MovieFilterOrderDirection.Ascending
-			};
-
 			// Invoke the API
-			response = await this.MovieService.GetAllAsync(this.UpcomingReleasesFilter);
+			response = await this.MovieService.GetUpcomingReleasesAsync();
 			if (response.Success)
 			{
 				// Update the movies
